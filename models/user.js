@@ -18,11 +18,11 @@ const verifyPassword = (plainPassword, hashedPassword) => {
 };
 
 const emailAlreadyExists = async (email) => {
-  return !!(await db.users.findFirst({ where: { email } }));
+  return !!(await db.user.findFirst({ where: { email } }));
 };
 
 const validateUser = (data, forUpdate = false) => {
-  Joi.object({
+  return Joi.object({
     email: Joi.string()
       .email()
       .max(255)
@@ -36,7 +36,7 @@ const validateUser = (data, forUpdate = false) => {
 
 const create = async ({ email, password }) => {
   const hashedPassword = await hashPassword(password);
-  return db.users.create({
+  return db.user.create({
     data: { email, hashedPassword },
   });
 };
