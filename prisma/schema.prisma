@@ -10,8 +10,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OrganizationType {
+  NON_PROFIT_ORGANIZATION
+  TOWN_HALL
+  MILITARY
+}
+
+enum EstimateStatus {
+  DRAFT
+  WAITING_FOR_VALIDATION
+  VALIDATED
+}
+
 model user {
-  id             Int    @id @default(autoincrement())
-  email          String
-  hashedPassword String
+  id               Int              @id @default(autoincrement())
+  email            String           @unique
+  hashedPassword   String
+  firstname        String
+  lastname         String
+  managerName      String
+  organizationType OrganizationType
+  organizationName String
+  phone            String
+  siretNumber      String
+  address1         String
+  address2         String
+  zipCode          String
+  city             String
+  activationCode   String
+  inscriptionDate  DateTime
+  estimates        estimate[]
+
+}
+
+model estimate {
+  id                    Int                      @id @default(autoincrement())
+  status                EstimateStatus
+  signature             String
+  validationDate        DateTime?
+  deadLine              DateTime
+  wantedDeadline        DateTime
+  additionalInformation String                   @db.LongText
+  validationCode        String
+  userId                Int
+  customer              user                     @relation(fields: [userId], references: [id])
+  products              estimatesOnProducts[]
+  attachedFiles         attachedFileOnEstimate[]
+}
+
+model estimatesOnProducts {
+  estimateId          Int
+  estimation          estimate @relation(fields: [estimateId], references: [id])
+  productId           Int
+  products            product  @relation(fields: [productId], references: [id])
+  quantity            Int
+  estimateDescription String   @db.LongText
+
+
+  @@id([estimateId, productId])
+}
+
+model product {
+  id          Int                   @id @default(autoincrement())
+  name        String
+  reference   String
+  stock       Int
+  description String                @db.LongText
+  unitPrice   Decimal
+  imageUrl    String
+  estimates   estimatesOnProducts[]
+
+
+}
+
+model attachedFile {
+  id        Int                      @id @default(autoincrement())
+  name      String
+  url       String
+  estimates attachedFileOnEstimate[]
+}
+
+model attachedFileOnEstimate {
+  attachedFileId Int
+  attachedFile   attachedFile @relation(fields: [attachedFileId], references: [id])
+  estimateId     Int
+  estimate       estimate     @relation(fields: [estimateId], references: [id])
+
+  @@id([attachedFileId, estimateId])
 }
