@@ -1,16 +1,12 @@
 import next from "next";
-// import Head from "next/head";
-
+import Layout from "../components/Layout";
 
 export default function Home() {
   return (
-    <div>
-      
-          <h1 className="bg-blue-200">Bienvenue sur mon Site</h1>
-
-          
-       
-      </div>
     
+      <Layout>
+      <h1 className="bg-third">Bienvenue sur mon Site</h1>
+      </Layout>
+      
   );
 }
