@@ -2,16 +2,14 @@ import Link from "next/link";
 import { AiOutlineLogin } from "react-icons";
 import { IoIosAddCircle } from "react-icons";
 import Image from "next/image";
-import LogoSansBlabla from "./assets/LogoSansBlabla.png";
+import LogoSansBlabla from "../public/assets/LogoSansBlabla.png";
 
 export default function Navbar() {
   return (
     <div>
       <ul>
         <li>
-          <Link href="/">
-            <Image src={LogoSansBlabla} alt="Logo" layout="responsive" />
-          </Link>
+          <Image src={LogoSansBlabla} alt="Logo" width="100px" height="100px" />
         </li>
         <li>
           <Link href="/Devis">
@@ -20,7 +18,6 @@ export default function Navbar() {
             </a>
           </Link>
         </li>
-
         <li>
           <Link href="/Connexion">
             <a>
