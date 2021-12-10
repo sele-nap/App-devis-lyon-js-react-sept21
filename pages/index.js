@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -6,10 +5,13 @@ import ImageDrapeau from "../public/Img/drapeau.jpg";
 import ImageTrophee from "../public/Img/trophée.jpeg";
 import ImageEcharpe from "../public/Img/echarpe.jpeg";
 import ImageMedaille from "../public/Img/medaille.jpg";
+import Layout from "../components/Layout";
+
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
+    <Layout className="bg-primary">
       <h1 className="text-center text-2xl m-10">
         {" "}
         maison de tradition lyonnaise de qualité vous souhaite la bienvenue
@@ -54,18 +56,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+    </Layout>
     </div>
-=======
-import next from "next";
-import Layout from "../components/Layout";
-
-export default function Home() {
-  return (
-    
-      <Layout className="bg-primary">
-      <h1 className="text-center">Maison de tradition lyonnaise de qualité<br/>Vous souhaite la bienvenue</h1>
-      </Layout>
-      
->>>>>>> footer
   );
 }
