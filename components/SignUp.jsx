@@ -28,22 +28,22 @@ export default function SignUp() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    // axios
-    //   .post("/api/users", data)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     alert("all ok");
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    axios
+      .post("/api/users", data)
+      .then((res) => {
+        console.log(res.data);
+        alert("all ok");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1> Inscription</h1>
 
-      <div className="m-10 w-2/4 p-4 flex flex-row items-center">
+      {/* <div className="m-10 w-2/4 p-4 flex flex-row items-center">
         <label htmlFor="name" className="m-2">
           Nom * :
         </label>
@@ -73,7 +73,7 @@ export default function SignUp() {
           })}
         />
         {errors.firstname && <span> {errors.firstname.message}</span>}
-      </div>
+      </div> */}
 
       <div className="m-10 w-2/4 p-4 flex flex-row items-center">
         <label htmlFor="email" className="m-2">
@@ -116,7 +116,7 @@ export default function SignUp() {
           {errors.password && <span> {errors.password.message}</span>}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
+        {/* <div className="flex items-center justify-around mb-4">
           <label>Confirmez</label>
           <input
             className="border-2 rounded-md m-2 p-1 border-gray-100 w-full"
@@ -132,9 +132,9 @@ export default function SignUp() {
           />
           <RemoveRedEyeIcon onClick={togglePasswordConfirmVisiblity} />
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-        </div>
+        </div> */}
 
-        <div className="text-sm italic text-center p-4">
+        {/* <div className="text-sm italic text-center p-4">
           <p> Le mot de passe doit contenir</p>
           <p> 1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères </p>
         </div>
@@ -159,9 +159,9 @@ export default function SignUp() {
               id="managerName"
               name="managerName"
             />
-          </div>
+          </div> */}
 
-          <div className="flex items-center justify-around mb-4">
+        {/* <div className="flex items-center justify-around mb-4">
             <label htmlFor="organizationName"> Dénomination</label>
             <input
               className="border-2 rounded-md m-2 p-1 w-3/5 border-gray-100"
@@ -169,8 +169,8 @@ export default function SignUp() {
               id="organizationName"
               name="organizationName"
             />
-          </div>
-          <label htmlFor="siret"> Siret : </label>
+          </div> */}
+        {/* <label htmlFor="siret"> Siret : </label>
           <input
             className="border-2 rounded-md m-2 w-3/5 p-1 border-gray-100"
             type="number"
@@ -198,8 +198,8 @@ export default function SignUp() {
             name="address2"
           />
           {errors.address1 && <span> {errors.address1.message}</span>}
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <label htmlFor="zipCode"> code postal</label>
           <input
             type="number"
@@ -214,8 +214,8 @@ export default function SignUp() {
         <div>
           <label htmlFor="city"> Ville : </label>
           <input type="text" id="city" name="city" />
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <label htmlFor="phone"> Téléphone : </label>
 
           <Controller
@@ -230,7 +230,7 @@ export default function SignUp() {
               <PhoneInput country={"fr"} selected={value} onChange={onChange} />
             )}
           />
-        </div>
+        </div> */}
       </div>
 
       <button type="submit" className=".ctaBtn">
