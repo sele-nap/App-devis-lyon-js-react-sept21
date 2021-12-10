@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/globals.css";
 import ImageDrapeau from "../public/Img/drapeau.jpg";
 import ImageTrophee from "../public/Img/trophée.jpeg";
 import ImageEcharpe from "../public/Img/echarpe.jpeg";
@@ -8,47 +8,137 @@ import ImageMedaille from "../public/Img/medaille.jpg";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-primary w-full">
       <h1 className="text-center text-2xl m-10">
         {" "}
         maison de tradition lyonnaise de qualité vous souhaite la bienvenue
       </h1>
-      <div className="h-40 w-full bg-red-200">Caroussel</div>
-      <div className="bg-gray-200 flex flex-row-reverse justify-around p-5 border-solid border-1px border-black">
-        <Image
-          src={ImageDrapeau}
-          width="100px"
-          height="100px"
-          className="rounded-lg border-solid border-1 border-black"
-        />
-        <p>lorem ipsum</p>
-      </div>
-      <div className="p-1 bg-blue-500 rounded-xl">
-        <div className="bg-blue-400  border-solid border-2 border-indigo-600 ">
-          <h2 className="text-center text-xl m-5 pt-3">Produit du moment</h2>
-          <div className="grid grid-cols-2 p-3 w-full ">
-            <div className=" ml-6 ">
-              <Image
-                src={ImageDrapeau}
-                width="140px"
-                height="140px"
-                className="border-solid border-2 border-indigo-600"
-              />
+      <div className="h-40 w-full shadow-2xl shadow-black bg-gray-200">
+        <div className="h-40">carroussel</div>
+        {/* <div className={styles.carousel}>
+          <div className={styles.carousel - inner}>
+            <input
+              className={styles.carousel - open}
+              type="radio"
+              id="carousel-1"
+              name="carousel"
+              aria-hidden="true"
+              hidden=""
+              checked="checked"
+            />
+            <div className={styles.carousel - item}>
+              <Image src={ImageDrapeau} />
             </div>
-            <div className=" mr-2">
-              <Image src={ImageEcharpe} width="140px" height="140px" />
+            <input
+              className={styles.carousel - open}
+              type="radio"
+              id="carousel-2"
+              name="carousel"
+              aria-hidden="true"
+              hidden=""
+            />
+            <div className={styles.carousel - item}>
+              <Image src={ImageEcharpe} />
             </div>
+            <input
+              className={styles.carousel - open}
+              type="radio"
+              id="carousel-3"
+              name="carousel"
+              aria-hidden="true"
+              hidden=""
+            />
+            <div className={styles.carousel - item}>
+              <Image src={ImageMedaille} />
+            </div>
+            <label
+              for="carousel-3"
+              className={styles.carousel - control.prev - control - 1}
+            >
+              ‹
+            </label>
+            <label
+              for="carousel-2"
+              className={styles.carousel - control.next - control - 1}
+            >
+              ›
+            </label>
+            <label
+              for="carousel-1"
+              className={styles.carousel - control.prev - control - 2}
+            >
+              ‹
+            </label>
+            <label
+              for="carousel-3"
+              className={styles.carousel - control.next - control - 2}
+            >
+              ›
+            </label>
+            <label
+              for="carousel-2"
+              className={styles.carousel - control.prev - control - 3}
+            >
+              ‹
+            </label>
+            <label
+              for="carousel-1"
+              className={styles.carousel - control - next - control - 3}
+            >
+              ›
+            </label>
+            <ol className={styles.carousel - indicators}>
+              <li>
+                <label for="carousel-1" className={styles.carousel - bullet}>
+                  •
+                </label>
+              </li>
+              <li>
+                <label for="carousel-2" className={styles.carousel - bullet}>
+                  •
+                </label>
+              </li>
+              <li>
+                <label for="carousel-3" className={styles.carousel - bullet}>
+                  •
+                </label>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div> */}
 
-            <div className="ml-6">
-              <Image
-                src={ImageMedaille}
-                width="140px"
-                height="140px"
-                className=""
-              />
-            </div>
-            <div className="mr-2">
-              <Image src={ImageTrophee} width="140px" height="140px" />
+        <div className="bg-primary flex flex-row-reverse justify-around p-5 shadow-xl shadow-black">
+          <Image src={ImageDrapeau} width="100px" height="100px" className="" />
+          <p>lorem ipsum</p>
+        </div>
+        <div className="bg-secondary ">
+          <div className=" ">
+            <h2 className="text-center text-xl m-3 pt-3">Produit du moment</h2>
+            <div className="grid gap-x-1 gap-y-2 grid-cols-2  p-7 w-full border-solid border-2 border-black rounded-xl ">
+              <div className="">
+                <Image
+                  src={ImageDrapeau}
+                  width="100px"
+                  height="100px"
+                  className=""
+                />
+              </div>
+              <div className="">
+                <Image src={ImageEcharpe} width="100px" height="100px" />
+              </div>
+
+              <div className="">
+                <Image
+                  src={ImageMedaille}
+                  width="100px"
+                  height="100px"
+                  className=""
+                />
+              </div>
+              <div className="">
+                <Image src={ImageTrophee} width="100px" height="100px" />
+              </div>
             </div>
           </div>
         </div>
