@@ -4,8 +4,8 @@ import Layout from "../components/Layout";
 export default function Home() {
   return (
     
-      <Layout>
-      <h1 className="bg-third">Bienvenue sur mon Site</h1>
+      <Layout className="bg-primary">
+      <h1 className="text-center">Maison de tradition lyonnaise de qualité<br/>Vous souhaite la bienvenue</h1>
       </Layout>
       
   );
