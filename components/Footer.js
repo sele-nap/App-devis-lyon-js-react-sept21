@@ -4,8 +4,6 @@ import Link from "next/link";
 export default function Footer() {
     return (
        
-
-
 <footer className="bg-third absolute bottom-0 left-0 dark:bg-gray-800 w-full py-8">
     <div className="max-w-screen-xl mx-auto px-4">
         <ul className="max-w-screen-md mx-auto text-lg font-light flex flex-wrap justify-between">
