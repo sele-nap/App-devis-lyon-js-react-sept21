@@ -41,8 +41,8 @@ const create = async ({ email, password }) => {
   });
 };
 
-const findByEmail = async (email) => {
-  return db.user.findUnique({ where: { email } });
+const findByEmail = async (email = "") => {
+  return await db.user.findUnique({ where: { email } });
 };
 module.exports = {
   hashPassword,

@@ -25,11 +25,12 @@ export default function Home() {
         />
         <p>cat ipsum</p>
       </div>
+
       <div className="p-1 bg-black-800 rounded-xl">
         <div className="bg-purple-400  border-solid border-2 border-indigo-600 ">
           <h2 className="text-center text-xl m-5 pt-3">Produit du moment</h2>
-          <div className="grid grid-cols-2 p-3 w-full ">
-            <div className=" ml-6 ">
+          <div className="grid overflow-hidden grid-cols-2 grid-rows-2 gap-8">
+            <div className="box">
               <Image
                 src={ImageDrapeau}
                 width="140px"
@@ -37,19 +38,14 @@ export default function Home() {
                 className="border-solid border-2 border-indigo-600"
               />
             </div>
-            <div className=" mr-2">
+            <div className=" box">
               <Image src={ImageEcharpe} width="140px" height="140px" />
             </div>
 
-            <div className="ml-6">
-              <Image
-                src={ImageMedaille}
-                width="140px"
-                height="140px"
-                className=""
-              />
+            <div className="box">
+              <Image src={ImageMedaille} width="140px" height="140px" />
             </div>
-            <div className="mr-2">
+            <div className="box">
               <Image src={ImageTrophee} width="140px" height="140px" />
             </div>
           </div>
