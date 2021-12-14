@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Controller, useForm } from "react-hook-form";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import axios from "axios";
 
 const SignupForm = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -28,14 +29,15 @@ const SignupForm = () => {
     console.log(data);
     axios
       .post("/api/users", data)
+
       .then((res) => {
-        console.log(res.data);
         alert("all ok");
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
   return (
     <div className="flex items-center justify-center">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-lg ">
@@ -43,12 +45,11 @@ const SignupForm = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Prénom
+              Prénom <span className="text-gray-400 text-md">*</span>
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               type="text"
-              placeholder="Jane"
               id="lastname"
               name="lastname"
               {...register("lastname", {
@@ -61,12 +62,11 @@ const SignupForm = () => {
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Nom de famille
+              Nom de famille <span className="text-gray-400 text-md">*</span>
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="text"
-              placeholder="Doe"
               id="firstname"
               name="firstname"
               {...register("firstname", {
@@ -79,7 +79,7 @@ const SignupForm = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Email
+              Email <span className="text-gray-400 text-md">*</span>
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -98,10 +98,11 @@ const SignupForm = () => {
           </div>
         </div>
 
+        {/* ________ PASSWORD SECTION  ________*/}
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Password
+              Password <span className="text-gray-400 text-md">*</span>
             </label>
             <div className="flex items-center">
               <input
@@ -130,6 +131,8 @@ const SignupForm = () => {
             </p>
           </div>
         </div>
+
+        {/* ________ PASSWORD ORGANISATION  ________*/}
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <div>
@@ -139,7 +142,9 @@ const SignupForm = () => {
               <div className="relative">
                 <select
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="grid-state"
+                  id="organizationType"
+                  name="organizationType"
+                  {...register("organizationType")}
                 >
                   <option value="2">Particulier</option>
                   <option value="3">Collectivité</option>
@@ -155,9 +160,10 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-zip"
+              id="siretNumber"
+              name="siretNumber"
               type="text"
-              placeholder="90210"
+              {...register("siretNumber")}
             />
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -166,8 +172,10 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-city"
+              id="managerName"
+              name="managerName"
               type="text"
+              {...register("managerName")}
             />
           </div>
           <div className="w-full px-3">
@@ -176,11 +184,15 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid"
+              id="organizationName"
+              name="organizationName"
               type="text"
+              {...register("organizationName")}
             />
           </div>
         </div>
+
+        {/* ________ PASSWORD ADRESSE  ________*/}
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full px-3">
@@ -189,14 +201,20 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid"
+              id="address1"
+              name="address1"
               type="text"
+              {...register("address1", {
+                required: " ❌ Champs obligatoire ",
+              })}
             />
 
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid"
+              id="address2"
+              name="address2"
               type="text"
+              {...register("address2")}
             />
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -205,9 +223,10 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-zip"
+              id="zipCode"
+              name="zipCode"
               type="text"
-              placeholder="90210"
+              {...register("zipCode")}
             />
           </div>
 
@@ -217,18 +236,21 @@ const SignupForm = () => {
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-zip"
+              id="city"
+              name="city"
               type="text"
-              placeholder="90210"
+              {...register("city")}
             />
           </div>
 
-          <div className="w-full md:w-2/3 px-3 mb-6 mt-4 md:mb-0">
+          {/* ________ PASSWORD TELEPHONE  ________*/}
+
+          <div className="w-full md:w-2/3 px-3  mt-4 md:mb-10">
             <Controller
               control={control}
               name="phone"
               id="phone"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               render={({
                 field: { onChange, value, name, ref },
                 fieldState: { invalid, isTouched, isDirty, error },
@@ -245,11 +267,11 @@ const SignupForm = () => {
         </div>
 
         <button
-          type="button"
+          type="submit"
           disabled=""
-          className="py-2 px-4  bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  opacity-70 cursor-not-allowed rounded-lg "
+          className="py-2 px-4   bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  opacity-70 cursor-not-allowed rounded-lg mb-10 "
         >
-          Upload
+          Créer mon profil
         </button>
       </form>
     </div>

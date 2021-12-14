@@ -23,24 +23,23 @@ enum EstimateStatus {
 }
 
 model user {
-  id             Int    @id @default(autoincrement())
-  email          String @unique
-  hashedPassword String
-  role           String @default("client")
-  // firstname        String
-  // lastname         String
-  // managerName      String
-  // organizationType OrganizationType
-  // organizationName String
-  // phone            String
-  // siretNumber      String
-  // address1         String
-  // address2         String
-  // zipCode          String
-  // city             String
-  // activationCode   String
-  // inscriptionDate  DateTime
-  // estimates        estimate[]
+  id               Int       @id @default(autoincrement())
+  email            String    @unique
+  hashedPassword   String
+  role             String    @default("client")
+  firstname        String?
+  lastname         String?
+  managerName      String?
+  organizationType String?
+  organizationName String?
+  phone            String?
+  siretNumber      String?
+  address1         String?
+  address2         String?
+  zipCode          String?
+  city             String?
+  activationCode   String?
+  inscriptionDate  DateTime?
 
   estimate estimate[]
 }
