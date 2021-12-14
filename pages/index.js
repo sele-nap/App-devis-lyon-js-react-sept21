@@ -5,12 +5,13 @@ import ImageDrapeau from "../public/Img/drapeau.jpg";
 import ImageTrophee from "../public/Img/trophée.jpeg";
 import ImageEcharpe from "../public/Img/echarpe.jpeg";
 import ImageMedaille from "../public/Img/medaille.jpg";
-import Header from "../components/Header";
+import Layout from "../components/Layout";
+
 
 export default function Home() {
   return (
-    <div>
-      <Header />
+    <div className="">
+    <Layout className="bg-primary">
       <h1 className="text-center text-2xl m-10">
         {" "}
         maison de tradition lyonnaise de qualité vous souhaite la bienvenue
@@ -51,6 +52,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+    </Layout>
     </div>
   );
 }
