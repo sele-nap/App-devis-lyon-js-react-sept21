@@ -8,20 +8,49 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.2.1",
+    "@mui/material": "^5.2.3",
+    "@mui/styled-engine-sc": "^5.1.0",
     "@prisma/client": "^3.6.0",
     "argon2": "^0.28.3",
+    "axios": "^0.24.0",
+    "codes-postaux": "^3.4.0",
+    "esm": "^3.2.25",
     "joi": "^17.5.0",
+    "module-alias": "^2.2.2",
+    "morgan": "^1.10.0",
     "next": "^12.0.7",
+    "next-auth": "^4.0.5",
+    "next-connect": "^0.11.0",
     "prisma": "^3.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "react-hook-form": "^7.21.0",
+    "react-phone-input-2": "^2.14.0",
+    "react-phone-number-input": "^3.1.43",
+    "react-select": "^5.2.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "eslint": "8.4.0",
     "eslint-config-next": "12.0.7",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.1"
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19"
+  },
+  "prisma": {
+    "seed": "node -r esm -r module-alias/register prisma/seed.js"
+  },
+  "_moduleAliases": {
+    "@styles": "styles",
+    "@components": "components",
+    "@models": "models",
+    "@middlewares": "middlewares",
+    "@db": "db.js",
+    "@mailer": "mailer.js"
   }
 }
