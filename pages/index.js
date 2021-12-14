@@ -17,98 +17,6 @@ export default function Home() {
         </h1>
         <div className="h-40 w-full shadow-2xl shadow-black bg-gray-200">
           <div className="h-40">carroussel</div>
-          {/* <div className={styles.carousel}>
-          <div className={styles.carousel - inner}>
-            <input
-              className={styles.carousel - open}
-              type="radio"
-              id="carousel-1"
-              name="carousel"
-              aria-hidden="true"
-              hidden=""
-              checked="checked"
-            />
-            <div className={styles.carousel - item}>
-              <Image src={ImageDrapeau} />
-            </div>
-            <input
-              className={styles.carousel - open}
-              type="radio"
-              id="carousel-2"
-              name="carousel"
-              aria-hidden="true"
-              hidden=""
-            />
-            <div className={styles.carousel - item}>
-              <Image src={ImageEcharpe} />
-            </div>
-            <input
-              className={styles.carousel - open}
-              type="radio"
-              id="carousel-3"
-              name="carousel"
-              aria-hidden="true"
-              hidden=""
-            />
-            <div className={styles.carousel - item}>
-              <Image src={ImageMedaille} />
-            </div>
-            <label
-              for="carousel-3"
-              className={styles.carousel - control.prev - control - 1}
-            >
-              ‹
-            </label>
-            <label
-              for="carousel-2"
-              className={styles.carousel - control.next - control - 1}
-            >
-              ›
-            </label>
-            <label
-              for="carousel-1"
-              className={styles.carousel - control.prev - control - 2}
-            >
-              ‹
-            </label>
-            <label
-              for="carousel-3"
-              className={styles.carousel - control.next - control - 2}
-            >
-              ›
-            </label>
-            <label
-              for="carousel-2"
-              className={styles.carousel - control.prev - control - 3}
-            >
-              ‹
-            </label>
-            <label
-              for="carousel-1"
-              className={styles.carousel - control - next - control - 3}
-            >
-              ›
-            </label>
-            <ol className={styles.carousel - indicators}>
-              <li>
-                <label for="carousel-1" className={styles.carousel - bullet}>
-                  •
-                </label>
-              </li>
-              <li>
-                <label for="carousel-2" className={styles.carousel - bullet}>
-                  •
-                </label>
-              </li>
-              <li>
-                <label for="carousel-3" className={styles.carousel - bullet}>
-                  •
-                </label>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div> */}
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 shadow-xl shadow-black">
             <Image
@@ -124,7 +32,7 @@ export default function Home() {
               <h2 className="text-center text-xl m-3 pt-3">
                 Produit du moment
               </h2>
-              <div className="grid gap-x-1 gap-y-2 grid-cols-2  p-7 w-full border-solid border-2 border-black rounded-xl ">
+              <div className="grid overflow-hidden grid-cols-2 grid-rows-2 gap-6  p-7 w-full border-solid border-2 border-black rounded-xl ">
                 <div className="">
                   <Image
                     src={ImageDrapeau}
