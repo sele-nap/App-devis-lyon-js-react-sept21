@@ -20,7 +20,7 @@ export default function Home() {
           <div className="h-40">carroussel</div>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
-            <Image src={ImageDrapeau} width="100px" height="100px" />
+            <Image src={ImageDrapeau} width="300px" height="100px" alt=""/>
             <p className="w-1/3 text-justify">
               "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
@@ -44,13 +44,14 @@ export default function Home() {
                         width="200px"
                         height="200px "
                         className="box col-start-1"
+                        alt=""
                       />
                     </a>
                   </Link>
 
                   <Link href="/catalog">
                     <a className="flex justify-center md:justify-between">
-                      <Image src={ImageEcharpe} width="200px" height="200px" />
+                      <Image src={ImageEcharpe} width="200px" height="200px" alt=""/>
                     </a>
                   </Link>
 
@@ -61,13 +62,14 @@ export default function Home() {
                         width="200px"
                         height="200px"
                         className=""
+                        alt=""
                       />
                     </a>
                   </Link>
 
                   <Link href="/catalog">
                     <a className="flex justify-center md:justify-between">
-                      <Image src={ImageTrophee} width="200px" height="200px" />
+                      <Image src={ImageTrophee} width="200px" height="200px" alt=""/>
                     </a>
                   </Link>
                 </div>
