@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
-import medaille from "../public/Img/medaille.jpg";
+import medaille2 from "../public/Img/medaille2.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
 import oscar2 from "../public/Img/oscar2.jpg";
 import styles from "../styles/Home.module.css";
@@ -47,9 +47,9 @@ export default function Home() {
             <SwiperSlide>
               <Image src={coupe1} alt="" />
             </SwiperSlide>
-            {/* <SwiperSlide> */}
-            {/* <Image src={medaille} alt="" />
-        </SwiperSlide> */}
+            <SwiperSlide>
+              <Image src={medaille2} alt="" />
+            </SwiperSlide>
             <SwiperSlide>
               <Image src={oscar1} alt="" />
             </SwiperSlide>
@@ -58,9 +58,17 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
 
-          <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
-            <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
-            <p className="w-1/3 text-justify">
+          <div className="bg-primary flex flex-row-reverse justify-around p-5  ">
+            <div className="hidden sm:block">
+              <Image
+                src={coupe}
+                width="300px"
+                height="200px"
+                alt=""
+                className="rounded-xl"
+              />
+            </div>
+            <p className="w-full text-justify md:w-1/3 ">
               "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae vitae
@@ -71,7 +79,7 @@ export default function Home() {
           </div>
           <div className="bg-secondary ">
             <div className=" ">
-              <h2 className="text-center text-xl m-3 pt-3">
+              <h2 className="text-center text-xl m-3 pt-8">
                 Produit du moment
               </h2>
               <div className=" h-full p-7 w-full m-100">
@@ -82,7 +90,7 @@ export default function Home() {
                         src={ImageDrapeau}
                         width="200px"
                         height="200px "
-                        className="box col-start-1"
+                        className="box col-start-1 rounded-xl"
                         alt=""
                       />
                     </a>
@@ -95,6 +103,7 @@ export default function Home() {
                         width="200px"
                         height="200px"
                         alt=""
+                        className="rounded-xl"
                       />
                     </a>
                   </Link>
@@ -105,7 +114,7 @@ export default function Home() {
                         src={ImageMedaille}
                         width="200px"
                         height="200px"
-                        className=""
+                        className="rounded-xl"
                         alt=""
                       />
                     </a>
@@ -118,6 +127,7 @@ export default function Home() {
                         width="200px"
                         height="200px"
                         alt=""
+                        className="rounded-xl"
                       />
                     </a>
                   </Link>

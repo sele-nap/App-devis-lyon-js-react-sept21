@@ -27,6 +27,22 @@ const validateUser = (data, forUpdate = false) => {
       .email()
       .max(255)
       .presence(forUpdate ? "optional" : "required"),
+    lastname: Joi.string()
+      .max(255)
+      .presence(forUpdate ? "optional" : "required"),
+    firstname: Joi.string()
+      .max(255)
+      .presence(forUpdate ? "optional" : "required"),
+    managerName: Joi.string().max(255),
+    organizationType: Joi.string().max(255),
+    organizationName: Joi.string().max(255),
+    managerName: Joi.string().max(255),
+    phone: Joi.string().max(255),
+    siretNumber: Joi.string().max(255),
+    address1: Joi.string().max(255),
+    address2: Joi.string().max(255),
+    zipCode: Joi.string().max(255),
+    city: Joi.string().max(255),
     password: Joi.string()
       .min(8)
       .max(100)
@@ -34,16 +50,45 @@ const validateUser = (data, forUpdate = false) => {
   }).validate(data, { abortEarly: false }).error;
 };
 
-const create = async ({ email, password }) => {
+const create = async ({
+  lastname,
+  firstname,
+  email,
+  password,
+  managerName,
+  organizationType,
+  organizationName,
+  phone,
+  siretNumber,
+  address1,
+  address2,
+  zipCode,
+  city,
+}) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
-    data: { email, hashedPassword },
+    data: {
+      lastname,
+      firstname,
+      email,
+      hashedPassword,
+      managerName,
+      organizationType,
+      organizationName,
+      phone,
+      siretNumber,
+      address1,
+      address2,
+      zipCode,
+      city,
+    },
   });
 };
 
 const findByEmail = async (email = "") => {
   return await db.user.findUnique({ where: { email } });
 };
+
 module.exports = {
   hashPassword,
   verifyPassword,

@@ -10,7 +10,9 @@ const Header = () => {
   const { data, status } = useSession();
   return (
     <div className="w-full flex flex-row items-center p-0 justify-between shadow-xs bg-third">
-      <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+      <Link href="/">
+        <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+      </Link>
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
         <Link href="/Devis">
@@ -28,6 +30,8 @@ const Header = () => {
           className="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none"
         />
       </span>
+
+      <Link href="/signup"> Inscription</Link>
 
       <div className="flex flex-row-reverse text-black mr-4 ml-4"></div>
       <div className="flex items-center m-2 md:flex">
