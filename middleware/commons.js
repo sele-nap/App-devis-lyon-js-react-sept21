@@ -13,14 +13,14 @@ const logger = morgan(
   ":method :url \nreq.body: :reqbody \n:status - :response-time ms\n"
 );
 
-const handler = nc({
-  onError: (err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).end("Something broke!");
-  },
-  onNoMatch: (req, res, next) => {
-    res.status(404).end("Page is not found");
-  },
-}).use(logger);
-
-export default handler;
+export default function base() {
+  return nc({
+    onError: (err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).end("Sorry, an error occured, please try again later");
+    },
+    onNoMatch: (req, res, next) => {
+      res.status(404).end("Not found");
+    },
+  }).use(logger);
+}
