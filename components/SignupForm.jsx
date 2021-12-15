@@ -4,6 +4,7 @@ import "react-phone-input-2/lib/style.css";
 import { Controller, useForm } from "react-hook-form";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignupForm = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -31,7 +32,13 @@ const SignupForm = () => {
       .post("/api/users", data)
 
       .then((res) => {
-        alert("all ok");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Vous allez recevoir un mail de confirmation",
+          showConfirmButton: false,
+          timer: 2500,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -146,10 +153,10 @@ const SignupForm = () => {
                   name="organizationType"
                   {...register("organizationType")}
                 >
-                  <option value="2">Particulier</option>
-                  <option value="3">Collectivité</option>
-                  <option value="3">Association</option>``
-                  <option value="4"> Entreprise</option>
+                  <option value="Particulier">Particulier</option>
+                  <option value="Collectivité">Collectivité</option>
+                  <option value="Association">Association</option>``
+                  <option value="Entreprise"> Entreprise</option>
                 </select>
               </div>
             </div>
