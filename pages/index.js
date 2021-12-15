@@ -1,6 +1,4 @@
-import Head from "next/head";
 import Image from "next/image";
-// import styles from "../styles/Home.module.css";
 import ImageDrapeau from "../public/Img/drapeau.jpg";
 import ImageTrophee from "../public/Img/trophée.jpeg";
 import ImageEcharpe from "../public/Img/echarpe.jpeg";
