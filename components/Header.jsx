@@ -9,7 +9,7 @@ import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 const Header = () => {
   const { data, status } = useSession();
   return (
-    <div className="w-full flex flex-row items-center p-0 justify-between shadow-xs bg-third">
+    <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row m-2">
       <Link href="/">
         <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
       </Link>
