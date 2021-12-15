@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className="w-full flex flex-row items-center p-0 justify-between shadow-xs bg-third">
       <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
-      <div className="text-black flex items-center m-2 md:flex">
+      <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
         <Link href="/Devis">
           <a>Devis</a>
@@ -20,7 +20,7 @@ const Header = () => {
           <IoIosAddCircle size={28} />
         </a>
       </div>
-      <span className="w-full md:w-1/ sm:w-1/6 h-10 cursor-pointer border border-gray-300 text-sm rounded-full flex">
+      <span className="w-full md:w-1/ sm:w-1/6 h-10 cursor-pointer border border-gray-300  text-sm rounded-full flex  justify-center ">
         <input
           type="search"
           name="serch"
@@ -29,28 +29,20 @@ const Header = () => {
         />
       </span>
 
-      <div className="flex flex-row-reverse text-black mr-4 ml-4 md:hidden"></div>
+      <div className="flex flex-row-reverse text-black mr-4 ml-4"></div>
       <div className="flex items-center m-2 md:flex">
         <a href="#" className="pl-2">
           <AiOutlineLogin size={28} />
         </a>
         {status === "unauthenticated" && (
-          <button
-            className="bg-yellow-100 p-2 rounded-xl"
-            onClick={() => signIn()}
-          >
-            Se connecter
-          </button>
+          <button onClick={() => signIn()}>Connexion</button>
         )}
         {status === "authenticated" && (
-          <button
-            className="bg-yellow-100 p-2 rounded-xl"
-            onClick={() => signOut()}
-          >
-            Se déconnecter
-          </button>
+          <button onClick={() => signOut()}>Déconnexion</button>
         )}
       </div>
     </div>
   );
 };
+
+export default Header;
