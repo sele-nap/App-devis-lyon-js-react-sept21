@@ -27,49 +27,36 @@ export default function Home() {
           {" "}
           maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-      
-
-          <div className="bg-primary flex flex-row-reverse justify-around p-5 ">
-            <div className="hidden md:block rounded-xl">
-              <Image
-                className="rounded-xl"
-                src={ImageTrophée}
-                width="200px"
-                height="200px"
-              />
-            </div>
-
-            <p className=" w-full md:w-1/2 text-justify">
         <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
-        <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        className={styles.swiper}
-      >
-        <SwiperSlide>
-          <Image src={coupe} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={coupe1} alt="" />
-        </SwiperSlide>
-        {/* <SwiperSlide> */}
-          {/* <Image src={medaille} alt="" />
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 6000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            className={styles.swiper}
+          >
+            <SwiperSlide>
+              <Image src={coupe} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={coupe1} alt="" />
+            </SwiperSlide>
+            {/* <SwiperSlide> */}
+            {/* <Image src={medaille} alt="" />
         </SwiperSlide> */}
-        <SwiperSlide>
-          <Image src={oscar1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={oscar2} alt="" />
-        </SwiperSlide>
-      </Swiper>
+            <SwiperSlide>
+              <Image src={oscar1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={oscar2} alt="" />
+            </SwiperSlide>
+          </Swiper>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
@@ -84,18 +71,18 @@ export default function Home() {
           </div>
           <div className="bg-secondary ">
             <div className=" ">
-              <h2 className="text-center text-xl m-3 pt-8">
-                Produits du moment
+              <h2 className="text-center text-xl m-3 pt-3">
+                Produit du moment
               </h2>
               <div className=" h-full p-7 w-full m-100">
-                <div className=" border-solid border-2 border-black rounded-xl p-5  sm: grid overflow-hidden grid-cols-2 grid-rows-2 gap-6  md:border-none ">
+                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 gap-6 pb">
                   <Link href="/catalog">
                     <a className="flex justify-center md:justify-end ">
                       <Image
                         src={ImageDrapeau}
                         width="200px"
                         height="200px "
-                        className="box col-start-1 rounded-xl  border-4 border-black "
+                        className="box col-start-1"
                         alt=""
                       />
                     </a>
@@ -107,31 +94,29 @@ export default function Home() {
                         src={ImageEcharpe}
                         width="200px"
                         height="200px"
-                        className="rounded-xl"
                         alt=""
                       />
                     </a>
                   </Link>
 
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end ">
+                    <a className="flex justify-center md:justify-end">
                       <Image
                         src={ImageMedaille}
                         width="200px"
                         height="200px"
-                        className="rounded-xl"
+                        className=""
                         alt=""
                       />
                     </a>
                   </Link>
 
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-between ">
+                    <a className="flex justify-center md:justify-between">
                       <Image
                         src={ImageTrophee}
                         width="200px"
                         height="200px"
-                        className="rounded-xl"
                         alt=""
                       />
                     </a>
@@ -145,4 +130,3 @@ export default function Home() {
     </div>
   );
 }
-// lg:  grid-cols-4 grid-rows-1 gap-6
