@@ -15,6 +15,7 @@
     "@mui/material": "^5.2.3",
     "@mui/styled-engine-sc": "^5.1.0",
     "@prisma/client": "^3.6.0",
+    "@swiper/core": "^0.0.21",
     "argon2": "^0.28.3",
     "axios": "^0.24.0",
     "codes-postaux": "^3.4.0",

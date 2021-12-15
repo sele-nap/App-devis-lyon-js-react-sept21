@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
-import medaille from "../public/Img/medaille.jpg";
+import medaille2 from "../public/Img/medaille2.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
 import oscar2 from "../public/Img/oscar2.jpg";
 import styles from "../styles/Home.module.css";
@@ -28,35 +28,35 @@ export default function Home() {
           maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
-          <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 6000,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            className={styles.swiper}
-          >
-            <SwiperSlide>
-              <Image src={coupe} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image src={coupe1} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image src={medaille} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image src={oscar1} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image src={oscar2} alt="" />
-            </SwiperSlide>
-          </Swiper>
+        <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        className={styles.swiper}
+      >
+        <SwiperSlide>
+          <Image src={coupe} alt="" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={coupe1} alt="" />
+        </SwiperSlide>
+        <SwiperSlide> 
+          <Image src={medaille2} alt="" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={oscar1} alt="" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={oscar2} alt="" />
+        </SwiperSlide>
+      </Swiper>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
