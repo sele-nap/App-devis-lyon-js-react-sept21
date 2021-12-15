@@ -28,35 +28,35 @@ export default function Home() {
           maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
-        <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        className={styles.swiper}
-      >
-        <SwiperSlide>
-          <Image src={coupe} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={coupe1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide> 
-          <Image src={medaille2} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={oscar1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={oscar2} alt="" />
-        </SwiperSlide>
-      </Swiper>
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 6000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            className={styles.swiper}
+          >
+            <SwiperSlide>
+              <Image src={coupe} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={coupe1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={medaille2} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={oscar1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={oscar2} alt="" />
+            </SwiperSlide>
+          </Swiper>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
@@ -75,7 +75,7 @@ export default function Home() {
                 Produit du moment
               </h2>
               <div className=" h-full p-7 w-full m-100">
-                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 gap-6 pb">
+                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
                   <Link href="/catalog">
                     <a className="flex justify-center md:justify-end ">
                       <Image
