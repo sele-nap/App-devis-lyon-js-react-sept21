@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
-import medaille from "../public/Img/medaille.jpg";
+import medaille2 from "../public/Img/medaille2.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
 import oscar2 from "../public/Img/oscar2.jpg";
 import styles from "../styles/Home.module.css";
@@ -47,9 +47,9 @@ export default function Home() {
         <SwiperSlide>
           <Image src={coupe1} alt="" />
         </SwiperSlide>
-        {/* <SwiperSlide> */}
-          {/* <Image src={medaille} alt="" />
-        </SwiperSlide> */}
+        <SwiperSlide> 
+          <Image src={medaille2} alt="" />
+        </SwiperSlide>
         <SwiperSlide>
           <Image src={oscar1} alt="" />
         </SwiperSlide>
