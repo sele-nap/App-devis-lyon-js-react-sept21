@@ -25,9 +25,9 @@ export default function Home() {
       <Layout className="bg-primary">
         <h1 className="text-center text-2xl m-10">
           {" "}
-          maison de tradition lyonnaise de qualité vous souhaite la bienvenue
+          Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
+        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200 cursor-pointer">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -77,61 +77,57 @@ export default function Home() {
               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
             </p>
           </div>
-          <div className="bg-secondary ">
-            <div className=" ">
-              <h2 className="text-center text-xl m-3 pt-8">
-                Produit du moment
-              </h2>
-              <div className=" h-full p-7 w-full m-100">
-                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
-                  <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end ">
-                      <Image
-                        src={ImageDrapeau}
-                        width="200px"
-                        height="200px "
-                        className="box col-start-1 rounded-xl"
-                        alt=""
-                      />
-                    </a>
-                  </Link>
+          <div className="bg-secondary mb-50">
+            <h2 className="text-center text-xl  pt-5 ">Produit du moment</h2>
+            <div className=" h-full w-full">
+              <div className="   border-solid border-2 border-black rounded-xl p-5  mb-20 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2  gap-6 pb sm: m-4">
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-end cursor-pointer">
+                    <Image
+                      src={ImageDrapeau}
+                      width="200px"
+                      height="200px "
+                      className="box col-start-1 rounded-xl"
+                      alt=""
+                    />
+                  </a>
+                </Link>
 
-                  <Link href="/catalog">
-                    <a className="flex justify-center md:justify-between">
-                      <Image
-                        src={ImageEcharpe}
-                        width="200px"
-                        height="200px"
-                        alt=""
-                        className="rounded-xl"
-                      />
-                    </a>
-                  </Link>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-between cursor-pointer">
+                    <Image
+                      src={ImageEcharpe}
+                      width="200px"
+                      height="200px"
+                      alt=""
+                      className="rounded-xl"
+                    />
+                  </a>
+                </Link>
 
-                  <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end">
-                      <Image
-                        src={ImageMedaille}
-                        width="200px"
-                        height="200px"
-                        className="rounded-xl"
-                        alt=""
-                      />
-                    </a>
-                  </Link>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-end cursor-pointer">
+                    <Image
+                      src={ImageMedaille}
+                      width="200px"
+                      height="200px"
+                      className="rounded-xl"
+                      alt=""
+                    />
+                  </a>
+                </Link>
 
-                  <Link href="/catalog">
-                    <a className="flex justify-center md:justify-between">
-                      <Image
-                        src={ImageTrophee}
-                        width="200px"
-                        height="200px"
-                        alt=""
-                        className="rounded-xl"
-                      />
-                    </a>
-                  </Link>
-                </div>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-between cursor-pointer">
+                    <Image
+                      src={ImageTrophee}
+                      width="200px"
+                      height="200px"
+                      alt=""
+                      className="rounded-xl"
+                    />
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

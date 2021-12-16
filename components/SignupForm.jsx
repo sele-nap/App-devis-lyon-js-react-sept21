@@ -129,7 +129,7 @@ const SignupForm = () => {
                   })}
                 />
                 <RemoveRedEyeIcon
-                  className="w-1/4"
+                  className="w-1/4 cursor-pointer"
                   onClick={togglePasswordVisiblity}
                 />
               </div>

@@ -9,16 +9,24 @@ import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 const Header = () => {
   const { data, status } = useSession();
   return (
-    <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row m-2">
-      <Link href="/">
-        <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
-      </Link>
+    <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row">
+      <div className="cursor-pointer">
+        <Link href="/">
+          <Image
+            src={LogoSansBlabla}
+            alt="Logo"
+            width="50px"
+            height="50px"
+            cursor-pointer
+          />
+        </Link>
+      </div>
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
         <Link href="/Devis">
           <a>Devis</a>
         </Link>
-        <a href="#" className="pl-2">
+        <a href="#" className="pl-2 ">
           <IoIosAddCircle size={28} />
         </a>
       </div>
@@ -30,10 +38,11 @@ const Header = () => {
           className="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none"
         />
       </span>
+      <div className="cursor-pointer">
+        <Link href="/signup"> Inscription</Link>
+      </div>
 
-      <Link href="/signup"> Inscription</Link>
-
-      <div className="flex flex-row-reverse text-black mr-4 ml-4"></div>
+      <div className="flex flex-row-reverse text-black mr-4 ml-4 cursor-pointer"></div>
       <div className="flex items-center m-2 md:flex">
         <a href="#" className="pl-2">
           <AiOutlineLogin size={28} />
