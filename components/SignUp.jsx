@@ -4,6 +4,7 @@ import axios from "axios";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Layout from "./Layout";
 
 export default function SignUp() {
   const [passwordShown, setPasswordShown] = useState(false);
