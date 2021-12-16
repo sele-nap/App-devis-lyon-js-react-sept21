@@ -27,7 +27,7 @@ export default function Home() {
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
+        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200 cursor-pointer">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -61,7 +61,7 @@ export default function Home() {
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
             <p className="w-1/3 text-justify">
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae vitae
               dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
@@ -77,7 +77,7 @@ export default function Home() {
               <div className=" h-full p-7 w-full m-100">
                 <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end ">
+                    <a className="flex justify-center md:justify-end cursor-pointer">
                       <Image
                         src={ImageDrapeau}
                         width="200px"
@@ -89,7 +89,7 @@ export default function Home() {
                   </Link>
 
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-between">
+                    <a className="flex justify-center md:justify-between cursor-pointer">
                       <Image
                         src={ImageEcharpe}
                         width="200px"
@@ -100,7 +100,7 @@ export default function Home() {
                   </Link>
 
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end">
+                    <a className="flex justify-center md:justify-end cursor-pointer">
                       <Image
                         src={ImageMedaille}
                         width="200px"
@@ -112,7 +112,7 @@ export default function Home() {
                   </Link>
 
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-between">
+                    <a className="flex justify-center md:justify-between cursor-pointer">
                       <Image
                         src={ImageTrophee}
                         width="200px"
