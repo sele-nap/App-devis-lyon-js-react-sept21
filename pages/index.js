@@ -61,7 +61,7 @@ export default function Home() {
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
             <p className="w-1/3 text-justify">
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae vitae
               dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit

@@ -40,7 +40,9 @@ const validateUser = (data, forUpdate = false) => {
     phone: Joi.string().max(255),
     siretNumber: Joi.string().max(255),
     address1: Joi.string().max(255),
-    address2: Joi.string().max(255),
+    address2: Joi.string()
+      .max(255)
+      .presence(forUpdate ? "optional" : "required"),
     zipCode: Joi.string().max(255),
     city: Joi.string().max(255),
     password: Joi.string()

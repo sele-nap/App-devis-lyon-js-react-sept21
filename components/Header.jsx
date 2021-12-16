@@ -9,13 +9,16 @@ import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 const Header = () => {
   const { data, status } = useSession();
   return (
-    <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row m-2">
-      <Link href="/">
-        <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+    <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row ">
+      <Link href="/" passHref>
+        <a className="flex justify-center md:justify-end ">
+          <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+        </a>
       </Link>
+
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
-        <Link href="/Devis">
+        <Link href="/devis">
           <a>Devis</a>
         </Link>
         <a href="#" className="pl-2">
