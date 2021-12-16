@@ -11,7 +11,9 @@ const Header = () => {
   return (
     <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row m-2">
       <Link href="/">
-        <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+        <a>
+          <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+        </a>
       </Link>
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}

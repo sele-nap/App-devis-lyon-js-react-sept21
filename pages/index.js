@@ -25,7 +25,7 @@ export default function Home() {
       <Layout className="bg-primary">
         <h1 className="text-center text-2xl m-10">
           {" "}
-          maison de tradition lyonnaise de qualité vous souhaite la bienvenue
+          Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
           <Swiper
