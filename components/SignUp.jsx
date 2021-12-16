@@ -230,7 +230,7 @@ export default function SignUp() {
         </div>{" "}
       </div>
 
-      <button type="submit" className=".ctaBtn">
+      <button type="submit" className=".ctaBtn cursor-pointer">
         {" "}
         Créer un compte
       </button>
