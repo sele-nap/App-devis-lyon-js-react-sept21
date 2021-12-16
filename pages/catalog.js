@@ -13,7 +13,7 @@ import trophée from "../public/Img/trophée.jpeg";
 export default function Catalog() {
   return (
     <Layout>
-        <h1 className="text-center text-2xl m-1">CATALOGUE</h1>
+      <h1 className="text-center text-2xl m-1">CATALOGUE</h1>
       <div className="flex flex-wrap items-center justify-center">
         <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-yellow-300 rounded-lg max-w-xs shadow-lg">
           <svg
@@ -409,7 +409,132 @@ export default function Catalog() {
             </div>
           </div>
         </div>
-      </div>
+
+        <div className="w-80 flex justify-center items-center">
+          <div className="w-full p-4">
+            <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
+              <div className="prod-title">
+                <p className="text-2xl uppercase text-gray-900 font-bold">
+                  Médaille
+                </p>
+                <p className="uppercase text-sm text-gray-400">
+                  Légion d'honneur
+                </p>
+              </div>
+              <div className="prod-img">
+                <Image
+                  src={legion}
+                  alt=""
+                  width={200}
+                  height={300}
+                  className="w-full object-cover object-center"
+                />
+              </div>
+              <div className="prod-info grid gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
+                  <p className="font-bold text-xl">35€</p>
+                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-80 flex justify-center items-center">
+          <div className="w-full p-4">
+            <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
+              <div className="prod-title">
+                <p className="text-2xl uppercase text-gray-900 font-bold">
+                  Coupe
+                </p>
+                <p className="uppercase text-sm text-gray-400">
+                  Championnat
+                </p>
+              </div>
+              <div className="prod-img">
+                <Image
+                  src={coupe1}
+                  alt=""
+                  width={200}
+                  height={300}
+                  className="w-full object-cover object-center"
+                />
+              </div>
+              <div className="prod-info grid gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
+                  <p className="font-bold text-xl">35€</p>
+                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-80 flex justify-center items-center">
+          <div className="w-full p-4">
+            <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
+              <div className="prod-title">
+                <p className="text-2xl uppercase text-gray-900 font-bold">
+                  Médaille
+                </p>
+                <p className="uppercase text-sm text-gray-400">
+                  Européenne
+                </p>
+              </div>
+              <div className="prod-img">
+                <Image
+                  src={europe}
+                  alt=""
+                  width={200}
+                  height={300}
+                  className="w-full object-cover object-center"
+                />
+              </div>
+              <div className="prod-info grid gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
+                  <p className="font-bold text-xl">35€</p>
+                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div className="w-80 flex justify-center items-center">
+          <div className="w-full p-4">
+            <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
+              <div className="prod-title">
+                <p className="text-2xl uppercase text-gray-900 font-bold">
+                  Coupe
+                </p>
+                <p className="uppercase text-sm text-gray-400">
+                  Champion
+                </p>
+              </div>
+              <div className="prod-img">
+                <Image
+                  src={trophée}
+                  alt=""
+                  width={200}
+                  height={300}
+                  className="w-full object-cover object-center"
+                />
+              </div>
+              <div className="prod-info grid gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
+                  <p className="font-bold text-xl">35€</p>
+                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
     </Layout>
   );
 }
