@@ -13,7 +13,7 @@ import trophée from "../public/Img/trophée.jpeg";
 export default function Catalog() {
   return (
     <Layout>
-        <h1 className="text-center text-2xl m-1">Catalogue</h1>
+        <h1 className="text-center text-2xl m-1">CATALOGUE</h1>
       <div className="flex flex-wrap items-center justify-center">
         <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-yellow-300 rounded-lg max-w-xs shadow-lg">
           <svg
