@@ -38,8 +38,9 @@ const Header = () => {
           className="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none"
         />
       </span>
-
-      <Link href="/signup"> Inscription</Link>
+      <div className="cursor-pointer">
+        <Link href="/signup"> Inscription</Link>
+      </div>
 
       <div className="flex flex-row-reverse text-black mr-4 ml-4 cursor-pointer"></div>
       <div className="flex items-center m-2 md:flex">
