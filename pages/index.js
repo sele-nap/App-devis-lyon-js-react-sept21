@@ -28,40 +28,40 @@ export default function Home() {
           maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
-        <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        className={styles.swiper}
-      >
-        <SwiperSlide>
-          <Image src={coupe} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={coupe1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide> 
-          <Image src={medaille2} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={oscar1} alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={oscar2} alt="" />
-        </SwiperSlide>
-      </Swiper>
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 6000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            className={styles.swiper}
+          >
+            <SwiperSlide>
+              <Image src={coupe} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={coupe1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={medaille2} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={oscar1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={oscar2} alt="" />
+            </SwiperSlide>
+          </Swiper>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
             <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
             <p className="w-1/3 text-justify">
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae vitae
               dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
