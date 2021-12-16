@@ -12,13 +12,9 @@ const Header = () => {
     <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row">
       <div className="cursor-pointer">
         <Link href="/">
-          <Image
-            src={LogoSansBlabla}
-            alt="Logo"
-            width="50px"
-            height="50px"
-            cursor-pointer
-          />
+          <a>
+            <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+          </a>
         </Link>
       </div>
       <div className="text-black flex justify-start items-center m-2 md:flex">
