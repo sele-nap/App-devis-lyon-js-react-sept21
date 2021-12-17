@@ -27,7 +27,7 @@ export default function Home() {
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200 cursor-pointer">
+        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -77,21 +77,24 @@ export default function Home() {
               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
             </p>
           </div>
-          <div className="bg-secondary mb-50">
-            <h2 className="text-center text-xl  pt-5 ">Produit du moment</h2>
-            <div className=" h-full w-full">
-              <div className="   border-solid border-2 border-black rounded-xl p-5  mb-20 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2  gap-6 pb sm: m-4">
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-end cursor-pointer">
-                    <Image
-                      src={ImageDrapeau}
-                      width="200px"
-                      height="200px "
-                      className="box col-start-1 rounded-xl"
-                      alt=""
-                    />
-                  </a>
-                </Link>
+          <div className="bg-secondary ">
+            <div className=" ">
+              <h2 className="text-center text-xl m-3 pt-3">
+                Produit du moment
+              </h2>
+              <div className=" h-full p-7 w-full m-100">
+                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
+                  <Link href="/catalog">
+                    <a className="flex justify-center md:justify-end ">
+                      <Image
+                        src={ImageDrapeau}
+                        width="200px"
+                        height="200px "
+                        className="box col-start-1"
+                        alt=""
+                      />
+                    </a>
+                  </Link>
 
                 <Link href="/catalog">
                   <a className="flex justify-center md:justify-between cursor-pointer">
@@ -131,6 +134,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </Layout>
     </div>
