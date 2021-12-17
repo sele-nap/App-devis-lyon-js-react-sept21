@@ -15,7 +15,7 @@ export default function Catalog() {
     <Layout>
       <h1 className="text-center text-2xl m-1">CATALOGUE</h1>
       <div className="flex flex-wrap items-center justify-center">
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-yellow-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -66,7 +66,7 @@ export default function Catalog() {
           </div>
         </div>
 
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-purple-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -115,7 +115,7 @@ export default function Catalog() {
           </div>
         </div>
 
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-blue-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -214,7 +214,7 @@ export default function Catalog() {
             </div>
           </div>
         </div>
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-blue-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -312,7 +312,7 @@ export default function Catalog() {
           </div>
         </div>
 
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-purple-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -361,7 +361,7 @@ export default function Catalog() {
           </div>
         </div>
 
-        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-yellow-300 rounded-lg max-w-xs shadow-lg">
+        <div className="flex-shrink-0 mx-2 mb-6 relative overflow-hidden bg-gray-300 rounded-lg max-w-xs shadow-lg">
           <svg
             className="absolute bottom-0 left-0 mb-8"
             viewBox="0 0 375 283"
@@ -446,7 +446,7 @@ export default function Catalog() {
             <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
               <div className="prod-title">
                 <p className="text-2xl uppercase text-gray-900 font-bold">
-                  Coupe
+                  Médaille
                 </p>
                 <p className="uppercase text-sm text-gray-400">
                   Championnat
@@ -454,7 +454,7 @@ export default function Catalog() {
               </div>
               <div className="prod-img">
                 <Image
-                  src={coupe1}
+                  src={medaille}
                   alt=""
                   width={200}
                   height={300}
