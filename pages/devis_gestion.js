@@ -28,28 +28,33 @@ export default function QuoteManagement() {
   return (
     <Layout>
       <section className="bg-slate-50 text-md">
-        <h1 className="border-double border-4 border-thrid text-black rounded place-items-center">
-          Liste des devis validés ou en attente de validation
-        </h1>
-        <h2 className="border-double border-4 border-thrid text-black rounded place-items-center">
-          Liste des devis en cours de création
-        </h2>
+        <div className="flex justify-center items-center">
+          <button className="border-2 border-third text-black rounded cursor-auto p-1 ">
+            Liste des devis validés ou en attente de validation
+          </button>
+        </div>
+        <div className="flex justify-center items-center">
+          <button className="border-2 border-third text-black rounded cursor-auto p-1">
+            Liste des devis en cours de création
+          </button>
+        </div>
+        <div className="flex justify-around items-center">
+          <button
+            className="py-2 px-4 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+            onClick={handleClick}
+          >
+            <IoIosAddCircle size={20} />
+            CRÉER UN DEVIS
+          </button>
 
-        <button
-          className="bg-thrid hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded-full cursor-pointer"
-          onClick={handleClick}
-        >
-          <IoIosAddCircle size={28} />
-          CRÉER UN DEVIS
-        </button>
-
-        <button
-          className="bg-thrid hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded-full cursor-pointer"
-          onClick={Downloaad}
-        >
-          <FaCloudDownloadAlt size={28} />
-          TÉLÉCHARGER
-        </button>
+          <button
+            className="py-2 px-4 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+            onClick={Downloaad}
+          >
+            <FaCloudDownloadAlt size={20} />
+            TÉLÉCHARGER
+          </button>
+        </div>
       </section>
     </Layout>
   );
