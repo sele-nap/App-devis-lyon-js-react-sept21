@@ -1,5 +1,6 @@
 import { validateUser, emailAlreadyExists, create } from "../../../models/user";
 import base from "../../../middleware/commons";
+let nodemailer = require("nodemailer");
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handler(req, res) {

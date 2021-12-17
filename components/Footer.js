@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="w-full flex flex-col bg-third fixed bottom-0 left-0 dark:bg-gray-800 pb-6 pt-0.3 sm:flex-row">
       <div className="max-w-screen-xl mx-auto px-4 h-10 sm:h-4">
-        <ul className="flex justify-between">
+        <ul className="flex justify-between items-center">
           <li className="">
             <Link href="./catalog">
               <a

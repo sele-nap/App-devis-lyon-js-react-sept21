@@ -96,7 +96,9 @@ const SignupForm = () => {
                   required: " ❌ Champs obligatoire ",
                 })}
               />
-              {errors.firstname && <span> {errors.firstname.message}</span>}
+              {errors.firstname && (
+                <span className="text-xs"> {errors.firstname.message}</span>
+              )}
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -117,7 +119,9 @@ const SignupForm = () => {
                   },
                 })}
               />
-              {errors.email && <span> {errors.email.message}</span>}
+              {errors.email && (
+                <span className="text-xs">{errors.email.message}</span>
+              )}
             </div>
           </div>
 
@@ -147,7 +151,9 @@ const SignupForm = () => {
                   onClick={togglePasswordVisiblity}
                 />
               </div>
-              {errors.password && <span> {errors.password.message}</span>}
+              {errors.password && (
+                <span className="text-xs"> {errors.password.message}</span>
+              )}
 
               <p className="text-gray-600 text-xs italic">
                 1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères
