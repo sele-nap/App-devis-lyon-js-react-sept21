@@ -7,11 +7,11 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-function devis() {
+function estimate() {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    axios.post("/api/devis", data).then((res) => {
+    axios.post("/api/estimate/devis", data).then((res) => {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -73,7 +73,7 @@ function devis() {
               id="demandeDevis"
               name="demandeDevis"
               type="text"
-              {...register("additionnalInformation", { required: true })}
+              {...register("additionalInformation", { required: true })}
             />
             <label> Pour quand ? :</label>
             <input
@@ -129,4 +129,4 @@ function devis() {
   );
 }
 
-export default devis;
+export default estimate;

@@ -18,15 +18,16 @@ enum OrganizationType {
 
 enum EstimateStatus {
   DRAFT
+  TO_DO
   WAITING_FOR_VALIDATION
   VALIDATED
 }
 
 model user {
-  id               Int       @id @default(autoincrement())
-  email            String    @unique
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
   hashedPassword   String
-  role             String    @default("client")
+  role             String   @default("client")
   firstname        String?
   lastname         String?
   managerName      String?
@@ -39,47 +40,47 @@ model user {
   zipCode          String?
   city             String?
   activationCode   String?
-  inscriptionDate  DateTime?
+  inscriptionDate  DateTime
 
   estimate estimate[]
 }
 
 model estimate {
   id                    Int                      @id @default(autoincrement())
-  status                EstimateStatus
-  signature             String
+  status                EstimateStatus           @default(TO_DO)
+  signature             String?
   validationDate        DateTime?
   deadLine              DateTime
-  wantedDeadline        DateTime
   additionalInformation String                   @db.LongText
-  validationCode        String
+  validationCode        String?
+  createDate            DateTime
   userId                Int
   customer              user                     @relation(fields: [userId], references: [id])
-  products              estimatesOnProducts[]
+  products              estimateLine[]
   attachedFiles         attachedFileOnEstimate[]
 }
 
-model estimatesOnProducts {
+model estimateLine {
   estimateId          Int
   estimation          estimate @relation(fields: [estimateId], references: [id])
   productId           Int
   products            product  @relation(fields: [productId], references: [id])
   quantity            Int
   estimateDescription String   @db.LongText
-
+  createDate          DateTime
 
   @@id([estimateId, productId])
 }
 
 model product {
-  id          Int                   @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
   reference   String
   stock       Int
-  description String                @db.LongText
+  description String         @db.LongText
   unitPrice   Decimal
   imageUrl    String
-  estimates   estimatesOnProducts[]
+  estimates   estimateLine[]
 
 
 }

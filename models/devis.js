@@ -2,26 +2,28 @@ const db = require("../db");
 const Joi = require("joi");
 // const { AiFillFilePdf } = require("react-icons/ai");
 
-const estimate = (data, forUpdate = false) => {
+const ValidateEstimate = (data, forUpdate = false) => {
   return Joi.object({
-    additionnalInformation: Joi.string()
+    additionalInformation: Joi.string()
       .min(1)
       .presence(forUpdate ? "optional" : "required"),
-    deadLIne: Joi.date().presence(forUpdate ? "optional" : "required"),
-    attachedFiles: Joi.extend(AiFillFilePdf),
+    deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
 
-const create = async ({ additionnalInformation, deadLIne, attachedFiles }) => {
-  const estimate = await estimate(null);
-  return db.estimate.create({
+const create = async ({
+  additionalInformation,
+  deadLine,
+  attachedFiles,
+  customer,
+}) => {
+  return await db.estimate.create({
     data: {
-      userId,
-      deadLIne,
-      additionnalInformation,
-      attachedFiles,
+      deadLine: new Date(deadLine),
+      additionalInformation,
+      createDate: new Date(Date.now()),
+      customer,
     },
   });
 };
-
-export default { estimate, create };
+module.exports = { ValidateEstimate, create };
