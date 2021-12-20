@@ -28,7 +28,6 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     axios
       .post("/api/users", data)
 

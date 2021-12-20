@@ -10,8 +10,10 @@ const Header = () => {
   const { data, status } = useSession();
   return (
     <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row">
-      <Link href="/">
-        <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+      <Link href="/" passHref>
+        <a className="flex justify-center md:justify-end ">
+          <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
+        </a>
       </Link>
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
