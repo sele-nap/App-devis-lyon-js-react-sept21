@@ -1,6 +1,7 @@
 import { validateUser, emailAlreadyExists, create } from "../../../models/user";
 import base from "../../../middleware/commons";
 let nodemailer = require("nodemailer");
+const crypto = require("crypto");
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handler(req, res) {
@@ -13,6 +14,8 @@ async function handler(req, res) {
   delete newUser.hashedPassword;
   res.status(201).send(newUser);
 }
+
+// ------- GENERATE A TOKEN
 
 // async function handlePost(req, res) {
 //   const validationErrors = validateUser(req.body);

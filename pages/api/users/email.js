@@ -9,15 +9,15 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     user: "wilder.app.devis@gmail.com",
-    pass: process.env.password;
+    pass: process.env.password,
   },
   secure: true,
 });
 
 const mailData = {
-    from: "wilder.app.devis@gmail.com",
-    to: 'your email',
-    subject: `Message From ${req.body.firstname}`,
-    text: req.body.message,
-    html: <div>{req.body.message}</div>
-   }
+  from: "wilder.app.devis@gmail.com",
+  to: "your email",
+  subject: `Message From ${req.body.firstname}`,
+  text: req.body.message,
+  html: <div>{req.body.message}</div>,
+};

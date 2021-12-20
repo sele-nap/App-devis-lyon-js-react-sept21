@@ -24,6 +24,7 @@ const SignupForm = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
+  const [selectOrg, setSelectOrg] = useState("");
 
   const togglePasswordConfirmVisiblity = () => {
     setPasswordConfirmShown(passwordConfirmShown ? false : true);
@@ -31,6 +32,11 @@ const SignupForm = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
+  const handleSelect = (e) => {
+    setSelectOrg(e.target.value);
+  };
+
   const {
     register,
     handleSubmit,
@@ -161,7 +167,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* ________ PASSWORD ORGANISATION  ________*/}
+          {/* ________  ORGANISATION  ________*/}
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <div>
@@ -173,18 +179,22 @@ const SignupForm = () => {
                     className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="organizationType"
                     name="organizationType"
+                    value={selectOrg}
+                    onChange={handleSelect}
                     {...register("organizationType", {
                       required: " ❌ Champs obligatoire ",
                     })}
                   >
-                    <option value="Particulier">Particulier</option>
-                    <option value="Collectivité">Collectivité</option>
-                    <option value="Association">Association</option>``
-                    <option value="Entreprise"> Entreprise</option>
+                    <option value="INDIVIDUAL">Particulier</option>
+                    <option value="TOWN_HALL">Collectivité</option>
+                    <option value="NON_PROFIT_ORGANIZATION">Association</option>
+                    ``
+                    <option value="BUISNESS"> Entreprise</option>
                   </select>
                 </div>
               </div>
             </div>
+            <div> {console.log(handleSelect)}Hello</div>
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Siret
@@ -226,7 +236,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* ________ PASSWORD ADRESSE  ________*/}
+          {/* ________   ADRESSE  ________*/}
 
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-full px-3">
@@ -284,11 +294,12 @@ const SignupForm = () => {
               />
             </div>
 
-            {/* ________ PASSWORD TELEPHONE  ________*/}
+            {/* ________  TELEPHONE  ________*/}
 
             <div className="w-full md:w-2/3 px-3  mt-4 md:mb-10">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-                Numero de téléphone
+                Numero de téléphone{" "}
+                <span className="text-gray-400 text-md">*</span>
               </label>
               <Controller
                 control={control}

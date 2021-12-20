@@ -21,34 +21,40 @@ const emailAlreadyExists = async (email) => {
   return !!(await db.user.findFirst({ where: { email } }));
 };
 
-const validateUser = (data, forUpdate = false) => {
+const validateUser = (data, forUpdate = true) => {
+  console.log(data);
   return Joi.object({
-    email: Joi.string()
-      .email()
+    // CHAMPS REQUIRED
+    email: Joi.string().email().max(255).required(),
+    lastname: Joi.string().max(255).required(),
+    firstname: Joi.string().max(255).required(),
+    organizationType: Joi.string().max(255).required(),
+
+    // CHAMPS SPE CATEGORIE
+    managerName: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    lastname: Joi.string()
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      ),
+    organizationName: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    firstname: Joi.string()
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      ),
+    siretNumber: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    managerName: Joi.string().max(255),
-    organizationType: Joi.string().max(255),
-    organizationName: Joi.string().max(255),
-    managerName: Joi.string().max(255),
-    phone: Joi.string().max(255),
-    siretNumber: Joi.string().max(255),
-    address1: Joi.string().max(255),
-    address2: Joi.string()
-      .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    zipCode: Joi.string().max(255),
-    city: Joi.string().max(255),
-    password: Joi.string()
-      .min(8)
-      .max(100)
-      .presence(forUpdate ? "optional" : "required"),
+
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      ),
+
+    // CHAMPS COORDDONNEES
+    phone: Joi.string().max(255).required(),
+    address1: Joi.string().max(255).required(),
+    address2: Joi.string().max(255).optional(),
+    zipCode: Joi.string().max(255).required(),
+    city: Joi.string().max(255).required(),
+    password: Joi.string().min(8).max(100).required(),
   }).validate(data, { abortEarly: false }).error;
 };
 

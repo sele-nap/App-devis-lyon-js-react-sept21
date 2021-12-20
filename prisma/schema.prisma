@@ -11,9 +11,10 @@ datasource db {
 }
 
 enum OrganizationType {
+  INDIVIDUAL
   NON_PROFIT_ORGANIZATION
   TOWN_HALL
-  MILITARY
+  BUISNESS
 }
 
 enum EstimateStatus {
