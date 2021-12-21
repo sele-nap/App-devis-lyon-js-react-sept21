@@ -23,6 +23,8 @@ const emailAlreadyExists = async (email) => {
 
 const validateUser = (data, forUpdate = true) => {
   console.log(data);
+  const isIndividual = data.organizationType === "INDIVIDUAL";
+
   return Joi.object({
     // CHAMPS REQUIRED
     email: Joi.string().email().max(255).required(),
@@ -35,23 +37,30 @@ const validateUser = (data, forUpdate = true) => {
       .max(255)
       .presence(
         data.organizationType === "INDIVIDUAL" ? "optional" : "required"
-      ),
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
     organizationName: Joi.string()
       .max(255)
       .presence(
         data.organizationType === "INDIVIDUAL" ? "optional" : "required"
-      ),
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
+
     siretNumber: Joi.string()
       .max(255)
 
       .presence(
         data.organizationType === "INDIVIDUAL" ? "optional" : "required"
-      ),
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
 
     // CHAMPS COORDDONNEES
     phone: Joi.string().max(255).required(),
     address1: Joi.string().max(255).required(),
-    address2: Joi.string().max(255).optional(),
+    address2: Joi.string()
+      .max(255)
+      .optional()
+      .allow(...(data.organizationType ? ["", null] : [])),
     zipCode: Joi.string().max(255).required(),
     city: Joi.string().max(255).required(),
     password: Joi.string().min(8).max(100).required(),
@@ -72,6 +81,7 @@ const create = async ({
   address2,
   zipCode,
   city,
+  emailVerificationCode,
 }) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
@@ -89,8 +99,24 @@ const create = async ({
       address2,
       zipCode,
       city,
+      emailVerificationCode,
     },
   });
+};
+
+export const confirmEmail = async (emailVerificationCode) => {
+  try {
+    if (await db.user.findUnique({ where: { emailVerificationCode } })) {
+      await db.user.update({
+        where: { emailVerificationCode },
+        data: { emailVerificationCode: null },
+      });
+      return true;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return false;
 };
 
 const findByEmail = async (email = "") => {

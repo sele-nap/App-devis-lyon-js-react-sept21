@@ -1,29 +1,31 @@
 import { validateUser, emailAlreadyExists, create } from "../../../models/user";
 import base from "../../../middleware/commons";
-let nodemailer = require("nodemailer");
-const crypto = require("crypto");
+// import mailer from "@mailer";
+// import crypto from "crypto";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handler(req, res) {
   const validationError = validateUser(req.body);
-  console.log(validationError);
   if (validationError) return res.status(422).send(validationError);
   if (await emailAlreadyExists(req.body.email))
     return res.status(409).send("This email already exists");
+  // const emailVerificationCode = crypto.randomBytes(50).toString("hex");
+  // const { id, email, firstname } = await create({
+  //   ...req.body,
+  //   emailVerificationCode,
+  // });
+  // const mailBody = `Rendez-vous sur ce lien pour vérifier votre email : ${process.env.HOST}/confirm-email?emailVerificationCode=${emailVerificationCode}`;
+  // await mailer.sendMail({
+  //   from: process.env.MAILER_FROM,
+  //   to: email,
+  //   subject: `Vérifier votre email`,
+  //   text: mailBody,
+  //   html: mailBody,
+  // });
+
   const newUser = create(req.body);
   delete newUser.hashedPassword;
   res.status(201).send(newUser);
 }
-
-// ------- GENERATE A TOKEN
-
-// async function handlePost(req, res) {
-//   const validationErrors = validateUser(req.body);
-//   if (validationErrors) return res.status(422).send(validationErrors);
-//   const alreadyExists = await emailAlreadyExists(req.body.email);
-//   if (alreadyExists) return res.status(409).send("email already taken");
-//   const { id, email, name, image } = await createUser(req.body);
-//   res.status(201).send({ id, email, name, image });
-// }
 
 export default base().post(handler);

@@ -24,17 +24,12 @@ const SignupForm = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
-  const [selectOrg, setSelectOrg] = useState("");
 
   const togglePasswordConfirmVisiblity = () => {
     setPasswordConfirmShown(passwordConfirmShown ? false : true);
   };
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
-  };
-
-  const handleSelect = (e) => {
-    setSelectOrg(e.target.value);
   };
 
   const {
@@ -179,8 +174,6 @@ const SignupForm = () => {
                     className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="organizationType"
                     name="organizationType"
-                    value={selectOrg}
-                    onChange={handleSelect}
                     {...register("organizationType", {
                       required: " ❌ Champs obligatoire ",
                     })}
@@ -194,7 +187,6 @@ const SignupForm = () => {
                 </div>
               </div>
             </div>
-            <div> {console.log(handleSelect)}Hello</div>
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Siret
