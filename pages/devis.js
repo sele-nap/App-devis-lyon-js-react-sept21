@@ -18,6 +18,13 @@ function estimate() {
         title: "Votre demande de devis a été envoyé",
         showConfirmButton: false,
         timer: 2500,
+      }).catch;
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Votre demande de devis n'a pas été envoyé",
+        showConfirmButton: false,
+        timer: 2500,
       });
     });
   };
@@ -61,7 +68,7 @@ function estimate() {
     <div>
       <Layout>
         <div className=" flex justify-center">
-          <h1 className="bg-third h-25 flex justify-center rounded-3xl m-20 p-3 md: w-1/3 text-xl ">
+          <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
             Votre demande de devis
           </h1>
         </div>
@@ -78,20 +85,20 @@ function estimate() {
             <label> Pour quand ? :</label>
             <input
               type="date"
-              className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 md: w-1/5 "
+              className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
               {...register("deadLine", { required: true })}
             />
           </div>
 
           <div className="flex justify-center ">
             {" "}
-            <button className="bg-third w-1/4 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml">
+            <button className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4">
               Ajouter pièces jointes <br />3 maximums
             </button>
           </div>
           <div className="">
             <ul>
-              <li className="text-center">
+              <li className="text-center ">
                 test.pdf{" "}
                 <DeleteForeverIcon
                   className="ml-3"
@@ -108,10 +115,10 @@ function estimate() {
             </ul>
           </div>
 
-          <div className="flex flex-row justify-around ">
+          <div className="flex flex-row justify-between ">
             <button
               type="submit"
-              className="bg-third w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml "
+              className="bg-third text-sm text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
             >
               Soumettre un devis <SendIcon className="ml-10 " />
             </button>

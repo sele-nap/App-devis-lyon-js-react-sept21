@@ -1,9 +1,9 @@
 const db = require("../db");
 const Joi = require("joi");
-// const { AiFillFilePdf } = require("react-icons/ai");
 
 const ValidateEstimate = (data, forUpdate = false) => {
   return Joi.object({
+    // customer: Joi.string.presence(),
     additionalInformation: Joi.string()
       .min(1)
       .presence(forUpdate ? "optional" : "required"),
@@ -14,8 +14,9 @@ const ValidateEstimate = (data, forUpdate = false) => {
 const create = async ({
   additionalInformation,
   deadLine,
-  attachedFiles,
+  // attachedFiles,
   customer,
+  status,
 }) => {
   return await db.estimate.create({
     data: {
