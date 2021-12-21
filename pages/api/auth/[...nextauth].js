@@ -1,15 +1,15 @@
-import { findByEmail, verifyPassword } from "../../../models/user";
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { findByEmail, verifyPassword } from '../../../models/user';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
   secret: process.env.SECRET,
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       async authorize(credentials, req) {
         const userInDb = await findByEmail(credentials.username);
         if (
@@ -24,32 +24,29 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
+      console.log('jwt begin', token);
       if (token && !token.role) {
-        const user = await findByEmail(token.email);
-        token.role = user.role;
-      }
-    },
-    async session({ session, user, token }) {
-      console.log("in session", { session, user, token });
-
-      if (token && !token.role && user.emailVerificationCode === null) {
         const user = await findByEmail(token.email);
         token.role = user?.role;
       }
+      console.log('jwt end');
       return token;
     },
     async session({ session, user, token }) {
-      if (token) {
+      console.log('session begin');
+
+      if (token && session.user) {
         session.user.id = token.sub;
         session.user.role = token.role;
       }
-      if (user) {
+      if (user && session.user) {
         session.user.id = user.id;
       }
+      console.log('session end');
       return session;
     },
     pages: {
-      signIn: "/login",
+      signIn: '/login',
     },
   },
 });
