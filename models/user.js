@@ -21,32 +21,49 @@ const emailAlreadyExists = async (email) => {
   return !!(await db.user.findFirst({ where: { email } }));
 };
 
-const validateUser = (data, forUpdate = false) => {
+const validateUser = (data, forUpdate = true) => {
+  console.log(data);
+  const isIndividual = data.organizationType === "INDIVIDUAL";
+
   return Joi.object({
-    email: Joi.string()
-      .email()
+    // CHAMPS REQUIRED
+    email: Joi.string().email().max(255).required(),
+    lastname: Joi.string().max(255).required(),
+    firstname: Joi.string().max(255).required(),
+    organizationType: Joi.string().max(255).required(),
+
+    // CHAMPS SPE CATEGORIE
+    managerName: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    lastname: Joi.string()
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
+    organizationName: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    firstname: Joi.string()
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
+
+    siretNumber: Joi.string()
       .max(255)
-      .presence(forUpdate ? "optional" : "required"),
-    managerName: Joi.string().max(255),
-    organizationType: Joi.string().max(255),
-    organizationName: Joi.string().max(255),
-    managerName: Joi.string().max(255),
-    phone: Joi.string().max(255),
-    siretNumber: Joi.string().max(255),
-    address1: Joi.string().max(255),
-    address2: Joi.string().max(255),
-    zipCode: Joi.string().max(255),
-    city: Joi.string().max(255),
-    password: Joi.string()
-      .min(8)
-      .max(100)
-      .presence(forUpdate ? "optional" : "required"),
+
+      .presence(
+        data.organizationType === "INDIVIDUAL" ? "optional" : "required"
+      )
+      .allow(...(isIndividual ? ["", null] : [])),
+
+    // CHAMPS COORDDONNEES
+    phone: Joi.string().max(255).required(),
+    address1: Joi.string().max(255).required(),
+    address2: Joi.string()
+      .max(255)
+      .optional()
+      .allow(...(data.organizationType ? ["", null] : [])),
+    zipCode: Joi.string().max(255).required(),
+    city: Joi.string().max(255).required(),
+    password: Joi.string().min(8).max(100).required(),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -64,6 +81,7 @@ const create = async ({
   address2,
   zipCode,
   city,
+  emailVerificationCode,
 }) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
@@ -81,8 +99,24 @@ const create = async ({
       address2,
       zipCode,
       city,
+      emailVerificationCode,
     },
   });
+};
+
+export const confirmEmail = async (emailVerificationCode) => {
+  try {
+    if (await db.user.findUnique({ where: { emailVerificationCode } })) {
+      await db.user.update({
+        where: { emailVerificationCode },
+        data: { emailVerificationCode: null },
+      });
+      return true;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return false;
 };
 
 const findByEmail = async (email = "") => {

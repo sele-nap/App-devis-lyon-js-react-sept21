@@ -278,7 +278,7 @@ const SignupForm = () => {
           <button
             type="submit"
             disabled=""
-            className="py-2 px-4   bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  opacity-70 cursor-not-allowed rounded-lg mb-10 "
+            className="py-2 px-4   bg-third hover:bg-yellow-300 focus:ring-yellow-60 0 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2   cursor-not-allowedrounded-lg mb-10 "
           >
             Créer mon profil
           </button>

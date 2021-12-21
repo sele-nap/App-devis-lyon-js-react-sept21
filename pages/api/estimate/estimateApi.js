@@ -1,5 +1,5 @@
 import base from "../../../middleware/commons";
-import { create, ValidateEstimate } from "../../../models/devis";
+import { create, ValidateEstimate } from "../../../models/estimate";
 
 async function handler(req, res) {
   const validationError = ValidateEstimate(req.body);

@@ -6,12 +6,18 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { now } from "next-auth/client/_utils";
 
 function estimate() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = async (data) => {
     console.log(data);
-    axios.post("/api/estimate/devis", data).then((res) => {
+    axios.post("./api/estimate/estimateApi", data).then((res) => {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -28,10 +34,6 @@ function estimate() {
       });
     });
   };
-
-  /*.catch((err) => {
-        console.error(err);
-      })*/
 
   const handleClickDelete = (e) => {
     Swal.fire({
@@ -77,17 +79,30 @@ function estimate() {
             <textarea
               placeholder="Votre message"
               className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="demandeDevis"
-              name="demandeDevis"
+              id="additionalInformation"
+              name="additionalInformation"
               type="text"
-              {...register("additionalInformation", { required: true })}
+              {...register("additionalInformation", {
+                required: " ❌ Champs obligatoire ",
+              })}
             />
+            {errors.additionalInformation && (
+              <span className="text-xs">
+                {" "}
+                {errors.additionalInformation.message}
+              </span>
+            )}
             <label> Pour quand ? :</label>
             <input
               type="date"
+              placeholder="date"
+              id="deadLine"
               className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
-              {...register("deadLine", { required: true })}
+              {...register("deadLine", { required: " ❌ Champs obligatoire " })}
             />
+            {errors.deadLine && (
+              <span className="text-xs"> {errors.deadLine.message}</span>
+            )}
           </div>
 
           <div className="flex justify-center ">
@@ -118,9 +133,10 @@ function estimate() {
           <div className="flex flex-row justify-between ">
             <button
               type="submit"
-              className="bg-third text-sm text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
+              className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
             >
-              Soumettre un devis <SendIcon className="ml-10 " />
+              Soumettre un devis{" "}
+              <SendIcon className="ml-10 " type="submit" onClick={onSubmit} />
             </button>
             <button
               className="bg-third w-2/5 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
