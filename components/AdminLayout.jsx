@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -11,7 +10,7 @@ export default function AdminLayout({ children, pageTitle }) {
   useEffect(() => {
     console.log(status, data);
     if (status !== "loading" && data?.user?.role !== "admin") {
-      router.push("/signup");
+      router.push("/login");
     }
   }, [status, data, router]);
 

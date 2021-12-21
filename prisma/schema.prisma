@@ -11,9 +11,10 @@ datasource db {
 }
 
 enum OrganizationType {
+  INDIVIDUAL
   NON_PROFIT_ORGANIZATION
   TOWN_HALL
-  MILITARY
+  BUISNESS
 }
 
 enum EstimateStatus {
@@ -24,14 +25,14 @@ enum EstimateStatus {
 }
 
 model user {
-  id               Int      @id @default(autoincrement())
-  email            String   @unique
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
   hashedPassword   String
-  role             String   @default("client")
+  role             String            @default("client")
   firstname        String?
   lastname         String?
   managerName      String?
-  organizationType String?
+  organizationType OrganizationType?
   organizationName String?
   phone            String?
   siretNumber      String?
