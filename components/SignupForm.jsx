@@ -244,6 +244,9 @@ const SignupForm = () => {
                   required: " ❌ Champs obligatoire ",
                 })}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
 
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -264,10 +267,22 @@ const SignupForm = () => {
                 id="zipCode"
                 name="zipCode"
                 type="text"
-                {...register("zipCode", {
-                  required: " ❌ Champs obligatoire ",
-                })}
+                {...register(
+                  "zipCode",
+
+                  {
+                    required: " ❌ Champs obligatoire ",
+                    maxLength: 5,
+                    pattern: {
+                      value: /\d{2}[ ]?\d{3}/,
+                      message: "❌ Code postal invalide",
+                    },
+                  }
+                )}
               />
+              {errors.zipCode && (
+                <span className="text-xs"> {errors.zipCode.message}</span>
+              )}
             </div>
 
             <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
@@ -284,6 +299,9 @@ const SignupForm = () => {
                   required: " ❌ Champs obligatoire ",
                 })}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
             </div>
 
             {/* ________  TELEPHONE  ________*/}
@@ -311,6 +329,9 @@ const SignupForm = () => {
                   />
                 )}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
             </div>
           </div>
 
