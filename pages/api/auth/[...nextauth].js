@@ -32,7 +32,7 @@ export default NextAuth({
     async session({ session, user, token }) {
       console.log("in session", { session, user, token });
 
-      if (token && !token.role) {
+      if (token && !token.role && user.emailVerificationCode === null) {
         const user = await findByEmail(token.email);
         token.role = user?.role;
       }

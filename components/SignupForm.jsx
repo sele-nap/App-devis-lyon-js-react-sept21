@@ -6,8 +6,22 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Layout from "./Layout";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = () => {
+  // const notify = () =>
+  //   toast.error("Merci de remplir l'ensemble des champs", {
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
+
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
 
@@ -17,6 +31,7 @@ const SignupForm = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
   const {
     register,
     handleSubmit,
@@ -27,7 +42,7 @@ const SignupForm = () => {
     mode: "onTouched",
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     axios
       .post("/api/users", data)
 
@@ -41,6 +56,7 @@ const SignupForm = () => {
         });
       })
       .catch((err) => {
+        // <ToastContainer />;
         console.error(err);
       });
   };
@@ -81,7 +97,9 @@ const SignupForm = () => {
                   required: " ❌ Champs obligatoire ",
                 })}
               />
-              {errors.firstname && <span> {errors.firstname.message}</span>}
+              {errors.firstname && (
+                <span className="text-xs"> {errors.firstname.message}</span>
+              )}
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -102,7 +120,9 @@ const SignupForm = () => {
                   },
                 })}
               />
-              {errors.email && <span> {errors.email.message}</span>}
+              {errors.email && (
+                <span className="text-xs">{errors.email.message}</span>
+              )}
             </div>
           </div>
 
@@ -132,7 +152,9 @@ const SignupForm = () => {
                   onClick={togglePasswordVisiblity}
                 />
               </div>
-              {errors.password && <span> {errors.password.message}</span>}
+              {errors.password && (
+                <span className="text-xs"> {errors.password.message}</span>
+              )}
 
               <p className="text-gray-600 text-xs italic">
                 1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères
@@ -140,7 +162,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* ________ PASSWORD ORGANISATION  ________*/}
+          {/* ________  ORGANISATION  ________*/}
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <div>
@@ -152,14 +174,14 @@ const SignupForm = () => {
                     className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="organizationType"
                     name="organizationType"
-                    {...register("organizationType")}
+                    {...register("organizationType", {
+                      required: " ❌ Champs obligatoire ",
+                    })}
                   >
                     <option value="INDIVIDUAL">Particulier</option>
-                    <option value="NON_PROFIT_ORGANIZATION">
-                      Collectivité
-                    </option>
-                    <option value="TOWN_HALL">Association</option>``
-                    <option value="COMPANY"> Entreprise</option>
+                    <option value="TOWN_HALL">Collectivité</option>
+                    <option value="NON_PROFIT_ORGANIZATION">Association</option>
+                    <option value="BUISNESS"> Entreprise</option>
                   </select>
                 </div>
               </div>
@@ -173,6 +195,7 @@ const SignupForm = () => {
                 id="siretNumber"
                 name="siretNumber"
                 type="text"
+                defaultValue="1"
                 {...register("siretNumber")}
               />
             </div>
@@ -185,6 +208,7 @@ const SignupForm = () => {
                 id="managerName"
                 name="managerName"
                 type="text"
+                defaultValue=""
                 {...register("managerName")}
               />
             </div>
@@ -196,18 +220,19 @@ const SignupForm = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="organizationName"
                 name="organizationName"
+                defaultValue={""}
                 type="text"
                 {...register("organizationName")}
               />
             </div>
           </div>
 
-          {/* ________ PASSWORD ADRESSE  ________*/}
+          {/* ________   ADRESSE  ________*/}
 
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-full px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-                Adresse
+                Adresse<span className="text-gray-400 text-md"> *</span>
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -218,11 +243,15 @@ const SignupForm = () => {
                   required: " ❌ Champs obligatoire ",
                 })}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
 
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="address2"
                 name="address2"
+                defaultValue=""
                 type="text"
                 {...register("address2")}
               />
@@ -230,36 +259,62 @@ const SignupForm = () => {
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Code Postal
+                <span className="text-gray-400 text-md"> *</span>
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="zipCode"
                 name="zipCode"
                 type="text"
-                {...register("zipCode")}
+                {...register(
+                  "zipCode",
+
+                  {
+                    required: " ❌ Champs obligatoire ",
+                    maxLength: 5,
+                    pattern: {
+                      value: /\d{2}[ ]?\d{3}/,
+                      message: "❌ Code postal invalide",
+                    },
+                  }
+                )}
               />
+              {errors.zipCode && (
+                <span className="text-xs"> {errors.zipCode.message}</span>
+              )}
             </div>
 
             <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Ville
+                <span className="text-gray-400 text-md"> *</span>
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="city"
                 name="city"
                 type="text"
-                {...register("city")}
+                {...register("city", {
+                  required: " ❌ Champs obligatoire ",
+                })}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
             </div>
 
-            {/* ________ PASSWORD TELEPHONE  ________*/}
+            {/* ________  TELEPHONE  ________*/}
 
             <div className="w-full md:w-2/3 px-3  mt-4 md:mb-10">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
+                Numero de téléphone{" "}
+                <span className="text-gray-400 text-md">*</span>
+              </label>
               <Controller
                 control={control}
                 name="phone"
                 id="phone"
+                defaultValue=""
                 className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 render={({
                   field: { onChange, value, name, ref },
@@ -273,18 +328,18 @@ const SignupForm = () => {
                   />
                 )}
               />
+              {errors.lastname && (
+                <span className="text-xs"> {errors.lastname.message}</span>
+              )}
             </div>
           </div>
 
-          <div className="mb-48">
-            <button
-              type="submit"
-              disabled=""
-              className="py-2 px-4   bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  opacity-70 cursor-not-allowed rounded-lg mb-10 "
-            >
-              Créer mon profil
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="py-2 px-4   bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  opacity-70 cursor-not-allowed rounded-lg mb-10 "
+          >
+            Créer mon profil
+          </button>
         </form>
       </div>
     </Layout>

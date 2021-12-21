@@ -14,7 +14,7 @@ enum OrganizationType {
   INDIVIDUAL
   NON_PROFIT_ORGANIZATION
   TOWN_HALL
-  COMPANY
+  BUISNESS
 }
 
 enum EstimateStatus {

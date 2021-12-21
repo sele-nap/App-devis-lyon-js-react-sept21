@@ -15,9 +15,10 @@ const Header = () => {
           <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
         </a>
       </Link>
+
       <div className="text-black flex justify-start items-center m-2 md:flex">
         {" "}
-        <Link href="/Devis">
+        <Link href="/devis">
           <a>Devis</a>
         </Link>
         <a href="#" className="pl-2 ">

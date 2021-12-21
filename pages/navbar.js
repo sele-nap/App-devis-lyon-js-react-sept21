@@ -9,7 +9,6 @@ export default function Navbar() {
     <div className="w-full flex flex-row items-center p-0 justify-between shadow-xs bg-third">
       <Image src={LogoSansBlabla} alt="Logo" width="s0px" height="50px" />
       <div className="text-black flex items-center m-2 md:flex">
-        {" "}
         <Link href="/Devis">
           <a>Devis</a>
         </Link>

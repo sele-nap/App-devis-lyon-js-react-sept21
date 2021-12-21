@@ -58,18 +58,10 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
 
-          <div className="bg-primary flex flex-row-reverse justify-around p-5  ">
-            <div className="hidden sm:block">
-              <Image
-                src={coupe}
-                width="300px"
-                height="200px"
-                alt=""
-                className="rounded-xl"
-              />
-            </div>
-            <p className="w-full text-justify md:w-1/3 ">
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          <div className="bg-primary flex flex-row-reverse justify-around p-5 border-solid border-purple-300">
+            <Image src={ImageDrapeau} width="300px" height="100px" alt="" />
+            <p className="w-1/3 text-justify">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae vitae
               dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
@@ -96,45 +88,45 @@ export default function Home() {
                     </a>
                   </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-between cursor-pointer">
-                    <Image
-                      src={ImageEcharpe}
-                      width="200px"
-                      height="200px"
-                      alt=""
-                      className="rounded-xl"
-                    />
-                  </a>
-                </Link>
+                  <Link href="/catalog">
+                    <a className="flex justify-center md:justify-between cursor-pointer">
+                      <Image
+                        src={ImageEcharpe}
+                        width="200px"
+                        height="200px"
+                        alt=""
+                        className="rounded-xl"
+                      />
+                    </a>
+                  </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-end cursor-pointer">
-                    <Image
-                      src={ImageMedaille}
-                      width="200px"
-                      height="200px"
-                      className="rounded-xl"
-                      alt=""
-                    />
-                  </a>
-                </Link>
+                  <Link href="/catalog">
+                    <a className="flex justify-center md:justify-end cursor-pointer">
+                      <Image
+                        src={ImageMedaille}
+                        width="200px"
+                        height="200px"
+                        className="rounded-xl"
+                        alt=""
+                      />
+                    </a>
+                  </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-between cursor-pointer">
-                    <Image
-                      src={ImageTrophee}
-                      width="200px"
-                      height="200px"
-                      alt=""
-                      className="rounded-xl"
-                    />
-                  </a>
-                </Link>
+                  <Link href="/catalog">
+                    <a className="flex justify-center md:justify-between cursor-pointer">
+                      <Image
+                        src={ImageTrophee}
+                        width="200px"
+                        height="200px"
+                        alt=""
+                        className="rounded-xl"
+                      />
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </Layout>
     </div>
