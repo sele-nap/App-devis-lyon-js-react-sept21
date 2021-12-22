@@ -32,12 +32,12 @@ export default function QuoteManagement() {
   const [createDevis, setCreateDevis] = useState();
 
   useEffect(() => {
-    axios.get("/api/devis").then((res) => setDevis(res.data));
+    axios.get("/api/estimateApi").then((res) => setDevis(res.data));
   }, []);
 
-  useEffect(() => {
-    axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
+  // }, []);
 
   return (
     <Layout>
