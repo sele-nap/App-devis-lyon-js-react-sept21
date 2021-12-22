@@ -8,7 +8,7 @@ export default function LogIn({ csrfToken }) {
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
             <div>
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 cursor-pointer">
                 Connectez-vous à votre compte
               </h2>
             </div>
@@ -62,7 +62,7 @@ export default function LogIn({ csrfToken }) {
                   />
                   <label
                     htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
+                    className="ml-2 block text-sm text-gray-900 cursor-pointer"
                   >
                     Se souvenir de moi
                   </label>
@@ -71,7 +71,7 @@ export default function LogIn({ csrfToken }) {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
                   >
                     Mot de passe perdu ?
                   </a>
@@ -83,7 +83,7 @@ export default function LogIn({ csrfToken }) {
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-third hover:bg-third focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3 cursor-pointer"></span>
                   Se connecter
                 </button>
               </div>
