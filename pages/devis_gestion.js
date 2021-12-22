@@ -50,10 +50,12 @@ export default function QuoteManagement() {
     <Layout>
       <section className="bg-slate-50 text-md">
         {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
-        <div className="flex justify-center items-center">
-          <button className="border-2 border-third text-black rounded cursor-auto p-1 ">
+        <div className="">
+          <div className="flex justify-center">
+          <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
             Liste des devis validés ou en attente de validation
           </button>
+          </div>
 
           {!estimate && <p>En chargement...</p>}
           {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
