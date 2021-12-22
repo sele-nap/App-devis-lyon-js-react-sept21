@@ -1,3 +1,5 @@
+import { now } from "next-auth/client/_utils";
+
 const db = require("../db");
 const argon2 = require("argon2");
 const Joi = require("joi");
@@ -100,6 +102,7 @@ const create = async ({
       zipCode,
       city,
       emailVerificationCode,
+      inscriptionDate: new Date(Date.now()),
     },
   });
 };
