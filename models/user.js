@@ -104,7 +104,7 @@ const create = async ({
   });
 };
 
-export const confirmEmail = async (emailVerificationCode) => {
+const confirmEmail = async (emailVerificationCode) => {
   try {
     if (await db.user.findUnique({ where: { emailVerificationCode } })) {
       await db.user.update({
@@ -130,4 +130,5 @@ module.exports = {
   validateUser,
   create,
   findByEmail,
+  confirmEmail,
 };

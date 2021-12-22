@@ -114,19 +114,19 @@ export default function Catalog() {
                 </p>
                 <p className="uppercase text-sm text-gray-400">Nation</p>
               </div>
-              <div className="prod-img">
+              <div className='prod-img'>
                 <Image
                   src={nationale}
                   alt=""
                   width={200}
                   height={300}
-                  className="w-full object-cover object-center"
+                  className='w-full object-cover object-center'
                 />
               </div>
-              <div className="prod-info grid gap-10">
-                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
-                  <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+              <div className='prod-info grid gap-10'>
+                <div className='flex flex-col md:flex-row justify-between items-center text-gray-900'>
+                  <p className='font-bold text-xl'>35€</p>
+                  <button className='px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none'>
                     Add to cart
                   </button>
                 </div>
@@ -143,19 +143,19 @@ export default function Catalog() {
                 </p>
                 <p className="uppercase text-sm text-gray-400">Championnat</p>
               </div>
-              <div className="prod-img">
+              <div className='prod-img'>
                 <Image
                   src={medaille}
-                  alt=""
+                  alt=''
                   width={200}
                   height={300}
-                  className="w-full object-cover object-center"
+                  className='w-full object-cover object-center'
                 />
               </div>
-              <div className="prod-info grid gap-10">
-                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
-                  <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+              <div className='prod-info grid gap-10'>
+                <div className='flex flex-col md:flex-row justify-between items-center text-gray-900'>
+                  <p className='font-bold text-xl'>35€</p>
+                  <button className='px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none'>
                     Add to cart
                   </button>
                 </div>
@@ -173,19 +173,19 @@ export default function Catalog() {
                 </p>
                 <p className="uppercase text-sm text-gray-400">Sport</p>
               </div>
-              <div className="prod-img">
+              <div className='prod-img'>
                 <Image
                   src={medaillesport}
                   alt=""
                   width={200}
                   height={300}
-                  className="w-full object-cover object-center"
+                  className='w-full object-cover object-center'
                 />
               </div>
-              <div className="prod-info grid gap-10">
-                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
-                  <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+              <div className='prod-info grid gap-10'>
+                <div className='flex flex-col md:flex-row justify-between items-center text-gray-900'>
+                  <p className='font-bold text-xl'>35€</p>
+                  <button className='px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none'>
                     Add to cart
                   </button>
                 </div>
@@ -203,19 +203,19 @@ export default function Catalog() {
                 </p>
                 <p className="uppercase text-sm text-gray-400">Champion</p>
               </div>
-              <div className="prod-img">
+              <div className='prod-img'>
                 <Image
                   src={trophée}
-                  alt=""
+                  alt=''
                   width={200}
                   height={300}
-                  className="w-full object-cover object-center"
+                  className='w-full object-cover object-center'
                 />
               </div>
-              <div className="prod-info grid gap-10">
-                <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
-                  <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+              <div className='prod-info grid gap-10'>
+                <div className='flex flex-col md:flex-row justify-between items-center text-gray-900'>
+                  <p className='font-bold text-xl'>35€</p>
+                  <button className='px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none'>
                     Add to cart
                   </button>
                 </div>
