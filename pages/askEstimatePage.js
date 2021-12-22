@@ -17,22 +17,26 @@ function estimate() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    axios.post("./api/estimate/estimateApi", data).then((res) => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Votre demande de devis a été envoyé",
-        showConfirmButton: false,
-        timer: 2500,
-      }); //.catch;
-      // Swal.fire({
-      //   position: "center",
-      //   icon: "error",
-      //   title: "Votre demande de devis n'a pas été envoyé",
-      //   showConfirmButton: false,
-      //   timer: 2500,
-      // });
-    });
+    await axios
+      .post("./api/estimate/estimateApi", data)
+      .then((res) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Votre demande de devis a été envoyé",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      })
+      .catch(
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Votre demande de devis n'a pas été envoyé",
+          showConfirmButton: false,
+          timer: 2500,
+        })
+      );
   };
 
   const handleClickDelete = (e) => {
@@ -135,11 +139,10 @@ function estimate() {
 
             <div className="flex flex-row justify-between ">
               <button
-                type="submit"
+                onClick={onSubmit}
                 className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
               >
-                Soumettre un devis{" "}
-                <SendIcon className="ml-10 " type="submit" onClick={onSubmit} />
+                Soumettre un devis <SendIcon className="ml-10 " />
               </button>
               <button
                 className="bg-third w-2/5 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
