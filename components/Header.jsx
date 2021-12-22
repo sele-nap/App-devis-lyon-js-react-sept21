@@ -8,7 +8,7 @@ import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 import Swal from "sweetalert2";
 
 const Header = () => {
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
 
   // const handleClickEstimate = () => {
   //   Swal.fire({

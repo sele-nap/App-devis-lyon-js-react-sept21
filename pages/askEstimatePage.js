@@ -16,7 +16,6 @@ function estimate() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     axios.post("./api/estimate", data).then((res) => {
       Swal.fire({
         position: "center",
