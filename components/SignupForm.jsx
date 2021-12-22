@@ -11,23 +11,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignupForm = () => {
-  // const notify = () =>
-  //   toast.error("Merci de remplir l'ensemble des champs", {
-  //     position: "top-center",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //   });
 
   const [passwordShown, setPasswordShown] = useState(false);
-  const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
 
-  const togglePasswordConfirmVisiblity = () => {
-    setPasswordConfirmShown(passwordConfirmShown ? false : true);
-  };
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
