@@ -1,6 +1,7 @@
 import { findByEmail, verifyPassword } from "../../../models/user";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { token } from "morgan";
 
 export default NextAuth({
   secret: process.env.SECRET,
@@ -24,7 +25,7 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("jwt begin", token);
+      // console.log(token.sub);
       if (token && !token.role) {
         const user = await findByEmail(token.email);
         token.role = user?.role;

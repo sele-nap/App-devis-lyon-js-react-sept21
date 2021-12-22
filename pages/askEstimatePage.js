@@ -17,7 +17,7 @@ function estimate() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    axios.post("./api/estimate/estimateApi", data).then((res) => {
+    axios.post("./api/estimate", data).then((res) => {
       Swal.fire({
         position: "center",
         icon: "success",

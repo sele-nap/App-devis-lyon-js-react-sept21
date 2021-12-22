@@ -1,7 +1,15 @@
 import base from "../../../middleware/commons";
-import { createAskEstimate, ValidateEstimate } from "../../../models/estimate";
+import {
+  createAskEstimate,
+  getEstimate,
+  ValidateEstimate,
+} from "../../../models/estimate";
 
-async function handler(req, res) {
+const handleGet = async (req, res) => {
+  res.send(await getEstimate());
+};
+
+async function handlerPost(req, res) {
   const validationError = ValidateEstimate(req.body);
   console.log(validationError);
   if (validationError) return res.status(422).send(validationError);
@@ -13,4 +21,5 @@ async function handler(req, res) {
 
   res.status(201).send(newEstimate);
 }
-export default base().post(handler);
+
+export default base().post(handlerPost).get(handleGet);

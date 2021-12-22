@@ -28,13 +28,20 @@ export default function QuoteManagement() {
     });
   };
 
-  const [devis, setDevis] = useState();
-  const [createDevis, setCreateDevis] = useState();
+  const [estimate, setEstimate] = useState();
+  // const [createDevis, setCreateDevis] = useState();
 
   useEffect(() => {
-    axios.get("/api/estimateApi").then((res) => setDevis(res.data));
+    axios.get("/api/estimate").then((res) => setEstimate(res.data));
   }, []);
 
+  const deleteEstimate = async (id) => {
+    if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
+      await axios.delete(`/api/estimate/${id}`);
+      alert("projet bien supprimé");
+      setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+    }
+  };
   // useEffect(() => {
   //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
   // }, []);
@@ -48,17 +55,17 @@ export default function QuoteManagement() {
             Liste des devis validés ou en attente de validation
           </button>
 
-          {!devis && <p>En chargement...</p>}
-          {devis?.length === 0 && <p>Pas de devis actuellement</p>}
-          {devis && devis.length !== 0 && (
+          {!estimate && <p>En chargement...</p>}
+          {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
+          {estimate && estimate.length !== 0 && (
             <table className="table-auto mt-6 mb-6">
               <tbody className="border-t">
-                {projects.map(({ id, name, date, validation }) => (
+                {estimate.map(({ id, deadLine, additionalInformation }) => (
                   <tr className="border-b" key={id}>
-                    <td className="text-lg p-3 font-bold">{name}</td>
-                    <td className="text-lg p-3 font-bold">{date}</td>
-                    <td className="text-lg p-3 font-bold">{validation}</td>
-                    <td className="pt-3 pb-3"></td>
+                    <td className="text-lg p-3 font-bold">{deadLine}</td>
+                    <td className="text-lg p-3 font-bold">
+                      {additionalInformation}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -67,7 +74,7 @@ export default function QuoteManagement() {
         </div>
 
         {/* ___________ QUOTATION IN THE PROCESS OF CREATION  ___________*/}
-        <div className="flex justify-center items-center">
+        {/* <div className="flex justify-center items-center">
           <button className="border-2 border-third text-black rounded cursor-auto p-1">
             Liste des devis en cours de création
           </button>
@@ -88,7 +95,7 @@ export default function QuoteManagement() {
               </tbody>
             </table>
           )}
-        </div>
+        </div> */}
 
         {/* ___________ CREATE A QUOTATION  ___________*/}
         <div className="flex justify-around items-center">
