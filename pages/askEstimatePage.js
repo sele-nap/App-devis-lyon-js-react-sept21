@@ -24,14 +24,14 @@ function estimate() {
         title: "Votre demande de devis a été envoyé",
         showConfirmButton: false,
         timer: 2500,
-      }).catch;
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Votre demande de devis n'a pas été envoyé",
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      }); //.catch;
+      // Swal.fire({
+      //   position: "center",
+      //   icon: "error",
+      //   title: "Votre demande de devis n'a pas été envoyé",
+      //   showConfirmButton: false,
+      //   timer: 2500,
+      // });
     });
   };
 
@@ -93,7 +93,7 @@ function estimate() {
                   {errors.additionalInformation.message}
                 </span>
               )}
-              <label> Pour quand ? :</label>
+              <label> Pour quelle date? :</label>
               <input
                 type="date"
                 placeholder="date"
