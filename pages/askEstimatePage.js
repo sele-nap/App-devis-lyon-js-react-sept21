@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
+import { useRef, useState } from "react";
+import Image from "next/image";
 
 function estimate() {
   const {
@@ -17,7 +19,7 @@ function estimate() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    await axios
+    axios
       .post("./api/estimate/estimateApi", data)
       .then((res) => {
         Swal.fire({
@@ -58,7 +60,7 @@ function estimate() {
       }
     });
   };
-
+  const [attachedFiles, setAttachedFiles] = useState("");
   const handleClickSave = (e) => {
     Swal.fire({
       position: "center",
@@ -68,6 +70,13 @@ function estimate() {
       showConfirmButton: false,
       timer: 2500,
     });
+  };
+  const attachedFilesRef = useRef(null);
+  const handleAttachedFilesClick = () => {
+    attachedFilesRef.current.click();
+  };
+  const handleAttachedFilesSelection = (e) => {
+    console.log(e.target.files[0]);
   };
 
   return (
@@ -83,7 +92,7 @@ function estimate() {
             <div className="flex align items-center flex-col">
               <textarea
                 placeholder="Votre message"
-                className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="additionalInformation"
                 name="additionalInformation"
                 type="text"
@@ -97,7 +106,7 @@ function estimate() {
                   {errors.additionalInformation.message}
                 </span>
               )}
-              <label> Pour quelle date? :</label>
+              <label className="mt-5"> Pour quelle date? :</label>
               <input
                 type="date"
                 placeholder="date"
@@ -114,19 +123,29 @@ function estimate() {
 
             <div className="flex justify-center ">
               {" "}
-              <button className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4">
+              <button
+                onClick={handleAttachedFilesClick}
+                className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
+              >
                 Ajouter pièces jointes <br />3 maximums
               </button>
+              <input
+                className="hidden"
+                type="file"
+                multiple="true"
+                id="attachedFiles"
+                accept="image/png, image/jpeg, image/gif"
+                ref={attachedFilesRef}
+                onChange={handleAttachedFilesSelection}
+              ></input>
             </div>
             <div className="">
               <ul>
-                <li className="text-center ">
-                  test.pdf{" "}
-                  <DeleteForeverIcon
-                    className="ml-3"
-                    onClick={handleClickDelete}
-                  />
-                </li>
+                <DeleteForeverIcon
+                  className="ml-3"
+                  onClick={handleClickDelete}
+                />
+
                 <li className="text-center">
                   test.pdf <DeleteForeverIcon className="ml-3" />
                 </li>
@@ -138,10 +157,7 @@ function estimate() {
             </div>
 
             <div className="flex flex-row justify-between ">
-              <button
-                onClick={onSubmit}
-                className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
-              >
+              <button className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl ">
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
               <button
