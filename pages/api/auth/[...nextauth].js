@@ -23,24 +23,30 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, user, token }) {
-      console.log("in session", { session, user, token });
-
-      if (token) {
-        session.user.role = token.role;
-      }
-
-      return session;
-    },
     async jwt({ token, user, account, profile, isNewUser }) {
+      console.log("jwt begin", token);
       if (token && !token.role) {
         const user = await findByEmail(token.email);
-        token.role = user.role;
+        token.role = user?.role;
       }
-
-      console.log("in jwt", { token, user, account, profile, isNewUser });
-
+      console.log("jwt end");
       return token;
+    },
+    async session({ session, user, token }) {
+      console.log("session begin");
+
+      if (token && session.user) {
+        session.user.id = token.sub;
+        session.user.role = token.role;
+      }
+      if (user && session.user) {
+        session.user.id = user.id;
+      }
+      console.log("session end");
+      return session;
+    },
+    pages: {
+      signIn: "/login",
     },
   },
 });

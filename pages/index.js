@@ -27,7 +27,7 @@ export default function Home() {
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200 cursor-pointer">
+        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -77,7 +77,7 @@ export default function Home() {
               <div className=" h-full p-7 w-full m-100">
                 <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
                   <Link href="/catalog">
-                    <a className="flex justify-center md:justify-end cursor-pointer">
+                    <a className="flex justify-center md:justify-end ">
                       <Image
                         src={ImageDrapeau}
                         width="200px"
@@ -95,6 +95,7 @@ export default function Home() {
                         width="200px"
                         height="200px"
                         alt=""
+                        className="rounded-xl"
                       />
                     </a>
                   </Link>
@@ -105,7 +106,7 @@ export default function Home() {
                         src={ImageMedaille}
                         width="200px"
                         height="200px"
-                        className=""
+                        className="rounded-xl"
                         alt=""
                       />
                     </a>
@@ -118,6 +119,7 @@ export default function Home() {
                         width="200px"
                         height="200px"
                         alt=""
+                        className="rounded-xl"
                       />
                     </a>
                   </Link>
