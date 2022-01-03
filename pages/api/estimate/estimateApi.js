@@ -4,10 +4,11 @@ import {
   getEstimate,
   ValidateEstimate,
 } from "../../../models/estimate";
+
 const handleGet = async (req, res) => {
   res.send(await getEstimate());
 };
-async function handlerPost(req, res) {
+async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
   console.log(validationError);
   if (validationError) return res.status(422).send(validationError);
@@ -17,4 +18,4 @@ async function handlerPost(req, res) {
   });
   res.status(201).send(newEstimate);
 }
-export default base().post(handlerPost).get(handleGet);
+export default base().post(handlePost).get(handleGet);

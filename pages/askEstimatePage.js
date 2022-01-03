@@ -9,6 +9,7 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import e from "cors";
 
 function estimate() {
   const {
@@ -18,7 +19,6 @@ function estimate() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     axios
       .post("./api/estimate/estimateApi", data)
       .then((res) => {
@@ -60,17 +60,24 @@ function estimate() {
       }
     });
   };
-  const [attachedFiles, setAttachedFiles] = useState("");
-  const handleClickSave = (e) => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title:
-        "Votre demande de devis a été enregistré mais n'a pas été envoyé à l'administrateur",
-      showConfirmButton: false,
-      timer: 2500,
-    });
+
+  const handleClickSave = async (data) => {
+    console.log(data);
+    await axios
+      .post("./api/estimate/estimateApi", { ...data, status: "DRAFT" })
+      .then((res) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title:
+            "Votre demande de devis a été enregistré mais n'a pas été envoyé à l'administrateur",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      });
   };
+
+  const [attachedFiles, setAttachedFiles] = useState("");
   const attachedFilesRef = useRef(null);
   const handleAttachedFilesClick = () => {
     attachedFilesRef.current.click();
@@ -125,6 +132,7 @@ function estimate() {
               {" "}
               <button
                 onClick={handleAttachedFilesClick}
+                type="submit"
                 className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
               >
                 Ajouter pièces jointes <br />3 maximums
@@ -132,11 +140,12 @@ function estimate() {
               <input
                 className="hidden"
                 type="file"
-                multiple="true"
+                // multiple = true
                 id="attachedFiles"
                 accept="image/png, image/jpeg, image/gif"
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
+                // {...register("attachedFiles")}
               ></input>
             </div>
             <div className="">
@@ -147,17 +156,22 @@ function estimate() {
                 />
 
                 <li className="text-center">
-                  test.pdf <DeleteForeverIcon className="ml-3" />
+                  test
+                  <DeleteForeverIcon className="ml-3" />
                 </li>
 
                 <li className="text-center">
-                  test.pdf <DeleteForeverIcon className="ml-3" />
+                  {handleAttachedFilesSelection}{" "}
+                  <DeleteForeverIcon className="ml-3" />
                 </li>
               </ul>
             </div>
 
             <div className="flex flex-row justify-between ">
-              <button className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl ">
+              <button
+                type="submit"
+                className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
+              >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
               <button
