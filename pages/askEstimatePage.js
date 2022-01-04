@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
 
-function estimate() {
+function Estimate() {
   const {
     register,
     handleSubmit,
@@ -16,8 +16,7 @@ function estimate() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    axios.post("./api/estimate/estimateApi", data).then((res) => {
+    axios.post("./api/estimate", data).then((res) => {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -156,4 +155,4 @@ function estimate() {
   );
 }
 
-export default estimate;
+export default Estimate;

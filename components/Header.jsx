@@ -8,7 +8,7 @@ import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 import Swal from "sweetalert2";
 
 const Header = () => {
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
 
   // const handleClickEstimate = () => {
   //   Swal.fire({
@@ -33,9 +33,9 @@ const Header = () => {
         <Link href="/askEstimatePage">
           <a className="pl-">
             {" "}
-            <button type="button" onClick={handleClickEstimate()}>
+            {/* <button type="button" onClick={handleClickEstimate()}>
               Devis
-            </button>
+            </button> */}
             <IoIosAddCircle size={28} />
           </a>
         </Link>

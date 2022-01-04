@@ -51,12 +51,12 @@ model estimate {
   status                EstimateStatus           @default(TO_DO)
   signature             String?
   validationDate        DateTime?
-  deadLine              DateTime
+  deadLine              DateTime?
   additionalInformation String                   @db.LongText
   validationCode        String?
-  createDate            DateTime
-  userId                Int
-  customer              user                     @relation(fields: [userId], references: [id])
+  createDate            DateTime?
+  userId                Int?
+  customer              user?                    @relation(fields: [userId], references: [id])
   products              estimateLine[]
   attachedFiles         attachedFileOnEstimate[]
 }

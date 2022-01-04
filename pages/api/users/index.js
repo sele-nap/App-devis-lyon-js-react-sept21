@@ -10,7 +10,6 @@ async function handler(req, res) {
   if (await emailAlreadyExists(req.body.email))
     return res.status(409).send("This email already exists");
   const emailVerificationCode = crypto.randomBytes(50).toString("hex");
-  console.log(emailVerificationCode);
   const { id, email, lastname } = await create({
     ...req.body,
     emailVerificationCode,

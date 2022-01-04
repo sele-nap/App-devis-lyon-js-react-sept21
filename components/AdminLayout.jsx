@@ -8,7 +8,6 @@ export default function AdminLayout({ children, pageTitle }) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(status, data);
     if (status !== "loading" && data?.user?.role !== "admin") {
       router.push("/login");
     }
