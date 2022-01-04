@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -52,9 +52,9 @@ export default function QuoteManagement() {
         {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
         <div className="">
           <div className="flex justify-center">
-          <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-            Liste des devis validés ou en attente de validation
-          </button>
+            <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
+              Liste des devis validés ou en attente de validation
+            </button>
           </div>
 
           {!estimate && <p>En chargement...</p>}
@@ -64,9 +64,14 @@ export default function QuoteManagement() {
               <tbody className="border-t">
                 {estimate.map(({ id, deadLine, additionalInformation }) => (
                   <tr className="border-b" key={id}>
+                    <td className="text-lg p-3 font-bold"> {id}</td>
                     <td className="text-lg p-3 font-bold">{deadLine}</td>
                     <td className="text-lg p-3 font-bold">
                       {additionalInformation}
+                    </td>
+                    <td>
+                      {" "}
+                      <Link href={`estimates/${id}`}> Voir plus</Link>
                     </td>
                   </tr>
                 ))}
