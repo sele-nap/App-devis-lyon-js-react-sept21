@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start:server": "next start",
     "lint": "next lint",
+    "debug": "NODE_OPTIONS='--inspect' next dev",
+    "start:server": "next start",
     "generate-db-client": "npx prisma generate",
     "migrate:dev": "npx prisma migrate dev",
     "migrate:deploy": "npx prisma migrate deploy",
@@ -15,6 +16,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@joi/date": "^2.1.0",
     "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "^5.2.1",
     "@mui/material": "^5.2.3",
