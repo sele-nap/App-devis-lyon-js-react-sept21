@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
 
-function estimate() {
+function Estimate() {
   const {
     register,
     handleSubmit,
@@ -155,4 +155,4 @@ function estimate() {
   );
 }
 
-export default estimate;
+export default Estimate;

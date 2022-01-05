@@ -1,5 +1,3 @@
-import { estimate } from "../db";
-
 const db = require("../db");
 const Joi = require("joi");
 
@@ -19,6 +17,30 @@ const ValidateEstimate = (data, forUpdate = false) => {
   }).validate(data, { abortEarly: false }).error;
 };
 
+const estimateToShow = {
+  id: true,
+  deadLine: true,
+  additionalInformation: true,
+};
+
+const getEstimates = async () => {
+  return db.estimate.findMany({
+    select: estimateToShow,
+  });
+};
+export const getOneEstimate = (id) => {
+  return db.estimate.findUnique({
+    where: { id: parseInt(id, 10) },
+    select: estimateToShow,
+  });
+};
+
+const deleteOneEstimate = (id) => {
+  return db.estimate
+    .delete({ where: { id: parseInt(id, 10) } })
+    .catch((_) => false);
+};
+
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
@@ -35,17 +57,6 @@ const createAskEstimate = async ({
   });
 };
 
-const estimateToShow = {
-  deadLine: true,
-  additionalInformation: true,
-};
-
-const getEstimate = async () => {
-  return db.estimate.findMany({
-    select: estimateToShow,
-  });
-};
-
 const updateAskEstimate = async (additionalInformation, deadLine) => {
   return db.estimate
     .patch({ where: { deadLine, attachedFiles } })
@@ -56,5 +67,7 @@ module.exports = {
   ValidateEstimate,
   createAskEstimate,
   updateAskEstimate,
-  getEstimate,
+  getEstimates,
+  getOneEstimate,
+  deleteOneEstimate,
 };

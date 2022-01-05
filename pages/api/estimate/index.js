@@ -1,12 +1,12 @@
 import base from "../../../middleware/commons";
 import {
   createAskEstimate,
-  getEstimate,
+  getEstimates,
   ValidateEstimate,
 } from "../../../models/estimate";
 
 const handleGet = async (req, res) => {
-  res.send(await getEstimate());
+  res.send(await getEstimates());
 };
 
 async function handlerPost(req, res) {
