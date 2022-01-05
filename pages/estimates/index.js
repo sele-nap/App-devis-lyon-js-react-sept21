@@ -62,18 +62,21 @@ export default function QuoteManagement() {
           {estimate && estimate.length !== 0 && (
             <table className="table-auto mt-6 mb-6">
               <tbody className="border-t">
-                {estimate.map(({ id, deadLine, additionalInformation }) => (
-                  <tr className="border-b" key={id}>
-                    <td className="text-lg p-3 font-bold"> {id}</td>
-                    <td className="text-lg p-3 font-bold">{deadLine}</td>
-                    <td className="text-lg p-3 font-bold">
-                      {additionalInformation}
-                    </td>
-                    <td>
-                      <Link href={`estimates/${id}`}> Voir plus</Link>
-                    </td>
-                  </tr>
-                ))}
+                {estimate.map(
+                  ({ id, deadLine, additionalInformation, customer }) => (
+                    <tr className="border-b" key={id}>
+                      <td className="text-lg p-3 font-bold"> {id}</td>
+                      <td className="text-lg p-3 font-bold">{deadLine}</td>
+                      <td className="text-lg p-3 font-bold">
+                        {additionalInformation}
+                      </td>
+                      <td className="text-lg p-3 font-bold">{customer.id}</td>
+                      <td>
+                        <Link href={`estimates/${id}`}> Voir plus</Link>
+                      </td>
+                    </tr>
+                  )
+                )}
               </tbody>
             </table>
           )}

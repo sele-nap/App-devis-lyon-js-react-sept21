@@ -46,7 +46,7 @@ const createAskEstimate = async ({
   additionalInformation,
   deadLine,
   // attachedFiles,
-  // customer,
+  customer,
 }) => {
   return await db.estimate.create({
     data: {
