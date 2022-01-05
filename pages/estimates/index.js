@@ -45,42 +45,149 @@ export default function QuoteManagement() {
   // useEffect(() => {
   //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
   // }, []);
-
   return (
     <Layout>
-      <section className="bg-slate-50 text-md">
+      <section className="bg-slate-50">
         {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
-        <div className="">
-          <div className="flex justify-center">
-            <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-              Liste des devis validés ou en attente de validation
-            </button>
-          </div>
 
-          {!estimate && <p>En chargement...</p>}
-          {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
-          {estimate && estimate.length !== 0 && (
-            <table className="table-auto mt-6 mb-6">
+        <div className="flex justify-center">
+          <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
+            Liste des devis validés ou en attente de validation
+          </button>
+        </div>
+
+        {!estimate && <p>En chargement...</p>}
+        {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
+        {estimate && estimate.length !== 0 && (
+          <div className="table w-full p-2 mt-8">
+            <table className="w-full border">
+              <thead>
+                <tr className="bg-gray-50 border-b">
+                  <th className="border-r p-2"></th>
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Numéro Client
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Nom
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Date de création devis
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Détails Devis
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Deadline Devis
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Editer
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Validation
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                </tr>
+              </thead>
               <tbody className="border-t">
                 {estimate.map(
-                  ({ id, deadLine, additionalInformation, customer }) => (
-                    <tr className="border-b" key={id}>
-                      <td className="text-lg p-3 font-bold"> {id}</td>
-                      <td className="text-lg p-3 font-bold">{deadLine}</td>
-                      <td className="text-lg p-3 font-bold">
-                        {additionalInformation}
+                  ({ id, userId, deadLine, additionalInformation }) => (
+                    <tr className="w-full border" key={id}>
+                      <td className="p-2 border-r">
+                        <input type="checkbox" />
                       </td>
-                      <td className="text-lg p-3 font-bold">{customer.id}</td>
+                      <td className="text-sm p-3">
+                        {" "}
+                        {id}
+                      </td>
+
+                      <td className="text-sm p-3">{userId}</td>
+                      <td className="text-sm p-3"> {deadLine}</td>
+                      <td className="text-sm p-3">{additionalInformation}</td>
+
+                      <td className="text-sm p-3">{deadLine}</td>
                       <td>
-                        <Link href={`estimates/${id}`}> Voir plus</Link>
+                        <Link href={`estimates/${id}`}> Ici ahah</Link>
+                      </td>
+                      <td className="">
+                        <div className="my-8 mx-8 relative inline-block w-10 mr-2 align-middle select-none">
+                          <input
+                            type="checkbox"
+                            name="toggle"
+                            id="Green"
+                            className="checked:bg-green-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                          />
+                          <label
+                            htmlFor="Green"
+                            className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
                       </td>
                     </tr>
                   )
                 )}
               </tbody>
             </table>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* ___________ QUOTATION IN THE PROCESS OF CREATION  ___________*/}
         {/* <div className="flex justify-center items-center">
