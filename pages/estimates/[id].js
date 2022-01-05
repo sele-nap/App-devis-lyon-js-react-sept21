@@ -7,12 +7,12 @@ export default function Estimate({
   return (
     <Layout>
       <div>
-        <h2 className="text-center m-12 text-xl">
-          Details de la demande de devis
+        <h2 className="text-center m-12 text-2xl">
+          Votre demande de devis n° {id}
         </h2>
-        <p> Devis n° {id}</p>
+
         <p> {additionalInformation} </p>
-        <p> {deadLine} </p>
+        <p> {JSON.stringify(deadLine)} </p>
       </div>
     </Layout>
   );
@@ -30,9 +30,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(ctx) {
   const estimate = await getOneEstimate(ctx.params.id);
-  const allData = JSON.stringify(estimate);
   return {
-    props: { allData },
+    props: { estimate },
     revalidate: 10,
   };
 }

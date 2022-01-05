@@ -5,7 +5,7 @@ import {
   deleteOneEstimate,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
-import requireAdmin from "../../../middleware/requireAdmin";
+import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = ValidateEstimate(body, true);
