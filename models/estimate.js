@@ -12,7 +12,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
     deadLine: Joi.date(),
     // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
     // .presence(forUpdate ? "optional" : "required"),
-    // customer: Joi.string(),
+    customer: Joi.string(),
     // attachedFiles: Joi.string().presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
@@ -21,6 +21,7 @@ const estimateToShow = {
   id: true,
   deadLine: true,
   additionalInformation: true,
+  customer: true,
 };
 
 const getEstimates = async () => {

@@ -47,7 +47,7 @@ export default function QuoteManagement() {
   // }, []);
   return (
     <Layout>
-      <section className="bg-slate-50 text-md">
+      <section className="bg-slate-50">
         {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
 
         <div className="flex justify-center">
@@ -154,30 +154,28 @@ export default function QuoteManagement() {
                       <td className="p-2 border-r">
                         <input type="checkbox" />
                       </td>
-                      <td className="text-lg p-3"> {id}</td>
+                      <td className="text-sm p-3"> {id}</td>
 
-                      <td className="text-lg p-3">{userId}</td>
-                      <td className="text-lg p-3"> {deadLine}</td>
-                      <td className="text-lg p-3">
-                        {additionalInformation}
-                      </td>
+                      <td className="text-sm p-3">{userId}</td>
+                      <td className="text-sm p-3"> {deadLine}</td>
+                      <td className="text-sm p-3">{additionalInformation}</td>
 
-                      <td className="text-lg p-3">{deadLine}</td>
+                      <td className="text-sm p-3">{deadLine}</td>
                       <td>
                         <Link href={`estimates/${id}`}> Ici ahah</Link>
                       </td>
-                      <td className="flex justify-center">             
-                          <div className="relative inline-block w-10 mr-2 align-middle select-none">
-                            <input
-                              type="checkbox"
-                              name="toggle"
-                              id="Green"
-                              className="checked:bg-green-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-                            />
-                            <label
-                              htmlFor="Green"
-                              className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                            ></label>
+                      <td className="flex justify-center">
+                        <div className="relative inline-block w-10 mr-2 align-middle select-none">
+                          <input
+                            type="checkbox"
+                            name="toggle"
+                            id="Green"
+                            className="checked:bg-green-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                          />
+                          <label
+                            htmlFor="Green"
+                            className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
                         </div>
                       </td>
                     </tr>
