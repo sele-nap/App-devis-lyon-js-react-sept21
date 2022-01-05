@@ -59,12 +59,12 @@ export default function QuoteManagement() {
         {!estimate && <p>En chargement...</p>}
         {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
         {estimate && estimate.length !== 0 && (
-          <div className="table w-full p-2">
+          <div className="table w-full p-2 mt-8">
             <table className="w-full border">
               <thead>
                 <tr className="bg-gray-50 border-b">
                   <th className="border-r p-2"></th>
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Numéro Client
                       <path
@@ -75,7 +75,7 @@ export default function QuoteManagement() {
                       />
                     </div>
                   </th>
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Nom
                       <path
@@ -87,7 +87,7 @@ export default function QuoteManagement() {
                     </div>
                   </th>
 
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Date de création devis
                       <path
@@ -99,7 +99,7 @@ export default function QuoteManagement() {
                     </div>
                   </th>
 
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Détails Devis
                       <path
@@ -111,7 +111,7 @@ export default function QuoteManagement() {
                     </div>
                   </th>
 
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Deadline Devis
                       <path
@@ -123,7 +123,7 @@ export default function QuoteManagement() {
                     </div>
                   </th>
 
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Editer
                       <path
@@ -134,7 +134,7 @@ export default function QuoteManagement() {
                       />
                     </div>
                   </th>
-                  <th className="p-2 border-r cursor-auto text-sm font-bold text-gray-500">
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Validation
                       <path
@@ -154,7 +154,10 @@ export default function QuoteManagement() {
                       <td className="p-2 border-r">
                         <input type="checkbox" />
                       </td>
-                      <td className="text-sm p-3"> {id}</td>
+                      <td className="text-sm p-3">
+                        {" "}
+                        {id}
+                      </td>
 
                       <td className="text-sm p-3">{userId}</td>
                       <td className="text-sm p-3"> {deadLine}</td>
@@ -164,8 +167,8 @@ export default function QuoteManagement() {
                       <td>
                         <Link href={`estimates/${id}`}> Ici ahah</Link>
                       </td>
-                      <td className="flex justify-center">
-                        <div className="relative inline-block w-10 mr-2 align-middle select-none">
+                      <td className="">
+                        <div className="my-8 mx-8 relative inline-block w-10 mr-2 align-middle select-none">
                           <input
                             type="checkbox"
                             name="toggle"
