@@ -10,6 +10,7 @@ export default function Estimate({
         <h2 className="text-center m-12 text-xl">
           Details de la demande de devis
         </h2>
+        <p> Devis n° {id}</p>
         <p> {additionalInformation} </p>
         <p> {deadLine} </p>
       </div>

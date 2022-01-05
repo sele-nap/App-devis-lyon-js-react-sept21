@@ -70,7 +70,6 @@ export default function QuoteManagement() {
                       {additionalInformation}
                     </td>
                     <td>
-                      {" "}
                       <Link href={`estimates/${id}`}> Voir plus</Link>
                     </td>
                   </tr>

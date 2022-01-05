@@ -18,9 +18,9 @@ const ValidateEstimate = (data, forUpdate = false) => {
 };
 
 const estimateToShow = {
+  id: true,
   deadLine: true,
   additionalInformation: true,
-  id: true,
 };
 
 const getEstimates = async () => {
