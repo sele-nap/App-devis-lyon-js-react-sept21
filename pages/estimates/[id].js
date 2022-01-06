@@ -17,8 +17,8 @@ export default function Estimate({
   return (
     <Layout>
       <div className="flex flex-col">
-        <h2 className="text-center text-2xl m-12">
-          Votre demande de devis n° {id}
+        <h2 className="text-center text-2xl  uppercase m-12">
+          Demande de devis n° {id}
         </h2>
         <div className="flex  justify-around">
           <div className="border-2 m-8 w-72 p-2 rounded-md">
@@ -39,7 +39,7 @@ export default function Estimate({
                 <p className="text-md mx-2 items-center p-1">
                   {customer.address1}{" "}
                 </p>
-                <p className="text-md mx-2 items-center">
+                <p className="text-md mx-2 items-center p-1">
                   {customer.zipCode} {customer.city}
                 </p>
               </div>
@@ -56,27 +56,30 @@ export default function Estimate({
           </div>
 
           <div className="">
-            <div className="border-2 m-8 w-72 p-2 rounded-md text-center">
-              <h2 className="text-center text-md uppercase">
+            <div className="rounded-xl m-20 justify-center items-center flex flex-col">
+              <h2 className="text-center text-xl uppercase">
                 date de la demande
               </h2>
-              <p> {moment(deadLine).format(" DD / MM / YYYY")}</p>
-              <h2 className="text-center text-md uppercase">
+              <p className="mb-3">
+                {" "}
+                {moment(deadLine).format(" DD / MM / YYYY")}
+              </p>
+              <h2 className="text-center text-xl uppercase">
                 date d'éxécution
               </h2>
               <p> {moment(deadLine).format(" DD / MM / YYYY")}</p>
             </div>
           </div>
         </div>
-        <div className="rounded-md m-20 justify-center items-center flex flex-col">
-          <div className="border-2  w-full mb-10 p-8">
+        <div className="rounded-xl m-20 justify-center items-center flex flex-col">
+          <div className="border-2 rounded-xl w-full mb-10 p-8">
             <h2 className="text-center text-xl uppercase mb-4">
               Rappel de la demande{" "}
             </h2>
             <p> {additionalInformation} </p>
           </div>
 
-          <div className="border-2  w-full mb-10 p-8">
+          <div className="border-2 rounded-xl w-full mb-10 p-8">
             <h2 className="text-center text-xl uppercase mb-4">
               réponse de l'administrateur
             </h2>
