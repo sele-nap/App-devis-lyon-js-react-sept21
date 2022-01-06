@@ -2,11 +2,13 @@ import Layout from "../../components/Layout";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { RiFileEditFill } from "react-icons/ri";
 import next from "next";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import moment from "moment";
 
 export default function QuoteManagement() {
   const handleClick = (e) => {
@@ -62,8 +64,8 @@ export default function QuoteManagement() {
           <div className="table w-full p-2 mt-8">
             <table className="w-full border">
               <thead>
-                <tr className="bg-gray-50 border-b">
-                  <th className="border-r p-2"></th>
+                <tr className="bg-gray-50">
+                  <th className="border p-2"></th>
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
                       Numéro Client
@@ -145,30 +147,56 @@ export default function QuoteManagement() {
                       />
                     </div>
                   </th>
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Suppression
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody className="border-t">
                 {estimate.map(
-                  ({ id, userId, deadLine, additionalInformation }) => (
-                    <tr className="w-full border" key={id}>
+                  ({
+                    id,
+                    userId,
+                    deadLine,
+                    additionalInformation,
+                    customer,
+                  }) => (
+                    <tr className="w-full text-center border-b my-2" key={id}>
                       <td className="p-2 border-r">
                         <input type="checkbox" />
                       </td>
-                      <td className="text-sm p-3">
-                        {" "}
-                        {id}
+                      <td className="text-sm p-3"> {customer.id}</td>
+
+                      <td className="text-center border text-sm p-3 my-2">
+                        {customer.lastname}
+                      </td>
+                      <td className="text-center border  text-sm p-3 my-2">
+                        {}
+                      </td>
+                      <td className="text-center border  text-sm p-3 my-2">
+                        {additionalInformation}
                       </td>
 
-                      <td className="text-sm p-3">{userId}</td>
-                      <td className="text-sm p-3"> {deadLine}</td>
-                      <td className="text-sm p-3">{additionalInformation}</td>
-
-                      <td className="text-sm p-3">{deadLine}</td>
-                      <td>
-                        <Link href={`estimates/${id}`}> Ici ahah</Link>
+                      <td className="text-center border text-sm p-3 my-2">
+                        {moment(deadLine).format(`DD/MM/YYYY`)}
+                      </td>
+                      <td className="border">
+                        <Link href={`estimates/${id}`}>
+                          <button className="cursor-pointer my-2">
+                            <RiFileEditFill size={25} />
+                          </button>
+                        </Link>
                       </td>
                       <td className="">
-                        <div className="my-8 mx-8 relative inline-block w-10 mr-2 align-middle select-none">
+                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                           <input
                             type="checkbox"
                             name="toggle"
@@ -180,6 +208,11 @@ export default function QuoteManagement() {
                             className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
                           ></label>
                         </div>
+                      </td>
+                      <td className="text-center border my-2">
+                        <button className="cursor-pointer">
+                          <RiDeleteBin5Fill size={25} />
+                        </button>
                       </td>
                     </tr>
                   )
@@ -214,25 +247,25 @@ export default function QuoteManagement() {
         </div> */}
 
         {/* ___________ CREATE A QUOTATION  ___________*/}
-        <div className="flex justify-around items-center">
+        <div className="flex justify-around items-center my-8">
           <Link passHref href="/admin/devis/edit/new">
             <button
-              className="py-2 px-4 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+              className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
               type="submit"
               onClick={handleClick}
             >
               <IoIosAddCircle size={20} />
-              CRÉER UN DEVIS
+              <p className="px-2"> CRÉER UN DEVIS</p>
             </button>
           </Link>
 
           {/* ___________ DOWNLOAD  ___________*/}
           <button
-            className="py-2 px-4 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+            className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
             onClick={Downloaad}
           >
             <FaCloudDownloadAlt size={20} />
-            TÉLÉCHARGER
+            <p className="px-2">TÉLÉCHARGER</p>
           </button>
         </div>
       </section>
