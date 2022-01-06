@@ -56,7 +56,7 @@ async function seed() {
         userId: 2,
       },
       {
-        deadLine: "2022-05-25T14:21:00+02:00",
+        deadLine: "2021-05-25T14:21:00+02:00",
         additionalInformation:
           "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
         userId: 3,
