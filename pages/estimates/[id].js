@@ -17,20 +17,6 @@ import React from "react";
 
 const ref = React.createRef();
 
-const PdfDL = () => {
-  return (
-    <div>
-      <div className="Post" ref={ref}>
-        <h1>Hello</h1>
-        <p>This is a test</p>
-      </div>
-      <Pdf targetRef={ref} filename="post.pdf">
-        {({ toPdf }) => <button onClick={toPdf}>Capture as PDF</button>}
-      </Pdf>
-    </div>
-  );
-};
-
 export default function Estimate({
   estimate: { id, deadLine, additionalInformation, customer, createDate },
 }) {
@@ -120,7 +106,7 @@ export default function Estimate({
               </div>
             </Link>
           </div>
-          <Pdf targetRef={ref} filename="code-example.pdf">
+          <Pdf targetRef={ref} filename="Devis.pdf">
             {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
           </Pdf>
           <div className="py-2 px-4 w-48 hover:bg-green-300 bg-green-400 focus:ring-green-600 focus:ring-offset-red-200 text-gray-900 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10">
