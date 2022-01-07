@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
-import { RiDeleteBin5Fill } from "react-icons/ri";
+// import { RiDeleteBin5Fill } from "react-icons/ri";
 import next from "next";
 import axios from "axios";
 import Swal from "sweetalert2";
