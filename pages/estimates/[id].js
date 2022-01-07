@@ -8,15 +8,35 @@ import BorderAllIcon from "@mui/icons-material/BorderAll";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Link from "next/link";
-
 import moment from "moment";
+import PDF from "../../components/PDF";
+import CTAbtn from "../../components/CTAbtn";
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
+import React from "react";
+
+const ref = React.createRef();
+
+const PdfDL = () => {
+  return (
+    <div>
+      <div className="Post" ref={ref}>
+        <h1>Hello</h1>
+        <p>This is a test</p>
+      </div>
+      <Pdf targetRef={ref} filename="post.pdf">
+        {({ toPdf }) => <button onClick={toPdf}>Capture as PDF</button>}
+      </Pdf>
+    </div>
+  );
+};
 
 export default function Estimate({
   estimate: { id, deadLine, additionalInformation, customer, createDate },
 }) {
   return (
     <Layout>
-      <div className="flex flex-col">
+      <div ref={ref} className="flex flex-col">
         <h2 className="text-center text-2xl  uppercase m-12">
           Demande de devis n° {id}
         </h2>
@@ -100,7 +120,9 @@ export default function Estimate({
               </div>
             </Link>
           </div>
-
+          <Pdf targetRef={ref} filename="code-example.pdf">
+            {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+          </Pdf>
           <div className="py-2 px-4 w-48 hover:bg-green-300 bg-green-400 focus:ring-green-600 focus:ring-offset-red-200 text-gray-900 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10">
             <Link href="/estimates" passHref>
               <div className="flex justify-center items-center cursor-pointer">
@@ -110,14 +132,7 @@ export default function Estimate({
             </Link>
           </div>
 
-          <div className="py-2 px-4 w-48 hover:bg-red-300 bg-red-400 focus:ring-red-600 focus:ring-offset-red-200 text-gray-900 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10">
-            <Link href="/estimates" passHref>
-              <div className="flex justify-center items-center cursor-pointer">
-                <DeleteForeverIcon />
-                <span className="ml-2"> Supprimer le devis</span>
-              </div>
-            </Link>
-          </div>
+          <CTAbtn title="Supprimer" link="/estimates" />
         </div>
       </div>
     </Layout>
