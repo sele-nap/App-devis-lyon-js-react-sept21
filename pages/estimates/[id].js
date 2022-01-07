@@ -12,7 +12,7 @@ import Link from "next/link";
 import moment from "moment";
 
 export default function Estimate({
-  estimate: { id, deadLine, additionalInformation, customer },
+  estimate: { id, deadLine, additionalInformation, customer, createDate },
 }) {
   return (
     <Layout>
@@ -62,7 +62,7 @@ export default function Estimate({
               </h2>
               <p className="mb-3">
                 {" "}
-                {moment(deadLine).format(" DD / MM / YYYY")}
+                {moment(createDate).format(" DD / MM / YYYY")}
               </p>
               <h2 className="text-center text-xl uppercase">
                 date d'éxécution
