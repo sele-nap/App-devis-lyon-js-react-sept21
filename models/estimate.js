@@ -13,6 +13,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
     // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
     // .presence(forUpdate ? "optional" : "required"),
     customer: Joi.string(),
+    status: Joi.string().presence("optional"),
     // attachedFiles: Joi.string().presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
@@ -47,6 +48,7 @@ const createAskEstimate = async ({
   deadLine,
   // attachedFiles,
   customer,
+  status,
 }) => {
   return await db.estimate.create({
     data: {
@@ -54,6 +56,7 @@ const createAskEstimate = async ({
       additionalInformation,
       createDate: new Date(Date.now()),
       customer,
+      status,
     },
   });
 };
