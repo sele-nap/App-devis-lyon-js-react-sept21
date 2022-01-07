@@ -65,7 +65,7 @@ export default function Estimate({
                 {moment(createDate).format(" DD / MM / YYYY")}
               </p>
               <h2 className="text-center text-xl uppercase">
-                date d'éxécution
+                date d{`'`}éxécution
               </h2>
               <p> {moment(deadLine).format(" DD / MM / YYYY")}</p>
             </div>
@@ -81,7 +81,7 @@ export default function Estimate({
 
           <div className="border-2 rounded-xl w-full mb-10 p-8">
             <h2 className="text-center text-xl uppercase mb-4">
-              réponse de l'administrateur
+              réponse de l{`'`}administrateur
             </h2>
             <input
               type="text"

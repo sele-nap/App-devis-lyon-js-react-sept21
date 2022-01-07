@@ -30,13 +30,6 @@ export default function QuoteManagement() {
     });
   };
 
-  const [estimate, setEstimate] = useState();
-  // const [createDevis, setCreateDevis] = useState();
-
-  useEffect(() => {
-    axios.get("/api/estimate").then((res) => setEstimate(res.data));
-  }, []);
-
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
       await axios.delete(`/api/estimate/${id}`);
@@ -44,6 +37,25 @@ export default function QuoteManagement() {
       setEstimate((estimate) => estimate.filter((e) => e.id !== id));
     }
   };
+
+  const [estimate, setEstimate] = useState();
+  // const [createDevis, setCreateDevis] = useState();
+
+  useEffect(() => {
+    axios.get("/api/estimate").then((res) => setEstimate(res.data));
+  }, []);
+
+  
+
+  // const deleteEstimate = async (id) => {
+  //   if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
+  //     await axios.delete(`/api/estimate/${id}`);
+  //     alert("projet bien supprimé");
+  //     setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+  //   }
+  // };
+
+
   // useEffect(() => {
   //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
   // }, []);
@@ -115,7 +127,7 @@ export default function QuoteManagement() {
 
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
-                      Deadline Devis
+                      Date limite du devis
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -164,10 +176,10 @@ export default function QuoteManagement() {
                 {estimate.map(
                   ({
                     id,
-                    userId,
                     deadLine,
                     additionalInformation,
                     customer,
+                    createDate,
                   }) => (
                     <tr className="w-full text-center border-b my-2" key={id}>
                       <td className="p-2 border-r">
@@ -179,7 +191,7 @@ export default function QuoteManagement() {
                         {customer.lastname}
                       </td>
                       <td className="text-center border  text-sm p-3 my-2">
-                        {}
+                        {moment(createDate).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="text-center border  text-sm p-3 my-2">
                         {additionalInformation}
@@ -210,7 +222,10 @@ export default function QuoteManagement() {
                         </div>
                       </td>
                       <td className="text-center border my-2">
-                        <button className="cursor-pointer">
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => deleteEstimate(id)}
+                        >
                           <RiDeleteBin5Fill size={25} />
                         </button>
                       </td>

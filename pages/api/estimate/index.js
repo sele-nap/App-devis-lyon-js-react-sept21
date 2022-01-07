@@ -1,5 +1,6 @@
 import base from "../../../middleware/commons";
 import {
+  deleteOneEstimate,
   createAskEstimate,
   getEstimates,
   ValidateEstimate,
@@ -20,4 +21,10 @@ async function handlerPost(req, res) {
   res.status(201).send(newEstimate);
 }
 
-export default base().post(handlerPost).get(handleGet);
+async function handleDelete({ query: { id } }, res) {
+  if (await deleteOneEstimate(id)) res.status(204).send();
+  else res.status(404).send();
+}
+
+
+export default base().post(handlerPost).get(handleGet).delete(handleDelete);;
