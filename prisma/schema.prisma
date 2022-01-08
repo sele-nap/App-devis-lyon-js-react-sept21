@@ -47,18 +47,18 @@ model user {
 }
 
 model estimate {
-  id                    Int                      @id @default(autoincrement())
-  status                EstimateStatus           @default(TO_DO)
+  id                    Int            @id @default(autoincrement())
+  status                EstimateStatus @default(TO_DO)
   signature             String?
   validationDate        DateTime?
   deadLine              DateTime
-  additionalInformation String                   @db.LongText
+  additionalInformation String         @db.LongText
   validationCode        String?
   createDate            DateTime
   userId                Int
-  customer              user                     @relation(fields: [userId], references: [id])
+  customer              user           @relation(fields: [userId], references: [id])
   products              estimateLine[]
-  attachedFiles         attachedFileOnEstimate[]
+  attachedFiles         attachedFile[]
 }
 
 model estimateLine {
@@ -87,17 +87,9 @@ model product {
 }
 
 model attachedFile {
-  id        Int                      @id @default(autoincrement())
-  name      String
-  url       String
-  estimates attachedFileOnEstimate[]
-}
-
-model attachedFileOnEstimate {
-  attachedFileId Int
-  attachedFile   attachedFile @relation(fields: [attachedFileId], references: [id])
-  estimateId     Int
-  estimate       estimate     @relation(fields: [estimateId], references: [id])
-
-  @@id([attachedFileId, estimateId])
+  id         Int      @id @default(autoincrement())
+  name       String
+  url        String?
+  estimateId Int
+  estimate   estimate @relation(fields: [estimateId], references: [id])
 }

@@ -1,6 +1,5 @@
 const db = require("../db");
 const Joi = require("joi");
-
 const format = require("@joi/date");
 
 const ValidateEstimate = (data, forUpdate = false) => {
@@ -13,14 +12,14 @@ const ValidateEstimate = (data, forUpdate = false) => {
       .presence(forUpdate ? "optional" : "required"),
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
-    // attachedFiles: Joi.string().presence(forUpdate ? "optional" : "required"),
+    attachedFiles: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };
 
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-  // attachedFiles,
+  attachedFiles,
   customer,
   status,
 }) => {
@@ -31,18 +30,33 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
+      attachedFiles,
+    },
+  });
+};
+
+const createFiles = async ({ name, estimate }) => {
+  return await db.attachedFile.create({
+    data: {
+      name,
+      estimate,
     },
   });
 };
 
 const updateAskEstimate = async (
   additionalInformation,
-  deadLine,
-  attachedFiles
+  deadLine
+  //attachedFiles
 ) => {
   return db.estimate
     .patch({ where: { additionalInformation, deadLine, attachedFiles } })
     .catch(() => false);
 };
 
-module.exports = { ValidateEstimate, createAskEstimate, updateAskEstimate };
+module.exports = {
+  ValidateEstimate,
+  createAskEstimate,
+  updateAskEstimate,
+  createFiles,
+};

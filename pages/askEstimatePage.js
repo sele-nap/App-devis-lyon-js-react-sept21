@@ -8,19 +8,40 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
-import Image from "next/image";
-import e from "cors";
 
 function estimate() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
-  const onSubmit = async (data) => {
+  //UPLOAD//
+  const [attachedFiles, setAttachedFiles] = useState([]);
+  const attachedFilesRef = useRef(null);
+
+  const handleAttachedFilesClick = (e) => {
+    attachedFilesRef.current.click();
+    e.preventDefault();
+  };
+  const handleAttachedFilesSelection = (e) => {
+    console.log(e.target.files[0]);
+
+    if (e.target.files[0])
+      setAttachedFiles(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const onSubmit = async (status) => {
+    const dataFiles = new FormData();
+    dataFiles.append("attachedFiles", attachedFilesRef.current.files[0]);
+    dataFiles.append("status", status);
+    dataFiles.append("deadLine", deadLine.value);
+    dataFiles.append("additionalInformation", additionalInformation.value);
+
     axios
-      .post("./api/estimate/estimateApi", data)
+      .post("/api/estimate/estimateApi", dataFiles)
+
       .then((res) => {
         Swal.fire({
           position: "center",
@@ -30,15 +51,15 @@ function estimate() {
           timer: 2500,
         });
       })
-      .catch(
+      .catch(() => {
         Swal.fire({
           position: "center",
           icon: "error",
           title: "Votre demande de devis n'a pas été envoyé",
           showConfirmButton: false,
           timer: 2500,
-        })
-      );
+        });
+      });
   };
 
   const handleClickDelete = (e) => {
@@ -61,31 +82,6 @@ function estimate() {
     });
   };
 
-  const handleClickSave = async (data) => {
-    console.log(data);
-    await axios
-      .post("./api/estimate/estimateApi", { ...data, status: "DRAFT" })
-      .then((res) => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title:
-            "Votre demande de devis a été enregistré mais n'a pas été envoyé à l'administrateur",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      });
-  };
-
-  const [attachedFiles, setAttachedFiles] = useState("");
-  const attachedFilesRef = useRef(null);
-  const handleAttachedFilesClick = () => {
-    attachedFilesRef.current.click();
-  };
-  const handleAttachedFilesSelection = (e) => {
-    console.log(e.target.files[0]);
-  };
-
   return (
     <div>
       <ClientLayout>
@@ -95,7 +91,7 @@ function estimate() {
               Votre demande de devis
             </h1>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form>
             <div className="flex align items-center flex-col">
               <textarea
                 placeholder="Votre message"
@@ -128,8 +124,7 @@ function estimate() {
               )}
             </div>
 
-            <div className="flex justify-center ">
-              {" "}
+            <div className="flex flex-col justify-end bg-emerald-100 ">
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
@@ -140,43 +135,61 @@ function estimate() {
               <input
                 className="hidden"
                 type="file"
-                // multiple = true
+                multiple="true"
                 id="attachedFiles"
                 accept="image/png, image/jpeg, image/gif"
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
-                // {...register("attachedFiles")}
               ></input>
-            </div>
-            <div className="">
-              <ul>
-                <DeleteForeverIcon
-                  className="ml-3"
-                  onClick={handleClickDelete}
-                />
-
-                <li className="text-center">
-                  test
-                  <DeleteForeverIcon className="ml-3" />
-                </li>
-
-                <li className="text-center">
-                  {handleAttachedFilesSelection}{" "}
-                  <DeleteForeverIcon className="ml-3" />
-                </li>
-              </ul>
+              <div className="flex flex-col">
+                <div className="flex flex-row bg-green-600">
+                  <input
+                    value={attachedFiles}
+                    className=" h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
+                  <DeleteForeverIcon
+                    className="ml-3"
+                    onClick={handleClickDelete}
+                  />
+                  {/* <input
+                    className="bg-blue-100 h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
+                  <DeleteForeverIcon
+                    className="ml-3"
+                    onClick={handleClickDelete}
+                  />
+                  <input
+                    className="bg-blue-100 h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
+                  <DeleteForeverIcon
+                    className="ml-3"
+                    onClick={handleClickDelete}
+                  /> */}
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-row justify-between ">
               <button
-                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmit("TO_DO");
+                }}
                 className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
               >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
+
               <button
                 className="bg-third w-2/5 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
-                onClick={handleClickSave}
+                name="Save"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmit("DRAFT");
+                }}
               >
                 Enregistrer ma demande pour continuer plus tard <br />
                 <SaveIcon className="ml-10" />
