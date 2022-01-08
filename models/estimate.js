@@ -75,15 +75,7 @@ const createFiles = async ({ name, estimate }) => {
   });
 };
 
-<<<<<<< HEAD
-const updateAskEstimate = async (
-  additionalInformation,
-  deadLine
-  //attachedFiles
-) => {
-=======
 const updateAskEstimate = async (additionalInformation, deadLine) => {
->>>>>>> dev
   return db.estimate
     .patch({ where: { deadLine, attachedFiles } })
     .catch(() => false);
@@ -93,11 +85,8 @@ module.exports = {
   ValidateEstimate,
   createAskEstimate,
   updateAskEstimate,
-<<<<<<< HEAD
   createFiles,
-=======
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
->>>>>>> dev
 };
