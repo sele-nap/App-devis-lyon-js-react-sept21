@@ -4,7 +4,7 @@ import next from "next";
 export default function About () {
     return (
         <Layout>
-            Qui sommes nous 
+            Qui sommes-nous 
         </Layout>
     )
 

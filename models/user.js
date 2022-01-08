@@ -24,7 +24,6 @@ const emailAlreadyExists = async (email) => {
 };
 
 const validateUser = (data, forUpdate = true) => {
-  console.log(data);
   const isIndividual = data.organizationType === "INDIVIDUAL";
 
   return Joi.object({

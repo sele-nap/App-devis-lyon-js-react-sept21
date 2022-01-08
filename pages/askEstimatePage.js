@@ -9,7 +9,7 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 
-function estimate() {
+function Estimate() {
   const {
     register,
     handleSubmit,
@@ -84,12 +84,44 @@ function estimate() {
 
   return (
     <div>
-      <ClientLayout>
-        <Layout>
-          <div className=" flex justify-center">
-            <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
-              Votre demande de devis
-            </h1>
+      {/* <ClientLayout> */}
+      <Layout>
+        <div className=" flex justify-center">
+          <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
+            Votre demande de devis
+          </h1>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex align items-center flex-col">
+            <textarea
+              placeholder="Votre message"
+              className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="additionalInformation"
+              name="additionalInformation"
+              type="text"
+              {...register("additionalInformation", {
+                required: " ❌ Champs obligatoire ",
+              })}
+            />
+            {errors.additionalInformation && (
+              <span className="text-xs">
+                {" "}
+                {errors.additionalInformation.message}
+              </span>
+            )}
+            <label className="mt-5"> Pour quelle date? :</label>
+            <input
+              type="date"
+              placeholder="date"
+              id="deadLine"
+              className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
+              {...register("deadLine", {
+                required: " ❌ Champs obligatoire ",
+              })}
+            />
+            {errors.deadLine && (
+              <span className="text-xs"> {errors.deadLine.message}</span>
+            )}
           </div>
           <form>
             <div className="flex align items-center flex-col">
@@ -202,4 +234,4 @@ function estimate() {
   );
 }
 
-export default estimate;
+export default Estimate;
