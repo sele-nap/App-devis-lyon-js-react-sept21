@@ -1,21 +1,16 @@
 const db = require("../db");
 const Joi = require("joi");
-<<<<<<< HEAD
 const format = require("@joi/date");
-=======
-
-// const format = require("@joi/date");
->>>>>>> dev
 
 const ValidateEstimate = (data, forUpdate = false) => {
   return Joi.object({
-    additionalInformation: Joi.string(),
-    // .presence(
-    //   forUpdate ? "optional" : "required"
-    // ),
-    deadLine: Joi.date(),
-    // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
-    // .presence(forUpdate ? "optional" : "required"),
+    additionalInformation: Joi.string().presence(
+      forUpdate ? "optional" : "required"
+    ),
+    deadLine: Joi.date()
+      // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
+      .presence(forUpdate ? "optional" : "required"),
+
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string(),

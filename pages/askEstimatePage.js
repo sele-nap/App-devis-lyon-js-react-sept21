@@ -1,5 +1,3 @@
-import React from "react";
-import ClientLayout from "../components/ClientLayout";
 import SendIcon from "@mui/icons-material/Send";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -8,13 +6,13 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
+import ClientLayout from "../components/ClientLayout";
 
 function Estimate() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm();
 
   //UPLOAD//
@@ -40,7 +38,7 @@ function Estimate() {
     dataFiles.append("additionalInformation", additionalInformation.value);
 
     axios
-      .post("/api/estimate/estimateApi", dataFiles)
+      .post("/api/estimate", dataFiles)
 
       .then((res) => {
         Swal.fire({
@@ -84,44 +82,13 @@ function Estimate() {
 
   return (
     <div>
-      {/* <ClientLayout> */}
       <Layout>
-        <div className=" flex justify-center">
-          <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
-            Votre demande de devis
-          </h1>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex align items-center flex-col">
-            <textarea
-              placeholder="Votre message"
-              className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="additionalInformation"
-              name="additionalInformation"
-              type="text"
-              {...register("additionalInformation", {
-                required: " ❌ Champs obligatoire ",
-              })}
-            />
-            {errors.additionalInformation && (
-              <span className="text-xs">
-                {" "}
-                {errors.additionalInformation.message}
-              </span>
-            )}
-            <label className="mt-5"> Pour quelle date? :</label>
-            <input
-              type="date"
-              placeholder="date"
-              id="deadLine"
-              className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
-              {...register("deadLine", {
-                required: " ❌ Champs obligatoire ",
-              })}
-            />
-            {errors.deadLine && (
-              <span className="text-xs"> {errors.deadLine.message}</span>
-            )}
+        {" "}
+        <ClientLayout>
+          <div className=" flex justify-center">
+            <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
+              Votre demande de devis
+            </h1>
           </div>
           <form>
             <div className="flex align items-center flex-col">
@@ -156,7 +123,7 @@ function Estimate() {
               )}
             </div>
 
-            <div className="flex flex-col justify-end bg-emerald-100 ">
+            <div className="flex flex-col justify-center ">
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
@@ -167,14 +134,14 @@ function Estimate() {
               <input
                 className="hidden"
                 type="file"
-                multiple="true"
+                // multiple="true"
                 id="attachedFiles"
                 accept="image/png, image/jpeg, image/gif"
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
               ></input>
               <div className="flex flex-col">
-                <div className="flex flex-row bg-green-600">
+                <div className="flex flex-row">
                   <input
                     value={attachedFiles}
                     className=" h-6 w-1/2"
@@ -184,6 +151,7 @@ function Estimate() {
                     className="ml-3"
                     onClick={handleClickDelete}
                   />
+
                   {/* <input
                     className="bg-blue-100 h-6 w-1/2"
                     {...register("attachedFiles")}
@@ -228,8 +196,8 @@ function Estimate() {
               </button>
             </div>
           </form>
-        </Layout>
-      </ClientLayout>
+        </ClientLayout>
+      </Layout>
     </div>
   );
 }
