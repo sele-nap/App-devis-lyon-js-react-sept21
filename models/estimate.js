@@ -56,7 +56,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      attachedFiles,
+      //attachedFiles,
     },
   });
 };
@@ -68,6 +68,12 @@ const createFiles = async ({ name, estimate }) => {
       estimate,
     },
   });
+};
+
+const deleteFiles = async (id) => {
+  return await db.attachedFile
+    .delete({ where: { id: parseInt(id, 10) } })
+    .catch((_) => false);
 };
 
 const updateAskEstimate = async (additionalInformation, deadLine) => {
@@ -84,4 +90,5 @@ module.exports = {
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
+  deleteFiles,
 };

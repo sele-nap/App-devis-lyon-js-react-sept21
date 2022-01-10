@@ -53,6 +53,6 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .post(handleImageUpload.single("attachedFiles"), handlePost)
+  .post(handleImageUpload.array("attachedFiles"), handlePost)
   .get(handleGet)
   .delete(handleDelete);

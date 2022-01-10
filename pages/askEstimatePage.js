@@ -24,15 +24,24 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files);
 
-    if (e.target.files[0])
-      setAttachedFiles(URL.createObjectURL(e.target.files[0]));
+    const fileList = Array.from(e.target.files);
+    console.log(fileList.FileList);
+    if (fileList.length) {
+      setAttachedFiles(
+        fileList.map((file) => {
+          //transform url
+          return file.name;
+        })
+      );
+      console.log(attachedFiles);
+    }
   };
 
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
-    dataFiles.append("attachedFiles", attachedFilesRef.current.files[0]);
+    dataFiles.append("attachedFiles", attachedFilesRef.current.files);
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);
     dataFiles.append("additionalInformation", additionalInformation.value);
@@ -60,25 +69,37 @@ function Estimate() {
       });
   };
 
-  const handleClickDelete = (e) => {
-    Swal.fire({
-      title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
-      text: "Cette action est irréversible",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DAB455",
-      cancelButtonColor: "#ECE6E6",
-      confirmButtonText: "oui, supprimé",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          "Supprimé",
-          "Votre pièce jointe à bien été supprimé",
-          "success"
-        );
-      }
-    });
-  };
+  // const deleteEstimate = async (id) => {
+  //   if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
+  //     );
+  //     alert("Pièce jointe supprimé");
+  //     setAttachedFiles((attachedFile) =>
+  //       attachedFile.filter((e) => e.id !== id)
+  //     );
+  //   }
+  // };
+
+  // const handleClickDelete = async (id) => {
+  //   await axios.delete(`/api/estimate/${id}`
+  //   .then((res) => {
+  //     Swal.fire({
+  //       title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
+  //       text: "Cette action est irréversible",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#DAB455",
+  //       cancelButtonColor: "#ECE6E6",
+  //       confirmButtonText: "oui, supprimé",
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         Swal.fire(
+  //           "Supprimé",
+  //           "Votre pièce jointe à bien été supprimé",
+  //           "success"
+  //         );
+  //       }
+  //     });
+  //   }));
 
   return (
     <div>
@@ -134,7 +155,7 @@ function Estimate() {
               <input
                 className="hidden"
                 type="file"
-                // multiple="true"
+                multiple={true}
                 id="attachedFiles"
                 accept="image/png, image/jpeg, image/gif"
                 ref={attachedFilesRef}
@@ -143,31 +164,25 @@ function Estimate() {
               <div className="flex flex-col">
                 <div className="flex flex-row">
                   <input
-                    value={attachedFiles}
                     className=" h-6 w-1/2"
                     {...register("attachedFiles")}
                   ></input>
-                  <DeleteForeverIcon
-                    className="ml-3"
-                    onClick={handleClickDelete}
-                  />
 
-                  {/* <input
-                    className="bg-blue-100 h-6 w-1/2"
-                    {...register("attachedFiles")}
-                  ></input>
-                  <DeleteForeverIcon
-                    className="ml-3"
-                    onClick={handleClickDelete}
-                  />
-                  <input
-                    className="bg-blue-100 h-6 w-1/2"
-                    {...register("attachedFiles")}
-                  ></input>
-                  <DeleteForeverIcon
-                    className="ml-3"
-                    onClick={handleClickDelete}
-                  /> */}
+                  <div>
+                    {attachedFiles.map((data, index) => {
+                      return (
+                        <ul key={index}>
+                          <li>
+                            {data}{" "}
+                            <DeleteForeverIcon
+                              className="ml-3"
+                              // onClick={handleClickDelete}
+                            />
+                          </li>
+                        </ul>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -201,5 +216,4 @@ function Estimate() {
     </div>
   );
 }
-
 export default Estimate;
