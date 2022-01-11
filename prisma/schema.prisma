@@ -87,9 +87,9 @@ model product {
 }
 
 model attachedFile {
-  id         Int      @id @default(autoincrement())
-  name       String
+  id         Int       @id @default(autoincrement())
+  name       String?
   url        String?
-  estimateId Int
-  estimate   estimate @relation(fields: [estimateId], references: [id])
+  estimateId Int?
+  estimate   estimate? @relation(fields: [estimateId], references: [id])
 }

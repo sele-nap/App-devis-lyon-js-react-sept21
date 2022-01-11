@@ -13,7 +13,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
 
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
-    attachedFiles: Joi.string(),
+    attachedFiles: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -45,6 +45,7 @@ const OneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
+  attachedFiles,
   customer,
   status,
 }) => {
@@ -55,7 +56,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      attachedFiles,
+      //attachedFiles,
     },
   });
 };
