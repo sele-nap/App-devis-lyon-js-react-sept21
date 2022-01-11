@@ -36,7 +36,7 @@ export const getOneEstimate = (id) => {
   });
 };
 
-const deleteOneEstimate = (id) => {
+const OneEstimate = (id) => {
   return db.estimate
     .delete({ where: { id: parseInt(id, 10) } })
     .catch((_) => false);
@@ -45,7 +45,6 @@ const deleteOneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-  attachedFiles,
   customer,
   status,
 }) => {
@@ -72,7 +71,7 @@ const createFiles = async ({ name, estimate }) => {
 
 const updateAskEstimate = async (additionalInformation, deadLine) => {
   return db.estimate
-    .patch({ where: { deadLine, attachedFiles } })
+    .update({ where: { deadLine, attachedFiles } })
     .catch(() => false);
 };
 
