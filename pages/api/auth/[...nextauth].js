@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import { getSession } from "next-auth/react";
 
 import CredentialsProvider from "next-auth/providers/credentials";
-import { token } from "morgan";
 
 export const getSessionID = async (req, res) => {
   const session = await getSession({ req });
@@ -21,9 +20,7 @@ export default NextAuth({
       name: "Credentials",
       async authorize(credentials, req) {
         const userInDb = await findByEmail(credentials.username);
-        console.log(
-          await verifyPassword(credentials.password, userInDb.hashedPassword)
-        );
+
         if (
           userInDb &&
           (await verifyPassword(credentials.password, userInDb.hashedPassword))

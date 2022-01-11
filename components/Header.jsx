@@ -15,7 +15,7 @@ const Header = () => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "Vous devez ếtre identifier pour pouvoir demander un devis",
+        title: "Vous devez ếtre identifié pour pouvoir demander un devis",
         showConfirmButton: false,
         timer: 2500,
       });

@@ -13,7 +13,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
 
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
-    attachedFiles: Joi.string(),
+    attachedFiles: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -72,7 +72,7 @@ const createFiles = async ({ name, estimate }) => {
 
 const updateAskEstimate = async (additionalInformation, deadLine) => {
   return db.estimate
-    .patch({ where: { deadLine, attachedFiles } })
+    .update({ where: { deadLine, attachedFiles } })
     .catch(() => false);
 };
 

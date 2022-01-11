@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
-export default function QuoteManagement() {
+export default function EstimateManagement() {
   const handleClick = (e) => {
     Swal.fire({
       position: "center",
@@ -20,7 +20,7 @@ export default function QuoteManagement() {
       timer: 1500,
     });
   };
-  const Downloaad = (e) => {
+  const Download = (e) => {
     Swal.fire({
       position: "center",
       icon: "success",
@@ -39,30 +39,15 @@ export default function QuoteManagement() {
   };
 
   const [estimate, setEstimate] = useState();
-  // const [createDevis, setCreateDevis] = useState();
 
   useEffect(() => {
     axios.get("/api/estimate").then((res) => setEstimate(res.data));
   }, []);
 
-  
-
-  // const deleteEstimate = async (id) => {
-  //   if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
-  //     await axios.delete(`/api/estimate/${id}`);
-  //     alert("projet bien supprimé");
-  //     setEstimate((estimate) => estimate.filter((e) => e.id !== id));
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
-  // }, []);
   return (
     <Layout>
       <section className="bg-slate-50">
-        {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
+        {/* ___________ VALID ESTIMATE / WAITING FOR VALIDATION  ___________*/}
 
         <div className="flex justify-center">
           <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
@@ -201,7 +186,7 @@ export default function QuoteManagement() {
                         {moment(deadLine).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="border">
-                        <Link href={`estimates/${id}`}>
+                        <Link passHref={`estimates/${id}`}>
                           <button className="cursor-pointer my-2">
                             <RiFileEditFill size={25} />
                           </button>
@@ -237,30 +222,6 @@ export default function QuoteManagement() {
           </div>
         )}
 
-        {/* ___________ QUOTATION IN THE PROCESS OF CREATION  ___________*/}
-        {/* <div className="flex justify-center items-center">
-          <button className="border-2 border-third text-black rounded cursor-auto p-1">
-            Liste des devis en cours de création
-          </button>
-
-          {!createDevis && <p>En chargement...</p>}
-          {createDevis?.length === 0 && <p>Pas de devis actuellement</p>}
-          {createDevis && createDevis.length !== 0 && (
-            <table className="table-auto mt-6 mb-6">
-              <tbody className="border-t">
-                {createDevis.map(({ id, name, date, validation }) => (
-                  <tr className="border-b" key={id}>
-                    <td className="text-lg p-3 font-bold">{name}</td>
-                    <td className="text-lg p-3 font-bold">{date}</td>
-                    <td className="text-lg p-3 font-bold">{validation}</td>
-                    <td className="pt-3 pb-3"></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div> */}
-
         {/* ___________ CREATE A QUOTATION  ___________*/}
         <div className="flex justify-around items-center my-8">
           <Link passHref href="/admin/devis/edit/new">
@@ -277,7 +238,7 @@ export default function QuoteManagement() {
           {/* ___________ DOWNLOAD  ___________*/}
           <button
             className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-            onClick={Downloaad}
+            onClick={Download}
           >
             <FaCloudDownloadAlt size={20} />
             <p className="px-2">TÉLÉCHARGER</p>

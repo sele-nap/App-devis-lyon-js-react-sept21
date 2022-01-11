@@ -2,7 +2,6 @@ import { findByEmail } from "../models/user";
 import { getSession } from "next-auth/react";
 
 export async function requireAdmin(req, res, next) {
-  console.log("hello");
   const session = await getSession({ req });
   if (!session) return res.status(401).send("Unauthorized");
   const userInDb = await findByEmail(session?.user?.email);
