@@ -8,7 +8,7 @@ export default function ClientLayout({ children, pageTitle }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (status !== "loading" && data?.user?.role !== "client") {
+    if (status !== "loading" && status == "unauthenticated") {
       router.push("/login");
     }
   }, [status, data, router]);

@@ -9,6 +9,8 @@ import {
   createFiles,
 } from "../../../models/estimate";
 
+// import { requireAdmin } from "../../../middleware/requireAdmin";
+
 import path from "path";
 
 const handleGet = async (req, res) => {
@@ -53,7 +55,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .use(requireAdmin)
+  // .use(requireAdmin)
   .post(handleImageUpload.single("attachedFiles"), handlePost)
   .get(handleGet)
   .delete(handleDelete);

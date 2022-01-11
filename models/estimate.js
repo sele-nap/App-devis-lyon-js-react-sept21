@@ -36,7 +36,7 @@ export const getOneEstimate = (id) => {
   });
 };
 
-const OneEstimate = (id) => {
+const deleteOneEstimate = (id) => {
   return db.estimate
     .delete({ where: { id: parseInt(id, 10) } })
     .catch((_) => false);
