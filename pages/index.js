@@ -75,7 +75,7 @@ export default function Home() {
                 Produit du moment
               </h2>
               <div className=" h-full p-7 w-full m-100">
-                <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 m-20 gap-6 pb sm: m-4">
+                <div className=" border-solid border-2 border-black rounded-xl m-20 p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2  gap-6 pb sm: m-4">
                   <Link href="/catalog">
                     <a className="flex justify-center md:justify-end ">
                       <Image

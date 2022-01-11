@@ -1,3 +1,5 @@
+import { now } from "next-auth/client/_utils";
+
 const db = require("../db");
 const argon2 = require("argon2");
 const Joi = require("joi");
@@ -22,7 +24,6 @@ const emailAlreadyExists = async (email) => {
 };
 
 const validateUser = (data, forUpdate = true) => {
-  console.log(data);
   const isIndividual = data.organizationType === "INDIVIDUAL";
 
   return Joi.object({
@@ -100,11 +101,12 @@ const create = async ({
       zipCode,
       city,
       emailVerificationCode,
+      inscriptionDate: new Date(Date.now()),
     },
   });
 };
 
-export const confirmEmail = async (emailVerificationCode) => {
+const confirmEmail = async (emailVerificationCode) => {
   try {
     if (await db.user.findUnique({ where: { emailVerificationCode } })) {
       await db.user.update({
@@ -130,4 +132,5 @@ module.exports = {
   validateUser,
   create,
   findByEmail,
+  confirmEmail,
 };

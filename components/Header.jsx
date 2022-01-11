@@ -5,9 +5,22 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { IoIosAddCircle } from "react-icons/io";
 import Image from "next/image";
 import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
+import Swal from "sweetalert2";
 
 const Header = () => {
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
+
+  const handleEstimateClick = () => {
+    if (status === "unauthenticated") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Vous devez ếtre identifié pour pouvoir demander un devis",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    }
+  };
   return (
     <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row">
       <Link href="/" passHref>
@@ -16,14 +29,17 @@ const Header = () => {
         </a>
       </Link>
 
-      <div className="text-black flex justify-start items-center m-2 md:flex">
+      <div className="text-black flex flex-row items-center m-2 md:flex">
         {" "}
-        <Link href="/devis">
-          <a>Devis</a>
+        <Link href="/askEstimatePage">
+          <a className="">
+            {" "}
+            <button onClick={handleEstimateClick}>
+              {" "}
+              Devis <IoIosAddCircle size={28} />
+            </button>
+          </a>
         </Link>
-        <a href="#" className="pl-2 ">
-          <IoIosAddCircle size={28} />
-        </a>
       </div>
       <span className="w-full md:w-1/ sm:w-1/6 h-10 cursor-pointer border border-gray-300  text-sm rounded-full flex  justify-center ">
         <input
@@ -39,7 +55,7 @@ const Header = () => {
 
       <div className="flex flex-row-reverse text-black mr-4 ml-4 cursor-pointer"></div>
       <div className="flex items-center m-2 md:flex">
-        <a href="#" className="pl-2">
+        <a href="/#" className="pl-2">
           <AiOutlineLogin size={28} />
         </a>
         {status === "unauthenticated" && (

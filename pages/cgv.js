@@ -4,12 +4,13 @@ import next from "next";
 export default function Cgv() {
   return (
     <Layout>
-      <h1>Conditions Générales de vente </h1>
+      <h1 className="font-bold">Conditions Générales de vente </h1>
 
-      <h2>Article L.111-1 du Code de la consommation</h2>
+      <h2 className="font-semibold">
+        Article L.111-1 du Code de la consommation
+      </h2>
 
-      <p>
-        {" "}
+      <p className="text-left">
         « Avant que le consommateur ne soit lié par un contrat de vente de biens
         ou de fourniture de services, le professionnel communique au
         consommateur, de manière lisible et compréhensible, les informations

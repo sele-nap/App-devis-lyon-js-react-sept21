@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start:server": "next start",
     "lint": "next lint",
+    "debug": "NODE_OPTIONS='--inspect' next dev",
+    "start:server": "next start",
     "generate-db-client": "npx prisma generate",
     "migrate:dev": "npx prisma migrate dev",
     "migrate:deploy": "npx prisma migrate deploy",
@@ -15,6 +16,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@joi/date": "^2.1.0",
     "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "^5.2.1",
     "@mui/material": "^5.2.3",
@@ -23,6 +25,7 @@
     "@swiper/core": "^0.0.21",
     "argon2": "^0.28.3",
     "axios": "^0.24.0",
+    "babel-plugin-superjson-next": "^0.4.2",
     "codes-postaux": "^3.4.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -31,7 +34,9 @@
     "joi": "^17.5.0",
     "mailer": "^0.6.7",
     "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.4",
     "next": "^12.0.7",
     "next-auth": "^4.0.5",
     "next-connect": "^0.11.0",
@@ -47,9 +52,12 @@
     "react-phone-number-input": "^3.1.43",
     "react-select": "^5.2.1",
     "react-toastify": "^8.1.0",
+    "sharp": "^0.29.3",
     "styled-components": "^5.3.3",
+    "superjson": "^1.8.0",
     "sweetalert2": "^11.3.0",
-    "swiper": "^7.3.2"
+    "swiper": "^7.3.2",
+    "uniqid": "^5.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
