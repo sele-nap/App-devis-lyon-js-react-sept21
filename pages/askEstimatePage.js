@@ -24,15 +24,16 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    // console.log(e.target.files);
+    console.log(e.target.files);
+    if (e.target.files[1])
+      setAttachedFiles(URL.createObjectURL(e.target.files[1]));
 
     const fileList = Array.from(e.target.files);
     console.log(fileList.FileList);
     if (fileList.length) {
       setAttachedFiles(
         fileList.map((file) => {
-          //transform url
-          return file.name;
+          return URL.createObjectURL(file);
         })
       );
       console.log(attachedFiles);
@@ -41,14 +42,18 @@ function Estimate() {
 
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
-    dataFiles.append("attachedFiles", attachedFilesRef.current.files);
+    console.log(attachedFilesRef);
+
+    for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
+      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+    }
+
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);
     dataFiles.append("additionalInformation", additionalInformation.value);
 
     axios
       .post("/api/estimate", dataFiles)
-
       .then((res) => {
         Swal.fire({
           position: "center",
@@ -69,6 +74,11 @@ function Estimate() {
       });
   };
 
+  // const handleClickDelete = async (id) => {
+  //   axios.delete(`/api/estimate/${id}`).then((res) => {
+  //     res;
+  //   });
+  // };
   // const deleteEstimate = async (id) => {
   //   if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
   //     );
@@ -80,26 +90,24 @@ function Estimate() {
   // };
 
   // const handleClickDelete = async (id) => {
-  //   await axios.delete(`/api/estimate/${id}`
-  //   .then((res) => {
-  //     Swal.fire({
-  //       title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
-  //       text: "Cette action est irréversible",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#DAB455",
-  //       cancelButtonColor: "#ECE6E6",
-  //       confirmButtonText: "oui, supprimé",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         Swal.fire(
-  //           "Supprimé",
-  //           "Votre pièce jointe à bien été supprimé",
-  //           "success"
-  //         );
-  //       }
-  //     });
-  //   }));
+  //   Swal.fire({
+  //     title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
+  //     text: "Cette action est irréversible",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#DAB455",
+  //     cancelButtonColor: "#ECE6E6",
+  //     confirmButtonText: "oui, supprimé",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire(
+  //         "Supprimé",
+  //         "Votre pièce jointe à bien été supprimé",
+  //         "success"
+  //       );
+  //     }
+  //   });
+  // };
 
   return (
     <div>
@@ -111,6 +119,11 @@ function Estimate() {
               Votre demande de devis
             </h1>
           </div>
+
+          <h2 className="text-center mb-10">
+            Cette demande ne vaut pas pour devis
+          </h2>
+
           <form>
             <div className="flex align items-center flex-col">
               <textarea
@@ -119,6 +132,7 @@ function Estimate() {
                 id="additionalInformation"
                 name="additionalInformation"
                 type="text"
+                required="required"
                 {...register("additionalInformation", {
                   required: " ❌ Champs obligatoire ",
                 })}
@@ -216,4 +230,5 @@ function Estimate() {
     </div>
   );
 }
+
 export default Estimate;

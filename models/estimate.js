@@ -8,8 +8,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
       forUpdate ? "optional" : "required"
     ),
     deadLine: Joi.date()
-      // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
-      .presence(forUpdate ? "optional" : "required"),
+    .presence(forUpdate ? "optional" : "required"),
 
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
@@ -45,7 +44,7 @@ const deleteOneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-  attachedFiles,
+
   customer,
   status,
 }) => {
@@ -56,16 +55,16 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      //attachedFiles,
     },
   });
 };
 
-const createFiles = async ({ name, estimate }) => {
+const createFiles = async ({ name, estimate, url }) => {
   return await db.attachedFile.create({
     data: {
       name,
       estimate,
+      url,
     },
   });
 };

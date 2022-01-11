@@ -54,6 +54,7 @@ async function seed() {
         additionalInformation:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar massa vel tincidunt suscipit.",
         userId: 2,
+        status: "DRAFT",
       },
       {
         deadLine: "2021-05-25T14:21:00+02:00",
