@@ -6,6 +6,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import WorkIcon from "@mui/icons-material/Work";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import axios from "axios";
+import { useState } from "react";
 
 export default function User({
   user: {
@@ -15,6 +17,7 @@ export default function User({
     organizationName,
     organizationType,
     address1,
+    address2,
     zipCode,
     city,
     phone,
@@ -23,6 +26,19 @@ export default function User({
     managerName,
   },
 }) {
+  const [users, setUsers] = useState([]);
+
+  const deleteUser = async (id) => {
+    if (
+      confirm(
+        "Voulez vous vraiment supprimer cette fiche client définitivement ?"
+      )
+    ) {
+      await axios.delete(`/api/users/${id}`);
+      alert("utilisateur bien supprimé");
+      setUsers((estimate) => users.filter((e) => e.id !== id));
+    }
+  };
   return (
     <Layout>
       <div className="flex flex-col">
@@ -40,7 +56,9 @@ export default function User({
             <div className=" items-center flex">
               <BusinessIcon className="m-2" />
               <div>
-                <p className="text-md mx-2 items-center p-1">{address1} </p>
+                <p className="text-md mx-2 items-center p-1">
+                  {address1} - {address2}
+                </p>
                 <p className="text-md mx-2 items-center p-1">
                   {zipCode} {city}
                 </p>
@@ -77,10 +95,9 @@ export default function User({
       </div>
 
       <div>
-        <div className="flex justify-center items-center cursor-pointer">
-          <DeleteForeverIcon />
-          <span className="ml-2"> Supprimer le compte client</span>
-        </div>
+        <button className="cursor-pointer" onClick={() => deleteUser(id)}>
+          <DeleteForeverIcon size={25} />
+        </button>
       </div>
     </Layout>
   );
