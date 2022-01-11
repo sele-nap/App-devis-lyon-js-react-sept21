@@ -29,7 +29,8 @@ const getEstimates = async () => {
     select: estimateToShow,
   });
 };
-export const getOneEstimate = (id) => {
+
+const getOneEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
     select: estimateToShow,

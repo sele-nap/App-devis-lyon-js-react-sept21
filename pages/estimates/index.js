@@ -186,7 +186,7 @@ export default function EstimateManagement() {
                         {moment(deadLine).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="border">
-                        <Link passHref={`estimates/${id}`}>
+                        <Link href={`estimates/${id}`} passHref>
                           <button className="cursor-pointer my-2">
                             <RiFileEditFill size={25} />
                           </button>
