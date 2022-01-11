@@ -45,7 +45,7 @@ const deleteOneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-  attachedFiles,
+  // attachedFiles,
   customer,
   status,
 }) => {
@@ -56,7 +56,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      attachedFiles,
+      // attachedFiles,
     },
   });
 };
