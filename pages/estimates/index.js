@@ -189,7 +189,7 @@ export default function QuoteManagement() {
                         {moment(deadLine).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="border">
-                        <Link href={`estimates/${id}`}>
+                        <Link passHref={`estimates/${id}`}>
                           <button className="cursor-pointer my-2">
                             <RiFileEditFill size={25} />
                           </button>
@@ -223,12 +223,13 @@ export default function QuoteManagement() {
         )}
 
         {/* ___________ QUOTATION IN THE PROCESS OF CREATION  ___________*/}
-        {/* <div className="flex justify-center items-center">
+
+        <div className="flex justify-center items-center">
           <button className="border-2 border-third text-black rounded cursor-auto p-1">
             Liste des devis en cours de création
           </button>
 
-          {!createDevis && <p>En chargement...</p>}
+          {/*  {!createDevis && <p>En chargement...</p>}
           {createDevis?.length === 0 && <p>Pas de devis actuellement</p>}
           {createDevis && createDevis.length !== 0 && (
             <table className="table-auto mt-6 mb-6">
@@ -243,8 +244,8 @@ export default function QuoteManagement() {
                 ))}
               </tbody>
             </table>
-          )}
-        </div> */}
+          )}*/}
+        </div>
 
         {/* ___________ CREATE A QUOTATION  ___________*/}
         <div className="flex justify-around items-center my-8">
