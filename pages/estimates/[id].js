@@ -16,8 +16,8 @@ import React from "react";
 
 const ref = React.createRef();
 const options = {
-  orientation: "landscape",
-  unit: "in",
+  orientation: "portrait",
+  unit: "cm",
   format: "A4",
 };
 
