@@ -1,19 +1,19 @@
 const db = require("../db");
 const Joi = require("joi");
-
-// const format = require("@joi/date");
+const format = require("@joi/date");
 
 const ValidateEstimate = (data, forUpdate = false) => {
   return Joi.object({
-    additionalInformation: Joi.string(),
-    // .presence(
-    //   forUpdate ? "optional" : "required"
-    // ),
-    deadLine: Joi.date(),
-    // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
-    // .presence(forUpdate ? "optional" : "required"),
+    additionalInformation: Joi.string().presence(
+      forUpdate ? "optional" : "required"
+    ),
+    deadLine: Joi.date()
+      // .format(["YYYY-MM-DD", "DD-MM-YYYY"])
+      .presence(forUpdate ? "optional" : "required"),
+
     customer: Joi.string(),
-    // attachedFiles: Joi.string().presence(forUpdate ? "optional" : "required"),
+    status: Joi.string().presence("optional"),
+    attachedFiles: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -45,8 +45,9 @@ const deleteOneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-  // attachedFiles,
+  attachedFiles,
   customer,
+  status,
 }) => {
   return await db.estimate.create({
     data: {
@@ -54,6 +55,17 @@ const createAskEstimate = async ({
       additionalInformation,
       createDate: new Date(Date.now()),
       customer,
+      status,
+      attachedFiles,
+    },
+  });
+};
+
+const createFiles = async ({ name, estimate }) => {
+  return await db.attachedFile.create({
+    data: {
+      name,
+      estimate,
     },
   });
 };
@@ -68,6 +80,7 @@ module.exports = {
   ValidateEstimate,
   createAskEstimate,
   updateAskEstimate,
+  createFiles,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,

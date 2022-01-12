@@ -10,16 +10,17 @@ import Swal from "sweetalert2";
 const Header = () => {
   const { data: session, status } = useSession();
 
-  // const handleClickEstimate = () => {
-  //   Swal.fire({
-  //     position: "center",
-  //     icon: "error",
-  //     title: "Vous devez ếtre identifier pour pouvoir demander un devis",
-  //     showConfirmButton: false,
-  //     timer: 2500,
-  //   });
-  // };
-
+  const handleEstimateClick = () => {
+    if (status === "unauthenticated") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Vous devez ếtre identifier pour pouvoir demander un devis",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    }
+  };
   return (
     <div className=" w-full flex flex-col items-center p-0 justify-between shadow-xs bg-third sm:flex-row">
       <Link href="/" passHref>
@@ -31,12 +32,12 @@ const Header = () => {
       <div className="text-black flex flex-row items-center m-2 md:flex">
         {" "}
         <Link href="/askEstimatePage">
-          <a className="pl-">
+          <a className="">
             {" "}
-            {/* <button type="button" onClick={handleClickEstimate()}>
-              Devis
-            </button> */}
-            <IoIosAddCircle size={28} />
+            <button onClick={handleEstimateClick}>
+              {" "}
+              Devis <IoIosAddCircle size={28} />
+            </button>
           </a>
         </Link>
       </div>

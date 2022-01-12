@@ -2,7 +2,6 @@ import { validateUser, emailAlreadyExists, create } from "../../../models/user";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
 import crypto from "crypto";
-import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handler(req, res) {
   const validationError = validateUser(req.body);

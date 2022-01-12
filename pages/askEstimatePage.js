@@ -1,5 +1,3 @@
-import React from "react";
-import ClientLayout from "../components/ClientLayout";
 import SendIcon from "@mui/icons-material/Send";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -7,6 +5,8 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Layout from "../components/Layout";
+import { useRef, useState } from "react";
+import ClientLayout from "../components/ClientLayout";
 
 function Estimate() {
   const {
@@ -15,23 +15,49 @@ function Estimate() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    axios.post("./api/estimate", data).then((res) => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Votre demande de devis a été envoyé",
-        showConfirmButton: false,
-        timer: 2500,
-      }).catch;
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Votre demande de devis n'a pas été envoyé",
-        showConfirmButton: false,
-        timer: 2500,
+  //UPLOAD//
+  const [attachedFiles, setAttachedFiles] = useState([]);
+  const attachedFilesRef = useRef(null);
+
+  const handleAttachedFilesClick = (e) => {
+    attachedFilesRef.current.click();
+    e.preventDefault();
+  };
+  const handleAttachedFilesSelection = (e) => {
+    console.log(e.target.files[0]);
+
+    if (e.target.files[0])
+      setAttachedFiles(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const onSubmit = async (status) => {
+    const dataFiles = new FormData();
+    dataFiles.append("attachedFiles", attachedFilesRef.current.files[0]);
+    dataFiles.append("status", status);
+    dataFiles.append("deadLine", deadLine.value);
+    dataFiles.append("additionalInformation", additionalInformation.value);
+
+    axios
+      .post("/api/estimate", dataFiles)
+
+      .then((res) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Votre demande de devis a été envoyé",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Votre demande de devis n'a pas été envoyé",
+          showConfirmButton: false,
+          timer: 2500,
+        });
       });
-    });
   };
 
   const handleClickDelete = (e) => {
@@ -54,31 +80,21 @@ function Estimate() {
     });
   };
 
-  const handleClickSave = (e) => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title:
-        "Votre demande de devis a été enregistré mais n'a pas été envoyé à l'administrateur",
-      showConfirmButton: false,
-      timer: 2500,
-    });
-  };
-
   return (
     <div>
-      <ClientLayout>
-        <Layout>
+      <Layout>
+        {" "}
+        <ClientLayout>
           <div className=" flex justify-center">
             <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
               Votre demande de devis
             </h1>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form>
             <div className="flex align items-center flex-col">
               <textarea
                 placeholder="Votre message"
-                className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-4/5  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="additionalInformation"
                 name="additionalInformation"
                 type="text"
@@ -92,7 +108,7 @@ function Estimate() {
                   {errors.additionalInformation.message}
                 </span>
               )}
-              <label> Pour quand ? :</label>
+              <label className="mt-5"> Pour quelle date? :</label>
               <input
                 type="date"
                 placeholder="date"
@@ -107,50 +123,81 @@ function Estimate() {
               )}
             </div>
 
-            <div className="flex justify-center ">
-              {" "}
-              <button className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4">
+            <div className="flex flex-col justify-center ">
+              <button
+                onClick={handleAttachedFilesClick}
+                type="submit"
+                className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
+              >
                 Ajouter pièces jointes <br />3 maximums
               </button>
-            </div>
-            <div className="">
-              <ul>
-                <li className="text-center ">
-                  test.pdf{" "}
+              <input
+                className="hidden"
+                type="file"
+                // multiple="true"
+                id="attachedFiles"
+                accept="image/png, image/jpeg, image/gif"
+                ref={attachedFilesRef}
+                onChange={handleAttachedFilesSelection}
+              ></input>
+              <div className="flex flex-col">
+                <div className="flex flex-row">
+                  <input
+                    value={attachedFiles}
+                    className=" h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
                   <DeleteForeverIcon
                     className="ml-3"
                     onClick={handleClickDelete}
                   />
-                </li>
-                <li className="text-center">
-                  test.pdf <DeleteForeverIcon className="ml-3" />
-                </li>
 
-                <li className="text-center">
-                  test.pdf <DeleteForeverIcon className="ml-3" />
-                </li>
-              </ul>
+                  {/* <input
+                    className="bg-blue-100 h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
+                  <DeleteForeverIcon
+                    className="ml-3"
+                    onClick={handleClickDelete}
+                  />
+                  <input
+                    className="bg-blue-100 h-6 w-1/2"
+                    {...register("attachedFiles")}
+                  ></input>
+                  <DeleteForeverIcon
+                    className="ml-3"
+                    onClick={handleClickDelete}
+                  /> */}
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-row justify-between ">
               <button
-                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmit("TO_DO");
+                }}
                 className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
               >
-                Soumettre un devis{" "}
-                <SendIcon className="ml-10 " type="submit" onClick={onSubmit} />
+                Soumettre un devis <SendIcon className="ml-10 " />
               </button>
+
               <button
                 className="bg-third w-2/5 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
-                onClick={handleClickSave}
+                name="Save"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmit("DRAFT");
+                }}
               >
                 Enregistrer ma demande pour continuer plus tard <br />
                 <SaveIcon className="ml-10" />
               </button>
             </div>
           </form>
-        </Layout>
-      </ClientLayout>
+        </ClientLayout>
+      </Layout>
     </div>
   );
 }

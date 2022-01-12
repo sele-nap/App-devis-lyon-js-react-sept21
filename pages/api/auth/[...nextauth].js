@@ -21,6 +21,9 @@ export default NextAuth({
       name: "Credentials",
       async authorize(credentials, req) {
         const userInDb = await findByEmail(credentials.username);
+        console.log(
+          await verifyPassword(credentials.password, userInDb.hashedPassword)
+        );
         if (
           userInDb &&
           (await verifyPassword(credentials.password, userInDb.hashedPassword))
