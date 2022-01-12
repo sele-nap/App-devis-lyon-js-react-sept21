@@ -11,7 +11,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
 
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
-    attachedFiles: Joi.string(),
+    attachedFiles: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -27,7 +27,8 @@ const getEstimates = async () => {
     select: estimateToShow,
   });
 };
-export const getOneEstimate = (id) => {
+
+const getOneEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
     select: estimateToShow,
@@ -68,17 +69,17 @@ const createFiles = async ({ name, estimate, url }) => {
   });
 };
 
-const updateAskEstimate = async (additionalInformation, deadLine) => {
+const updateEstimate = (id, data) => {
   return db.estimate
-    .patch({ where: { deadLine, attachedFiles } })
+    .update({ where: { id: parseInt(id, 10) }, data })
     .catch(() => false);
 };
 
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
-  updateAskEstimate,
-
+  updateEstimate,
+  createFiles,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,

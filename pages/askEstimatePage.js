@@ -59,7 +59,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: "Votre demande de devis n'a pas été envoyé",
+          title: "Votre demande de devis n'a pas été envoyée",
           showConfirmButton: false,
           timer: 2500,
         });
