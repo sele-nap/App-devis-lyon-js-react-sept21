@@ -56,26 +56,53 @@ async function seed() {
         additionalInformation:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar massa vel tincidunt suscipit.",
         userId: 2,
+        status: "TO_DO",
       },
       {
         deadLine: "2021-05-25T14:21:00+02:00",
         additionalInformation: "Des médailles pour mon chat svp, merci.",
         userId: 3,
-        status: 'DRAFT',
+        status: "DRAFT",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
         additionalInformation:
           "10 médailles, 100 écharpes, 3 coupes et 4 chocolats, svp",
         userId: 2,
-        status: 'WAITING_FOR_VALIDATION',
+        status: "WAITING_FOR_VALIDATION",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
         additionalInformation:
           "Cat ipsum dolor sit amet, poop in a handbag look delicious and drink the soapy mopping up water then puke giant foamy fur-balls, stuff and things. If human is on laptop sit on the keyboard russian blue and headbutt owner's knee. .",
         userId: 3,
-        status: 'VALIDATED',
+        status: "TO_DO",
+      },
+      {
+        deadLine: "2022-03-19T14:21:00+02:00",
+        additionalInformation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar massa vel tincidunt suscipit.",
+        userId: 2,
+      },
+      {
+        deadLine: "2021-05-25T14:21:00+02:00",
+        additionalInformation: "Des médailles pour mon chat svp, merci.",
+        userId: 3,
+        status: "DRAFT",
+      },
+      {
+        deadLine: "2022-03-19T14:21:00+02:00",
+        additionalInformation:
+          "10 médailles, 100 écharpes, 3 coupes et 4 chocolats, svp",
+        userId: 2,
+        status: "WAITING_FOR_VALIDATION",
+      },
+      {
+        deadLine: "2022-03-19T14:21:00+02:00",
+        additionalInformation:
+          "Cat ipsum dolor sit amet, poop in a handbag look delicious and drink the soapy mopping up water then puke giant foamy fur-balls, stuff and things. If human is on laptop sit on the keyboard russian blue and headbutt owner's knee. .",
+        userId: 3,
+        status: "VALIDATED",
       },
     ],
   });

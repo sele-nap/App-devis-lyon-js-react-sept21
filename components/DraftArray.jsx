@@ -8,37 +8,27 @@ import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
-import EstimateList from "./EstimateList";
-import ToggleButton from "./ToggleButton";
 
-export default function ToDoArray({}) {
-  const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("projet bien supprimé");
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id));
-    }
-  };
-
-  const [estimate, setEstimate] = useState();
+export default function DraftArray() {
+  const [createEstimate, setCreateEstimate] = useState();
 
   useEffect(() => {
-    axios.get("/api/estimate").then((res) => setEstimate(res.data));
+    axios.get("/api/estimate").then((res) => setCreateEstimate(res.data));
   }, []);
 
   return (
-    <section>
-      {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}
+    <section className="">
+      {/* ___________ ESTIMATE IN THE PROCESS OF CREATION  ___________ */}
 
-      <div className="flex justify-center">
-        <div className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-          Liste des devis validés ou en attente de validation
+      <div className="flex justify-center items-center mt-10">
+        <div className="border-2 border-third text-black rounded cursor-auto p-1">
+          Liste des devis en cours de création
         </div>
       </div>
 
-      {!estimate && <p>En chargement...</p>}
-      {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
-      {estimate && estimate.length !== 0 && (
+      {!createEstimate && <p>En chargement...</p>}
+      {createEstimate?.length === 0 && <p>Pas de devis actuellement</p>}
+      {createEstimate && createEstimate.length !== 0 && (
         <div className="table w-full p-2 mt-8">
           <table className="w-full border">
             <thead>
@@ -69,7 +59,7 @@ export default function ToDoArray({}) {
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Date de création devis
+                    Date limite du devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -93,7 +83,7 @@ export default function ToDoArray({}) {
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Date limite du devis
+                    Date de création du devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -116,17 +106,6 @@ export default function ToDoArray({}) {
                 </th>
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Validation
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    />
-                  </div>
-                </th>
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                  <div className="flex items-center justify-center">
                     Suppression
                     <path
                       strokeLinecap="round"
@@ -139,7 +118,7 @@ export default function ToDoArray({}) {
               </tr>
             </thead>
             <tbody className="border-t">
-              {estimate.map(
+              {createEstimate.map(
                 ({
                   id,
                   deadLine,
@@ -157,14 +136,14 @@ export default function ToDoArray({}) {
                       {customer.lastname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
-                      {moment(createDate).format(`DD/MM/YYYY`)}
+                      {moment(deadLine).format(`DD/MM/YYYY`)}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {additionalInformation}
                     </td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {moment(deadLine).format(`DD/MM/YYYY`)}
+                      {moment(createDate).format(`DD/MM/YYYY`)}
                     </td>
                     <td className="border">
                       <Link href={`estimates/${id}`} passHref>
@@ -172,11 +151,6 @@ export default function ToDoArray({}) {
                           <RiFileEditFill size={25} />
                         </button>
                       </Link>
-                    </td>
-                    <td className="">
-                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        <ToggleButton />
-                      </div>
                     </td>
                     <td className="text-center border my-2">
                       <button
@@ -193,8 +167,6 @@ export default function ToDoArray({}) {
           </table>
         </div>
       )}
-
-      <EstimateList status="VALIDATED" />
     </section>
   );
 }
