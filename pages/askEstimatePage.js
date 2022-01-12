@@ -39,6 +39,24 @@ function Estimate() {
   };
 
   //Soumission devis//
+
+  const customErrors = () => {
+    const globalError = "votre demande de devis n'a pas été envoyée";
+    if (additionalInformation.value === "") {
+      return "Le champ message n'a pas été rempli, " + globalError;
+    }
+    if (deadLine.value === "") {
+      return "Le champ date n'a pas été rempli, " + globalError;
+    }
+    return globalError;
+  };
+
+  const [numberEstimate, setNumberEstimate] = useState("");
+  const resetForm = () => {
+    additionalInformation.value = "";
+    deadLine.value = "";
+    setAttachedFiles([]);
+  };
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
 
@@ -53,13 +71,25 @@ function Estimate() {
     axios
       .post("/api/estimate", dataFiles)
       .then((res) => {
-        res;
+        setNumberEstimate("n°" + res.data?.id);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title:
+            res.data.status === "TO_DO"
+              ? `Votre demande de devis ${numberEstimate} a été envoyé `
+              : "Votre demande de devis a été enregistré, vous pourrez le modiifer ultérieurement",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        resetForm();
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         Swal.fire({
           position: "center",
           icon: "error",
-          title: "Votre demande de devis n'a pas été envoyée",
+          title: customErrors(),
           showConfirmButton: false,
           timer: 2500,
         });
@@ -98,7 +128,7 @@ function Estimate() {
         <ClientLayout>
           <div className=" flex justify-center">
             <h1 className="bg-third h-10 w-3/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
-              Votre demande de devis
+              {`Votre demande de devis ${numberEstimate}`}
             </h1>
           </div>
 
@@ -114,10 +144,10 @@ function Estimate() {
                 id="additionalInformation"
                 name="additionalInformation"
                 type="text"
-                required="require"
-                {...register("additionalInformation", {
-                  required: " ❌ Champs obligatoire ",
-                })}
+                require="require"
+                // {...register("additionalInformation", {
+                //   required: " ❌ Champs obligatoire ",
+                // })}
               />
               {errors.additionalInformation && (
                 <span className="text-xs">
@@ -131,10 +161,10 @@ function Estimate() {
                 placeholder="date"
                 min={date}
                 id="deadLine"
-                className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
-                {...register("deadLine", {
-                  required: " ❌ Champs obligatoire ",
-                })}
+                className="mt-5 w-1/2 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 md: w-2/3 lg: w-1/5 "
+                // {...register("deadLine", {
+                //   required: " ❌ Champs obligatoire ",
+                // })}
               />
               {errors.deadLine && (
                 <span className="text-xs"> {errors.deadLine.message}</span>
@@ -145,7 +175,7 @@ function Estimate() {
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className="bg-third w-3/4 h-15  rounded-3xl mt-10  p-2 text-ml md:w-1/5 lg:w-2/3"
+                className="bg-third w-3/4 h-15  rounded-3xl mt-10  p-2 text-ml md:w-3/5 lg:w-1/3"
               >
                 Ajouter pièces jointes <br />3 maximums
               </button>
@@ -195,32 +225,18 @@ function Estimate() {
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmit("TO_DO");
-                  Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Votre demande de devis a été envoyé",
-                    showConfirmButton: false,
-                    timer: 2500,
-                  });
                 }}
-                className="bg-third  text-center w-3/4 m-10 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
+                className="bg-third  text-center w-3/4 m-5 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
               >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
 
               <button
-                className="bg-third text-center w-3/4 m-10 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
+                className="bg-third text-center w-3/4 m-5 md:w-2/5 h-10 flex justify-center rounded-3xl  p-2 text-ml "
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmit("DRAFT");
-                  Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Votre demande de devis a été enregistré",
-                    showConfirmButton: false,
-                    timer: 2500,
-                  });
                 }}
               >
                 Enregistrer ma demande <br />
