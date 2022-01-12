@@ -24,16 +24,15 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    console.log(e.target.files);
     if (e.target.files[1])
       setAttachedFiles(URL.createObjectURL(e.target.files[1]));
 
     const fileList = Array.from(e.target.files);
-    console.log(fileList.FileList);
+
     if (fileList.length) {
       setAttachedFiles(
         fileList.map((file) => {
-          return URL.createObjectURL(file);
+          return file.name;
         })
       );
     }
@@ -54,13 +53,7 @@ function Estimate() {
     axios
       .post("/api/estimate", dataFiles)
       .then((res) => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Votre demande de devis a été envoyé",
-          showConfirmButton: false,
-          timer: 2500,
-        });
+        res;
       })
       .catch(() => {
         Swal.fire({
@@ -72,8 +65,9 @@ function Estimate() {
         });
       });
   };
+
   // Remove attached files//
-  const handleClickDelete = (index) => {
+  const handleClickDelete = () => {
     Swal.fire({
       title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
       text: "Cette action est irréversible",
@@ -84,7 +78,7 @@ function Estimate() {
       confirmButtonText: "oui, supprimé",
     }).then((result) => {
       if (result.isConfirmed) {
-        attachedFiles.splice(index, 2);
+        setAttachedFiles(attachedFiles.splice(1, 3));
         Swal.fire(
           "Supprimé",
           "Votre pièce jointe à bien été supprimé",
@@ -93,10 +87,10 @@ function Estimate() {
       }
     });
   };
+  //INPUT DATE//
   const date2 = add(new Date(), { days: 7 });
-  console.log(date2);
   const date = format(date2, "yyyy-MM-dd");
-  console.log(date);
+
   return (
     <div>
       <Layout>
@@ -120,7 +114,7 @@ function Estimate() {
                 id="additionalInformation"
                 name="additionalInformation"
                 type="text"
-                required="required"
+                required="require"
                 {...register("additionalInformation", {
                   required: " ❌ Champs obligatoire ",
                 })}
@@ -159,6 +153,7 @@ function Estimate() {
                 className="hidden"
                 type="file"
                 multiple={true}
+                max="3"
                 id="attachedFiles"
                 accept="image/png, image/jpeg, image/gif"
                 ref={attachedFilesRef}
@@ -166,10 +161,7 @@ function Estimate() {
               ></input>
               <div className="">
                 <div className="">
-                  <input
-                    className=" h-6 w-1/2"
-                    {...register("attachedFiles")}
-                  ></input>
+                  <input className=" h-6 w-1/2"></input>
                 </div>
               </div>
 
@@ -197,6 +189,13 @@ function Estimate() {
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmit("TO_DO");
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Votre demande de devis a été envoyé",
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
                 }}
                 className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml "
               >
@@ -209,6 +208,13 @@ function Estimate() {
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmit("DRAFT");
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Votre demande de devis a été enregistré",
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
                 }}
               >
                 Enregistrer ma demande <br />
