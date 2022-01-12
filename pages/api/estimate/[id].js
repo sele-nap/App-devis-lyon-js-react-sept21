@@ -1,16 +1,17 @@
 import {
   ValidateEstimate,
-  updateAskEstimate,
+  updateEstimate,
   getOneEstimate,
   deleteOneEstimate,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
-import { requireAdmin } from "../../../middleware/requireAdmin";
+// import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = ValidateEstimate(body, true);
   if (validationErrors) return res.status(422).send(validationErrors);
-  const updated = await updateAskEstimate(id, body);
+  const updated = await updateEstimate(id, body);
+  console.log(updated);
   if (updated) res.status(200).send(updated);
   else res.status(404).send();
 }
@@ -27,7 +28,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .use(requireAdmin)
+  // .use(requireAdmin)
   .get(handleGet)
   .patch(handlePatch)
   .delete(handleDelete);

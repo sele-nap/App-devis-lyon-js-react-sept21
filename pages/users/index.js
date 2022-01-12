@@ -132,7 +132,7 @@ const ListClient = () => {
                     <td className="text-sm p-3"> {organizationName}</td>
                     <td className="text-sm p-3"> {organizationType}</td>
                     <td className="border">
-                      <Link href={`users/${id}`} passHref>
+                      <Link href={`users/edit/${id}`} passHref>
                         <button className="cursor-pointer my-2">
                           <RiFileEditFill size={25} />
                         </button>

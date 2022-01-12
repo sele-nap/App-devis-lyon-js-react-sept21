@@ -1,6 +1,3 @@
-import { now } from "next-auth/client/_utils";
-import { tryGetPreviewData } from "next/dist/server/api-utils";
-
 const db = require("../db");
 const argon2 = require("argon2");
 const Joi = require("joi");
@@ -159,34 +156,14 @@ const deleteOneUser = (id) => {
     .catch((_) => false);
 };
 
-const updateOneUser = async (
-  address1,
-  address2,
-  firstname,
-  lastname,
-  managerName,
-  organizationName,
-  organizationType,
-  phone,
-  zipCode,
-  city
-) => {
+// const createProject = ({ title, description, mainPictureUrl }) => {
+//   return db.project.create({ data: { title, description, mainPictureUrl } });
+// };
+
+const updateOneUser = (id, data) => {
   return db.user
-    .update({
-      where: {
-        address1,
-        address2,
-        firstname,
-        lastname,
-        managerName,
-        organizationName,
-        organizationType,
-        phone,
-        zipCode,
-        city,
-      },
-    })
-    .catch(() => false);
+    .update({ where: { id: parseInt(id, 10) }, data })
+    .catch((_) => false);
 };
 
 module.exports = {

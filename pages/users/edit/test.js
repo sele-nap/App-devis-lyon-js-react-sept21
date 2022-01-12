@@ -1,5 +1,5 @@
-import { getUsers, getOneUser } from "../../models/user";
-import Layout from "../../components/Layout";
+import { getUsers, getOneUser } from "../../../models/user";
+import Layout from "../../../components/Layout";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import BusinessIcon from "@mui/icons-material/Business";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -7,7 +7,9 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import WorkIcon from "@mui/icons-material/Work";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/dist/client/router";
+import SignupForm from "../../../components/SignupForm";
 
 export default function User({
   user: {
@@ -41,7 +43,8 @@ export default function User({
   };
   return (
     <Layout>
-      <div className="flex flex-col">
+      <SignupForm />
+      {/* <div className="flex flex-col">
         <h2 className="text-center text-2xl  uppercase m-12">
           Fiche client n° {id}
         </h2>
@@ -98,7 +101,7 @@ export default function User({
         <button className="cursor-pointer" onClick={() => deleteUser(id)}>
           <DeleteForeverIcon size={25} />
         </button>
-      </div>
+      </div> */}
     </Layout>
   );
 }
