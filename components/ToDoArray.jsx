@@ -8,8 +8,8 @@ import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
-import EstimateList from "./EstimateList";
-import ToggleButton from "./ToggleButton";
+// import EstimateList from "./EstimateList";
+// import ToggleButton from "./ToggleButton";
 
 export default function ToDoArray({}) {
   const deleteEstimate = async (id) => {
@@ -175,7 +175,7 @@ export default function ToDoArray({}) {
                     </td>
                     <td className="">
                       <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        <ToggleButton />
+                        {/* <ToggleButton /> */}
                       </div>
                     </td>
                     <td className="text-center border my-2">
@@ -194,7 +194,7 @@ export default function ToDoArray({}) {
         </div>
       )}
 
-      <EstimateList status="VALIDATED" />
+      {/* <EstimateList status="VALIDATED" /> */}
     </section>
   );
 }

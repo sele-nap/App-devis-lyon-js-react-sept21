@@ -22,11 +22,12 @@ export default function EstimateList({ status }) {
     });
   };
 
-  return (
+//   return (
     
-      {estimates.map((e) => (
-       key={e.id}
-      ))}
+//       {estimates.map((e) => (
+//        key={e.id}
+//       ))}
     
-  );
+//   );
 }
+
