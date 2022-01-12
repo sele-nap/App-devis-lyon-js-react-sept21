@@ -29,7 +29,8 @@ const getEstimates = async () => {
     select: estimateToShow,
   });
 };
-export const getOneEstimate = (id) => {
+
+const getOneEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
     select: estimateToShow,
@@ -70,16 +71,16 @@ const createFiles = async ({ name, estimate }) => {
   });
 };
 
-const updateAskEstimate = async (additionalInformation, deadLine) => {
+const updateEstimate = (id, data) => {
   return db.estimate
-    .update({ where: { deadLine, attachedFiles } })
+    .update({ where: { id: parseInt(id, 10) }, data })
     .catch(() => false);
 };
 
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
-  updateAskEstimate,
+  updateEstimate,
   createFiles,
   getEstimates,
   getOneEstimate,

@@ -1,4 +1,10 @@
-import { validateUser, emailAlreadyExists, create } from "../../../models/user";
+import {
+  validateUser,
+  emailAlreadyExists,
+  create,
+  getUsers,
+  deleteOneUser,
+} from "../../../models/user";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
 import crypto from "crypto";
@@ -27,4 +33,13 @@ async function handler(req, res) {
   res.status(201).send(newUser);
 }
 
-export default base().post(handler);
+const handleGet = async (req, res) => {
+  res.send(await getUsers());
+};
+
+async function handleDelete({ query: { id } }, res) {
+  if (await deleteOneUser(id)) res.status(204).send();
+  else res.status(404).send();
+}
+
+export default base().post(handler).get(handleGet).delete(handleDelete);
