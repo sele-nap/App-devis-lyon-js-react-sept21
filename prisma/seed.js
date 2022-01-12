@@ -1,3 +1,5 @@
+import { FaDraft2Digital } from "react-icons/fa";
+
 const { hashPassword } = require("../models/user");
 const db = require("../db");
 
@@ -57,9 +59,23 @@ async function seed() {
       },
       {
         deadLine: "2021-05-25T14:21:00+02:00",
-        additionalInformation:
-          "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+        additionalInformation: "Des médailles pour mon chat svp, merci.",
         userId: 3,
+        status: 'DRAFT',
+      },
+      {
+        deadLine: "2022-03-19T14:21:00+02:00",
+        additionalInformation:
+          "10 médailles, 100 écharpes, 3 coupes et 4 chocolats, svp",
+        userId: 2,
+        status: 'WAITING_FOR_VALIDATION',
+      },
+      {
+        deadLine: "2022-03-19T14:21:00+02:00",
+        additionalInformation:
+          "Cat ipsum dolor sit amet, poop in a handbag look delicious and drink the soapy mopping up water then puke giant foamy fur-balls, stuff and things. If human is on laptop sit on the keyboard russian blue and headbutt owner's knee. .",
+        userId: 3,
+        status: 'VALIDATED',
       },
     ],
   });

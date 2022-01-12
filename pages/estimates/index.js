@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import ToDoArray from "../../components/ToDoArray";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -10,7 +11,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
-export default function QuoteManagement() {
+export default function EstimateManagement() {
   const handleClick = (e) => {
     Swal.fire({
       position: "center",
@@ -20,7 +21,7 @@ export default function QuoteManagement() {
       timer: 1500,
     });
   };
-  const Downloaad = (e) => {
+  const Download = (e) => {
     Swal.fire({
       position: "center",
       icon: "success",
@@ -30,41 +31,31 @@ export default function QuoteManagement() {
     });
   };
 
-  const [estimate, setEstimate] = useState();
-  // const [createDevis, setCreateDevis] = useState();
+  const [createEstimate, setCreateEstimate] = useState();
 
   useEffect(() => {
-    axios.get("/api/estimate").then((res) => setEstimate(res.data));
+    axios.get("/api/estimate").then((res) => setCreateEstimate(res.data));
   }, []);
 
-  const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("projet bien supprimé");
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id));
-    }
-  };
-  // useEffect(() => {
-  //   axios.get("/api/CreationDevis").then((res) => setCreateDevis(res.data));
-  // }, []);
   return (
     <Layout>
-      <section className="bg-slate-50">
-        {/* ___________ VALID QUOTATION / WAITING FOR VALIDATION  ___________*/}
+      <ToDoArray />
+      <section className="">
+        {/* ___________ ESTIMATE IN THE PROCESS OF CREATION  ___________ */}
 
-        <div className="flex justify-center">
-          <button className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-            Liste des devis validés ou en attente de validation
-          </button>
+        <div className="flex justify-center items-center mt-10">
+          <div className="border-2 border-third text-black rounded cursor-auto p-1">
+            Liste des devis en cours de création
+          </div>
         </div>
 
-        {!estimate && <p>En chargement...</p>}
-        {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
-        {estimate && estimate.length !== 0 && (
+        {!createEstimate && <p>En chargement...</p>} 
+        {createEstimate?.length === 0 && <p>Pas de devis actuellement</p>}
+        {createEstimate && createEstimate.length !== 0 && (
           <div className="table w-full p-2 mt-8">
             <table className="w-full border">
               <thead>
-                <tr className="bg-gray-50">
+                <tr className="bg-gray-100">
                   <th className="border p-2"></th>
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
@@ -91,7 +82,7 @@ export default function QuoteManagement() {
 
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
-                      Date de création devis
+                      Date limite du devis
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -115,7 +106,7 @@ export default function QuoteManagement() {
 
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
-                      Deadline Devis
+                      Date de création du devis
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -138,17 +129,6 @@ export default function QuoteManagement() {
                   </th>
                   <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                     <div className="flex items-center justify-center">
-                      Validation
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                      />
-                    </div>
-                  </th>
-                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                    <div className="flex items-center justify-center">
                       Suppression
                       <path
                         strokeLinecap="round"
@@ -161,13 +141,13 @@ export default function QuoteManagement() {
                 </tr>
               </thead>
               <tbody className="border-t">
-                {estimate.map(
+                {createEstimate.map(
                   ({
                     id,
-                    userId,
                     deadLine,
                     additionalInformation,
                     customer,
+                    createDate,
                   }) => (
                     <tr className="w-full text-center border-b my-2" key={id}>
                       <td className="p-2 border-r">
@@ -179,38 +159,27 @@ export default function QuoteManagement() {
                         {customer.lastname}
                       </td>
                       <td className="text-center border  text-sm p-3 my-2">
-                        {}
+                        {moment(deadLine).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="text-center border  text-sm p-3 my-2">
                         {additionalInformation}
                       </td>
 
                       <td className="text-center border text-sm p-3 my-2">
-                        {moment(deadLine).format(`DD/MM/YYYY`)}
+                        {moment(createDate).format(`DD/MM/YYYY`)}
                       </td>
                       <td className="border">
-                        <Link passHref={`estimates/${id}`}>
+                        <Link href={`estimates/${id}`} passHref>
                           <button className="cursor-pointer my-2">
                             <RiFileEditFill size={25} />
                           </button>
                         </Link>
                       </td>
-                      <td className="">
-                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                          <input
-                            type="checkbox"
-                            name="toggle"
-                            id="Green"
-                            className="checked:bg-green-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-                          />
-                          <label
-                            htmlFor="Green"
-                            className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                          ></label>
-                        </div>
-                      </td>
                       <td className="text-center border my-2">
-                        <button className="cursor-pointer">
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => deleteEstimate(id)}
+                        >
                           <RiDeleteBin5Fill size={25} />
                         </button>
                       </td>
@@ -221,55 +190,32 @@ export default function QuoteManagement() {
             </table>
           </div>
         )}
+      </section>
 
-        {/* ___________ QUOTATION IN THE PROCESS OF CREATION  ___________*/}
+      {/* ___________ CREATE AN ESTIMATE  ___________*/}
 
-        <div className="flex justify-center items-center">
-          <button className="border-2 border-third text-black rounded cursor-auto p-1">
-            Liste des devis en cours de création
-          </button>
-
-          {/*  {!createDevis && <p>En chargement...</p>}
-          {createDevis?.length === 0 && <p>Pas de devis actuellement</p>}
-          {createDevis && createDevis.length !== 0 && (
-            <table className="table-auto mt-6 mb-6">
-              <tbody className="border-t">
-                {createDevis.map(({ id, name, date, validation }) => (
-                  <tr className="border-b" key={id}>
-                    <td className="text-lg p-3 font-bold">{name}</td>
-                    <td className="text-lg p-3 font-bold">{date}</td>
-                    <td className="text-lg p-3 font-bold">{validation}</td>
-                    <td className="pt-3 pb-3"></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}*/}
-        </div>
-
-        {/* ___________ CREATE A QUOTATION  ___________*/}
-        <div className="flex justify-around items-center my-8">
-          <Link passHref href="/admin/devis/edit/new">
-            <button
-              className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-              type="submit"
-              onClick={handleClick}
-            >
-              <IoIosAddCircle size={20} />
-              <p className="px-2"> CRÉER UN DEVIS</p>
-            </button>
-          </Link>
-
-          {/* ___________ DOWNLOAD  ___________*/}
+      <div className="flex justify-around items-center my-8">
+        <Link passHref href="/admin/devis/edit/new">
           <button
             className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-            onClick={Downloaad}
+            type="submit"
+            onClick={handleClick}
           >
-            <FaCloudDownloadAlt size={20} />
-            <p className="px-2">TÉLÉCHARGER</p>
+            <IoIosAddCircle size={20} />
+            <p className="px-2"> CRÉER UN DEVIS</p>
           </button>
-        </div>
-      </section>
+        </Link>
+
+        {/* ___________ DOWNLOAD  ___________*/}
+
+        <button
+          className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+          onClick={Download}
+        >
+          <FaCloudDownloadAlt size={20} />
+          <p className="px-2">TÉLÉCHARGER</p>
+        </button>
+      </div>
     </Layout>
   );
 }
