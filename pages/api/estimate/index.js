@@ -1,26 +1,22 @@
 import base from "../../../middleware/commons";
 import handleImageUpload from "../../../middleware/handleImageUpload";
-import sharp from "sharp";
+import { createFiles, deleteFiles } from "../../../models/attachedFiles";
 import {
   deleteOneEstimate,
   createAskEstimate,
   getEstimates,
   ValidateEstimate,
-  createFiles,
-  deleteAttachedFiles,
 } from "../../../models/estimate";
-
-import path from "path";
 
 const handleGet = async (req, res) => {
   res.send(await getEstimates());
 };
 
 async function handlePost(req, res) {
-  console.log("receveided files:", req.files);
+  // console.log("receveided files:", req.files);
 
   const validationError = ValidateEstimate(req.body);
-  console.log(validationError);
+  // console.log(validationError);
 
   if (validationError) return res.status(422).send(validationError);
   const newEstimate = await createAskEstimate({
@@ -42,11 +38,6 @@ async function handlePost(req, res) {
   res.status(201).send(newEstimate);
 }
 
-// async function deleteAttachedFiles({ query: { id } }, res) {
-//   if (await deleteAttachedFiles(id)) res.status(204).send();
-//   else res.status(404).send();
-// }
-
 export const config = {
   api: {
     bodyParser: false,
@@ -54,11 +45,11 @@ export const config = {
 };
 
 async function handleDelete({ query: { id } }, res) {
-  if (await deleteOneEstimate(id)) res.status(204).send();
-  else res.status(404).send();
+  if (await deleteOneEstimate(id)) res.status(204).send("ok");
+  else res.status(404).send("non supprimé");
 }
 
 export default base()
   .post(handleImageUpload.array("attachedFiles", 3), handlePost)
   .get(handleGet)
-  .delete(handleDelete, deleteAttachedFiles);
+  .delete(handleDelete);

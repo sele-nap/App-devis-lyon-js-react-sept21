@@ -7,11 +7,11 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
+import { add, format } from "date-fns";
 
 function Estimate() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -36,13 +36,12 @@ function Estimate() {
           return URL.createObjectURL(file);
         })
       );
-      console.log(attachedFiles);
     }
   };
 
+  //Soumission devis//
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
-    console.log(attachedFilesRef);
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
@@ -73,49 +72,38 @@ function Estimate() {
         });
       });
   };
-
-  // const handleClickDelete = async (id) => {
-  //   axios.delete(`/api/estimate/${id}`).then((res) => {
-  //     res;
-  //   });
-  // };
-  // const deleteEstimate = async (id) => {
-  //   if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
-  //     );
-  //     alert("Pièce jointe supprimé");
-  //     setAttachedFiles((attachedFile) =>
-  //       attachedFile.filter((e) => e.id !== id)
-  //     );
-  //   }
-  // };
-
-  // const handleClickDelete = async (id) => {
-  //   Swal.fire({
-  //     title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
-  //     text: "Cette action est irréversible",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#DAB455",
-  //     cancelButtonColor: "#ECE6E6",
-  //     confirmButtonText: "oui, supprimé",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.fire(
-  //         "Supprimé",
-  //         "Votre pièce jointe à bien été supprimé",
-  //         "success"
-  //       );
-  //     }
-  //   });
-  // };
-
+  // Remove attached files//
+  const handleClickDelete = (index) => {
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre pièce jointe?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "oui, supprimé",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        attachedFiles.splice(index, 2);
+        Swal.fire(
+          "Supprimé",
+          "Votre pièce jointe à bien été supprimé",
+          "success"
+        );
+      }
+    });
+  };
+  const date2 = add(new Date(), { days: 7 });
+  console.log(date2);
+  const date = format(date2, "yyyy-MM-dd");
+  console.log(date);
   return (
     <div>
       <Layout>
         {" "}
         <ClientLayout>
           <div className=" flex justify-center">
-            <h1 className="bg-third h-25 w-1/2 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
+            <h1 className="bg-third h-10 w-3/4 items-center md: h-25 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
               Votre demande de devis
             </h1>
           </div>
@@ -147,6 +135,7 @@ function Estimate() {
               <input
                 type="date"
                 placeholder="date"
+                min={date}
                 id="deadLine"
                 className="mt-5  appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 lg: w-1/5 "
                 {...register("deadLine", {
@@ -158,11 +147,11 @@ function Estimate() {
               )}
             </div>
 
-            <div className="flex flex-col justify-center ">
+            <div className="flex flex-col  items-center ml-20">
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className="bg-third w-1/2 h-15 flex justify-center rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
+                className="bg-third w-1/2 h-15  rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
               >
                 Ajouter pièces jointes <br />3 maximums
               </button>
@@ -175,28 +164,30 @@ function Estimate() {
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
               ></input>
-              <div className="flex flex-col">
-                <div className="flex flex-row">
+              <div className="">
+                <div className="">
                   <input
                     className=" h-6 w-1/2"
                     {...register("attachedFiles")}
                   ></input>
+                </div>
+              </div>
 
-                  <div>
-                    {attachedFiles.map((data, index) => {
-                      return (
-                        <ul key={index}>
-                          <li>
-                            {data}{" "}
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              // onClick={handleClickDelete}
-                            />
-                          </li>
-                        </ul>
-                      );
-                    })}
-                  </div>
+              <div className="">
+                <div className="">
+                  {attachedFiles.map((data, index) => {
+                    return (
+                      <ul key={index}>
+                        <li>
+                          {data}{" "}
+                          <DeleteForeverIcon
+                            className="ml-3"
+                            onClick={handleClickDelete}
+                          />
+                        </li>
+                      </ul>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -207,20 +198,20 @@ function Estimate() {
                   e.preventDefault();
                   onSubmit("TO_DO");
                 }}
-                className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-xl "
+                className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml "
               >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
 
               <button
-                className="bg-third w-2/5 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
+                className="bg-third  md: text-center w-1/3 m-15 lg:w-1/3 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
                   onSubmit("DRAFT");
                 }}
               >
-                Enregistrer ma demande pour continuer plus tard <br />
+                Enregistrer ma demande <br />
                 <SaveIcon className="ml-10" />
               </button>
             </div>

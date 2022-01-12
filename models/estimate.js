@@ -7,8 +7,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
     additionalInformation: Joi.string().presence(
       forUpdate ? "optional" : "required"
     ),
-    deadLine: Joi.date()
-    .presence(forUpdate ? "optional" : "required"),
+    deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
 
     customer: Joi.string(),
     status: Joi.string().presence("optional"),
@@ -69,12 +68,6 @@ const createFiles = async ({ name, estimate, url }) => {
   });
 };
 
-const deleteFiles = async (id) => {
-  return await db.attachedFile
-    .delete({ where: { id: parseInt(id, 10) } })
-    .catch((_) => false);
-};
-
 const updateAskEstimate = async (additionalInformation, deadLine) => {
   return db.estimate
     .patch({ where: { deadLine, attachedFiles } })
@@ -85,9 +78,8 @@ module.exports = {
   ValidateEstimate,
   createAskEstimate,
   updateAskEstimate,
-  createFiles,
+
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
-  deleteFiles,
 };
