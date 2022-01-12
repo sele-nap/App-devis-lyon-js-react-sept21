@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
-import { RiH1 } from "react-icons/ri";
 import Layout from "../../../components/Layout";
+import Swal from "sweetalert2";
 
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  // const [hashedPassword, setHashedPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [organizationType, setOrganizationType] = useState("");
   const [siretNumber, setSiretNumber] = useState("");
   const [managerName, setManagerName] = useState("");
@@ -30,7 +30,7 @@ export default function UserDetails() {
       firstname,
       lastname,
       email,
-      // hashedPassword,
+      password,
       organizationType,
       siretNumber,
       managerName,
@@ -43,7 +43,15 @@ export default function UserDetails() {
     };
     try {
       if (isUpdate) {
-        await axios.patch(`/api/users/${id}`, formValues);
+        await axios.patch(`/api/users/${id}`, formValues).then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Profil mis à jour avec succè",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        });
       } else {
         await axios.post(`/api/users/${id}`, formValues);
       }
@@ -55,38 +63,40 @@ export default function UserDetails() {
 
   useEffect(() => {
     if (id && isUpdate) {
-      axios.get(`/api/users/${id}`).then(
-        ({
-          data: {
-            firstname,
-            lastname,
-            email,
-            // hashedPassword,
-            organizationType,
-            siretNumber,
-            managerName,
-            organizationName,
-            address1,
-            address2,
-            zipCode,
-            city,
-            phone,
-          },
-        }) => {
-          setFirstName(firstname);
-          setLastName(lastname);
-          setEmail(email);
-          setZipCode(zipCode);
-          setCity(city);
-          setPhone(phone);
-          // setHashedPassword(hashedPassword);
-          setOrganizationType(organizationType);
-          setSiretNumber(siretNumber);
-          setManagerName(managerName);
-          setOrganizationName(organizationName);
-          setAddress1(address1), setAddress2(address2);
-        }
-      );
+      axios
+        .get(`/api/users/${id}`)
+        .then(
+          ({
+            data: {
+              firstname,
+              lastname,
+              email,
+              password,
+              organizationType,
+              siretNumber,
+              managerName,
+              organizationName,
+              address1,
+              address2,
+              zipCode,
+              city,
+              phone,
+            },
+          }) => {
+            setFirstName(firstname);
+            setLastName(lastname);
+            setEmail(email);
+            setZipCode(zipCode);
+            setCity(city);
+            setPhone(phone);
+            setPassword(password);
+            setOrganizationType(organizationType);
+            setSiretNumber(siretNumber);
+            setManagerName(managerName);
+            setOrganizationName(organizationName);
+            setAddress1(address1), setAddress2(address2);
+          }
+        );
     }
   }, [isUpdate, id]);
 
@@ -151,7 +161,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            {/* <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                   Mot de passe <span className="text-gray-400 text-md">*</span>
@@ -161,12 +171,12 @@ export default function UserDetails() {
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="password"
                     type="password"
-                    value={hashedPassword}
-                    onChange={(e) => setHashedPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {/* ________  ORGANISATION  ________*/}
             <div className="flex flex-wrap -mx-3 mb-2">

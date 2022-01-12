@@ -62,7 +62,7 @@ const validateUser = (data, forUpdate = true) => {
       .allow(...(data.organizationType ? ["", null] : [])),
     zipCode: Joi.string().max(255).required(),
     city: Joi.string().max(255).required(),
-    password: Joi.string().min(8).max(100).required(),
+    // password: Joi.string().min(8).max(100).required(),
   }).validate(data, { abortEarly: false }).error;
 };
 
