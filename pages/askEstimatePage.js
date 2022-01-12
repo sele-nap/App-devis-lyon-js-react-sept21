@@ -97,7 +97,7 @@ function Estimate() {
         {" "}
         <ClientLayout>
           <div className=" flex justify-center">
-            <h1 className="bg-third h-10 w-3/4 items-center md: h-25 text-center flex justify-center rounded-3xl m-20 p-3 lg: w-50">
+            <h1 className="bg-third h-10 w-3/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
               Votre demande de devis
             </h1>
           </div>
@@ -141,11 +141,11 @@ function Estimate() {
               )}
             </div>
 
-            <div className="flex flex-col  items-center ml-20">
+            <div className="flex flex-col items-center">
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className="bg-third w-1/2 h-15  rounded-3xl m-20 p-2 text-ml md:1/5 lg:w-1/4"
+                className="bg-third w-3/4 h-15  rounded-3xl mt-10  p-2 text-ml md:w-1/5 lg:w-2/3"
               >
                 Ajouter pièces jointes <br />3 maximums
               </button>
@@ -153,21 +153,19 @@ function Estimate() {
                 className="hidden"
                 type="file"
                 multiple={true}
-                max="3"
                 id="attachedFiles"
-                accept="image/png, image/jpeg, image/gif"
+                accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
               ></input>
-              <div className="">
-                <div className="">
-                  <input className=" h-6 w-1/2"></input>
-                </div>
-              </div>
 
-              <div className="">
-                <div className="">
-                  {attachedFiles.map((data, index) => {
+              {/* <div className="">
+                <input className=" h-6 w-1/2" max="3"></input>
+              </div> */}
+
+              <div className="m-20">
+                {attachedFiles.map((data, index) => {
+                  if (attachedFiles.length <= 3) {
                     return (
                       <ul key={index}>
                         <li>
@@ -179,12 +177,20 @@ function Estimate() {
                         </li>
                       </ul>
                     );
-                  })}
-                </div>
+                  } else {
+                    Swal.fire({
+                      position: "center",
+                      icon: "warning",
+                      title: "3 pièces jointes maximum",
+                      showConfirmButton: false,
+                      timer: 2500,
+                    });
+                  }
+                })}
               </div>
             </div>
 
-            <div className="flex flex-row justify-between ">
+            <div className=" flex flex-wrap justify-around  ">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -197,13 +203,13 @@ function Estimate() {
                     timer: 2500,
                   });
                 }}
-                className="bg-third  text-center w-1/3 m-15 lg:w-1/4 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml "
+                className="bg-third  text-center w-3/4 m-10 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
               >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
 
               <button
-                className="bg-third  md: text-center w-1/3 m-15 lg:w-1/3 h-10 flex justify-center rounded-3xl m-20 p-2 text-ml"
+                className="bg-third text-center w-3/4 m-10 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
