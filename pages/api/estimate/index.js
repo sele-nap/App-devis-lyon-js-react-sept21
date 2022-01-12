@@ -8,13 +8,10 @@ import {
   ValidateEstimate,
 } from "../../../models/estimate";
 
-<<<<<<< HEAD
-=======
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 import path from "path";
 
->>>>>>> dev
 const handleGet = async (req, res) => {
   res.send(await getEstimates());
 };
@@ -57,11 +54,6 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-<<<<<<< HEAD
   .post(handleImageUpload.array("attachedFiles", 3), handlePost)
-=======
-  // .use(requireAdmin)
-  .post(handleImageUpload.single("attachedFiles"), handlePost)
->>>>>>> dev
   .get(handleGet)
   .delete(handleDelete);
