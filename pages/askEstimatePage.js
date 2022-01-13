@@ -8,6 +8,7 @@ import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
 import { add, format } from "date-fns";
+import Link from "next/link";
 
 function Estimate() {
   const {
@@ -57,6 +58,12 @@ function Estimate() {
     deadLine.value = "";
     setAttachedFiles([]);
   };
+  const goToEstimate = () => {
+    <Link href="/pages/estimates/index">
+      {" "}
+      <a></a>
+    </Link>;
+  };
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
 
@@ -83,6 +90,7 @@ function Estimate() {
           timer: 2500,
         });
         resetForm();
+        goToEstimate();
       })
       .catch((error) => {
         console.log(error);
@@ -156,12 +164,14 @@ function Estimate() {
                 </span>
               )}
               <label className="mt-5"> Pour quelle date? :</label>
+              <p>minimum 7 jours après votre demande</p>
               <input
                 type="date"
                 placeholder="date"
                 min={date}
                 id="deadLine"
-                className="mt-5 w-1/2 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 md: w-2/3 lg: w-1/5 "
+                className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
+                 "
                 // {...register("deadLine", {
                 //   required: " ❌ Champs obligatoire ",
                 // })}
