@@ -8,7 +8,7 @@ import BorderAllIcon from "@mui/icons-material/BorderAll";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Link from "next/link";
-
+import CtaButton from "../../components/CtaButton";
 import moment from "moment";
 
 export default function Estimate({
@@ -94,10 +94,12 @@ export default function Estimate({
         <div className="flex flex-row justify-around">
           <div className="py-2 px-4 w-48 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10">
             <Link href="/estimates" passHref>
-              <div className="flex justify-center items-center cursor-pointer">
-                <BorderAllIcon />
-                <span className="ml-2"> Synthèse des devis</span>
-              </div>
+              <CtaButton
+                // action={Download}
+                title="Télécharger"
+                type="submit"
+                icon={<BorderAllIcon />}
+              />
             </Link>
           </div>
 

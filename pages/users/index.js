@@ -25,8 +25,7 @@ const ListClient = () => {
   }, []);
   return (
     <div>
-      <Layout>
-        <h1> Fichier client</h1>
+      <Layout title="Mes contacts">
         <div className="table w-full p-2 mt-8">
           <table className="w-full border">
             <thead>
