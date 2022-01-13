@@ -1,6 +1,5 @@
 const db = require("../db");
 const Joi = require("joi");
-const format = require("@joi/date");
 
 const ValidateEstimate = (data, forUpdate = false) => {
   return Joi.object({
@@ -9,7 +8,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
     ),
     deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
 
-    customer: Joi.string(),
+    // customer: Joi.string(),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
@@ -20,6 +19,10 @@ const estimateToShow = {
   deadLine: true,
   additionalInformation: true,
   customer: true,
+  status: true,
+  validationDate: true,
+  createDate: true,
+  adminCommnent: true,
 };
 
 const getEstimates = async () => {
@@ -44,7 +47,6 @@ const deleteOneEstimate = (id) => {
 const createAskEstimate = async ({
   additionalInformation,
   deadLine,
-
   customer,
   status,
 }) => {

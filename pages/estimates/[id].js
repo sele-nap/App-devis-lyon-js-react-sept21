@@ -7,10 +7,10 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import BorderAllIcon from "@mui/icons-material/BorderAll";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import Link from "next/link";
 import CtaButton from "../../components/CtaButton";
 import moment from "moment";
-import CTAbtn from "../../components/CTAbtn";
 import ReactDOM from "react-dom";
 import Pdf from "react-to-pdf";
 import React from "react";
@@ -25,7 +25,14 @@ const options = {
 };
 
 export default function Estimate({
-  estimate: { id, deadLine, additionalInformation, customer, createDate },
+  estimate: {
+    id,
+    deadLine,
+    additionalInformation,
+    adminCommnent,
+    customer,
+    createDate,
+  },
 }) {
   return (
     <Layout>
@@ -103,7 +110,7 @@ export default function Estimate({
             </div>
           </div>
           <div className="rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
-            <div className=" w-full mb-10 p-8">
+            <div className=" w-full mb-2 p-8">
               <h2 className="text-center text-xl uppercase mb-4">
                 Rappel de la demande{" "}
               </h2>
@@ -113,15 +120,11 @@ export default function Estimate({
               </p>
             </div>
 
-            <div className="border-2 rounded-xl w-full mb-10 p-8">
+            <div className=" w-full mb-2 p-8">
               <h2 className="text-center text-xl uppercase mb-4">
                 Proposition de l{`'`}administrateur
               </h2>
-              <input
-                type="text"
-                placeholder="Veuillez apporter une réponse à ce devis"
-                className="w-full h-36"
-              />
+              <p className="italic ml-24 text-gray-700 "> {adminCommnent} </p>
             </div>
 
             <div>
@@ -154,14 +157,19 @@ export default function Estimate({
               </div>
             </Link>
           </div>
+          <CtaButton title="Supprimer le devis" icon={<DeleteForeverIcon />} />
 
-          <CTAbtn title="Supprimer" link="/estimates" />
+          <Link href={`estimates/edit/${id}`} passHref>
+            <CtaButton
+              title="Edition du devis"
+              icon={<ModeEditOutlineIcon />}
+            />
+          </Link>
         </div>
       </div>
     </Layout>
   );
 }
-
 export async function getStaticPaths() {
   const estimates = await getEstimates();
   return {
