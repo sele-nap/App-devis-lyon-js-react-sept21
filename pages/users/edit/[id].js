@@ -47,7 +47,7 @@ export default function UserDetails() {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Profil mis à jour avec succè",
+            title: "Profil mis à jour",
             showConfirmButton: false,
             timer: 2500,
           });
@@ -150,31 +150,10 @@ export default function UserDetails() {
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                   Email <span className="text-gray-400 text-md">*</span>
                 </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Mot de passe <span className="text-gray-400 text-md">*</span>
-                </label>
-                <div className="flex items-center">
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
+                <p className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-5>
+                  {" "}
+                  {email}{" "}
+                </p>
               </div>
             </div>
 
