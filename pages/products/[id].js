@@ -31,19 +31,19 @@ export default function ProductDetails() {
     };
     try {
       if (isUpdate) {
-        await axios.patch(`/api/products/${id}`, formValues).then((res) => {
+        await axios.patch(`/api/product/${id}`, formValues).then((res) => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Produits mis à jour",
+            title: "Produit mis à jour",
             showConfirmButton: false,
             timer: 2500,
           });
         });
       } else {
-        await axios.post(`/api/products/${id}`, formValues);
+        await axios.post(`/api/product/${id}`, formValues);
       }
-      router.push("/product");
+      router.push("/products");
     } catch (err) {
       console.error(err);
     }
@@ -52,7 +52,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (id && isUpdate) {
       axios
-        .get(`/api/products/${id}`)
+        .get(`/api/product/${id}`)
         .then(({ data: { name, description, unitPrice } }) => {
           setName(name);
           setDescription(description), setUnitPrice(unitPrice);
@@ -82,8 +82,8 @@ export default function ProductDetails() {
                     type="text"
                     id="name"
                     name="name"
-                    // value={firstname}
-                    // onChange={(e) => setFirstName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="w-full px-3">
@@ -95,8 +95,8 @@ export default function ProductDetails() {
                     type="text"
                     id="description"
                     name="description"
-                    // value={lastname}
-                    // onChange={(e) => setLastName(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
               </div>
@@ -110,21 +110,21 @@ export default function ProductDetails() {
                     type="number"
                     id="unitPrice"
                     name="unitPrice"
-                    // value={lastname}
-                    // onChange={(e) => setLastName(e.target.value)}
+                    value={unitPrice}
+                    onChange={(e) => setUnitPrice(e.target.value)}
                   />
                 </div>
               </div>
-              <Link href="/estimates" passHref>
-                <button className=" ml-24 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-              </Link>
+              <button
+                type="submit"
+                className="py-2 px-4 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
+              >
+                Sauvegardez mon profil
+              </button>
             </form>
           </div>
           <div className="mt-10 flex justify-center">
-            <Link href="/estimates" passHref>
+            <Link href="/products" passHref>
               <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
                 <ArrowBackIcon />
                 <span className="mx-2"> Mes produits </span>

@@ -66,27 +66,27 @@ async function seed() {
       },
     ],
   });
+  await db.product.deleteMany();
+  await db.product.createMany({
+    data: [
+      {
+        name: "Médaille",
+        unitPrice: 5,
+        description: "médaille en or",
+      },
+      {
+        name: "Trophées",
+        unitPrice: 10,
+        description: "trophée en argent",
+      },
+      {
+        name: "Echarpe",
+        unitPrice: 15,
+        description: "Echarpe en tissu",
+      },
+    ],
+  });
 }
-
-await db.product.createMany({
-  data: [
-    {
-      name: Médaille,
-      unitPrice: 5,
-      description: "médaille en or",
-    },
-    {
-      name: Trophées,
-      unitPrice: 10,
-      description: "trophée en argent",
-    },
-    {
-      name: Echarpe,
-      unitPrice: 15,
-      description: "Echarpe en tissu",
-    },
-  ],
-});
 
 seed();
 

@@ -8,22 +8,22 @@ import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
 
 const ListProduct = () => {
-  //   const deleteUser = async (id) => {
-  //     if (
-  //       confirm(
-  //         "Voulez vous vraiment supprimer cette fiche client définitivement ?"
-  //       )
-  //     ) {
-  //       await axios.delete(`/api/users/${id}`);
-  //       alert("utilisateur bien supprimé");
-  //       setUsers((estimate) => users.filter((e) => e.id !== id));
-  //     }
-  //   };
-  //   const [users, setUsers] = useState([]);
+  const deleteProduct = async (id) => {
+    if (
+      confirm(
+        "Voulez vous vraiment supprimer cette fiche client définitivement ?"
+      )
+    ) {
+      await axios.delete(`/api/product/${id}`);
+      alert("utilisateur bien supprimé");
+      setProduct((estimate) => product.filter((e) => e.id !== id));
+    }
+  };
+  const [product, setProduct] = useState([]);
 
-  //   useEffect(() => {
-  //     axios.get("/api/users").then((res) => setUsers(res.data));
-  //   }, []);
+  useEffect(() => {
+    axios.get("/api/product").then((res) => setProduct(res.data));
+  }, []);
   return (
     <div>
       <Layout title="Mes produits">
@@ -106,35 +106,29 @@ const ListProduct = () => {
               </thead>
 
               <tbody className="border-t">
-                {/* {users.map(
-                  ({
-                    id,
-                    firstname,
-                    lastname,
-                    organizationName,
-                    organizationType,
-                  }) => ( */}
-                <tr className="w-full text-center border-b my-2">
-                  <td className="text-sm p-3"> id</td>
-                  <td className="text-sm p-3"> firstname</td>
-                  <td className="text-sm p-3"> lastname</td>
-                  <td className="text-sm p-3"> organizationName</td>
-                  <td className="border">
-                    {/* <Link href={`users/edit/${id}`} passHref> */}
-                    <button className="cursor-pointer my-2">
-                      <RiFileEditFill size={25} />
-                    </button>
-                    {/* </Link> */}
-                  </td>
-                  <td className="text-center border my-2">
-                    <button
-                      className="cursor-pointer"
-                      //   onClick={() => deleteUser(id)}
-                    >
-                      <RiDeleteBin5Fill size={25} />
-                    </button>
-                  </td>
-                </tr>
+                {product.map(({ id, name, description, unitPrice }) => (
+                  <tr className="w-full text-center border-b my-2" key={id}>
+                    <td className="text-sm p-3"> {id}</td>
+                    <td className="text-sm p-3"> {name}</td>
+                    <td className="text-sm p-3"> {description}</td>
+                    <td className="text-sm p-3">{unitPrice} € </td>
+                    <td className="border">
+                      <Link href={`products/${id}`} passHref>
+                        <button className="cursor-pointer my-2">
+                          <RiFileEditFill size={25} />
+                        </button>
+                      </Link>
+                    </td>
+                    <td className="text-center border my-2">
+                      <button
+                        className="cursor-pointer"
+                        //   onClick={() => deleteUser(id)}
+                      >
+                        <RiDeleteBin5Fill size={25} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
