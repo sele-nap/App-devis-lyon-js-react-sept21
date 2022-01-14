@@ -138,13 +138,14 @@ const ListProduct = () => {
                 ))}
               </tbody>
             </table>
-
-            <Link href="/products/newProduct" passHref>
-              <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-                {/* <ArrowBackIcon /> */}
-                <span className="mx-2"> Créer une référence </span>
-              </button>
-            </Link>
+            <div className="justify-center flex mt-4">
+              <Link href="/products/newProduct" passHref>
+                <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+                  {/* <ArrowBackIcon /> */}
+                  <span className="mx-2"> Créer une référence </span>
+                </button>
+              </Link>
+            </div>
           </div>
         </AdminLayout>
       </Layout>
