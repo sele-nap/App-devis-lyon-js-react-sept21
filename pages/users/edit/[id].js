@@ -105,80 +105,57 @@ export default function UserDetails() {
 
   return (
     <Layout>
-      <AdminLayout>
-        <div>
-          <div className="flex flex-col mb-10">
-            <h1 className="text-center text-2xl mb-2">
-              {" "}
-              Edition de mon profil
-            </h1>
-            <span className="text-gray-400 text-md text-center">
-              Les champs avec * ne sont pas modifiables
-            </span>
-          </div>
-          <div className="flex items-center justify-center">
-            <form
-              className="w-full max-w-lg "
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await saveUser();
-              }}
-            >
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Prénom
-                  </label>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    value={firstname}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </div>
-                <div className="w-full md:w-1/2 px-3 md:mb-0">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Nom de famille
-                  </label>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    value={lastname}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </div>
+      <div>
+        <div className="flex flex-col mb-10">
+          <h1 className="text-center text-2xl mb-2"> Editer mon profil</h1>
+          <span className="text-gray-400 text-md text-center">
+            Les champs avec * ne sont pas modifiables
+          </span>
+        </div>
+        <div className="flex items-center justify-center">
+          <form
+            className="w-full max-w-lg "
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await saveUser();
+            }}
+          >
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full ">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Prénom
+                </label>
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Email <span className="text-gray-400 text-md">*</span>
-                  </label>
-                  <div className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    {email}
-                  </div>
-                </div>
+              <div className="w-full mt-4 ">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Nom de famille
+                </label>
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
               </div>
-
-              <div className="flex flex-wrap -mx-3 mb-6 hidden">
-                <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Mot de passe{" "}
-                    <span className="text-gray-400 text-md">*</span>
-                  </label>
-                  <div className="flex items-center">
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-2">
+              <div className="w-full ">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Email <span className="text-gray-400 text-md">*</span>
+                </label>
+                <p className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 mb-5 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                  {email}
+                </p>
               </div>
 
               {/* ________  ORGANISATION  ________*/}
@@ -325,14 +302,14 @@ export default function UserDetails() {
 
               <button
                 type="submit"
-                className="py-2 px-4 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
+                className="py-2 px-4 hover:bg-green-300 bg-green-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
               >
                 Sauvegardez mon profil
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-      </AdminLayout>
+      </div>
     </Layout>
   );
 }
