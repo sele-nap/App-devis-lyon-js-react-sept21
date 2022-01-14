@@ -4,8 +4,10 @@ import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import BusinessIcon from "@mui/icons-material/Business";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PhoneIcon from "@mui/icons-material/Phone";
-import BorderAllIcon from "@mui/icons-material/BorderAll";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SaveIcon from "@mui/icons-material/Save";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Link from "next/link";
 import CtaButton from "../../components/CtaButton";
 import moment from "moment";
@@ -224,25 +226,32 @@ export default function Estimate() {
         </div>
         <div className="mt-10 flex justify-center">
           <Link href="/estimates" passHref>
-            <CtaButton
-              // action={Download}
-              title="Modifier le devis"
-              type="submit"
-              icon={<SaveIcon />}
-            />
+            <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+              <ArrowBackIcon />
+              <span className="mx-2"> Mes devis </span>
+            </button>
           </Link>
+
+          <Link href="/estimates" passHref>
+            <button className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+              <SaveIcon />
+              <span className="mx-2"> Sauvegarde </span>
+            </button>
+          </Link>
+
           <div className="ml-2  shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
             <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
               {({ toPdf }) => (
                 <button className="font-bold" onClick={toPdf}>
-                  Télécharger en PDF
+                  <PictureAsPdfIcon />
+                  <span className="mx-2"> Télécharger en PDF </span>
                 </button>
               )}
             </Pdf>
           </div>
-          <button className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-            <SaveIcon />
-            <span className="mx-2"> Sauvegarde </span>
+          <button className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+            <DeleteForeverIcon />
+            <span className="mx-2"> Suppression </span>
           </button>
         </div>
       </div>
