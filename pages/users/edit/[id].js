@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
+import CtaButton from "../../../components/CtaButton";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import AdminLayout from "../../../components/AdminLayout";
 
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
@@ -102,234 +105,235 @@ export default function UserDetails() {
 
   return (
     <Layout>
-      <div>
-        <div className="flex flex-col mb-10">
-          <h1 className="text-center text-2xl mb-2"> Editer mon profil</h1>
-          <span className="text-gray-400 text-md text-center">
-            Les champs avec * ne sont pas modifiables
-          </span>
-        </div>
-        <div className="flex items-center justify-center">
-          <form
-            className="w-full max-w-lg "
-            onSubmit={async (e) => {
-              e.preventDefault();
-              await saveUser();
-            }}
-          >
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Prénom
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  type="text"
-                  id="firstname"
-                  name="firstname"
-                  value={firstname}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </div>
-              <div className="w-full md:w-1/2 px-3 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Nom de famille
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                  type="text"
-                  id="lastname"
-                  name="lastname"
-                  value={lastname}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Email <span className="text-gray-400 text-md">*</span>
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Mot de passe <span className="text-gray-400 text-md">*</span>
-                </label>
-                <div className="flex items-center">
+      <AdminLayout>
+        <div>
+          <div className="flex flex-col mb-10">
+            <h1 className="text-center text-2xl mb-2">
+              {" "}
+              Edition de mon profil
+            </h1>
+            <span className="text-gray-400 text-md text-center">
+              Les champs avec * ne sont pas modifiables
+            </span>
+          </div>
+          <div className="flex items-center justify-center">
+            <form
+              className="w-full max-w-lg "
+              onSubmit={async (e) => {
+                e.preventDefault();
+                await saveUser();
+              }}
+            >
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Prénom
+                  </label>
                   <input
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    value={firstname}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="w-full md:w-1/2 px-3 md:mb-0">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Nom de famille
+                  </label>
+                  <input
+                    className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    value={lastname}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
               </div>
-            </div>
-
-            {/* ________  ORGANISATION  ________*/}
-            <div className="flex flex-wrap -mx-3 mb-2">
-              <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Type de structure
+                    Email <span className="text-gray-400 text-md">*</span>
                   </label>
-                  <div className="relative">
-                    <select
-                      className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="organizationType"
-                      name="organizationType"
-                      value={organizationType}
-                      onChange={(e) => setOrganizationType(e.target.value)}
-                    >
-                      <option value="INDIVIDUAL">Particulier</option>
-                      <option value="TOWN_HALL">Collectivité</option>
-                      <option value="NON_PROFIT_ORGANIZATION">
-                        Association
-                      </option>
-                      <option value="BUISNESS"> Entreprise</option>
-                    </select>
+                  <div className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    {email}
                   </div>
                 </div>
               </div>
-              <>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+
+              <div className="flex flex-wrap -mx-3 mb-6 hidden">
+                <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Siret
+                    Mot de passe{" "}
+                    <span className="text-gray-400 text-md">*</span>
                   </label>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="siretNumber"
-                    name="siretNumber"
-                    type="text"
-                    value={siretNumber}
-                    onChange={(e) => setSiretNumber(e.target.value)}
-                  />
+                  <div className="flex items-center">
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
                 </div>
+              </div>
+
+              {/* ________  ORGANISATION  ________*/}
+              <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Nom du responsable
-                  </label>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="managerName"
-                    name="managerName"
-                    type="text"
-                    value={managerName}
-                    onChange={(e) => setManagerName(e.target.value)}
-                  />
+                  <div>
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                      Type de structure
+                    </label>
+                    <div className="relative">
+                      <select
+                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="organizationType"
+                        name="organizationType"
+                        value={organizationType}
+                        onChange={(e) => setOrganizationType(e.target.value)}
+                      >
+                        <option value="INDIVIDUAL">Particulier</option>
+                        <option value="TOWN_HALL">Collectivité</option>
+                        <option value="NON_PROFIT_ORGANIZATION">
+                          Association
+                        </option>
+                        <option value="BUISNESS"> Entreprise</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
+                <>
+                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                      Siret
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="siretNumber"
+                      name="siretNumber"
+                      type="text"
+                      value={siretNumber}
+                      onChange={(e) => setSiretNumber(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                      Nom du responsable
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="managerName"
+                      name="managerName"
+                      type="text"
+                      value={managerName}
+                      onChange={(e) => setManagerName(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full px-3">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
+                      Denomination
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="organizationName"
+                      name="organizationName"
+                      type="text"
+                      value={organizationName}
+                      onChange={(e) => setOrganizationName(e.target.value)}
+                    />
+                  </div>
+                </>
+              </div>
+
+              {/* ________   ADRESSE  ________*/}
+
+              <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full px-3">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-                    Denomination
+                    Adresse<span className="text-gray-400 text-md"> *</span>
                   </label>
                   <input
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="organizationName"
-                    name="organizationName"
+                    id="address1"
+                    name="address1"
                     type="text"
-                    value={organizationName}
-                    onChange={(e) => setOrganizationName(e.target.value)}
+                    value={address1}
+                    onChange={(e) => setAddress1(e.target.value)}
+                  />
+
+                  <input
+                    className="mt-3 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="address2"
+                    name="address2"
+                    defaultValue=""
+                    type="text"
+                    value={address2}
+                    onChange={(e) => setAddress2(e.target.value)}
                   />
                 </div>
-              </>
-            </div>
+                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Code Postal
+                    <span className="text-gray-400 text-md"> *</span>
+                  </label>
+                  <input
+                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="zipCode"
+                    name="zipCode"
+                    type="text"
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                  />
+                </div>
 
-            {/* ________   ADRESSE  ________*/}
+                <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Ville
+                    <span className="text-gray-400 text-md"> *</span>
+                  </label>
+                  <input
+                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="city"
+                    name="city"
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </div>
+              </div>
 
-            <div className="flex flex-wrap -mx-3 mb-2">
-              <div className="w-full px-3">
+              <div className="w-full  mt-4 md:mb-10">
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-                  Adresse<span className="text-gray-400 text-md"> *</span>
+                  Numero de téléphone{" "}
+                  <span className="text-gray-400 text-md">*</span>
                 </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="address1"
-                  name="address1"
-                  type="text"
-                  value={address1}
-                  onChange={(e) => setAddress1(e.target.value)}
-                />
 
                 <input
-                  className="mt-3 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="address2"
-                  name="address2"
-                  defaultValue=""
-                  type="text"
-                  value={address2}
-                  onChange={(e) => setAddress2(e.target.value)}
-                />
-              </div>
-              <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Code Postal
-                  <span className="text-gray-400 text-md"> *</span>
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="zipCode"
-                  name="zipCode"
-                  type="text"
-                  value={zipCode}
-                  onChange={(e) => setZipCode(e.target.value)}
-                />
-              </div>
-
-              <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Ville
-                  <span className="text-gray-400 text-md"> *</span>
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="city"
-                  name="city"
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="w-full  mt-4 md:mb-10">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-                Numero de téléphone{" "}
-                <span className="text-gray-400 text-md">*</span>
-              </label>
-
-              <input
-                name="phone"
-                id="phone"
-                className=" appearance-none block w-full
+                  name="phone"
+                  id="phone"
+                  className=" appearance-none block w-full
               bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4
               leading-tight focus:outline-none focus:bg-white
               focus:border-gray-500"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
 
-            <button
-              type="submit"
-              className="py-2 px-4 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
-            >
-              Sauvegardez mon profil
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="py-2 px-4 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
+              >
+                Sauvegardez mon profil
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      </AdminLayout>
     </Layout>
   );
 }
