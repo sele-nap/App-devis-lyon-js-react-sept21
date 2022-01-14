@@ -25,8 +25,9 @@ const estimateToShow = {
   status: true,
 };
 
-const getEstimates = async () => {
+const getEstimates = async ({ statusList }) => {
   return db.estimate.findMany({
+    where: { status: {in: statusList} },
     select: estimateToShow,
   });
 };
@@ -71,10 +72,8 @@ const createFiles = async ({ name, estimate }) => {
   });
 };
 
-const updateAskEstimate = async (additionalInformation, deadLine) => {
-  return db.estimate
-    .patch({ where: { deadLine, attachedFiles } })
-    .catch(() => false);
+const updateAskEstimate = async (id, data) => {
+  return db.estimate.update({ where: { id : parseInt(id, 10)}, data });
 };
 
 module.exports = {

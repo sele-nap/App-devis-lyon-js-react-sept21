@@ -35,7 +35,7 @@ export default function EstimateManagement() {
 
   return (
     <Layout>
-      <EstimateList status='TO_D0'/>
+      <EstimateList statusList={['TO_DO', 'WAITING_FOR_VALIDATION', 'VALIDATED' ]} />
       <DraftArray status='DRAFT'/>
 
       {/* ___________ CREATE AN ESTIMATE  ___________*/}

@@ -2,16 +2,17 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { RiFileEditFill } from "react-icons/ri";
+import { QueryClient, QueryClientProvider } from "react-query";
 import next from "next";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
+import ToggleButton from "./ToggleButton";
 
-// import ToggleButton from "./ToggleButton";
+export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
 
-export default function EstimateList({ status, limit = 5, offset = 0 }) {
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
       await axios.delete(`/api/estimate/${id}`);
@@ -23,10 +24,14 @@ export default function EstimateList({ status, limit = 5, offset = 0 }) {
   const [estimate, setEstimate] = useState([]);
 
   useEffect(() => {
+    const statusParam = statusList.map(s => `status=${s}`) .join(`&`)
+    
     axios
-      .get(`/api/estimate?status=${status}&offset=${offset}&limit=${limit}`)
+      .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
       .then((res) => setEstimate(res.data));
-  }, [offset, limit, status]);
+  }, [offset, limit, statusList]);
+
+  const queryClient = new QueryClient();
 
   return (
     <section>
@@ -148,6 +153,7 @@ export default function EstimateList({ status, limit = 5, offset = 0 }) {
                   additionalInformation,
                   customer,
                   createDate,
+                  status
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
                     <td className="p-2 border-r">
@@ -176,9 +182,10 @@ export default function EstimateList({ status, limit = 5, offset = 0 }) {
                       </Link>
                     </td>
                     <td className="">
-                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        {/* <ToggleButton /> */}
-                      </div>
+                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                          <ToggleButton e = {{id}} />
+
+                        </div>                   
                     </td>
                     <td className="text-center border my-2">
                       <button

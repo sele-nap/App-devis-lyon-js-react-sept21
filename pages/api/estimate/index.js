@@ -12,7 +12,8 @@ import {
 import path from "path";
 
 const handleGet = async (req, res) => {
-  res.send(await getEstimates());
+  const{statusList} = req.query
+  res.send(await getEstimates({statusList}));
 };
 async function handlePost(req, res) {
   console.log("receveided file:", req.file);
