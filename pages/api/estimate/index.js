@@ -10,17 +10,12 @@ import {
 
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
-import path from "path";
-
 const handleGet = async (req, res) => {
   res.send(await getEstimates());
 };
 
 async function handlePost(req, res) {
-  // console.log("receveided files:", req.files);
-
   const validationError = ValidateEstimate(req.body);
-  // console.log(validationError);
 
   if (validationError) return res.status(422).send(validationError);
   const newEstimate = await createAskEstimate({
@@ -28,8 +23,6 @@ async function handlePost(req, res) {
     customer: { connect: { id: 1 } },
   });
   if (req.files && req.files?.length) {
-    //  const ext = path.extname(req.files.path);
-    // const outputFilePath = `${req.files.path.replace(ext, "")}_thumb.webp`;
     const filesSave = req.files.map((file) =>
       createFiles({
         name: file.filename,
