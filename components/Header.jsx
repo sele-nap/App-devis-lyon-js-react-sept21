@@ -35,10 +35,9 @@ const Header = () => {
           <a className="">
             {" "}
             <button
-              className="ml-3 mr-3 text-sm md text-lg:lg"
+              className="ml-3 mr-3 text-sm text-white flex justify-center flex-col items-center md text-lg:lg hover:text-black"
               onClick={handleEstimateClick}
             >
-              {" "}
               Devis <IoIosAddCircle size={25} />
             </button>
           </a>
@@ -60,12 +59,18 @@ const Header = () => {
         </a>
       </div>
 
-      <div className="cursor-pointer ">
-        <Link href="/signup"> Inscription</Link>
+      <div className="mr-6 md:mr-0">
+        {status === "unauthenticated" && (
+          <Link href="/signup">
+            <a className="sm:text-xs inline-block text-xs px-4 py-2 text-center leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-800 hover:bg-white">
+              Créer un compte
+            </a>
+          </Link>
+        )}
       </div>
-      <div className=" text-black  cursor-pointer "></div>
-      <div className="flex items-center  md:flex">
-        <span className="">
+
+      <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-800 hover:bg-white">
+        <span className="mx-2">
           <AiOutlineLogin size={25} />
         </span>
         {status === "unauthenticated" && (
