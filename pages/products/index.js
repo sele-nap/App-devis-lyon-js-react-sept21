@@ -9,16 +9,23 @@ import AdminLayout from "../../components/AdminLayout";
 
 const ListProduct = () => {
   const deleteProduct = async (id) => {
-    if (
-      confirm(
-        "Voulez vous vraiment supprimer cette fiche client définitivement ?"
-      )
-    ) {
+    if (confirm("Voulez vous vraiment supprimer ce produit définitivement ?")) {
       await axios.delete(`/api/product/${id}`);
-      alert("utilisateur bien supprimé");
-      setProduct((estimate) => product.filter((e) => e.id !== id));
+      alert("produit bien supprimé");
+      setProduct((product) => product.filter((e) => e.id !== id));
     }
   };
+  // const deleteProduct = async (id) => {
+  //   if (
+  //     confirm(
+  //       "Voulez vous vraiment supprimer cette fiche client définitivement ?"
+  //     )
+  //   ) {
+  //     await axios.delete(`/api/product/${id}`);
+  //     alert("utilisateur bien supprimé");
+  //     setProduct((estimate) => product.filter((e) => e.id !== id));
+  //   }
+  // };
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -122,7 +129,7 @@ const ListProduct = () => {
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"
-                        //   onClick={() => deleteUser(id)}
+                        onClick={() => deleteProduct(id)}
                       >
                         <RiDeleteBin5Fill size={25} />
                       </button>
@@ -131,6 +138,13 @@ const ListProduct = () => {
                 ))}
               </tbody>
             </table>
+
+            <Link href="/products/newProduct" passHref>
+              <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+                {/* <ArrowBackIcon /> */}
+                <span className="mx-2"> Créer une référence </span>
+              </button>
+            </Link>
           </div>
         </AdminLayout>
       </Layout>

@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/dist/client/router";
 import Layout from "../../components/Layout";
 import Swal from "sweetalert2";
-import CtaButton from "../../components/CtaButton";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import AdminLayout from "../../components/AdminLayout";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -17,61 +14,24 @@ export default function ProductDetails() {
   const [description, setDescription] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
 
-  const router = useRouter();
-  const {
-    query: { id },
-  } = router;
-  const isUpdate = id !== "new";
-
-  const saveProduct = async () => {
-    const formValues = {
-      name,
-      description,
-      unitPrice,
-    };
-    try {
-      if (isUpdate) {
-        await axios.patch(`/api/products/${id}`, formValues).then((res) => {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Produits mis à jour",
-            showConfirmButton: false,
-            timer: 2500,
-          });
-        });
-      } else {
-        await axios.post(`/api/products/${id}`, formValues);
-      }
-      router.push("/product");
-    } catch (err) {
-      console.error(err);
-    }
+  const onSubmit = (data) => {
+    axios.post("/api/product", { name, description, unitPrice }).then((res) => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Nouveau produit",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    });
   };
-
-  useEffect(() => {
-    if (id && isUpdate) {
-      axios
-        .get(`/api/products/${id}`)
-        .then(({ data: { name, description, unitPrice } }) => {
-          setName(name);
-          setDescription(description), setUnitPrice(unitPrice);
-        });
-    }
-  }, [isUpdate, id]);
 
   return (
     <Layout title="Modification du produit">
       <AdminLayout>
         <div className="flex flex-col">
           <div className="flex items-center justify-center w-full">
-            <form
-              className="w-full max-w-lg "
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await saveProduct();
-              }}
-            >
+            <form>
               <div className=" -mx-3 mb-6">
                 <div className="w-full  px-3 mb-4">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -82,8 +42,8 @@ export default function ProductDetails() {
                     type="text"
                     id="name"
                     name="name"
-                    // value={firstname}
-                    // onChange={(e) => setFirstName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="w-full px-3">
@@ -95,8 +55,8 @@ export default function ProductDetails() {
                     type="text"
                     id="description"
                     name="description"
-                    // value={lastname}
-                    // onChange={(e) => setLastName(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
               </div>
@@ -110,21 +70,24 @@ export default function ProductDetails() {
                     type="number"
                     id="unitPrice"
                     name="unitPrice"
-                    // value={lastname}
-                    // onChange={(e) => setLastName(e.target.value)}
+                    value={unitPrice}
+                    onChange={(e) => setUnitPrice(e.target.value)}
                   />
                 </div>
               </div>
-              <Link href="/estimates" passHref>
-                <button className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-              </Link>
+              {/* <Link href="/estimates" passHref> */}
+              <button
+                onClick={onSubmit}
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+              {/* </Link> */}
             </form>
           </div>
           <div className="mt-10 flex justify-center">
-            <Link href="/estimates" passHref>
+            <Link href="/products" passHref>
               <button className="ml-2 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
                 <ArrowBackIcon />
                 <span className="mx-2"> Mes produits </span>
