@@ -9,6 +9,9 @@ import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
+import CtaButton from "../../components/CtaButton";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export default function EstimateManagement() {
   const handleClick = (e) => {
@@ -45,7 +48,7 @@ export default function EstimateManagement() {
   }, []);
 
   return (
-    <Layout>
+    <Layout title="Mes devis">
       <section className="bg-slate-50">
         {/* ___________ VALID ESTIMATE / WAITING FOR VALIDATION  ___________*/}
 
@@ -224,25 +227,20 @@ export default function EstimateManagement() {
 
         {/* ___________ CREATE A QUOTATION  ___________*/}
         <div className="flex justify-around items-center my-8">
-          <Link passHref href="/admin/devis/edit/new">
-            <button
-              className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-              type="submit"
-              onClick={handleClick}
-            >
-              <IoIosAddCircle size={20} />
-              <p className="px-2"> CRÉER UN DEVIS</p>
-            </button>
-          </Link>
+          <CtaButton
+            title="Créer un devis"
+            icon={<AddCircleIcon />}
+            action={handleClick}
+          />
 
           {/* ___________ DOWNLOAD  ___________*/}
-          <button
-            className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-            onClick={Download}
-          >
-            <FaCloudDownloadAlt size={20} />
-            <p className="px-2">TÉLÉCHARGER</p>
-          </button>
+
+          <CtaButton
+            action={Download}
+            title="Télécharger"
+            type="submit"
+            icon={<CloudDownloadIcon />}
+          />
         </div>
       </section>
     </Layout>
