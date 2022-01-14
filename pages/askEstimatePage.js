@@ -8,11 +8,10 @@ import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
 import { add, format } from "date-fns";
-import Link from "next/link";
+import useHistory from "react-router-dom";
 
 function Estimate() {
   const {
-    register,
     formState: { errors },
   } = useForm();
 
@@ -59,10 +58,9 @@ function Estimate() {
     setAttachedFiles([]);
   };
   const goToEstimate = () => {
-    <Link href="/pages/estimates/index">
-      {" "}
-      <a></a>
-    </Link>;
+    let url = "./estimates/index";
+    let history = useHistory();
+    history.push(url);
   };
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
@@ -90,7 +88,7 @@ function Estimate() {
           timer: 2500,
         });
         resetForm();
-        goToEstimate();
+        // goToEstimate();
       })
       .catch((error) => {
         console.log(error);
