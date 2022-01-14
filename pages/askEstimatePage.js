@@ -7,8 +7,7 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
-import { add, format } from "date-fns";
-import useHistory from "react-router-dom";
+import { format } from "date-fns";
 
 function Estimate() {
   const {
@@ -57,11 +56,7 @@ function Estimate() {
     deadLine.value = "";
     setAttachedFiles([]);
   };
-  const goToEstimate = () => {
-    let url = "./estimates/index";
-    let history = useHistory();
-    history.push(url);
-  };
+
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
 
@@ -88,7 +83,6 @@ function Estimate() {
           timer: 2500,
         });
         resetForm();
-        // goToEstimate();
       })
       .catch((error) => {
         console.log(error);
@@ -100,6 +94,7 @@ function Estimate() {
           timer: 2500,
         });
       });
+    goToEstimate();
   };
 
   // Remove attached files//
@@ -162,7 +157,7 @@ function Estimate() {
                 </span>
               )}
               <label className="mt-5"> Pour quelle date? :</label>
-              <p>minimum 7 jours après votre demande</p>
+
               <input
                 type="date"
                 placeholder="date"
@@ -170,9 +165,6 @@ function Estimate() {
                 id="deadLine"
                 className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
                  "
-                // {...register("deadLine", {
-                //   required: " ❌ Champs obligatoire ",
-                // })}
               />
               {errors.deadLine && (
                 <span className="text-xs"> {errors.deadLine.message}</span>
@@ -196,10 +188,6 @@ function Estimate() {
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
               ></input>
-
-              {/* <div className="">
-                <input className=" h-6 w-1/2" max="3"></input>
-              </div> */}
 
               <div className="m-20">
                 {attachedFiles.map((data, index) => {
