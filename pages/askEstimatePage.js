@@ -7,11 +7,10 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
-import { add, format } from "date-fns";
+import { format } from "date-fns";
 
 function Estimate() {
   const {
-    register,
     formState: { errors },
   } = useForm();
 
@@ -57,6 +56,7 @@ function Estimate() {
     deadLine.value = "";
     setAttachedFiles([]);
   };
+
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
 
@@ -156,15 +156,14 @@ function Estimate() {
                 </span>
               )}
               <label className="mt-5"> Pour quelle date? :</label>
+
               <input
                 type="date"
                 placeholder="date"
                 min={date}
                 id="deadLine"
-                className="mt-5 w-1/2 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 md: w-2/3 lg: w-1/5 "
-                // {...register("deadLine", {
-                //   required: " ❌ Champs obligatoire ",
-                // })}
+                className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
+                 "
               />
               {errors.deadLine && (
                 <span className="text-xs"> {errors.deadLine.message}</span>
@@ -188,10 +187,6 @@ function Estimate() {
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
               ></input>
-
-              {/* <div className="">
-                <input className=" h-6 w-1/2" max="3"></input>
-              </div> */}
 
               <div className="m-20">
                 {attachedFiles.map((data, index) => {
