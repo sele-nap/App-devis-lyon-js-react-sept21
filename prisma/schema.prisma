@@ -56,6 +56,7 @@ model estimate {
   additionalInformation String         @db.LongText
   validationCode        String?
   createDate            DateTime?
+  adminCommnent         String?        @db.LongText
   userId                Int?
   customer              user?          @relation(fields: [userId], references: [id])
   products              estimateLine[]
@@ -77,11 +78,8 @@ model estimateLine {
 model product {
   id          Int            @id @default(autoincrement())
   name        String
-  reference   String
-  stock       Int
-  description String         @db.LongText
+  description String?        @db.LongText
   unitPrice   Decimal
-  imageUrl    String
   estimates   estimateLine[]
 
 
