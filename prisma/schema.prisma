@@ -78,11 +78,8 @@ model estimateLine {
 model product {
   id          Int            @id @default(autoincrement())
   name        String
-  reference   String
-  stock       Int
-  description String         @db.LongText
+  description String?        @db.LongText
   unitPrice   Decimal
-  imageUrl    String
   estimates   estimateLine[]
 
 
