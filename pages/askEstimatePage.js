@@ -94,7 +94,6 @@ function Estimate() {
           timer: 2500,
         });
       });
-    goToEstimate();
   };
 
   // Remove attached files//
