@@ -9,12 +9,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
-export default function DraftArray() {
-  const [createEstimate, setCreateEstimate] = useState();
+export default function DraftArray({ status, limit = 5, offset = 0 }) {
+  const [createEstimate, setCreateEstimate] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/estimate").then((res) => setCreateEstimate(res.data));
-  }, []);
+    axios.get(`/api/estimate?status=${status}&offset=${offset}&limit=${limit}`).then((res) => setCreateEstimate(res.data));
+  }, [offset, limit, status]);
 
   return (
     <section className="">

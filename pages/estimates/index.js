@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import ToDoArray from "../../components/ToDoArray";
+import EstimateList from "../../components/EstimateList";
 import DraftArray from "../../components/DraftArray";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
@@ -35,8 +35,8 @@ export default function EstimateManagement() {
 
   return (
     <Layout>
-      <ToDoArray />
-      <DraftArray />
+      <EstimateList status='TO_D0'/>
+      <DraftArray status='DRAFT'/>
 
       {/* ___________ CREATE AN ESTIMATE  ___________*/}
 

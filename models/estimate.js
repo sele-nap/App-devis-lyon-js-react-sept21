@@ -22,6 +22,7 @@ const estimateToShow = {
   deadLine: true,
   additionalInformation: true,
   customer: true,
+  status: true,
 };
 
 const getEstimates = async () => {
