@@ -118,7 +118,7 @@ function Estimate() {
     });
   };
   //INPUT DATE//
-  const date2 = add(new Date(), { days: 7 });
+  const date2 = new Date();
   const date = format(date2, "yyyy-MM-dd");
 
   return (
