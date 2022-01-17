@@ -7,11 +7,9 @@ const ValidateEstimate = (data, forUpdate = false) => {
       forUpdate ? "optional" : "required"
     ),
     deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
-
-    customer: Joi.string().presence(forUpdate ? "optional" : "required"),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string().presence("optional"),
-    // adminCommnent: Joi.string().presence("optional"),
+    adminComment: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -23,7 +21,7 @@ const estimateToShow = {
   status: true,
   validationDate: true,
   createDate: true,
-  // adminCommnent: true,
+  adminComment: true,
 };
 
 const getEstimates = async ({ statusList }) => {
@@ -41,6 +39,12 @@ const getOneEstimate = (id) => {
   });
 };
 
+const getEstimate = (id) => {
+  return db.estimate.findUnique({
+    where: { id: parseInt(id, 10) },
+  });
+};
+
 const deleteOneEstimate = (id) => {
   return db.estimate
     .delete({ where: { id: parseInt(id, 10) } })
@@ -52,7 +56,8 @@ const createAskEstimate = async ({
   deadLine,
   customer,
   status,
-  // validationCode,
+  validationCode,
+  adminComment,
 }) => {
   return await db.estimate.create({
     data: {
@@ -61,7 +66,8 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      // validationCode,
+      validationCode,
+      adminComment,
     },
   });
 };
@@ -90,7 +96,7 @@ const confirmEstimate = async (validationCode) => {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
       await db.estimate.update({
         where: { validationCode },
-        data: { validationCode: null },
+        data: { validationCode: null, status: "VALIDATED" },
       });
       return true;
     }
@@ -108,6 +114,7 @@ module.exports = {
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
+  getEstimate,
   confirmEstimate,
   validateEstimate,
 };

@@ -54,9 +54,9 @@ model estimate {
   validationDate        DateTime?
   deadLine              DateTime?
   additionalInformation String         @db.LongText
-  validationCode        String?
+  validationCode        String?        @unique
   createDate            DateTime?
-  adminCommnent         String?        @db.LongText
+  adminComment          String?        @db.LongText
   userId                Int?
   customer              user?          @relation(fields: [userId], references: [id])
   products              estimateLine[]

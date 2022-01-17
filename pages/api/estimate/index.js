@@ -8,7 +8,7 @@ import {
   getEstimates,
   ValidateEstimate,
 } from "../../../models/estimate";
-import mailer from "../../../mailer";
+// import mailer from "../../../mailer";
 import crypto from "crypto";
 
 // import { requireAdmin } from "../../../middleware/requireAdmin";
@@ -20,6 +20,7 @@ const handleGet = async (req, res) => {
 
 async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
+  console.log(validationError);
   if (validationError) return res.status(422).send(validationError);
   const validationCode = crypto.randomBytes(50).toString("hex");
   const newEstimate = await createAskEstimate({
@@ -27,14 +28,7 @@ async function handlePost(req, res) {
     validationCode,
     customer: { connect: { id: req.currentUser.id } },
   });
-  const mailBody = `Rendez-vous sur ce lien pour valider votre demande de devis : ${process.env.HOST}/validationCode?validationCode=${validationCode}`;
-  await mailer.sendMail({
-    from: process.env.MAILER_FROM,
-    to: "bastien.lecalvez@gmail.com",
-    subject: `Validation de votre devis`,
-    text: mailBody,
-    html: mailBody,
-  });
+
   if (req.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
       createFiles({

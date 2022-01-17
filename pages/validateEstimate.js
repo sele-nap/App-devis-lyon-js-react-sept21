@@ -29,6 +29,7 @@ export default function validationCode({ verified }) {
 }
 
 export async function getServerSideProps({ query }) {
+  console.log(query);
   const verified = await confirmEstimate(query?.validationCode);
   return {
     props: {

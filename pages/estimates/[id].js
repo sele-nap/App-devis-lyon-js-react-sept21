@@ -23,6 +23,8 @@ import Swal from "sweetalert2";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import EditEstimateArray from "../../components/editEstimateArray";
 import AdminLayout from "../../components/AdminLayout";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+
 //  -------------------------- FORMAT PDF --------------------------
 const ref = React.createRef();
 const options = {
@@ -42,13 +44,23 @@ export default function Estimate() {
   };
   const [estimate, setEstimate] = useState([]);
 
+  const sendMail = async (id) => {
+    if (
+      confirm(
+        "Voulez vous recevoir un mail avec un lien de validation, cette étape vaudra signature de votre part "
+      )
+    ) {
+      axios.post(`/api/estimate/${id}`);
+      alert("RDV maintenant dans votre boite mail pour activer ce lien");
+    }
+  };
   //  -------------------------- STATE FOR UPDATE --------------------------
   const [status, setStatus] = useState("");
   const [deadLine, setDeadLine] = useState("");
   const [validationDate, setValidationDate] = useState("");
   const [additionalInformation, setAdditionalInformation] = useState("");
   const [createDate, setCreateDate] = useState("");
-  const [adminCommnent, setAdminCommnent] = useState("");
+  const [adminComment, setAdminComment] = useState("");
   const [customer, setCustomer] = useState("");
 
   const router = useRouter();
@@ -60,7 +72,7 @@ export default function Estimate() {
   const saveEstimate = async () => {
     const formValues = {
       additionalInformation,
-      adminCommnent,
+      adminComment,
     };
     try {
       if (isUpdate) {
@@ -94,7 +106,7 @@ export default function Estimate() {
               deadLine,
               additionalInformation,
               createDate,
-              adminCommnent,
+              adminComment,
               customer,
             },
           }) => {
@@ -103,7 +115,7 @@ export default function Estimate() {
             setValidationDate(validationDate);
             setAdditionalInformation(additionalInformation);
             setCreateDate(createDate);
-            setAdminCommnent(adminCommnent);
+            setAdminComment(adminComment);
             setCustomer(customer);
           }
         );
@@ -111,165 +123,172 @@ export default function Estimate() {
   }, [isUpdate, id]);
   return (
     <Layout>
-      <AdminLayout>
-        <div className="flex flex-col">
-          <div ref={ref}>
-            <div className="flex justify-end items-center  mt-10 mx-24">
-              <div className="flex">
-                <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
+      {/* <AdminLayout> */}
+      <div className="flex flex-col">
+        <div ref={ref}>
+          <div className="flex justify-end items-center  mt-10 mx-24">
+            <div className="flex">
+              <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
+            </div>
+            <div className="mx-4">
+              <h1 className="text-xl uppercase">
+                {" "}
+                Société des décorations lyonnaises
+              </h1>
+              <div className="text-gray-700 italic text-sm">
+                <p> Adresse Lambda - 69000 LYON </p>
+                <p> Contact : contact@lyon-decoration.com</p>
+                <p>Tel : 0123456789</p>
               </div>
-              <div className="mx-4">
-                <h1 className="text-xl uppercase">
-                  {" "}
-                  Société des décorations lyonnaises
-                </h1>
-                <div className="text-gray-700 italic text-sm">
-                  <p> Adresse Lambda - 69000 LYON </p>
-                  <p> Contact : contact@lyon-decoration.com</p>
-                  <p>Tel : 0123456789</p>
+            </div>
+          </div>
+
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await saveEstimate();
+            }}
+          >
+            <h2 className="text-center text-2xl  uppercase m-4">
+              Devis{status} n° {id}
+            </h2>
+            <div className="flex  justify-around">
+              <div className="m-8 w-72 p-2 rounded-md">
+                <h2 className="text-center text-xl uppercase mb-4">
+                  Coordonnées du client
+                </h2>
+
+                <div className=" items-center flex flex-row">
+                  <AssignmentIndIcon className="m-2" />
+                  <p className="text-md mx-2 items-center p-1 text-gray-700 ">
+                    {customer.firstname} {customer.lastname}
+                  </p>
                 </div>
+
+                <div className=" items-center flex">
+                  <BusinessIcon className="m-2" />
+                  <div>
+                    <p className="text-md mx-2 items-center p-1 text-gray-700 ">
+                      {customer.address1}{" "}
+                    </p>
+                    <p className="text-md mx-2 items-center p-1 text-gray-700 ">
+                      {customer.zipCode} {customer.city}
+                    </p>
+                  </div>
+                </div>
+                <div className=" items-center flex flex-row">
+                  <AlternateEmailIcon className="m-2" />
+                  <p className="text-md mx-2 items-center p-1 text-gray-700 ">
+                    {customer.email}
+                  </p>
+                </div>
+
+                <div className=" items-center flex flex-row">
+                  <PhoneIcon className="m-2" />
+                  <p className="text-md mx-2 items-center p-1 text-gray-700 ">
+                    {customer.phone}
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-xl m-20 justify-center items-center flex flex-col">
+                <h2 className="text-center text-lg uppercase">
+                  date de la demande
+                </h2>
+                <p className="mb-3 text-gray-700 ">
+                  {moment(createDate).format(" DD / MM / YYYY")}{" "}
+                </p>
+                <h2 className="text-center text-lg uppercase">
+                  date d{`'`}éxécution
+                </h2>
+                <p className="mb-3 text-gray-700 ">
+                  {moment(deadLine).format(" DD / MM / YYYY")}{" "}
+                </p>
+              </div>
+            </div>
+            <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
+              <div className=" w-full mb-10 p-8">
+                <h2 className="text-center text-xl uppercase mb-4">
+                  Rappel de la demande{" "}
+                </h2>
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="additionalInformation"
+                  name="additionalInformation"
+                  placeholder="Demande apportée"
+                  type="text"
+                  value={additionalInformation}
+                  onChange={(e) => setAdditionalInformation(e.target.value)}
+                />{" "}
+              </div>
+
+              <div className=" w-full mb-10 p-8">
+                <h2 className="text-center text-xl uppercase mb-4">
+                  Proposition de l{`'`}administrateur
+                </h2>
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="adminComment"
+                  name="adminComment"
+                  type="text"
+                  value={adminComment}
+                  onChange={(e) => setAdminComment(e.target.value)}
+                />
               </div>
             </div>
 
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await saveEstimate();
-              }}
-            >
-              <h2 className="text-center text-2xl  uppercase m-4">
-                Devis{status} n° {id}
-              </h2>
-              <div className="flex  justify-around">
-                <div className="m-8 w-72 p-2 rounded-md">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Coordonnées du client
-                  </h2>
-
-                  <div className=" items-center flex flex-row">
-                    <AssignmentIndIcon className="m-2" />
-                    <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.firstname} {customer.lastname}
-                    </p>
-                  </div>
-
-                  <div className=" items-center flex">
-                    <BusinessIcon className="m-2" />
-                    <div>
-                      <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                        {customer.address1}{" "}
-                      </p>
-                      <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                        {customer.zipCode} {customer.city}
-                      </p>
-                    </div>
-                  </div>
-                  <div className=" items-center flex flex-row">
-                    <AlternateEmailIcon className="m-2" />
-                    <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.email}
-                    </p>
-                  </div>
-
-                  <div className=" items-center flex flex-row">
-                    <PhoneIcon className="m-2" />
-                    <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.phone}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-xl m-20 justify-center items-center flex flex-col">
-                  <h2 className="text-center text-lg uppercase">
-                    date de la demande
-                  </h2>
-                  <p className="mb-3 text-gray-700 ">
-                    {moment(createDate).format(" DD / MM / YYYY")}{" "}
-                  </p>
-                  <h2 className="text-center text-lg uppercase">
-                    date d{`'`}éxécution
-                  </h2>
-                  <p className="mb-3 text-gray-700 ">
-                    {moment(deadLine).format(" DD / MM / YYYY")}{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
-                <div className=" w-full mb-10 p-8">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Rappel de la demande{" "}
-                  </h2>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="additionalInformation"
-                    name="additionalInformation"
-                    placeholder="Demande apportée"
-                    type="text"
-                    value={additionalInformation}
-                    onChange={(e) => setAdditionalInformation(e.target.value)}
-                  />{" "}
-                </div>
-
-                <div className=" w-full mb-10 p-8">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Proposition de l{`'`}administrateur
-                  </h2>
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="adminCommnent"
-                    name="adminCommnent"
-                    type="text"
-                    value={adminCommnent}
-                    onChange={(e) => setAdminCommnent(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
-                {/* <EditEstimateArray /> */}
-              </div>
-              <div className="flex justify-center mt-20">
-                <Link href="/estimates" passHref>
-                  <button
-                    type="submit"
-                    className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                  >
-                    <SaveIcon />
-                    <span className="mx-2"> Sauvegarde </span>
-                  </button>
-                </Link>
-              </div>
-            </form>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Link href="/estimates" passHref>
-              <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-                <ArrowBackIcon />
-                <span className="mx-2"> Mes devis </span>
+            <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
+              {/* <EditEstimateArray /> */}
+            </div>
+            <div className="flex justify-center mt-20">
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
               </button>
-            </Link>
-
-            <div className="ml-2  shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-              <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
-                {({ toPdf }) => (
-                  <button className="font-bold" onClick={toPdf}>
-                    <PictureAsPdfIcon />
-                    <span className="mx-2"> Télécharger en PDF </span>
-                  </button>
-                )}
-              </Pdf>
             </div>
-            <button
-              className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              onClick={() => deleteEstimate(id)}
-            >
-              <DeleteForeverIcon />
-              <span className="mx-2"> Suppression </span>
-            </button>
-          </div>
+          </form>
         </div>
-        <div className="flex flex-row justify-around mt-20"></div>
-      </AdminLayout>
+        <div className="mt-10 flex justify-center">
+          <Link href="/estimates" passHref>
+            <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+              <ArrowBackIcon />
+              <span className="mx-2"> Mes devis </span>
+            </button>
+          </Link>
+
+          {adminComment && (
+            <button onClick={() => sendMail(id)}>
+              {" "}
+              <span>
+                {" "}
+                <CheckCircleOutlineIcon /> Validation du devis
+              </span>
+            </button>
+          )}
+          <div className="ml-2  shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+            <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
+              {({ toPdf }) => (
+                <button className="font-bold" onClick={toPdf}>
+                  <PictureAsPdfIcon />
+                  <span className="mx-2"> Télécharger en PDF </span>
+                </button>
+              )}
+            </Pdf>
+          </div>
+          <button
+            className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+            onClick={() => deleteEstimate(id)}
+          >
+            <DeleteForeverIcon />
+            <span className="mx-2"> Suppression </span>
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-row justify-around mt-20"></div>
+      {/* </AdminLayout> */}
     </Layout>
   );
 }
