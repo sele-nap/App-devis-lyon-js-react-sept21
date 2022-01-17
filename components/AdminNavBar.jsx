@@ -29,13 +29,13 @@ const AdminNavBar = () => {
                   <PermContactCalendarIcon />
                   <span className="mx-2"> Mes contacts</span>
                 </a>
-                <a
+                {/* <a
                   className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-600 focus:outline-none focus:shadow-outline"
                   href="/products"
                 >
                   <StoreIcon />
                   <span className="mx-2"> Mes produits</span>
-                </a>
+                </a> */}
               </nav>
             </div>
           </div>

@@ -50,7 +50,7 @@ const createAskEstimate = async ({
   deadLine,
   customer,
   status,
-  validationCode,
+  // validationCode,
 }) => {
   return await db.estimate.create({
     data: {
@@ -59,7 +59,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
-      validationCode,
+      // validationCode,
     },
   });
 };
@@ -80,11 +80,11 @@ const updateEstimate = (id, data) => {
     .catch(() => false);
 };
 
-// const validateEstimate = (id, status, validationCode) => {
-//   return db.estimate
-//     .update({ where: { id: parseInt(id, 10) }, status, validationCode })
-//     .catch(() => false);
-// };
+const validateEstimate = (id, status, validationCode) => {
+  return db.estimate
+    .update({ where: { id: parseInt(id, 10) }, status, validationCode })
+    .catch(() => false);
+};
 const confirmEstimate = async (validationCode) => {
   try {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
@@ -109,5 +109,5 @@ module.exports = {
   getOneEstimate,
   deleteOneEstimate,
   confirmEstimate,
-  // validateEstimate,
+  validateEstimate,
 };

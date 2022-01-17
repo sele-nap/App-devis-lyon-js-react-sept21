@@ -171,6 +171,7 @@ export default function EstimateManagement() {
                       additionalInformation,
                       customer,
                       createDate,
+                      status,
                     }) => (
                       <tr className="w-full text-center border-b my-2" key={id}>
                         <td className="p-2 border-r">
@@ -179,7 +180,7 @@ export default function EstimateManagement() {
                         <td className="text-sm p-3"> {customer.id}</td>
 
                         <td className="text-center border text-sm p-3 my-2">
-                          {customer.lastname}
+                          {status}
                         </td>
                         <td className="text-center border  text-sm p-3 my-2">
                           {moment(createDate).format(`DD/MM/YYYY`)}
