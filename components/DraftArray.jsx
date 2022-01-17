@@ -9,8 +9,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
-export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
-
+export default function DraftArray({
+  statusList,
+  limit = 5,
+  offset = 0,
+  customer,
+}) {
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
       await axios.delete(`/api/estimate/${id}`);
@@ -21,14 +25,16 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
 
   const [createEstimate, setCreateEstimate] = useState([]);
   const getEstimates = (statusList, limit, offset) => {
-    const statusParam = statusList.map(s => `statusList=${s}`) .join(`&`)
+    const statusParam = statusList.map((s) => `statusList=${s}`).join(`&`);
 
-    axios.get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`).then((res) => setCreateEstimate(res.data));
-  }
+    axios
+      .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
+      .then((res) => setCreateEstimate(res.data));
+  };
 
   useEffect(() => {
-    getEstimates(statusList, limit, offset)
-  }, [offset, limit, statusList]);
+    getEstimates(statusList, limit, offset);
+  }, [offset, limit, statusList, customer]);
 
   return (
     <section className="">

@@ -260,10 +260,11 @@ export default function Estimate() {
           </Link>
 
           {adminComment && (
-            <button onClick={() => sendMail(id)}>
-              {" "}
+            <button
+              onClick={() => sendMail(id)}
+              className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+            >
               <span>
-                {" "}
                 <CheckCircleOutlineIcon /> Validation du devis
               </span>
             </button>
