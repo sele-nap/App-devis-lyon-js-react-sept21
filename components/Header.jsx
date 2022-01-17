@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AiOutlineLogin } from "react-icons/ai";
 import { IoIosAddCircle } from "react-icons/io";
 import { VscSearch } from "react-icons/vsc";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import Image from "next/image";
 import LogoSansBlabla from "../public/Img/LogoSansBlabla.png";
 import Swal from "sweetalert2";
@@ -35,7 +36,7 @@ const Header = () => {
           <a className="">
             {" "}
             <button
-              className="ml-3 mr-3 text-sm text-white flex justify-center flex-col items-center md text-lg:lg hover:text-black"
+              className="ml-3 mr-3 text-sm  flex justify-center flex-col items-center md text-lg:lg hover:text-black"
               onClick={handleEstimateClick}
             >
               Devis <IoIosAddCircle size={25} />
@@ -59,17 +60,26 @@ const Header = () => {
         </a>
       </div>
 
-      <div className="mr-6 md:mr-0">
+      <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
+        <AppRegistrationIcon />
+        <span className="mx-2"></span>
         {status === "unauthenticated" && (
-          <Link href="/signup">
-            <a className="sm:text-xs inline-block text-xs px-4 py-2 text-center leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-800 hover:bg-white">
-              Créer un compte
-            </a>
-          </Link>
+          <button className="text-sm md text-lg:lg">
+            <Link href="/signup">
+              <a> Créer un compte</a>
+            </Link>
+          </button>
+        )}
+        {status === "authenticated" && (
+          <button className="text-sm md text-lg:lg">
+            <Link href="/estimates">
+              <a>Dashboard</a>
+            </Link>
+          </button>
         )}
       </div>
 
-      <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none border rounded text-white border-white hover:border-transparent hover:text-slate-800 hover:bg-white">
+      <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none rounded te over:border-transparent hover:text-slate-800 hover:bg-white">
         <span className="mx-2">
           <AiOutlineLogin size={25} />
         </span>
