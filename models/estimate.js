@@ -11,7 +11,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
     customer: Joi.string().presence(forUpdate ? "optional" : "required"),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string().presence("optional"),
-    adminCommnent: Joi.string().optional(),
+    // adminCommnent: Joi.string().presence("optional"),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -23,11 +23,13 @@ const estimateToShow = {
   status: true,
   validationDate: true,
   createDate: true,
-  adminCommnent: true,
+  // adminCommnent: true,
 };
 
-const getEstimates = async () => {
+const getEstimates = async ({ statusList }) => {
+  console.log(statusList);
   return db.estimate.findMany({
+    where: { status: { in: statusList } },
     select: estimateToShow,
   });
 };
@@ -74,10 +76,8 @@ const createFiles = async ({ name, estimate, url }) => {
   });
 };
 
-const updateEstimate = (id, data) => {
-  return db.estimate
-    .update({ where: { id: parseInt(id, 10) }, data })
-    .catch(() => false);
+const updateAskEstimate = async (id, data) => {
+  return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
 };
 
 const validateEstimate = (id, status, validationCode) => {
@@ -103,7 +103,7 @@ const confirmEstimate = async (validationCode) => {
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
-  updateEstimate,
+  updateAskEstimate,
   createFiles,
   getEstimates,
   getOneEstimate,

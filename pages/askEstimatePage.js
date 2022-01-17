@@ -71,6 +71,7 @@ function Estimate() {
     axios
       .post("/api/estimate", dataFiles)
       .then((res) => {
+        console.log(res);
         setNumberEstimate("n°" + res.data?.id);
         Swal.fire({
           position: "center",

@@ -1,6 +1,6 @@
 import {
   ValidateEstimate,
-  updateEstimate,
+  updateAskEstimate,
   getOneEstimate,
   deleteOneEstimate,
 } from "../../../models/estimate";
@@ -10,7 +10,7 @@ import base from "../../../middleware/commons";
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = ValidateEstimate(body, true);
   if (validationErrors) return res.status(422).send(validationErrors);
-  const updated = await updateEstimate(id, body);
+  const updated = await updateAskEstimate(id, body);
   console.log(updated);
   if (updated) res.status(200).send(updated);
   else res.status(404).send();
