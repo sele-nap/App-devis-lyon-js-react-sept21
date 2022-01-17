@@ -1,34 +1,34 @@
 import {
-  ValidateEstimate,
-  updateEstimate,
-  getOneEstimate,
-  deleteOneEstimate,
-} from "../../../models/estimate";
+  ValidateProduct,
+  updateProduct,
+  getOneProduct,
+  deleteOneProduct,
+} from "../../../models/product";
 import base from "../../../middleware/commons";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handlePatch({ query: { id }, body }, res) {
-  const validationErrors = ValidateEstimate(body, true);
+  const validationErrors = ValidateProduct(body, true);
   if (validationErrors) return res.status(422).send(validationErrors);
-  const updated = await updateEstimate(id, body);
+  const updated = await updateProduct(id, body);
   console.log(updated);
   if (updated) res.status(200).send(updated);
   else res.status(404).send();
 }
 
-async function handleGet({ query: { id } }, res) {
-  const estimate = await getOneEstimate(id);
-  if (estimate) res.send(estimate);
+async function handleGetOne({ query: { id } }, res) {
+  const product = await getOneProduct(id);
+  if (product) res.send(product);
   else res.status(404).send();
 }
 
 async function handleDelete({ query: { id } }, res) {
-  if (await deleteOneEstimate(id)) res.status(204).send();
+  if (await deleteOneProduct(id)) res.status(204).send();
   else res.status(404).send();
 }
 
 export default base()
   // .use(requireAdmin)
-  .get(handleGet)
+  .get(handleGetOne)
   .patch(handlePatch)
   .delete(handleDelete);

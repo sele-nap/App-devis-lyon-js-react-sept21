@@ -1,5 +1,3 @@
-import { now } from "next-auth/client/_utils";
-
 const db = require("../db");
 const argon2 = require("argon2");
 const Joi = require("joi");
@@ -125,6 +123,49 @@ const findByEmail = async (email = "") => {
   return await db.user.findUnique({ where: { email } });
 };
 
+const userToShow = {
+  id: true,
+  email: true,
+  address1: true,
+  address2: true,
+  firstname: true,
+  lastname: true,
+  managerName: true,
+  organizationName: true,
+  organizationType: true,
+  phone: true,
+  zipCode: true,
+  city: true,
+  siretNumber: true,
+};
+const getUsers = async () => {
+  return db.user.findMany({
+    select: userToShow,
+  });
+};
+const getOneUser = (id) => {
+  return db.user.findUnique({
+    where: { id: parseInt(id, 10) },
+    select: userToShow,
+  });
+};
+
+const deleteOneUser = (id) => {
+  return db.user
+    .delete({ where: { id: parseInt(id, 10) } })
+    .catch((_) => false);
+};
+
+// const createProject = ({ title, description, mainPictureUrl }) => {
+//   return db.project.create({ data: { title, description, mainPictureUrl } });
+// };
+
+const updateOneUser = (id, data) => {
+  return db.user
+    .update({ where: { id: parseInt(id, 10) }, data })
+    .catch((_) => false);
+};
+
 module.exports = {
   hashPassword,
   verifyPassword,
@@ -133,4 +174,8 @@ module.exports = {
   create,
   findByEmail,
   confirmEmail,
+  getUsers,
+  getOneUser,
+  deleteOneUser,
+  updateOneUser,
 };

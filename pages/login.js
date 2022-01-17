@@ -1,6 +1,7 @@
 import React from "react";
 import { getCsrfToken } from "next-auth/react";
 import Layout from "../components/Layout";
+import CtaButton from "../components/CtaButton";
 
 export default function LogIn({ csrfToken }) {
   return (
@@ -56,14 +57,8 @@ export default function LogIn({ csrfToken }) {
                     />
                   </div>
                 </div>
-                <div>
-                  <button
-                    type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-third hover:bg-third focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    <span className="absolute left-0 inset-y-0 flex items-center pl-3 cursor-pointer"></span>
-                    Se connecter
-                  </button>
+                <div className="flex justify-center">
+                  <CtaButton title="Se connecter" type="submit" />
                 </div>
               </form>
             </div>

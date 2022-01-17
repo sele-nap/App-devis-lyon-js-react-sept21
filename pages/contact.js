@@ -1,6 +1,8 @@
 import Layout from "../components/Layout";
 import next from "next";
 import { useForm } from "react-hook-form";
+import CtaButton from "../components/CtaButton";
+import EmailIcon from "@mui/icons-material/Email";
 
 export default function Contact() {
   const onSubmit = (data) => console.log(data);
@@ -16,7 +18,7 @@ export default function Contact() {
     mode: "onTouched",
   });
   return (
-    <Layout>
+    <Layout title="Contact">
       <div className="flex items-center justify-center mt-16">
         <form className="w-full max-w-lg" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-10">
@@ -71,16 +73,12 @@ export default function Contact() {
               ></textarea>
             </div>
           </div>
-          <div className="md:flex md:items-center">
-            <div className="md:w-1/3">
-              <button
-                className="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                type="button"
-              >
-                Envoyez un message
-              </button>
-            </div>
-            <div className="md:w-2/3"></div>
+          <div className="md:flex justify-center md:items-center">
+            <CtaButton
+              title="Envoyer un mail"
+              type="submit"
+              icon={<EmailIcon />}
+            />
           </div>
         </form>
       </div>
