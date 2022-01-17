@@ -97,7 +97,7 @@ const confirmEstimate = async (validationCode) => {
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
-  updateEstimate,
+  updateAskEstimate,
   createFiles,
   getEstimates,
   getOneEstimate,
