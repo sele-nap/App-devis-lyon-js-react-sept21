@@ -1,5 +1,6 @@
 import base from "../../../middleware/commons";
 import handleImageUpload from "../../../middleware/handleImageUpload";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 import { createFiles, deleteFiles } from "../../../models/attachedFiles";
 import {
   deleteOneEstimate,
@@ -7,6 +8,7 @@ import {
   getEstimates,
   ValidateEstimate,
 } from "../../../models/estimate";
+import { getSafeAttributes } from "../../../models/user";
 
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
@@ -16,11 +18,11 @@ const handleGet = async (req, res) => {
 
 async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
-
   if (validationError) return res.status(422).send(validationError);
+  res.send(getSafeAttributes(req.currentUser));
   const newEstimate = await createAskEstimate({
     ...req.body,
-    customer: { connect: { id: 1 } },
+    customer: { connect: { id: req.currentUser.id } },
   });
   if (req.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
@@ -47,6 +49,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
+  .use(requireCurrentUser)
   .post(handleImageUpload.array("attachedFiles", 3), handlePost)
   .get(handleGet)
   .delete(handleDelete);

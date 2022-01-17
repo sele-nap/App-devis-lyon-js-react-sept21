@@ -166,6 +166,11 @@ const updateOneUser = (id, data) => {
     .catch((_) => false);
 };
 
+const getSafeAttributes = (user) => ({
+  ...user,
+  hashPassword: undefined,
+});
+
 module.exports = {
   hashPassword,
   verifyPassword,
@@ -178,4 +183,5 @@ module.exports = {
   getOneUser,
   deleteOneUser,
   updateOneUser,
+  getSafeAttributes,
 };
