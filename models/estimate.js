@@ -42,6 +42,7 @@ const getOneEstimate = (id) => {
 const getEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
+    include: { customer: true },
   });
 };
 

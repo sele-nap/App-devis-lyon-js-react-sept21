@@ -20,15 +20,13 @@ async function handlePatch({ query: { id }, body }, res) {
   if (updated) res.status(200).send(updated);
   else res.status(404).send();
 }
-
-const userMail = req.user.email;
-// console.log(userMail);
-async function sendMail({ query: { id } }, res) {
-  const { validationCode } = await getEstimate(id);
+async function sendMail({ query: { id } }, req, res) {
+  const { validationCode, customer } = await getEstimate(id);
   const mailBody = `Rendez-vous sur ce lien pour valider votre demande de devis : ${process.env.HOST}/validateEstimate?validationCode=${validationCode} La validation de ce mail vaudra pour signature de votre part et engage le début de réalisation des travaux.`;
+  console.log(customer.email);
   await mailer.sendMail({
     from: process.env.MAILER_FROM,
-    to: "bastien.lecalvez@gmail.com",
+    to: customer.email,
     subject: `Validation de votre devis`,
     text: mailBody,
     html: mailBody,

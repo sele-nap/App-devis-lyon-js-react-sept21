@@ -15,6 +15,8 @@ import crypto from "crypto";
 
 const handleGet = async (req, res) => {
   const { statusList } = req.query;
+  const customerMail = req.currentUser.email;
+  console.log(customerMail);
   res.send(await getEstimates({ statusList }));
 };
 
