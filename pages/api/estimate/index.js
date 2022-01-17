@@ -13,7 +13,8 @@ import crypto from "crypto";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 const handleGet = async (req, res) => {
-  res.send(await getEstimates());
+  const{statusList} = req.query
+  res.send(await getEstimates({statusList}));
 };
 
 async function handlePost(req, res) {

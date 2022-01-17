@@ -25,8 +25,10 @@ const estimateToShow = {
   adminCommnent: true,
 };
 
-const getEstimates = async () => {
+const getEstimates = async ({ statusList }) => {
+  console.log(statusList)
   return db.estimate.findMany({
+    where: { status: {in: statusList} },
     select: estimateToShow,
   });
 };
@@ -73,10 +75,8 @@ const createFiles = async ({ name, estimate, url }) => {
   });
 };
 
-const updateEstimate = (id, data) => {
-  return db.estimate
-    .update({ where: { id: parseInt(id, 10) }, data })
-    .catch(() => false);
+const updateAskEstimate = async (id, data) => {
+  return db.estimate.update({ where: { id : parseInt(id, 10)}, data });
 };
 
 const confirmEstimate = async (validationCode) => {
