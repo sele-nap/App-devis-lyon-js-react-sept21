@@ -25,8 +25,10 @@ const estimateToShow = {
   adminCommnent: true,
 };
 
-const getEstimates = async () => {
+const getEstimates = async ({ statusList }) => {
+  console.log(statusList)
   return db.estimate.findMany({
+    where: { status: {in: statusList} },
     select: estimateToShow,
   });
 };
@@ -49,6 +51,7 @@ const createAskEstimate = async ({
   deadLine,
   customer,
   status,
+  validationCode,
 }) => {
   return await db.estimate.create({
     data: {
@@ -57,6 +60,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
+      validationCode,
     },
   });
 };
@@ -71,18 +75,32 @@ const createFiles = async ({ name, estimate, url }) => {
   });
 };
 
-const updateEstimate = (id, data) => {
-  return db.estimate
-    .update({ where: { id: parseInt(id, 10) }, data })
-    .catch(() => false);
+const updateAskEstimate = async (id, data) => {
+  return db.estimate.update({ where: { id : parseInt(id, 10)}, data });
+};
+
+const confirmEstimate = async (validationCode) => {
+  try {
+    if (await db.estimate.findUnique({ where: { validationCode } })) {
+      await db.estimate.update({
+        where: { validationCode },
+        data: { validationCode: null },
+      });
+      return true;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return false;
 };
 
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
-  updateEstimate,
+  updateAskEstimate,
   createFiles,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
+  confirmEstimate,
 };
