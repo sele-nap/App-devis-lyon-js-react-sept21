@@ -12,7 +12,6 @@ import moment from "moment";
 import ToggleButton from "./ToggleButton";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
-
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
       await axios.delete(`/api/estimate/${id}`);
@@ -23,16 +22,15 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
 
   const [estimate, setEstimate] = useState([]);
   const getEstimates = (statusList, limit, offset) => {
-    const statusParam = statusList.map(s => `statusList=${s}`) .join(`&`)
-    
+    const statusParam = statusList.map((s) => `statusList=${s}`).join(`&`);
+
     axios
       .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
       .then((res) => setEstimate(res.data));
-  }
+  };
   useEffect(() => {
-    getEstimates(statusList, limit, offset)
+    getEstimates(statusList, limit, offset);
   }, [offset, limit, statusList]);
-
 
   return (
     <section>
@@ -154,16 +152,16 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   additionalInformation,
                   customer,
                   createDate,
-                  status
+                  status,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
                     <td className="p-2 border-r">
                       <input type="checkbox" />
                     </td>
-                    <td className="text-sm p-3"> {customer.id}</td>
+                    {/* <td className="text-sm p-3">{customer.id}</td> */}
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname}
+                      {/* {customer.lastname} */}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(createDate).format(`DD/MM/YYYY`)}
@@ -183,12 +181,14 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       </Link>
                     </td>
                     <td className="">
-                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                          <ToggleButton e = {{id, status}} handleChange ={() =>
-                          getEstimates(statusList, offset, limit)
-                          } />
-
-                        </div>                   
+                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                        <ToggleButton
+                          e={{ id, status }}
+                          handleChange={() =>
+                            getEstimates(statusList, offset, limit)
+                          }
+                        />
+                      </div>
                     </td>
                     <td className="text-center border my-2">
                       <button

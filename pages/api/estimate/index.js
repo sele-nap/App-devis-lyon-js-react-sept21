@@ -15,7 +15,9 @@ import crypto from "crypto";
 
 const handleGet = async (req, res) => {
   const { statusList } = req.query;
-  res.send(await getEstimates({ statusList }));
+  const customerId =
+    req.currentUser.role === "admin" ? undefined : req.currentUser.id;
+  res.send(await getEstimates({ statusList, customerId }));
 };
 
 async function handlePost(req, res) {

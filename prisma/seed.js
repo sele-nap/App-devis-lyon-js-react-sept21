@@ -87,7 +87,7 @@ async function seed() {
         deadLine: "2021-05-25T14:21:00+02:00",
         additionalInformation:
           "Plays league of legends. Scratch at fleas, meow until belly rubs, hide behind curtain when vacuum cleaner is on scratch strangers and poo on owners food touch water with paw then recoil in horror show belly so cats go for world domination. ",
-        userId: 3,
+        userId: 2,
         status: "DRAFT",
       },
       {
