@@ -19,11 +19,12 @@ const handleGet = async (req, res) => {
 async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
   if (validationError) return res.status(422).send(validationError);
-  res.send(getSafeAttributes(req.currentUser));
+
   const newEstimate = await createAskEstimate({
     ...req.body,
     customer: { connect: { id: req.currentUser.id } },
   });
+
   if (req.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
       createFiles({
