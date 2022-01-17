@@ -158,10 +158,10 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     <td className="p-2 border-r">
                       <input type="checkbox" />
                     </td>
-                    {/* <td className="text-sm p-3">{customer.id}</td> */}
+                    <td className="text-sm p-3">{customer.id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {/* {customer.lastname} */}
+                      {customer.lastname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(createDate).format(`DD/MM/YYYY`)}
