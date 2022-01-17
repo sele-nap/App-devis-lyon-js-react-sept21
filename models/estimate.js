@@ -8,9 +8,10 @@ const ValidateEstimate = (data, forUpdate = false) => {
     ),
     deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
 
-    customer: Joi.string(),
+    customer: Joi.string().presence(forUpdate ? "optional" : "required"),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string().presence("optional"),
+    adminCommnent: Joi.string().optional(),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -79,6 +80,11 @@ const updateEstimate = (id, data) => {
     .catch(() => false);
 };
 
+// const validateEstimate = (id, status, validationCode) => {
+//   return db.estimate
+//     .update({ where: { id: parseInt(id, 10) }, status, validationCode })
+//     .catch(() => false);
+// };
 const confirmEstimate = async (validationCode) => {
   try {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
@@ -103,4 +109,5 @@ module.exports = {
   getOneEstimate,
   deleteOneEstimate,
   confirmEstimate,
+  // validateEstimate,
 };

@@ -13,6 +13,7 @@ import CtaButton from "../../components/CtaButton";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AdminLayout from "../../components/AdminLayout";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function EstimateManagement() {
   const handleClick = (e) => {
@@ -198,7 +199,7 @@ export default function EstimateManagement() {
                           </Link>
                         </td>
                         <td className="">
-                          <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                          {/* <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                             <input
                               type="checkbox"
                               name="toggle"
@@ -209,7 +210,8 @@ export default function EstimateManagement() {
                               htmlFor="Green"
                               className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
                             ></label>
-                          </div>
+                          </div> */}
+                          <CheckCircleOutlineIcon />
                         </td>
                         <td className="text-center border my-2">
                           <button
