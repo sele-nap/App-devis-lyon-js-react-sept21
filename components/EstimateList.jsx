@@ -12,27 +12,43 @@ import moment from "moment";
 import ToggleButton from "./ToggleButton";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
+  const perPage = 5;
+  const [estimatesList, setEstimatesList] = useState([]);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [estimatesListLoading, setEstimatesListLoading] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
+    if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
       await axios.delete(`/api/estimate/${id}`);
       alert("projet bien supprimé");
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+      setEstimatesList((estimatesList) =>
+        estimatesList.filter((e) => e.id !== id)
+      );
     }
   };
 
-  const [estimate, setEstimate] = useState([]);
-  const getEstimates = (statusList, limit, offset) => {
-    const statusParam = statusList.map(s => `statusList=${s}`) .join(`&`)
-    
-    axios
-      .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
-      .then((res) => setEstimate(res.data));
-  }
-  useEffect(() => {
-    getEstimates(statusList, limit, offset)
-  }, [offset, limit, statusList]);
+  const getEstimates = (statusList, currentPage, perPage) => {
+    const statusParam = statusList.map((s) => `statusList=${s}`).join(`&`);
 
+    axios
+      .get(
+        `/api/estimate?${statusParam}&offset=${
+          (currentPage - 1) * perPage
+        }&limit=${perPage}`
+      )
+      .then((res) => {
+        setEstimatesList(res.data);
+        console.log(res.headers["x-total-count"]);
+        setNumberOfPages(
+          Math.ceil(parseInt(res.headers["x-total-count"]) / perPage)
+        );
+      });
+  };
+  useEffect(() => {
+    getEstimates(statusList, currentPage, perPage);
+  }, [currentPage, perPage, statusList]);
 
   return (
     <section>
@@ -44,14 +60,13 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
         </div>
       </div>
 
-      {!estimate && <p>En chargement...</p>}
-      {estimate?.length === 0 && <p>Pas de devis actuellement</p>}
-      {estimate && estimate.length !== 0 && (
+      {!estimatesList && <p>En chargement...</p>}
+      {estimatesList?.length === 0 && <p>Pas de devis actuellement</p>}
+      {estimatesList && estimatesList.length !== 0 && (
         <div className="table w-full p-2 mt-8">
           <table className="w-full border">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border p-2"></th>
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Numéro Client
@@ -147,19 +162,16 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
               </tr>
             </thead>
             <tbody className="border-t">
-              {estimate.map(
+              {estimatesList.map(
                 ({
                   id,
                   deadLine,
                   additionalInformation,
                   customer,
                   createDate,
-                  status
+                  status,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
-                    <td className="p-2 border-r">
-                      <input type="checkbox" />
-                    </td>
                     <td className="text-sm p-3"> {customer.id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
@@ -183,12 +195,14 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       </Link>
                     </td>
                     <td className="">
-                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                          <ToggleButton e = {{id, status}} handleChange ={() =>
-                          getEstimates(statusList, offset, limit)
-                          } />
-
-                        </div>                   
+                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                        <ToggleButton
+                          e={{ id, status }}
+                          handleChange={() =>
+                            getEstimates(statusList, currentPage, perPage)
+                          }
+                        />
+                      </div>
                     </td>
                     <td className="text-center border my-2">
                       <button
@@ -205,7 +219,29 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
           </table>
         </div>
       )}
-
+      <nav className="border-t border-gray-200 px-4 flex items-center justify-center sm:px-0 md:-mt-px md:flex">
+        <div className="flex items-center">
+          {new Array(numberOfPages)
+            .fill()
+            .map((_, i) => i + 1)
+            .map((page) => {
+              return (
+                <a
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex  items-center text-sm font-medium"
+                  key={page}
+                  style={{ display: "inline-block", minWidth: 48 }}
+                  href={`/estimates?currentPage=${page}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentPage(page);
+                  }}
+                >
+                  {page}
+                </a>
+              );
+            })}
+        </div>
+      </nav>
       {/* <EstimateList status="VALIDATED" /> */}
     </section>
   );

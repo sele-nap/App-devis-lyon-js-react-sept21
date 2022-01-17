@@ -24,7 +24,7 @@ export default function Catalog() {
                   Médaille
                 </p>
                 <p className="uppercase text-sm text-gray-400">
-                  Légion d'honneur
+                  Légion d{`'`}honneur
                 </p>
               </div>
               <div className="prod-img">

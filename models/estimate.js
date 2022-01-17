@@ -25,12 +25,16 @@ const estimateToShow = {
   status: true,
 };
 
-const getEstimates = async ({ statusList }) => {
-  console.log(statusList)
-  return db.estimate.findMany({
-    where: { status: {in: statusList} },
-    select: estimateToShow,
-  });
+const getEstimates = async ({ statusList, limit, offset }) => {
+  return(
+    Promise.all([
+      db.estimate.findMany({
+        where: { status: {in: statusList} },
+        select: estimateToShow, take: parseInt(limit), skip: parseInt(offset)
+      }),
+      db.estimate.count({where: { status: {in: statusList} }})
+    ])
+  )
 };
 export const getOneEstimate = (id) => {
   return db.estimate.findUnique({

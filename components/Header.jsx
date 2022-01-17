@@ -55,7 +55,7 @@ const Header = () => {
 
       <div className="flex flex-row-reverse text-black mr-4 ml-4 cursor-pointer"></div>
       <div className="flex items-center m-2 md:flex">
-        <a href="/#" className="pl-2">
+        <a href="#" className="pl-2">
           <AiOutlineLogin size={28} />
         </a>
         {status === "unauthenticated" && (

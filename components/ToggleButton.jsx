@@ -5,7 +5,7 @@ function ToggleButton({ e, handleChange }) {
   console.log(e.status);
   return (
     <div>
-      <label className="flex items-center space-x-3 mb-3">
+      <label className="flex items-center justify-center">
         <input
           type="checkbox"
           name="checked"
