@@ -49,6 +49,7 @@ const createAskEstimate = async ({
   deadLine,
   customer,
   status,
+  validationCode,
 }) => {
   return await db.estimate.create({
     data: {
@@ -57,6 +58,7 @@ const createAskEstimate = async ({
       createDate: new Date(Date.now()),
       customer,
       status,
+      validationCode,
     },
   });
 };
@@ -77,6 +79,21 @@ const updateEstimate = (id, data) => {
     .catch(() => false);
 };
 
+const confirmEstimate = async (validationCode) => {
+  try {
+    if (await db.estimate.findUnique({ where: { validationCode } })) {
+      await db.estimate.update({
+        where: { validationCode },
+        data: { validationCode: null },
+      });
+      return true;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return false;
+};
+
 module.exports = {
   ValidateEstimate,
   createAskEstimate,
@@ -85,4 +102,5 @@ module.exports = {
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
+  confirmEstimate,
 };

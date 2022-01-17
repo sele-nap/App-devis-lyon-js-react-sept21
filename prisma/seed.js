@@ -1,5 +1,3 @@
-import { de } from "date-fns/locale";
-
 const { hashPassword } = require("../models/user");
 const db = require("../db");
 
