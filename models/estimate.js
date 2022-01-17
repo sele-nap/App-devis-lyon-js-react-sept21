@@ -26,6 +26,7 @@ const estimateToShow = {
 };
 
 const getEstimates = async ({ statusList }) => {
+  console.log(statusList)
   return db.estimate.findMany({
     where: { status: {in: statusList} },
     select: estimateToShow,

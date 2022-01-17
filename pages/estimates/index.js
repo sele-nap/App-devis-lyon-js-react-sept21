@@ -11,8 +11,47 @@ import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
+import { useRouter } from "next/router";
 
-export default function EstimateManagement() {
+export default function EstimateManagement(props) {
+  
+  
+  
+  const router = useRouter();
+  const { perPage = 5, currentPage = 1 } = router.query;
+  const [estimates, setEstimates] = useState(props.estimates);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [estimatesLoading, setEstimatesLoading] = useState(false);
+  const setCurrentPage = (page) => {
+    router.push(`/estimates?currentPage=${page}&{perPage}`, null, {
+      scroll: false,
+    });
+  };
+
+  useEffect(() => {
+    setEstimatesLoading(true);
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    axios
+      .get(
+        `/api/estimate?offset=${(currentPage - 1) * perPage}&limit=${perPage}`,
+        {
+          cancelToken: source.token,
+        }
+      )
+      .then((res) => {
+        setEstimates(res.data);
+        setNumberOfPages(Math.ceil(res.headers["x-total-count"] / perPage));
+      })
+      .catch(console.error)
+      .finally(() => {
+        setEstimatesLoading(false);
+      });
+    return() => {
+      source.cancel();
+    };
+  }, [currentPage, perPage]);
+  
 
   const handleClick = (e) => {
     Swal.fire({
@@ -35,8 +74,22 @@ export default function EstimateManagement() {
 
   return (
     <Layout>
-      <EstimateList statusList={['TO_DO', 'WAITING_FOR_VALIDATION', 'VALIDATED' ]} />
-      <DraftArray status='DRAFT'/>
+      <EstimateList
+        statusList={['TO_DO', 'WAITING_FOR_VALIDATION', 'VALIDATED']}
+      />
+      {/* <nav>
+        {new Array(numberOfPages)
+        .fill()
+        .map((_, i) => i + 1)
+        .map((page) => {
+          return(
+            <a
+            key={page}
+
+          )
+        })}
+      </nav> */}
+      <DraftArray statusList={['DRAFT']} />
 
       {/* ___________ CREATE AN ESTIMATE  ___________*/}
 

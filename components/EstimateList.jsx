@@ -22,16 +22,17 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   };
 
   const [estimate, setEstimate] = useState([]);
-
-  useEffect(() => {
-    const statusParam = statusList.map(s => `status=${s}`) .join(`&`)
+  const getEstimates = (statusList, limit, offset) => {
+    const statusParam = statusList.map(s => `statusList=${s}`) .join(`&`)
     
     axios
       .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
       .then((res) => setEstimate(res.data));
+  }
+  useEffect(() => {
+    getEstimates(statusList, limit, offset)
   }, [offset, limit, statusList]);
 
-  const queryClient = new QueryClient();
 
   return (
     <section>
@@ -183,7 +184,9 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     </td>
                     <td className="">
                         <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                          <ToggleButton e = {{id}} />
+                          <ToggleButton e = {{id, status}} handleChange ={() =>
+                          getEstimates(statusList, offset, limit)
+                          } />
 
                         </div>                   
                     </td>

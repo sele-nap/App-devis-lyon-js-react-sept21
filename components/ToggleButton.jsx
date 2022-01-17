@@ -1,26 +1,26 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-
-function ToggleButton({ e }) {
-
+function ToggleButton({ e, handleChange }) {
+  console.log(e.status);
   return (
     <div>
-           <input
-              type="checkbox"
-              name="toggle"
-              id="Green"
-              className="checked:bg-green-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-              checked={e.status === "VALIDATED"}
-              onChange={async (event) => {
-              axios.patch(`/api/estimate/${e.id}`,{status: event.target.value === "on" ? "VALIDATED" : "TO_DO"})
-              console.log()
-              }}
-            />
-            <label
-              htmlFor="Green"
-              className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-            ></label>
+      <label className="flex items-center space-x-3 mb-3">
+        <input
+          type="checkbox"
+          name="checked"
+          className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none"
+          defaultChecked={e.status === "VALIDATED"}
+          onChange={async (event) => {
+            axios
+              .patch(`/api/estimate/${e.id}`, {
+                status: e.status !== "VALIDATED" ? "VALIDATED" : "TO_DO",
+              })
+              .then(handleChange);
+          }}
+        />
+        <span className="text-gray-700 dark:text-white font-normal"></span>
+      </label>
     </div>
   );
 }
