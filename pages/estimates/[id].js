@@ -70,7 +70,7 @@ export default function Estimate(req) {
   const isUpdate = id !== "new";
 
   // -----------------------------UPLOAD-------------------------------------
-  const [attachedFiles, setAttachedFiles] = useState([]);
+
   const attachedFilesRef = useRef(null);
 
   const handleAttachedFilesClick = (e) => {
@@ -302,57 +302,55 @@ export default function Estimate(req) {
                   <span className="mx-2"> Sauvegarde </span>
                 </button>
               </div>
-<<<<<<< HEAD
-            </div>
-            <div className="m-20">
-              {attachedFiles.map((data, index) => {
-                if (attachedFiles.length <= 3) {
-                  return (
-                    <ul key={index}>
-                      <li>
-                        {data}{" "}
-                        {/* <DeleteForeverIcon
+            </form>
+          </div>
+          <div className="m-20">
+            {attachedFiles.map((data, index) => {
+              if (attachedFiles.length <= 3) {
+                return (
+                  <ul key={index}>
+                    <li>
+                      {data}{" "}
+                      {/* <DeleteForeverIcon
                           className="ml-3"
                           onClick={handleClickDelete}
                         /> */}
-                      </li>
-                    </ul>
-                  );
-                } else {
-                  Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "3 pièces jointes maximum",
-                    showConfirmButton: false,
-                    timer: 2500,
-                  });
-                }
-              })}
-            </div>
-
-            <button
-              className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              onClick={handleAttachedFilesClick}
-              type="submit"
-            >
-              Pièces Jointes
-            </button>
-            <input
-              className="hidden"
-              type="file"
-              multiple={true}
-              id="attachedFiles"
-              accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
-              ref={attachedFilesRef}
-              onChange={handleAttachedFilesSelection}
-            ></input>
-            {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
-            {/* <EditEstimateArray /> */}
-            {/* </div> */}
-            <div className="flex justify-center mt-20">
-=======
-            </form>
+                    </li>
+                  </ul>
+                );
+              } else {
+                Swal.fire({
+                  position: "center",
+                  icon: "warning",
+                  title: "3 pièces jointes maximum",
+                  showConfirmButton: false,
+                  timer: 2500,
+                });
+              }
+            })}
           </div>
+
+          <button
+            className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+            onClick={handleAttachedFilesClick}
+            type="submit"
+          >
+            Pièces Jointes
+          </button>
+          <input
+            className="hidden"
+            type="file"
+            multiple={true}
+            id="attachedFiles"
+            accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
+            ref={attachedFilesRef}
+            onChange={handleAttachedFilesSelection}
+          ></input>
+
+          {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
+          {/* <EditEstimateArray /> */}
+          {/* </div> */}
+          <div className="flex justify-center mt-20"></div>
           <div className="mt-10 flex justify-center">
             <Link href="/estimates" passHref>
               <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
@@ -362,7 +360,6 @@ export default function Estimate(req) {
             </Link>
 
             {adminComment && (
->>>>>>> dev
               <button
                 onClick={() => sendMail(id)}
                 className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
