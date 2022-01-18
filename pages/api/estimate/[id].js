@@ -14,8 +14,16 @@ import handleImageUpload from "../../../middleware/handleImageUpload";
 import estimate from ".";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
-async function handlePatch({ query: { id }, body, files, currentUser }, res) {
+async function handlePatch(req, res) {
+  const {
+    query: { id },
+    body,
+    files,
+    currentUser,
+  } = req;
+
   const validationErrors = ValidateEstimate(body, true);
+  console.log(req.body);
   console.log(validationErrors);
   if (validationErrors) return res.status(422).send(validationErrors);
   const updated = await updateAskEstimate(id, body);

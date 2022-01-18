@@ -27,9 +27,6 @@ export default function Home() {
   return (
     <div className="">
       <Layout className="bg-primary">
-        <p className="flex justify-end text-xs italic mx-12">
-          Bonjour {currentUserProfile.firstname} {currentUserProfile.lastname} -
-        </p>
         <h1 className="text-center text-2xl m-10">
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue

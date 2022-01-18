@@ -41,16 +41,16 @@ function Estimate() {
 
   //Soumission devis//
 
-  const customErrors = () => {
-    const globalError = "votre demande de devis n'a pas été envoyée";
-    if (additionalInformation.value === "") {
-      return "Le champ message n'a pas été rempli, " + globalError;
-    }
-    if (deadLine.value === "") {
-      return "Le champ date n'a pas été rempli, " + globalError;
-    }
-    return globalError;
-  };
+  // const customErrors = () => {
+  //   const globalError = "votre demande de devis n'a pas été envoyée";
+  //   if (additionalInformation.value === "") {
+  //     return "Le champ message n'a pas été rempli, " + globalError;
+  //   }
+  //   if (deadLine.value === "") {
+  //     return "Le champ date n'a pas été rempli, " + globalError;
+  //   }
+  //   return globalError;
+  // };
 
   const [numberEstimate, setNumberEstimate] = useState("");
 
@@ -92,7 +92,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: customErrors(),
+          title: "votre demande de devis n'a pas été envoyée",
           showConfirmButton: false,
           timer: 2500,
         });

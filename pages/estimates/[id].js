@@ -35,8 +35,7 @@ const options = {
 };
 
 export default function Estimate(req) {
-  const { currentUserIsAdmin } =
-    useContext(CurrentUserContext);
+  const { currentUserIsAdmin } = useContext(CurrentUserContext);
 
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
@@ -152,7 +151,7 @@ export default function Estimate(req) {
             setCreateDate(createDate);
             setAdminComment(adminComment);
             setCustomer(customer);
-            setAttachedFiles(attachedFiles);
+            // setAttachedFiles(attachedFiles);
           }
         );
     }
