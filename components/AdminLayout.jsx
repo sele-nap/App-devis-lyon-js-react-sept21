@@ -19,8 +19,6 @@ export default function AdminLayout({ children, pageTitle }) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-
-      <AdminNavBar />
       <main>{children}</main>
     </>
   );

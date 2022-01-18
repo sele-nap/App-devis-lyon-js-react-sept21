@@ -8,6 +8,7 @@ import {
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
 import crypto from "crypto";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
 async function handler(req, res) {
   const validationError = validateUser(req.body);
@@ -34,7 +35,9 @@ async function handler(req, res) {
 }
 
 const handleGet = async (req, res) => {
-  res.send(await getUsers());
+  const customerId =
+    req.currentUser.role === "admin" ? undefined : req.currentUser.id;
+  res.send(await getUsers({ customerId }));
 };
 
 async function handleDelete({ query: { id } }, res) {
@@ -42,4 +45,8 @@ async function handleDelete({ query: { id } }, res) {
   else res.status(404).send();
 }
 
-export default base().post(handler).get(handleGet).delete(handleDelete);
+export default base()
+  .use(requireCurrentUser)
+  .post(handler)
+  .get(handleGet)
+  .delete(handleDelete);

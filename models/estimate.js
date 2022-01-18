@@ -24,17 +24,31 @@ const estimateToShow = {
   adminComment: true,
 };
 
-const getEstimates = async ({ statusList, customerId }) => {
-  return db.estimate.findMany({
-    where: { status: { in: statusList }, customer: { id: customerId } },
-    select: estimateToShow,
-  });
+const getEstimates = async ({ statusList, limit, offset, customerId }) => {
+  return Promise.all([
+    db.estimate.findMany({
+      where: { status: { in: statusList }, customer: { id: customerId } },
+      select: estimateToShow,
+      take: parseInt(limit),
+      skip: parseInt(offset),
+    }),
+    db.estimate.count({
+      where: { status: { in: statusList }, customer: { id: customerId } },
+    }),
+  ]);
 };
 
 const getOneEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
     select: estimateToShow,
+  });
+};
+
+const getOneEstimateAttachedFiles = (id) => {
+  return db.estimate.findUnique({
+    where: { id: parseInt(id, 10) },
+    include: { attachedFiles: true, customer: true },
   });
 };
 
@@ -118,4 +132,5 @@ module.exports = {
   getEstimate,
   confirmEstimate,
   validateEstimate,
+  getOneEstimateAttachedFiles,
 };

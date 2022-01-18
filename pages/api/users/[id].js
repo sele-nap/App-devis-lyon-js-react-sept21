@@ -5,7 +5,7 @@ import {
   updateOneUser,
 } from "../../../models/user";
 import base from "../../../middleware/commons";
-import { requireAdmin } from "../../../middleware/requireAdmin";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = validateUser(body, true);
@@ -27,7 +27,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  //   .use(requireAdmin)
+  .use(requireCurrentUser)
   .get(handleGet)
   .patch(handlePatch)
   .delete(handleDelete);
