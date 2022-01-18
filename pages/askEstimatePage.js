@@ -8,8 +8,10 @@ import Layout from "../components/Layout";
 import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
 import { format } from "date-fns";
+import { useRouter } from "next/dist/client/router";
 
 function Estimate() {
+  const router = useRouter();
   const {
     formState: { errors },
   } = useForm();
@@ -95,6 +97,7 @@ function Estimate() {
           timer: 2500,
         });
       });
+    router.push("/estimates");
   };
 
   // Remove attached files//

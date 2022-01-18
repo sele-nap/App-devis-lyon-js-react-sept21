@@ -126,7 +126,7 @@ export default function Estimate() {
       {/* <AdminLayout> */}
       <div className="flex flex-col">
         <div ref={ref}>
-          <div className="flex justify-end items-center  mt-10 mx-24">
+          <div className="flex justify-end items-center  mt-10 mx-72">
             <div className="flex">
               <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
             </div>
@@ -206,7 +206,7 @@ export default function Estimate() {
                 </p>
               </div>
             </div>
-            <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
+            <div className="border rounded-xl mx-72 ml-20 justify-start items-center flex flex-col">
               <div className=" w-full mb-10 p-8">
                 <h2 className="text-center text-xl uppercase mb-4">
                   Rappel de la demande{" "}
@@ -237,9 +237,9 @@ export default function Estimate() {
               </div>
             </div>
 
-            <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col">
-              {/* <EditEstimateArray /> */}
-            </div>
+            {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
+            {/* <EditEstimateArray /> */}
+            {/* </div> */}
             <div className="flex justify-center mt-20">
               <button
                 type="submit"

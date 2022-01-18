@@ -21,7 +21,7 @@ const emailAlreadyExists = async (email) => {
   return !!(await db.user.findFirst({ where: { email } }));
 };
 
-const validateUser = (data, forUpdate = true) => {
+const validateUser = (data, forUpdate = false) => {
   const isIndividual = data.organizationType === "INDIVIDUAL";
 
   return Joi.object({
@@ -62,7 +62,10 @@ const validateUser = (data, forUpdate = true) => {
       .allow(...(data.organizationType ? ["", null] : [])),
     zipCode: Joi.string().max(255).required(),
     city: Joi.string().max(255).required(),
-    // password: Joi.string().min(8).max(100).required(),
+    password: Joi.string()
+      .min(8)
+      .max(100)
+      .presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
 
