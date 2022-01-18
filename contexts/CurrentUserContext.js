@@ -8,21 +8,19 @@ const CurrentUserContext = createContext();
 export const CurrentUserContextProvider = ({ children }) => {
   const [currentUserProfile, setCurrentUserProfile] = useState("");
   const { status } = useSession();
-  const currentUserIsAdmin = currentUserProfile?.role === "client";
-  console.log("is Admin : " + currentUserProfile?.role);
+  const currentUserIsAdmin = currentUserProfile?.role === "admin";
 
   const updateProfileOnAPI = (data) => {
     axios.patch("/api/users", data).then(({ data }) => {
       setCurrentUserProfile(data);
-      alert("ok");
     });
   };
-  console.log(status);
+
   const getProfile = () => {
     axios
       .get("/api/profile")
-      .then(({ role }) => {
-        setCurrentUserProfile(role);
+      .then(({ data }) => {
+        setCurrentUserProfile(data);
       })
       .catch(() => {
         // when we have a stale cookie, disconnect
