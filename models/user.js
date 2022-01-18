@@ -176,6 +176,7 @@ const getSafeAttributes = (user) => ({
   hashPassword: undefined,
 });
 
+
 module.exports = {
   hashPassword,
   verifyPassword,

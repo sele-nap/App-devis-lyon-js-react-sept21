@@ -22,6 +22,8 @@ import Swal from "sweetalert2";
 import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ClientLayout from "../../components/ClientLayout";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 
 //  -------------------------- FORMAT PDF --------------------------
@@ -33,6 +35,9 @@ const options = {
 };
 
 export default function Estimate(req) {
+  const { currentUserIsAdmin } =
+    useContext(CurrentUserContext);
+
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
@@ -152,6 +157,7 @@ export default function Estimate(req) {
         );
     }
   }, [isUpdate, id]);
+
   return (
     <Layout>
       <ClientLayout>
@@ -261,7 +267,7 @@ export default function Estimate(req) {
                   <h2 className="text-center text-xl uppercase mb-4">
                     Proposition de l{`'`}administrateur
                   </h2>
-                  {customer?.role === "admin" ? (
+                  {currentUserIsAdmin ? (
                     <input
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="adminComment"

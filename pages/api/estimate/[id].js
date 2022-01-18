@@ -66,7 +66,7 @@ export const config = {
 };
 
 export default base()
-  // .use(requireCurrentUser)
+  .use(requireCurrentUser)
   .post(sendMail)
   .get(handleGet)
   .patch(handleImageUpload.array("attachedFiles", 3), handlePatch)

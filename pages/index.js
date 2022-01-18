@@ -16,14 +16,20 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Imagetrophée from "../public/Img/imagetrophée.jpg";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Home() {
+  const { currentUserProfile } = useContext(CurrentUserContext);
   return (
     <div className="">
       <Layout className="bg-primary">
+        <p className="flex justify-end text-xs italic mx-12">
+          Bonjour {currentUserProfile.firstname} {currentUserProfile.lastname} -
+        </p>
         <h1 className="text-center text-2xl m-10">
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
