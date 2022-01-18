@@ -2,7 +2,6 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { RiFileEditFill } from "react-icons/ri";
-import { QueryClient, QueryClientProvider } from "react-query";
 import next from "next";
 import axios from "axios";
 import Swal from "sweetalert2";

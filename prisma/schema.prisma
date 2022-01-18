@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+
 }
 
 datasource db {
@@ -53,8 +54,9 @@ model estimate {
   validationDate        DateTime?
   deadLine              DateTime?
   additionalInformation String         @db.LongText
-  validationCode        String?
+  validationCode        String?        @unique
   createDate            DateTime?
+  adminComment          String?        @db.LongText
   userId                Int?
   customer              user?          @relation(fields: [userId], references: [id])
   products              estimateLine[]
@@ -76,20 +78,17 @@ model estimateLine {
 model product {
   id          Int            @id @default(autoincrement())
   name        String
-  reference   String
-  stock       Int
-  description String         @db.LongText
+  description String?        @db.LongText
   unitPrice   Decimal
-  imageUrl    String
   estimates   estimateLine[]
 
 
 }
 
 model attachedFile {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
   url        String?
-  estimateId Int
-  estimate   estimate @relation(fields: [estimateId], references: [id])
+  estimateId Int?
+  estimate   estimate? @relation(fields: [estimateId], references: [id])
 }

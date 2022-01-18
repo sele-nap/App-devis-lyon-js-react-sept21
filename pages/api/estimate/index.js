@@ -1,47 +1,54 @@
 import base from "../../../middleware/commons";
 import handleImageUpload from "../../../middleware/handleImageUpload";
-import sharp from "sharp";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
+import { createFiles, deleteFiles } from "../../../models/attachedFiles";
 import {
   deleteOneEstimate,
   createAskEstimate,
   getEstimates,
   ValidateEstimate,
-  createFiles,
 } from "../../../models/estimate";
+// import mailer from "../../../mailer";
+import crypto from "crypto";
 
-import path from "path";
+// import { requireAdmin } from "../../../middleware/requireAdmin";
 
 const handleGet = async (req, res) => {
+<<<<<<< HEAD
   const{statusList, limit, offset} = req.query
   const [items, totalCount] = await getEstimates({statusList, limit, offset})
   res.setHeader("x-total-count", totalCount)
   res.send(items);
   
+=======
+  const { statusList } = req.query;
+  const customerId =
+    req.currentUser.role === "admin" ? undefined : req.currentUser.id;
+  res.send(await getEstimates({ statusList, customerId }));
+>>>>>>> dev
 };
-async function handlePost(req, res) {
-  console.log("receveided file:", req.file);
 
+async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
   console.log(validationError);
-
   if (validationError) return res.status(422).send(validationError);
+  const validationCode = crypto.randomBytes(50).toString("hex");
   const newEstimate = await createAskEstimate({
     ...req.body,
-    customer: { connect: { id: 1 } },
+    validationCode,
+    customer: { connect: { id: req.currentUser.id } },
   });
-  if (req.file && req.file?.path) {
-    const ext = path.extname(req.file.path);
-    const outputFilePath = `${req.file.path.replace(ext, "")}_thumb.webp`;
-    await createFiles({
-      name: req.file.filename,
-      estimate: { connect: { id: newEstimate.id } },
-    });
-    // await sharp(req.file.buffer)
-    //   .resize(250, 250, "contain")
-    //   .webp({ quality: 85 })
-    //   .toFile(outputFilePath);
-  }
 
+  if (req.files && req.files?.length) {
+    const filesSave = req.files.map((file) =>
+      createFiles({
+        name: file.filename,
+        estimate: { connect: { id: newEstimate.id } },
+        url: file.path,
+      })
+    );
+    await Promise.all(filesSave);
+  }
   res.status(201).send(newEstimate);
 }
 
@@ -52,11 +59,12 @@ export const config = {
 };
 
 async function handleDelete({ query: { id } }, res) {
-  if (await deleteOneEstimate(id)) res.status(204).send();
-  else res.status(404).send();
+  if (await deleteOneEstimate(id)) res.status(204).send("ok");
+  else res.status(404).send("non supprimé");
 }
 
 export default base()
-  .post(handleImageUpload.single("attachedFiles"), handlePost)
+  .use(requireCurrentUser)
+  .post(handleImageUpload.array("attachedFiles", 3), handlePost)
   .get(handleGet)
   .delete(handleDelete);
