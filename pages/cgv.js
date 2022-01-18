@@ -3,9 +3,7 @@ import next from "next";
 
 export default function Cgv() {
   return (
-    <Layout>
-      <h1 className="font-bold">Conditions Générales de vente </h1>
-
+    <Layout title="Conditions Générales de vente">
       <h2 className="font-semibold">
         Article L.111-1 du Code de la consommation
       </h2>
