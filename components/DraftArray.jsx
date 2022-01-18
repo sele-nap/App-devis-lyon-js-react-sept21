@@ -9,32 +9,57 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 
-export default function DraftArray({
-  statusList,
-  limit = 5,
-  offset = 0,
-  customer,
-}) {
+export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
   const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce projet définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("projet bien supprimé");
-      setCreateEstimate((estimate) => estimate.filter((e) => e.id !== id));
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre devis?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui, supprimé",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      axios.delete(`/api/estimate/${id}`);
+      setCreateEstimate((createEstimate) =>
+        createEstimate.filter((e) => e.id !== id)
+      );
+      Swal.fire(
+        "Supprimé",
+        "Votre devis a bien été supprimé",
+        "success"
+      );
     }
-  };
+  });
+};
 
+  const perPage = 5;
   const [createEstimate, setCreateEstimate] = useState([]);
-  const getEstimates = (statusList, limit, offset) => {
+  const [numberOfPages, setNumberOfPages] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const getEstimates = (statusList, currentPage, perPage) => {
     const statusParam = statusList.map((s) => `statusList=${s}`).join(`&`);
 
     axios
-      .get(`/api/estimate?${statusParam}&offset=${offset}&limit=${limit}`)
-      .then((res) => setCreateEstimate(res.data));
+      .get(
+        `/api/estimate?${statusParam}&offset=${
+          (currentPage - 1) * perPage
+        }&limit=${perPage}`
+      )
+      .then((res) => {
+        setCreateEstimate(res.data);
+        setNumberOfPages(
+          Math.ceil(parseInt(res.headers["x-total-count"]) / perPage)
+        );
+      });
   };
 
   useEffect(() => {
-    getEstimates(statusList, limit, offset);
-  }, [offset, limit, statusList, customer]);
+    getEstimates(statusList, currentPage, perPage);
+  }, [currentPage, perPage, statusList]);
 
   return (
     <section className="">
@@ -53,7 +78,6 @@ export default function DraftArray({
           <table className="w-full border">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border p-2"></th>
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Numéro Client
@@ -147,9 +171,6 @@ export default function DraftArray({
                   createDate,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
-                    <td className="p-2 border-r">
-                      <input type="checkbox" />
-                    </td>
                     <td className="text-sm p-3"> {customer.id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
@@ -187,6 +208,29 @@ export default function DraftArray({
           </table>
         </div>
       )}
+      <nav className="border-t border-gray-200 px-4 flex items-center justify-center sm:px-0 md:-mt-px md:flex">
+        <div className="flex items-center">
+          {new Array(numberOfPages)
+            .fill()
+            .map((_, i) => i + 1)
+            .map((page) => {
+              return (
+                <a
+                  className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium"
+                  key={page}
+                  style={{ display: "inline-block", minWidth: 48 }}
+                  href={`/estimates?currentPage=${page}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentPage(page);
+                  }}
+                >
+                  {page}
+                </a>
+              );
+            })}
+        </div>
+      </nav>
     </section>
   );
 }

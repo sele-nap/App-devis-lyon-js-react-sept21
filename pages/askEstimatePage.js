@@ -109,7 +109,7 @@ function Estimate() {
       showCancelButton: true,
       confirmButtonColor: "#DAB455",
       cancelButtonColor: "#ECE6E6",
-      confirmButtonText: "oui, supprimé",
+      confirmButtonText: "Oui, supprimé",
     }).then((result) => {
       if (result.isConfirmed) {
         setAttachedFiles(attachedFiles.splice(1, 3));
