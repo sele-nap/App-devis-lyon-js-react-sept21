@@ -19,13 +19,32 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("projet bien supprimé");
-      setEstimatesList((estimatesList) =>
-        estimatesList.filter((e) => e.id !== id)
-      );
-    }
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre devis?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui, supprimé",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
+
+        //   alert("Projet bien supprimé");
+        axios.delete(`/api/estimate/${id}`);
+        setEstimatesList((estimatesList) =>
+          estimatesList.filter((e) => e.id !== id)
+        );
+        Swal.fire(
+          "Supprimé",
+          "Votre devis a bien été supprimé",
+          "success"
+        );
+      }
+
+      
+    });
   };
 
   const getEstimates = (statusList, currentPage, perPage) => {

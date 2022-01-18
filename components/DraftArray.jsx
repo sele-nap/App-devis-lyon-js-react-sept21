@@ -11,14 +11,29 @@ import moment from "moment";
 
 export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
   const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("projet bien supprimé");
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre devis?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui, supprimé",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      axios.delete(`/api/estimate/${id}`);
       setCreateEstimate((createEstimate) =>
         createEstimate.filter((e) => e.id !== id)
       );
+      Swal.fire(
+        "Supprimé",
+        "Votre devis a bien été supprimé",
+        "success"
+      );
     }
-  };
+  });
+};
+
   const perPage = 5;
   const [createEstimate, setCreateEstimate] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(0);
