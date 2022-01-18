@@ -23,7 +23,6 @@ async function handlePatch({ query: { id }, body }, res) {
 async function sendMail({ query: { id } }, req, res) {
   const { validationCode, customer } = await getEstimate(id);
   const mailBody = `Rendez-vous sur ce lien pour valider votre demande de devis : ${process.env.HOST}/validateEstimate?validationCode=${validationCode} La validation de ce mail vaudra pour signature de votre part et engage le début de réalisation des travaux.`;
-  console.log(customer.email);
   await mailer.sendMail({
     from: process.env.MAILER_FROM,
     to: customer.email,
@@ -45,7 +44,6 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  // .use(requireAdmin)
   .use(requireCurrentUser)
   .post(sendMail)
   .get(handleGet)
