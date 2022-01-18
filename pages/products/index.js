@@ -153,3 +153,7 @@
 //   );
 // };
 // export default ListProduct;
+
+export default function ProductsPage() {
+  return null;
+}
