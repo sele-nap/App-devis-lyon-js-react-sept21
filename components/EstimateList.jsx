@@ -188,7 +188,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       {moment(deadLine).format(`DD/MM/YYYY`)}
                     </td>
                     <td className="border">
-                      <Link href={`estimates/${id}`} passHref>
+                      <Link href={`/api/estimate/${id}`} passHref>
                         <button className="cursor-pointer my-2">
                           <RiFileEditFill size={25} />
                         </button>
