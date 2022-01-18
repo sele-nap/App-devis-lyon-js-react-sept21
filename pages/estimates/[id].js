@@ -35,8 +35,8 @@ const options = {
 };
 
 export default function Estimate(req) {
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  console.log(currentUserIsAdmin);
+  const { currentUserIsAdmin } =
+    useContext(CurrentUserContext);
 
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
@@ -133,7 +133,6 @@ export default function Estimate(req) {
     <Layout>
       <ClientLayout>
         <div className="flex flex-col">
-          <p> {currentUserIsAdmin}</p>
           <div ref={ref}>
             <div className="flex justify-end items-center  mt-10 mx-72">
               <div className="flex">
