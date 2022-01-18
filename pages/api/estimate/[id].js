@@ -23,7 +23,6 @@ async function handlePatch(req, res) {
   } = req;
 
   const validationErrors = ValidateEstimate(body, true);
-  console.log(req.body);
   console.log(validationErrors);
   if (validationErrors) return res.status(422).send(validationErrors);
   const updated = await updateAskEstimate(id, body);

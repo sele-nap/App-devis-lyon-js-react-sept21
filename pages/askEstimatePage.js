@@ -86,6 +86,9 @@ function Estimate() {
           timer: 2500,
         });
         resetForm();
+        setTimeout(() => {
+          router.push("/estimates"), 2000;
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -97,7 +100,6 @@ function Estimate() {
           timer: 2500,
         });
       });
-    router.push("/estimates");
   };
 
   // Remove attached files//

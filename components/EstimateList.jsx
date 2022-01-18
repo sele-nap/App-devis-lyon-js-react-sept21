@@ -9,8 +9,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import moment from "moment";
 import ToggleButton from "./ToggleButton";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
+  const { currentUserIsAdmin } = useContext(CurrentUserContext);
+
   const perPage = 5;
   const [estimatesList, setEstimatesList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -36,14 +40,8 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
         setEstimatesList((estimatesList) =>
           estimatesList.filter((e) => e.id !== id)
         );
-        Swal.fire(
-          "Supprimé",
-          "Votre devis a bien été supprimé",
-          "success"
-        );
+        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
       }
-
-      
     });
   };
 
@@ -155,17 +153,21 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     />
                   </div>
                 </th>
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                  <div className="flex items-center justify-center">
-                    Validation
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    />
-                  </div>
-                </th>
+
+                {currentUserIsAdmin ? (
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Validation
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                ) : null}
+
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Suppression
@@ -212,16 +214,18 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    <td className="">
-                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        <ToggleButton
-                          e={{ id, status }}
-                          handleChange={() =>
-                            getEstimates(statusList, currentPage, perPage)
-                          }
-                        />
-                      </div>
-                    </td>
+                    {currentUserIsAdmin ? (
+                      <td className="">
+                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                          <ToggleButton
+                            e={{ id, status }}
+                            handleChange={() =>
+                              getEstimates(statusList, currentPage, perPage)
+                            }
+                          />
+                        </div>
+                      </td>
+                    ) : null}
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"
