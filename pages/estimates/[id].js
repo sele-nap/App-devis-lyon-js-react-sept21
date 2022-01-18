@@ -21,6 +21,7 @@ import Swal from "sweetalert2";
 // import EditEstimateArray from "../../components/editEstimateArray";
 import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ClientLayout from "../../components/ClientLayout";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 
 //  -------------------------- FORMAT PDF --------------------------
@@ -31,7 +32,7 @@ const options = {
   format: "A2",
 };
 
-export default function Estimate() {
+export default function Estimate(req) {
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
@@ -121,7 +122,7 @@ export default function Estimate() {
   }, [isUpdate, id]);
   return (
     <Layout>
-      <AdminLayout>
+      <ClientLayout>
         <div className="flex flex-col">
           <div ref={ref}>
             <div className="flex justify-end items-center  mt-10 mx-72">
@@ -171,7 +172,7 @@ export default function Estimate() {
                     <BusinessIcon className="m-2" />
                     <div>
                       <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                        {customer.address1}{" "}
+                        {customer.address1}
                       </p>
                       <p className="text-md mx-2 items-center p-1 text-gray-700 ">
                         {customer.zipCode} {customer.city}
@@ -228,14 +229,32 @@ export default function Estimate() {
                   <h2 className="text-center text-xl uppercase mb-4">
                     Proposition de l{`'`}administrateur
                   </h2>
-                  <input
+                  {customer.role === "admin" ? (
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="adminComment"
+                      name="adminComment"
+                      type="text"
+                      value={adminComment}
+                      onChange={(e) => setAdminComment(e.target.value)}
+                    />
+                  ) : (
+                    <div
+                      className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="adminComment"
+                      name="adminComment"
+                    >
+                      {adminComment}
+                    </div>
+                  )}
+                  {/* <input
                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="adminComment"
                     name="adminComment"
                     type="text"
                     value={adminComment}
                     onChange={(e) => setAdminComment(e.target.value)}
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -295,7 +314,7 @@ export default function Estimate() {
           </div>
         </div>
         <div className="flex flex-row justify-around mt-20"></div>
-      </AdminLayout>
+      </ClientLayout>
     </Layout>
   );
 }
