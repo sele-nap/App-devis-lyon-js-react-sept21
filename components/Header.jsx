@@ -24,24 +24,21 @@ const Header = () => {
     }
   };
   return (
-    <div className="flex flex-row w-full items-center p-2  m-0 justify-around shadow-xs bg-third ">
+    <div className="flex flex-row flex-wrap w-full items-center p-2  m-0 justify-around shadow-xs bg-third ">
       <Link href="/" passHref>
         <a className="flex justify-center md:justify-end ">
           <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
         </a>
       </Link>
-      <div className="text-black flex flex-row   ">
-        {" "}
+      <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
+        <span className="mx-2"></span>
         <Link href="/askEstimatePage">
-          <a className="">
-            {" "}
-            <button
-              className="ml-3 mr-3 text-sm  flex justify-center flex-col items-center md text-lg:lg hover:text-black"
-              onClick={handleEstimateClick}
-            >
-              Devis <IoIosAddCircle size={25} />
-            </button>
-          </a>
+          <button
+            className="text-sm md text-lg:lg"
+            onClick={handleEstimateClick}
+          >
+            <IoIosAddCircle size={20} /> <a>Devis</a>
+          </button>
         </Link>
       </div>
 
