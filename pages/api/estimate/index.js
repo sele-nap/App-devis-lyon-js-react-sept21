@@ -36,7 +36,7 @@ async function handlePost(req, res) {
       createFiles({
         name: file.filename,
         estimate: { connect: { id: newEstimate.id } },
-        url: file.path,
+        url: file.path.replace("public/", ""),
       })
     );
     await Promise.all(filesSave);

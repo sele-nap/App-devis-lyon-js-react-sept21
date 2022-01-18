@@ -38,6 +38,13 @@ const getOneEstimate = (id) => {
   });
 };
 
+const getOneEstimateAttachedFiles = (id) => {
+  return db.estimate.findUnique({
+    where: { id: parseInt(id, 10) },
+    include: { attachedFiles: true, customer: true },
+  });
+};
+
 const getEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
@@ -117,4 +124,5 @@ module.exports = {
   getEstimate,
   confirmEstimate,
   validateEstimate,
+  getOneEstimateAttachedFiles,
 };

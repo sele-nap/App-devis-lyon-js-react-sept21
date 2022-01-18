@@ -61,6 +61,7 @@ export default function Estimate(req) {
   const [createDate, setCreateDate] = useState("");
   const [adminComment, setAdminComment] = useState("");
   const [customer, setCustomer] = useState("");
+  const [attachedFiles, setAttachedFiles] = useState([]);
 
   const router = useRouter();
   const {
@@ -107,6 +108,7 @@ export default function Estimate(req) {
               createDate,
               adminComment,
               customer,
+              attachedFiles,
             },
           }) => {
             setStatus(status);
@@ -116,6 +118,7 @@ export default function Estimate(req) {
             setCreateDate(createDate);
             setAdminComment(adminComment);
             setCustomer(customer);
+            setAttachedFiles(attachedFiles);
           }
         );
     }
@@ -164,7 +167,7 @@ export default function Estimate(req) {
                   <div className=" items-center flex flex-row">
                     <AssignmentIndIcon className="m-2" />
                     <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.firstname} {customer.lastname}
+                      {customer?.firstname} {customer?.lastname}
                     </p>
                   </div>
 
@@ -172,24 +175,24 @@ export default function Estimate(req) {
                     <BusinessIcon className="m-2" />
                     <div>
                       <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                        {customer.address1}
+                        {customer?.address1}
                       </p>
                       <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                        {customer.zipCode} {customer.city}
+                        {customer?.zipCode} {customer?.city}
                       </p>
                     </div>
                   </div>
                   <div className=" items-center flex flex-row">
                     <AlternateEmailIcon className="m-2" />
                     <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.email}
+                      {customer?.email}
                     </p>
                   </div>
 
                   <div className=" items-center flex flex-row">
                     <PhoneIcon className="m-2" />
                     <p className="text-md mx-2 items-center p-1 text-gray-700 ">
-                      {customer.phone}
+                      {customer?.phone}
                     </p>
                   </div>
                 </div>
@@ -229,7 +232,7 @@ export default function Estimate(req) {
                   <h2 className="text-center text-xl uppercase mb-4">
                     Proposition de l{`'`}administrateur
                   </h2>
-                  {customer.role === "admin" ? (
+                  {customer?.role === "admin" ? (
                     <input
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="adminComment"
@@ -248,6 +251,14 @@ export default function Estimate(req) {
                     </div>
                   )}
                 </div>
+
+                {attachedFiles.map((a) => {
+                  return (
+                    <Link key={a.id} href={"/" + a.url}>
+                      <a>{a.name} </a>
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}

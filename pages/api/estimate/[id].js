@@ -4,6 +4,7 @@ import {
   getOneEstimate,
   deleteOneEstimate,
   getEstimate,
+  getOneEstimateAttachedFiles,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
@@ -33,7 +34,7 @@ async function sendMail({ query: { id } }, req, res) {
 }
 
 async function handleGet({ query: { id } }, res) {
-  const estimate = await getOneEstimate(id);
+  const estimate = await getOneEstimateAttachedFiles(id);
   if (estimate) res.send(estimate);
   else res.status(404).send();
 }
@@ -44,7 +45,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .use(requireCurrentUser)
+  // .use(requireCurrentUser)
   .post(sendMail)
   .get(handleGet)
   .patch(handlePatch)
