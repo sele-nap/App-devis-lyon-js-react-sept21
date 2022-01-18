@@ -1,9 +1,9 @@
 /*
   Warnings:
 
-  - You are about to drop the column `adminCommnent` on the `estimate` table. All the data in the column will be lost.
+  - You are about to drop the column `adminComment` on the `estimate` table. All the data in the column will be lost.
 
 */
 -- AlterTable
-ALTER TABLE `estimate` DROP COLUMN `adminCommnent`,
+ALTER TABLE `estimate` DROP COLUMN `adminComment`,
     ADD COLUMN `adminComment` LONGTEXT NULL;
