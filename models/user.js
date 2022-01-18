@@ -141,11 +141,13 @@ const userToShow = {
   city: true,
   siretNumber: true,
 };
-const getUsers = async () => {
+const getUsers = async ({ customerId }) => {
   return db.user.findMany({
+    // where: { customer: { id: customerId } },
     select: userToShow,
   });
 };
+
 const getOneUser = (id) => {
   return db.user.findUnique({
     where: { id: parseInt(id, 10) },
@@ -174,6 +176,7 @@ const getSafeAttributes = (user) => ({
   hashPassword: undefined,
 });
 
+
 module.exports = {
   hashPassword,
   verifyPassword,
@@ -182,8 +185,8 @@ module.exports = {
   create,
   findByEmail,
   confirmEmail,
-  getUsers,
   getOneUser,
+  getUsers,
   deleteOneUser,
   updateOneUser,
   getSafeAttributes,

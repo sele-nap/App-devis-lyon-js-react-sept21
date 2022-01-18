@@ -41,18 +41,19 @@ function Estimate() {
 
   //Soumission devis//
 
-  const customErrors = () => {
-    const globalError = "votre demande de devis n'a pas été envoyée";
-    if (additionalInformation.value === "") {
-      return "Le champ message n'a pas été rempli, " + globalError;
-    }
-    if (deadLine.value === "") {
-      return "Le champ date n'a pas été rempli, " + globalError;
-    }
-    return globalError;
-  };
+  // const customErrors = () => {
+  //   const globalError = "votre demande de devis n'a pas été envoyée";
+  //   if (additionalInformation.value === "") {
+  //     return "Le champ message n'a pas été rempli, " + globalError;
+  //   }
+  //   if (deadLine.value === "") {
+  //     return "Le champ date n'a pas été rempli, " + globalError;
+  //   }
+  //   return globalError;
+  // };
 
   const [numberEstimate, setNumberEstimate] = useState("");
+
   const resetForm = () => {
     additionalInformation.value = "";
     deadLine.value = "";
@@ -65,7 +66,6 @@ function Estimate() {
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
-
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);
     dataFiles.append("additionalInformation", additionalInformation.value);
@@ -81,7 +81,7 @@ function Estimate() {
           title:
             res.data.status === "TO_DO"
               ? `Votre demande de devis ${res.data?.id} a été envoyé `
-              : "Votre demande de devis a été enregistré, vous pourrez le modiifer ultérieurement",
+              : "Votre demande de devis a été enregistré, vous pourrez le modifier ultérieurement",
           showConfirmButton: false,
           timer: 2500,
         });
@@ -92,7 +92,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: customErrors(),
+          title: "votre demande de devis n'a pas été envoyée",
           showConfirmButton: false,
           timer: 2500,
         });

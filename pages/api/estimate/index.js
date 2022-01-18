@@ -14,13 +14,25 @@ import crypto from "crypto";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 const handleGet = async (req, res) => {
-
-  const{statusList, limit, offset} = req.query
-  const [items, totalCount] = await getEstimates({statusList, limit, offset})
-  res.setHeader("x-total-count", totalCount)
+  const customerId =
+    req.currentUser.role === "admin" ? undefined : req.currentUser.id;
+  const { statusList, limit, offset } = req.query;
+  const [items, totalCount] = await getEstimates({
+    statusList,
+    limit,
+    offset,
+    customerId,
+  });
+  res.setHeader("x-total-count", totalCount);
   res.send(items);
 };
 
+// const handleGet = async (req, res) => {
+//   const { statusList } = req.query;
+//   const customerId =
+//     req.currentUser.role === "admin" ? undefined : req.currentUser.id;
+//   res.send(await getEstimates({ statusList, customerId }));
+// };
 async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
   console.log(validationError);
@@ -37,7 +49,7 @@ async function handlePost(req, res) {
       createFiles({
         name: file.filename,
         estimate: { connect: { id: newEstimate.id } },
-        url: file.path,
+        url: file.path.replace("public/", ""),
       })
     );
     await Promise.all(filesSave);

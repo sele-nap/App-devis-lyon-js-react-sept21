@@ -15,12 +15,15 @@ import styles from "../styles/Home.module.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-// import Imagetrophée from "../public/Img/imagetrophée.jpg";
+import Imagetrophée from "../public/Img/imagetrophée.jpg";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Home() {
+  const { currentUserProfile } = useContext(CurrentUserContext);
   return (
     <div className="">
       <Layout className="bg-primary">
