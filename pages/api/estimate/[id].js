@@ -45,7 +45,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  // .use(requireCurrentUser)
+  .use(requireCurrentUser)
   .post(sendMail)
   .get(handleGet)
   .patch(handlePatch)

@@ -22,6 +22,8 @@ import Swal from "sweetalert2";
 import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ClientLayout from "../../components/ClientLayout";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 
 //  -------------------------- FORMAT PDF --------------------------
@@ -33,6 +35,9 @@ const options = {
 };
 
 export default function Estimate(req) {
+  const { currentUserIsAdmin } = useContext(CurrentUserContext);
+  console.log(currentUserIsAdmin);
+
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
     if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
@@ -123,10 +128,12 @@ export default function Estimate(req) {
         );
     }
   }, [isUpdate, id]);
+
   return (
     <Layout>
       <ClientLayout>
         <div className="flex flex-col">
+          <p> {currentUserIsAdmin}</p>
           <div ref={ref}>
             <div className="flex justify-end items-center  mt-10 mx-72">
               <div className="flex">
