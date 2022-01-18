@@ -81,7 +81,7 @@ function Estimate() {
           title:
             res.data.status === "TO_DO"
               ? `Votre demande de devis ${res.data?.id} a été envoyé `
-              : "Votre demande de devis a été enregistré, vous pourrez le modiifer ultérieurement",
+              : "Votre demande de devis a été enregistré, vous pourrez le modifier ultérieurement",
           showConfirmButton: false,
           timer: 2500,
         });

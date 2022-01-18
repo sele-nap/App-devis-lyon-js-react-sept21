@@ -6,6 +6,7 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 
 import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
+import ClientLayout from "../../components/ClientLayout";
 
 const ListClient = () => {
   const deleteUser = async (id) => {
@@ -27,7 +28,7 @@ const ListClient = () => {
   return (
     <div>
       <Layout title="Mes contacts">
-        <AdminLayout>
+        <ClientLayout>
           <div className="table w-full p-2 mt-8">
             <table className="w-full border">
               <thead>
@@ -153,7 +154,7 @@ const ListClient = () => {
               </tbody>
             </table>
           </div>
-        </AdminLayout>
+        </ClientLayout>
       </Layout>
     </div>
   );
