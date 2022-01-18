@@ -53,6 +53,7 @@ function Estimate() {
   };
 
   const [numberEstimate, setNumberEstimate] = useState("");
+
   const resetForm = () => {
     additionalInformation.value = "";
     deadLine.value = "";
@@ -65,7 +66,6 @@ function Estimate() {
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
-
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);
     dataFiles.append("additionalInformation", additionalInformation.value);

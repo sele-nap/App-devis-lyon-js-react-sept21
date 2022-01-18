@@ -5,5 +5,5 @@
 
 */
 -- AlterTable
-ALTER TABLE `estimate` DROP COLUMN `adminCommnent`,
+ALTER TABLE `estimate` DROP COLUMN `adminComment`,
     ADD COLUMN `adminComment` LONGTEXT NULL;

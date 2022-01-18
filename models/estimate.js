@@ -72,12 +72,13 @@ const createAskEstimate = async ({
   });
 };
 
-const createFiles = async ({ name, estimate, url }) => {
+const createFiles = async ({ name, estimate, url, creator }) => {
   return await db.attachedFile.create({
     data: {
       name,
       estimate,
       url,
+      creator,
     },
   });
 };

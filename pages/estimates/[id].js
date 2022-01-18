@@ -17,11 +17,11 @@ import React from "react";
 import Logo from "../../public/Img/LogoSansBlabla.png";
 import Image from "next/image";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Swal from "sweetalert2";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import EditEstimateArray from "../../components/editEstimateArray";
+// import EditEstimateArray from "../../components/editEstimateArray";
 import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
@@ -69,14 +69,43 @@ export default function Estimate() {
   } = router;
   const isUpdate = id !== "new";
 
+  // -----------------------------UPLOAD-------------------------------------
+  const [attachedFiles, setAttachedFiles] = useState([]);
+  const attachedFilesRef = useRef(null);
+
+  const handleAttachedFilesClick = (e) => {
+    attachedFilesRef.current.click();
+    e.preventDefault();
+  };
+  const handleAttachedFilesSelection = (e) => {
+    if (e.target.files[1])
+      setAttachedFiles(URL.createObjectURL(e.target.files[1]));
+
+    const fileList = Array.from(e.target.files);
+    console.log(fileList);
+    if (fileList.length) {
+      setAttachedFiles(
+        fileList.map((file) => {
+          return file.name;
+        })
+      );
+    }
+  };
+
   const saveEstimate = async () => {
-    const formValues = {
-      additionalInformation,
-      adminComment,
-    };
+    const dataFiles = new FormData();
+    for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
+      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+    }
+    dataFiles.append("additionalInformation", additionalInformation.value);
+    dataFiles.append("adminComment", adminComment.value);
+    // const formValues = {
+    //   additionalInformation,
+    //   adminComment,
+    // };
     try {
       if (isUpdate) {
-        await axios.patch(`/api/estimate/${id}`, formValues).then((res) => {
+        await axios.patch(`/api/estimate/${id}`, dataFiles).then((res) => {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -86,7 +115,7 @@ export default function Estimate() {
           });
         });
       } else {
-        await axios.post(`/api/estimate/${id}`, formValues);
+        await axios.post(`/api/estimate/${id}`, dataFiles);
       }
       router.push("/estimates");
     } catch (err) {
@@ -236,7 +265,48 @@ export default function Estimate() {
                 />
               </div>
             </div>
+            <div className="m-20">
+              {attachedFiles.map((data, index) => {
+                if (attachedFiles.length <= 3) {
+                  return (
+                    <ul key={index}>
+                      <li>
+                        {data}{" "}
+                        {/* <DeleteForeverIcon
+                          className="ml-3"
+                          onClick={handleClickDelete}
+                        /> */}
+                      </li>
+                    </ul>
+                  );
+                } else {
+                  Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "3 pièces jointes maximum",
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+                }
+              })}
+            </div>
 
+            <button
+              className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              onClick={handleAttachedFilesClick}
+              type="submit"
+            >
+              Pièces Jointes
+            </button>
+            <input
+              className="hidden"
+              type="file"
+              multiple={true}
+              id="attachedFiles"
+              accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
+              ref={attachedFilesRef}
+              onChange={handleAttachedFilesSelection}
+            ></input>
             {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
             {/* <EditEstimateArray /> */}
             {/* </div> */}
