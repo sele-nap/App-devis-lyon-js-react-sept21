@@ -14,11 +14,11 @@ import crypto from "crypto";
 // import { requireAdmin } from "../../../middleware/requireAdmin";
 
 const handleGet = async (req, res) => {
+
   const{statusList, limit, offset} = req.query
   const [items, totalCount] = await getEstimates({statusList, limit, offset})
   res.setHeader("x-total-count", totalCount)
   res.send(items);
-  
 };
 
 async function handlePost(req, res) {
