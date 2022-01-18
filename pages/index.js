@@ -31,7 +31,7 @@ export default function Home() {
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
         </h1>
-        <div className="h-90 w-full shadow-2xl shadow-black bg-gray-200">
+        <div className="h-90 w-full bg-gray-200">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
