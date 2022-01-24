@@ -3,16 +3,10 @@ import Link from "next/link";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import StoreIcon from "@mui/icons-material/Store";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import { useContext } from "react";
 
 const AdminNavBar = () => {
-  const { currentUserProfile } = useContext(CurrentUserContext);
   return (
     <div>
-      <p className="text-xs italic mx-12">
-        Bonjour {currentUserProfile.firstname} {currentUserProfile.lastname}
-      </p>
       <div className="flex justify-center mt-4">
         <div className="border-b-2 mb-4">
           <div className="antialiased bg-gray-100 dark-mode:bg-gray-900">
