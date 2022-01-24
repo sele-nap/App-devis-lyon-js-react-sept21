@@ -67,16 +67,6 @@ export default function EstimateManagement() {
               <p className="px-2"> CRÉER UN DEVIS</p>
             </button>
           </Link>
-
-          {/* ___________ DOWNLOAD  ___________*/}
-
-          <button
-            className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-            onClick={Download}
-          >
-            <FaCloudDownloadAlt size={20} />
-            <p className="px-2">TÉLÉCHARGER</p>
-          </button>
         </div>
       </ClientLayout>
     </Layout>
