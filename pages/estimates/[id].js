@@ -97,6 +97,19 @@ export default function Estimate(req) {
       );
     }
   };
+  const deleteAttachedFiles = async (id) => {
+    if (
+      confirm(
+        "Voulez vous vraiment supprimer cette fiche client définitivement ?"
+      )
+    ) {
+      await axios.delete(`/api/attachedFiles/${id}`);
+      alert("Pièce jointe bien supprimé");
+      setAttachedFiles((attachedFiles) =>
+        attachedFiles.filter((e) => e.id !== id)
+      );
+    }
+  };
 
   // Remove attached files//
   const handleClickDelete = () => {
@@ -127,10 +140,7 @@ export default function Estimate(req) {
     }
     dataFiles.append("additionalInformation", additionalInformation.value);
     dataFiles.append("adminComment", adminComment.value);
-    // const formValues = {
-    //   additionalInformation,
-    //   adminComment,
-    // };
+
     try {
       if (isUpdate) {
         await axios.patch(`/api/estimate/${id}`, dataFiles).then((res) => {
@@ -320,18 +330,22 @@ export default function Estimate(req) {
                       {adminComment}
                     </div>
                   )}
-                  {/* <div>
-                    {" "}
+
+                  <div>
                     {attachedFiles.map((a) => {
                       return (
                         <div className="m-5 text-center ">
                           <Link key={a.id} href={"/" + a.url}>
                             <a>{a.name}</a>
                           </Link>
+                          <DeleteForeverIcon
+                            className="ml-3"
+                            onClick={() => deleteAttachedFiles(id)}
+                          />
                         </div>
                       );
                     })}
-                  </div> */}
+                  </div>
                 </div>
 
                 <div className="m-20 align-sub">
