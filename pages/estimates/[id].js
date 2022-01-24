@@ -100,7 +100,7 @@ export default function Estimate(req) {
   const deleteAttachedFiles = async (id) => {
     if (
       confirm(
-        "Voulez vous vraiment supprimer cette fiche client définitivement ?"
+        "Voulez vous vraiment supprimer cette pièce jointe définitivement ?"
       )
     ) {
       await axios.delete(`/api/attachedFiles/${id}`);
@@ -296,15 +296,17 @@ export default function Estimate(req) {
                   />{" "}
                   <div>
                     {" "}
-                    {attachedFiles.map((a) => {
-                      return (
-                        <div className="m-5 text-center ">
-                          <Link key={a.id} href={"/" + a.url}>
-                            <a>{a.name}</a>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                    {attachedFiles
+                      .filter((attachedFile) => attachedFile.creator === null)
+                      .map((a) => {
+                        return (
+                          <div className="m-5 text-center ">
+                            <Link key={a.id} href={"/" + a.url}>
+                              <a>{a.name}</a>
+                            </Link>
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
 
@@ -332,19 +334,23 @@ export default function Estimate(req) {
                   )}
 
                   <div>
-                    {attachedFiles.map((a) => {
-                      return (
-                        <div className="m-5 text-center ">
-                          <Link key={a.id} href={"/" + a.url}>
-                            <a>{a.name}</a>
-                          </Link>
-                          <DeleteForeverIcon
-                            className="ml-3"
-                            onClick={() => deleteAttachedFiles(id)}
-                          />
-                        </div>
-                      );
-                    })}
+                    {attachedFiles
+                      .filter((attachedFile) => {
+                        return attachedFile.creator === "admin";
+                      })
+                      .map((a) => {
+                        return (
+                          <div className="m-5 text-center ">
+                            <Link key={a.id} href={"/" + a.url}>
+                              <a>{a.name}</a>
+                            </Link>
+                            <DeleteForeverIcon
+                              className="ml-3"
+                              onClick={() => deleteAttachedFiles(a.id)}
+                            />
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
 
