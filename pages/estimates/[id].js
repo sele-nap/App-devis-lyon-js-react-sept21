@@ -320,7 +320,7 @@ export default function Estimate(req) {
                       {adminComment}
                     </div>
                   )}
-                  <div>
+                  {/* <div>
                     {" "}
                     {attachedFiles.map((a) => {
                       return (
@@ -331,7 +331,7 @@ export default function Estimate(req) {
                         </div>
                       );
                     })}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="m-20 align-sub">
