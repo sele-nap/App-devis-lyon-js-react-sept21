@@ -320,22 +320,33 @@ export default function Estimate(req) {
                       {adminComment}
                     </div>
                   )}
+                  <div>
+                    {" "}
+                    {attachedFiles.map((a) => {
+                      return (
+                        <div className="m-5 text-center ">
+                          <Link key={a.id} href={"/" + a.url}>
+                            <a>{a.name}</a>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="m-20 align-sub">
-                  {attachedFilesUpload.map((data, index) => {
+                  {attachedFilesUpload.map((data, index, url) => {
                     if (attachedFilesUpload.length <= 3) {
                       return (
-                        <ul key={index}>
-                          {" "}
-                          <li>
-                            {data}{" "}
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={handleClickDelete}
-                            />
-                          </li>
-                        </ul>
+                        <div>
+                          <Link key={index} href={"/" + url}>
+                            <a>{data} </a>
+                          </Link>
+                          <DeleteForeverIcon
+                            className="ml-3"
+                            onClick={handleClickDelete}
+                          />
+                        </div>
                       );
                     } else {
                       Swal.fire({
@@ -373,11 +384,11 @@ export default function Estimate(req) {
                   <span className="mx-2"> Sauvegarde </span>
                 </button>
                 <button
-                  className="ml-2 pl-10 pt- flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}
                   type="submit"
                 >
-                  <IoIosAttach size={25} />
+                  <IoIosAttach size={26} />
                   <span className="mx-2 ">Pièces Jointes </span>
                 </button>
               </div>
@@ -406,7 +417,7 @@ export default function Estimate(req) {
                 </span>
               </button>
             )}
-            <div className="ml-2  shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+            <div className="ml-2  pt-3 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
               <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
                 {({ toPdf }) => (
                   <button className="font-bold" onClick={toPdf}>
