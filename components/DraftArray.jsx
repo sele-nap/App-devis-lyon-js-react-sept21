@@ -146,7 +146,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                {/* <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Validation
                     <path
@@ -156,7 +156,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                       d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                     />
                   </div>
-                </th> */}
+                </th>
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Suppression
@@ -202,7 +202,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    {/* <td className="">
+                    <td className="">
                       <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                         <ToggleButtonToDo
                           e={{ id, status }}
@@ -211,7 +211,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                           }
                         />
                       </div>
-                    </td> */}
+                    </td>
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"
