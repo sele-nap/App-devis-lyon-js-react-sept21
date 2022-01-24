@@ -9,14 +9,9 @@ import Layout from "./Layout";
 
 const SignupForm = () => {
   const [passwordShown, setPasswordShown] = useState(false);
-  const [passwordConfirmShown, setPasswordConfirmShown] = useState(false);
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
-  };
-
-  const togglePasswordConfirmVisiblity = () => {
-    setPasswordConfirmShown(passwordConfirmShown ? false : true);
   };
 
   const {
@@ -37,6 +32,7 @@ const SignupForm = () => {
   const isIndividual = organizationType === "INDIVIDUAL";
 
   const onSubmit = (data) => {
+    //   console.log(data);
     axios
       .post("/api/users", data)
       .then((res) => {
@@ -133,8 +129,8 @@ const SignupForm = () => {
                 placeholder="******************"
                 id="password"
                 name="password"
-                type="text"
-                // type={passwordShown ? "text" : "password"}
+                // type="text"
+                type={passwordShown ? "text" : "password"}
                 {...register("password", {
                   required: " ❌ Mot de passe requis ",
                   pattern: {
@@ -154,24 +150,21 @@ const SignupForm = () => {
             )}
 
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Repeat Mot de passe{" "}
+              Repeat Mot de passe
               <span className="text-gray-400 text-md">*</span>
             </label>
             <input
               className="appearance-none block w-3/4 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="password_repeat"
-              type="text"
-              // type={passwordShown ? "text" : "password"}
-              {...register("password", {
-                validate: (value) =>
-                  value === password.current || "The passwords do not match",
+              id="passwordConfirm"
+              name="passwordConfirm"
+              type={passwordShown ? "text" : "password"}
+              {...register("passwordConfirm", {
+                required: "❌ Les deux mots de passe ne correspondent pas",
+                validate: (value) => value === watch("password"),
               })}
             />
-            {errors.password_repeat && <p>{errors.password_repeat.message}</p>}
-            <RemoveRedEyeIcon
-              className="w-1/4 cursor-pointer"
-              onClick={togglePasswordConfirmVisiblity}
-            />
+
+            {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
 
             <p className="text-gray-600 text-xs italic">
               1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères
