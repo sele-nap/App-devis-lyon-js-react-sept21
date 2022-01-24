@@ -25,6 +25,7 @@ import ClientLayout from "../../components/ClientLayout";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
+import { IoIosAttach } from "react-icons/io";
 
 //  -------------------------- FORMAT PDF --------------------------
 const ref = React.createRef();
@@ -122,10 +123,7 @@ export default function Estimate(req) {
   const saveEstimate = async () => {
     const dataFiles = new FormData();
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      dataFiles.append(
-        "attachedFiles",
-        attachedFilesUploadRef.current.files[i]
-      );
+      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.value);
     dataFiles.append("adminComment", adminComment.value);
@@ -278,7 +276,7 @@ export default function Estimate(req) {
                     Rappel de la demande{" "}
                   </h2>
                   <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
                     id="additionalInformation"
                     name="additionalInformation"
                     placeholder="Demande apportée"
@@ -290,9 +288,11 @@ export default function Estimate(req) {
                     {" "}
                     {attachedFiles.map((a) => {
                       return (
-                        <Link key={a.id} href={"/" + a.url}>
-                          <a>{a.name}</a>
-                        </Link>
+                        <div className="m-5 text-center ">
+                          <Link key={a.id} href={"/" + a.url}>
+                            <a>{a.name}</a>
+                          </Link>
+                        </div>
                       );
                     })}
                   </div>
@@ -373,11 +373,12 @@ export default function Estimate(req) {
                   <span className="mx-2"> Sauvegarde </span>
                 </button>
                 <button
-                  className="ml-2 shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                  className="ml-2 pl-10 pt- flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}
                   type="submit"
                 >
-                  Pièces Jointes
+                  <IoIosAttach size={25} />
+                  <span className="mx-2 ">Pièces Jointes </span>
                 </button>
               </div>
             </form>
