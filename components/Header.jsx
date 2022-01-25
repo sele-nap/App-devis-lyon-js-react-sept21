@@ -33,23 +33,12 @@ const Header = () => {
       <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
         <span className="mx-2"></span>
         <Link href="/askEstimatePage" passHref>
-<<<<<<< HEAD
-          <a>
-            <button
-              className="text-sm md text-lg:lg"
-              onClick={handleEstimateClick}
-            >
-              <IoIosAddCircle size={20} /> <a>Devis</a>
-            </button>
-          </a>
-=======
           <button
             className="text-sm md text-lg:lg"
             onClick={handleEstimateClick}
           >
             <IoIosAddCircle size={20} /> <a>Devis</a>
           </button>
->>>>>>> 174cd6f9efcac8bef8fba50e25d1a92c2eaa8568
         </Link>
       </div>
 
