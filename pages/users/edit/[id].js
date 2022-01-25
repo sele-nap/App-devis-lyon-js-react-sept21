@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
-import CtaButton from "../../../components/CtaButton";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import AdminLayout from "../../../components/AdminLayout";
 
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");

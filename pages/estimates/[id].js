@@ -163,7 +163,9 @@ export default function Estimate(req) {
       } else {
         await axios.post(`/api/estimate/${id}`, dataFiles);
       }
-      router.push("/estimates");
+      setTimeout(() => {
+        router.push("/estimates"), 2000;
+      });
     } catch (err) {
       console.error(err);
     }
@@ -323,7 +325,9 @@ export default function Estimate(req) {
                   <div>
                     {" "}
                     {attachedFiles
-                      .filter((attachedFile) => attachedFile.creator === null)
+                      .filter(
+                        (attachedFile) => attachedFile.creator === "client"
+                      )
                       .map((a) => {
                         return (
                           <div key={a.id} className="m-5 text-center ">

@@ -47,9 +47,6 @@ export default function Home() {
             className={styles.swiper}
           >
             <SwiperSlide>
-              <Image src={coupe} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
               <Image src={coupe1} alt="" />
             </SwiperSlide>
             <SwiperSlide>
