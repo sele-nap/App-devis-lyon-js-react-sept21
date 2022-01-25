@@ -205,7 +205,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                     <td className="">
                       <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                         <ToggleButtonToDo
-                          e={{ id, status }}
+                          e={{ id, statusList }}
                           handleChange={() =>
                             getEstimates(statusList, offset, limit)
                           }
