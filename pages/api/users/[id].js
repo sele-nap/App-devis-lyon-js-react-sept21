@@ -27,7 +27,7 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .use(requireCurrentUser)
+  // .use(requireCurrentUser)
   .get(handleGet)
   .patch(handlePatch)
   .delete(handleDelete);
