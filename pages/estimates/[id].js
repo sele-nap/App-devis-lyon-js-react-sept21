@@ -161,30 +161,29 @@ export default function Estimate(req) {
     <Layout>
       <ClientLayout>
         <div className="flex flex-col">
-          <div ref={ref}>
-            <div className="flex justify-end items-center  mt-10 mx-72">
-              <div className="flex">
-                <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
-              </div>
-              <div className="mx-4">
-                <h1 className="text-xl uppercase">
-                  {" "}
-                  Société des décorations lyonnaises
-                </h1>
-                <div className="text-gray-700 italic text-sm">
-                  <p> Adresse Lambda - 69000 LYON </p>
-                  <p> Contact : contact@lyon-decoration.com</p>
-                  <p>Tel : 0123456789</p>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await saveEstimate();
+            }}
+          >
+            <div ref={ref}>
+              <div className="flex justify-end items-center  mt-10 mx-72">
+                <div className="flex">
+                  <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
+                </div>
+                <div className="mx-4">
+                  <h1 className="text-xl uppercase">
+                    {" "}
+                    Société des décorations lyonnaises
+                  </h1>
+                  <div className="text-gray-700 italic text-sm">
+                    <p> Adresse Lambda - 69000 LYON </p>
+                    <p> Contact : contact@lyon-decoration.com</p>
+                    <p>Tel : 0123456789</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await saveEstimate();
-              }}
-            >
               <h2 className="text-center text-2xl  uppercase m-4">
                 Devis
                 {{ status } === "TO_DO"
@@ -298,17 +297,17 @@ export default function Estimate(req) {
               {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
               {/* <EditEstimateArray /> */}
               {/* </div> */}
-              <div className="flex justify-center mt-20">
-                <button
-                  type="submit"
-                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                >
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div className="flex justify-center mt-20">
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+            </div>
+          </form>
           <div className="m-20">
             {attachedFiles.map((data, index) => {
               if (attachedFiles.length <= 3) {
