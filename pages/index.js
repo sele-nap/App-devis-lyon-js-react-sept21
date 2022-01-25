@@ -66,7 +66,7 @@ export default function Home() {
           <div className="bg-primary flex flex-row-reverse justify-around p-5 ">
             <p className="w-full text-justify mr-5">
               Cat ipsum dolor sit amet, refuse to leave cardboard box pretend
-              you want to go out but then don't headbutt owner's knee. Sit as
+              you want to go out but then dont headbutt owners knee. Sit as
               close as possible to warm fire without sitting on cold floor avoid
               the new toy and just play with the box it came in, and rub face on
               everything, or attack the child or meowwww or munch, munch, chomp,
