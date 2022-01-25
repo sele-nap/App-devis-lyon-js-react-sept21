@@ -31,6 +31,9 @@ const getEstimates = async ({ statusList, limit, offset, customerId }) => {
       select: estimateToShow,
       take: parseInt(limit),
       skip: parseInt(offset),
+      orderBy: {
+        createDate: "desc",
+      },
     }),
     db.estimate.count({
       where: { status: { in: statusList }, customer: { id: customerId } },
@@ -55,6 +58,7 @@ const getOneEstimateAttachedFiles = (id) => {
 const getEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
+
     include: { customer: true },
   });
 };

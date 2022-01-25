@@ -20,6 +20,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
+import HelloGuy from "../components/HelloGuy";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
   return (
     <div className="">
       <Layout className="bg-primary">
+        <HelloGuy />
         <h1 className="text-center text-2xl m-10">
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
