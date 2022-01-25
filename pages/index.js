@@ -15,7 +15,6 @@ import styles from "../styles/Home.module.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Imagetrophée from "../public/Img/imagetrophée.jpg";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
