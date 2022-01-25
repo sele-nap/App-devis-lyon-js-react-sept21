@@ -381,10 +381,6 @@ export default function Estimate(req) {
                 </div>
               </div>
 
-              {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
-              {/* <EditEstimateArray /> */}
-              {/* </div> */}
-
               <div className="flex  justify-center mt-20">
                 <input
                   className="hidden"
@@ -415,9 +411,6 @@ export default function Estimate(req) {
             </form>
           </div>
 
-          {/* <div className="border rounded-xl mx-20 ml-20 justify-center items-center flex flex-col"> */}
-          {/* <EditEstimateArray /> */}
-          {/* </div> */}
           <div className="flex justify-center mt-5"></div>
           <div className="mt-10 flex justify-center">
             <Link href="/estimates" passHref>
@@ -447,10 +440,7 @@ export default function Estimate(req) {
                 )}
               </Pdf>
             </div>
-            {/* <ToggleButtonToDo
-              e={{ id, status }}
-              handleChange={() => getEstimates(statusList, offset, limit)}
-            /> */}
+
             <button
               className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               onClick={() => deleteEstimate(id)}
