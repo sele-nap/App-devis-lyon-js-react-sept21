@@ -28,6 +28,7 @@ import { useContext } from "react";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 import { IoIosAttach } from "react-icons/io";
 
+const router = useRouter;
 //  -------------------------- FORMAT PDF --------------------------
 const ref = React.createRef();
 const options = {
@@ -45,13 +46,16 @@ export default function Estimate(req) {
       await axios.delete(`/api/estimate/${id}`);
       alert("devis bien supprimé");
       setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+      setTimeout(() => {
+        router.push("/estimates"), 2000;
+      });
     }
 
-    return (
-      <button type="button" onClick={() => router.back()}>
-        Retour
-      </button>
-    );
+    // return (
+    //   <button type="button" onClick={() => router.back()}>
+    //     Retour
+    //   </button>
+    // );
   };
   const [estimate, setEstimate] = useState([]);
 

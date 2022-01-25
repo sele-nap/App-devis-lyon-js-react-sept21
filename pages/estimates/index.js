@@ -37,18 +37,6 @@ export default function EstimateManagement() {
         <EstimateList
           statusList={["TO_DO", "WAITING_FOR_VALIDATION", "VALIDATED"]}
         />
-        {/* <nav>
-        {new Array(numberOfPages)
-          .fill()
-          .map((_, i) => i + 1)
-          .map((page) => {
-            return(
-              <a
-              key={page}
-              
-              )
-            })}
-          </nav> */}
         <DraftArray statusList={["DRAFT"]} />
 
         {/* ___________ CREATE AN ESTIMATE  ___________*/}

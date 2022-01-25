@@ -32,7 +32,7 @@ const Header = () => {
       </Link>
       <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
         <span className="mx-2"></span>
-        <Link passHref="/askEstimatePage">
+        <Link href="/askEstimatePage" passHref>
           <button
             className="text-sm md text-lg:lg"
             onClick={handleEstimateClick}
@@ -62,14 +62,14 @@ const Header = () => {
         <span className="mx-2"></span>
         {status === "unauthenticated" && (
           <button className="text-sm md text-lg:lg">
-            <Link passHref="/signup">
+            <Link href="/signup">
               <a> Créer un compte</a>
             </Link>
           </button>
         )}
         {status === "authenticated" && (
           <button className="text-sm md text-lg:lg">
-            <Link passHref="/estimates">
+            <Link href="/estimates">
               <a>Dashboard</a>
             </Link>
           </button>
