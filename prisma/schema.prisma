@@ -91,5 +91,5 @@ model attachedFile {
   url        String?
   estimateId Int?
   estimate   estimate? @relation(fields: [estimateId], references: [id])
-  creator    String?
+  creator    String    @default("client")
 }

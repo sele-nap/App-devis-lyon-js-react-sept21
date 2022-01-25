@@ -33,7 +33,7 @@ async function handlePatch(req, res) {
       createFiles({
         name: file.filename,
         estimate: { connect: { id: parseInt(id) } },
-        url: file.path,
+        url: file.path.replace("public/", ""),
         creator: currentUser.role,
       })
     );
