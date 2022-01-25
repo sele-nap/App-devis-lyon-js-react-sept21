@@ -39,12 +39,24 @@ export default function Estimate(req) {
 
   //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
-    if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
-      await axios.delete(`/api/estimate/${id}`);
-      alert("devis bien supprimé");
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre devis?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui, supprimé",
+    }).then((result) => {
+    if (result.isConfirmed) {
+      axios.delete(`/api/estimate/${id}`);
+      setEstimate((estimate) => estimate.filter((e) => e.id !== id)
+      );
+      Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+      
     }
-  };
+  });
+};
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
