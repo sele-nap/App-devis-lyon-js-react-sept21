@@ -32,6 +32,7 @@ const SignupForm = () => {
   const isIndividual = organizationType === "INDIVIDUAL";
 
   const onSubmit = (data) => {
+    //   console.log(data);
     axios
       .post("/api/users", data)
       .then((res) => {
@@ -127,6 +128,8 @@ const SignupForm = () => {
                 className="appearance-none block w-3/4 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 placeholder="******************"
                 id="password"
+                name="password"
+                // type="text"
                 type={passwordShown ? "text" : "password"}
                 {...register("password", {
                   required: " ❌ Mot de passe requis ",
@@ -145,6 +148,23 @@ const SignupForm = () => {
             {errors.password && (
               <span className="text-xs"> {errors.password.message}</span>
             )}
+
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Repeat Mot de passe
+              <span className="text-gray-400 text-md">*</span>
+            </label>
+            <input
+              className="appearance-none block w-3/4 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              type={passwordShown ? "text" : "password"}
+              {...register("passwordConfirm", {
+                required: "❌ Les deux mots de passe ne correspondent pas",
+                validate: (value) => value === watch("password"),
+              })}
+            />
+
+            {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
 
             <p className="text-gray-600 text-xs italic">
               1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères

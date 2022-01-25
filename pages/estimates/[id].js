@@ -138,11 +138,12 @@ export default function Estimate(req) {
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
-    dataFiles.append("additionalInformation", additionalInformation.value);
-    dataFiles.append("adminComment", adminComment.value);
+    dataFiles.append("additionalInformation", additionalInformation.valueOf());
+    dataFiles.append("adminComment", adminComment.valueOf());
 
     try {
       if (isUpdate) {
+        console.log(dataFiles);
         await axios.patch(`/api/estimate/${id}`, dataFiles).then((res) => {
           Swal.fire({
             position: "center",
@@ -195,30 +196,29 @@ export default function Estimate(req) {
     <Layout>
       <ClientLayout>
         <div className="flex flex-col">
-          <div ref={ref}>
-            <div className="flex justify-end items-center  mt-10 mx-72">
-              <div className="flex">
-                <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
-              </div>
-              <div className="mx-4">
-                <h1 className="text-xl uppercase">
-                  {" "}
-                  Société des décorations lyonnaises
-                </h1>
-                <div className="text-gray-700 italic text-sm">
-                  <p> Adresse Lambda - 69000 LYON </p>
-                  <p> Contact : contact@lyon-decoration.com</p>
-                  <p>Tel : 0123456789</p>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await saveEstimate();
+            }}
+          >
+            <div ref={ref}>
+              <div className="flex justify-end items-center  mt-10 mx-72">
+                <div className="flex">
+                  <Image src={Logo} width={"70px"} height={"70px"} alt="logo" />
+                </div>
+                <div className="mx-4">
+                  <h1 className="text-xl uppercase">
+                    {" "}
+                    Société des décorations lyonnaises
+                  </h1>
+                  <div className="text-gray-700 italic text-sm">
+                    <p> Adresse Lambda - 69000 LYON </p>
+                    <p> Contact : contact@lyon-decoration.com</p>
+                    <p>Tel : 0123456789</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await saveEstimate();
-              }}
-            >
               <h2 className="text-center text-2xl  uppercase m-4">
                 Devis
                 {{ status } === "TO_DO"
@@ -300,8 +300,8 @@ export default function Estimate(req) {
                       .filter((attachedFile) => attachedFile.creator === null)
                       .map((a) => {
                         return (
-                          <div className="m-5 text-center ">
-                            <Link key={a.id} href={"/" + a.url}>
+                          <div key={a.id} className="m-5 text-center ">
+                            <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
                           </div>
@@ -340,8 +340,8 @@ export default function Estimate(req) {
                       })
                       .map((a) => {
                         return (
-                          <div className="m-5 text-center ">
-                            <Link key={a.id} href={"/" + a.url}>
+                          <div key={a.id} className="m-5 text-center ">
+                            <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
                             <DeleteForeverIcon
@@ -408,48 +408,49 @@ export default function Estimate(req) {
                   <span className="mx-2 ">Pièces Jointes </span>
                 </button>
               </div>
-            </form>
-          </div>
-
-          <div className="flex justify-center mt-5"></div>
-          <div className="mt-10 flex justify-center">
-            <Link href="/estimates" passHref>
-              <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-                <ArrowBackIcon />
-                <span className="mx-2"> Mes devis </span>
-              </button>
-            </Link>
-
-            {adminComment && (
-              <button
-                onClick={() => sendMail(id)}
-                className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              >
-                <span>
-                  <CheckCircleOutlineIcon /> Validation du devis
-                </span>
-              </button>
-            )}
-            <div className="ml-2  pt-3 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
-              <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
-                {({ toPdf }) => (
-                  <button className="font-bold" onClick={toPdf}>
-                    <PictureAsPdfIcon />
-                    <span className="mx-2"> Télécharger en PDF </span>
-                  </button>
-                )}
-              </Pdf>
             </div>
-
-            <button
-              className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              onClick={() => deleteEstimate(id)}
-            >
-              <DeleteForeverIcon />
-              <span className="mx-2"> Suppression </span>
-            </button>
-          </div>
+          </form>
         </div>
+
+        <div className="flex justify-center mt-5"></div>
+        <div className="mt-10 flex justify-center">
+          <Link href="/estimates" passHref>
+            <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+              <ArrowBackIcon />
+              <span className="mx-2"> Mes devis </span>
+            </button>
+          </Link>
+
+          {adminComment && (
+            <button
+              onClick={() => sendMail(id)}
+              className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+            >
+              <span>
+                <CheckCircleOutlineIcon /> Validation du devis
+              </span>
+            </button>
+          )}
+          <div className="ml-2  pt-3 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+            <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
+              {({ toPdf }) => (
+                <button className="font-bold" onClick={toPdf}>
+                  <PictureAsPdfIcon />
+                  <span className="mx-2"> Télécharger en PDF </span>
+                </button>
+              )}
+            </Pdf>
+          </div>
+
+          <button
+            className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+            onClick={() => deleteEstimate(id)}
+          >
+            <DeleteForeverIcon />
+            <span className="mx-2"> Suppression </span>
+          </button>
+        </div>
+
         <div className="flex flex-row justify-around mt-20"></div>
       </ClientLayout>
     </Layout>
