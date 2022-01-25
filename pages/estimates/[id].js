@@ -10,6 +10,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Link from "next/link";
 import moment from "moment";
+import Router from "next/router";
 import Pdf from "react-to-pdf";
 import React from "react";
 import Logo from "../../public/Img/LogoSansBlabla.png";
@@ -45,6 +46,12 @@ export default function Estimate(req) {
       alert("devis bien supprimé");
       setEstimate((estimate) => estimate.filter((e) => e.id !== id));
     }
+
+    return (
+      <button type="button" onClick={() => router.back()}>
+        Retour
+      </button>
+    );
   };
   const [estimate, setEstimate] = useState([]);
 

@@ -2,9 +2,6 @@ import Layout from "../../components/Layout";
 import EstimateList from "../../components/EstimateList";
 import DraftArray from "../../components/DraftArray";
 import { IoIosAddCircle } from "react-icons/io";
-import { FaCloudDownloadAlt } from "react-icons/fa";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import { RiFileEditFill } from "react-icons/ri";
 import next from "next";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -67,16 +64,6 @@ export default function EstimateManagement() {
               <p className="px-2"> CRÉER UN DEVIS</p>
             </button>
           </Link>
-
-          {/* ___________ DOWNLOAD  ___________*/}
-
-          <button
-            className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-            onClick={Download}
-          >
-            <FaCloudDownloadAlt size={20} />
-            <p className="px-2">TÉLÉCHARGER</p>
-          </button>
         </div>
       </ClientLayout>
     </Layout>
