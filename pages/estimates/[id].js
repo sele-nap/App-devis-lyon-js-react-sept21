@@ -290,9 +290,28 @@ export default function Estimate(req) {
               <div className="border rounded-xl mx-72 ml-20 justify-start items-center flex flex-col">
                 <div className=" w-full mb-10 p-8">
                   <h2 className="text-center text-xl uppercase mb-4">
-                    Rappel de la demande{" "}
+                    Rappel de la demande
                   </h2>
-                  <input
+                  {status != "VALIDATED" ? (
+                    <input
+                      className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
+                      id="additionalInformation"
+                      name="additionalInformation"
+                      placeholder="Demande apportée"
+                      type="text"
+                      value={additionalInformation}
+                      onChange={(e) => setAdditionalInformation(e.target.value)}
+                    />
+                  ) : (
+                    <div
+                      className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="additionalInformation"
+                      name="additionalInformation"
+                    >
+                      {additionalInformation}
+                    </div>
+                  )}
+                  {/* <input
                     className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
                     id="additionalInformation"
                     name="additionalInformation"
@@ -300,7 +319,7 @@ export default function Estimate(req) {
                     type="text"
                     value={additionalInformation}
                     onChange={(e) => setAdditionalInformation(e.target.value)}
-                  />{" "}
+                  />{" "} */}
                   <div>
                     {" "}
                     {attachedFiles
