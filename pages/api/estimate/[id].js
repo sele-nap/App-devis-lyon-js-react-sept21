@@ -11,8 +11,6 @@ import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
 import handleImageUpload from "../../../middleware/handleImageUpload";
-import estimate from ".";
-// import { requireAdmin } from "../../../middleware/requireAdmin";
 
 async function handlePatch(req, res) {
   const {
@@ -33,7 +31,7 @@ async function handlePatch(req, res) {
       createFiles({
         name: file.filename,
         estimate: { connect: { id: parseInt(id) } },
-        url: file.path,
+        url: file.path.replace("public/", ""),
         creator: currentUser.role,
       })
     );

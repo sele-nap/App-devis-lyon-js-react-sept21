@@ -19,6 +19,7 @@ specifiers:
   cors: ^2.8.5
   date-fns: ^2.28.0
   dotenv: ^10.0.0
+  emailjs-com: ^3.2.0
   eslint: 8.4.0
   eslint-config-next: 12.0.7
   esm: ^3.2.25
@@ -73,6 +74,7 @@ dependencies:
   cors: 2.8.5
   date-fns: 2.28.0
   dotenv: 10.0.0
+  emailjs-com: 3.2.0
   esm: 3.2.25
   express: 4.17.2
   joi: 17.5.0
@@ -2325,6 +2327,12 @@ packages:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
+    dev: false
+
+  /emailjs-com/3.2.0:
+    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
+    engines: {node: '>=12.0.0'}
+    deprecated: The SDK name changed to @emailjs/browser
     dev: false
 
   /emittery/0.4.1:

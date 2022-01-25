@@ -8,18 +8,18 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
-import medaille2 from "../public/Img/medaille2.jpg";
+import Medal from "../public/Img/Medal.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
 import oscar2 from "../public/Img/oscar2.jpg";
 import styles from "../styles/Home.module.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Imagetrophée from "../public/Img/imagetrophée.jpg";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
+import HelloGuy from "../components/HelloGuy";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Home() {
@@ -27,6 +27,7 @@ export default function Home() {
   return (
     <div className="">
       <Layout className="bg-primary">
+        <HelloGuy />
         <h1 className="text-center text-2xl m-10">
           {" "}
           Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
@@ -52,7 +53,7 @@ export default function Home() {
               <Image src={coupe1} alt="" />
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={medaille2} alt="" />
+              <Image src={Medal} alt="" />
             </SwiperSlide>
             <SwiperSlide>
               <Image src={oscar1} alt="" />
@@ -64,12 +65,12 @@ export default function Home() {
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 ">
             <p className="w-full text-justify mr-5">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
+              Cat ipsum dolor sit amet, refuse to leave cardboard box pretend
+              you want to go out but then dont headbutt owners knee. Sit as
+              close as possible to warm fire without sitting on cold floor avoid
+              the new toy and just play with the box it came in, and rub face on
+              everything, or attack the child or meowwww or munch, munch, chomp,
+              chomp.
             </p>
           </div>
           <div className="bg-secondary ">

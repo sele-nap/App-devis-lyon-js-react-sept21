@@ -66,6 +66,10 @@ const validateUser = (data, forUpdate = false) => {
       .min(8)
       .max(100)
       .presence(forUpdate ? "optional" : "required"),
+    passwordConfirm: Joi.any()
+      .valid(Joi.ref("password"))
+      .required()
+      .options({ messages: { "any.only": "{{#label}} does not match" } }),
   }).validate(data, { abortEarly: false }).error;
 };
 
