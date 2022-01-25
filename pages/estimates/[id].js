@@ -327,7 +327,9 @@ export default function Estimate(req) {
                   <div>
                     {" "}
                     {attachedFiles
-                      .filter((attachedFile) => attachedFile.creator === null)
+                      .filter(
+                        (attachedFile) => attachedFile.creator === "client"
+                      )
                       .map((a) => {
                         return (
                           <div key={a.id} className="m-5 text-center ">
