@@ -25,12 +25,11 @@ SwiperCore.use([Autoplay, Pagination, Navigation]);
 export default function Home() {
   const { currentUserProfile } = useContext(CurrentUserContext);
   return (
-    <div className="">
-      <Layout className="bg-primary">
+    <div>
+      <Layout>
         <HelloGuy />
-        <h1 className="text-center text-2xl m-10">
-          {" "}
-          Maison de tradition lyonnaise de qualité vous souhaite la bienvenue
+        <h1 className="w-full my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
+          Les super médailles vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full bg-gray-200">
           <Swiper

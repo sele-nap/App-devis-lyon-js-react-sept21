@@ -180,7 +180,7 @@ function Estimate() {
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className="bg-third w-3/4 h-15  rounded-3xl mt-10  p-2 text-ml md:w-3/5 lg:w-1/3"
+                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Ajouter pièces jointes <br />3 maximums
               </button>
@@ -227,13 +227,13 @@ function Estimate() {
                   e.preventDefault();
                   onSubmit("TO_DO");
                 }}
-                className="bg-third  text-center w-3/4 m-5 md:w-1/3 h-10 flex justify-center rounded-3xl  p-2 text-ml "
+                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Soumettre un devis <SendIcon className="ml-10 " />
               </button>
 
               <button
-                className="bg-third text-center w-3/4 m-5 md:w-2/5 h-10 flex justify-center rounded-3xl  p-2 text-ml "
+                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
