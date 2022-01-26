@@ -345,7 +345,7 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                {adminComment != null ? (
+                {adminComment != null || currentUserIsAdmin ? (
                   <div className=" w-full mb-10 p-8">
                     <h2 className="text-center text-xl uppercase mb-4">
                       Proposition de l{`'`}administrateur
@@ -365,7 +365,7 @@ export default function Estimate(req) {
                         id="adminComment"
                         name="adminComment"
                       >
-                        {adminComment != null ? adminComment : null}
+                        {adminComment}
                       </div>
                     )}
 
@@ -390,7 +390,7 @@ export default function Estimate(req) {
                     </div>
                   </div>
                 ) : (
-                  "pas encore"
+                  "Une réponse de notre part vous sera apportée dans les meilleurs délais."
                 )}
 
                 <div className="m-20 align-sub">
