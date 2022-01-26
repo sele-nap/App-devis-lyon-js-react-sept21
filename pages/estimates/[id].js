@@ -65,8 +65,7 @@ export default function Estimate(req) {
 
   const sendMail = async (id) => {
     Swal.fire({
-      title:
-        "Voulez vous recevoir un mail avec un lien de validation ? Cette étape vaudra signature de votre part. ",
+      title: "Voulez vous envoyer un mail avec un lien de validation ?  ",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#DAB455",
@@ -77,7 +76,7 @@ export default function Estimate(req) {
         axios.post(`/api/estimate/${id}`);
         Swal.fire(
           "Envoyé",
-          "RDV maintenant dans votre boite mail pour activer ce lien.",
+          "Un mail a été envoyé, celui ci fait office de signature et vaut acceptation des conditions de ventes",
           "success"
         );
       }
