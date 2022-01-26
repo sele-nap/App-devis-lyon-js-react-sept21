@@ -71,8 +71,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}
 
       <div className="flex justify-center">
-        <div className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-          Liste des devis validés ou en attente de validation
+        <div className="ml-2 pl-10 pt-3 flex justify-center items-center text shadow w-96 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+          <span className="text-md text-center">
+            {" "}
+            Devis validés ou en attente de validation{" "}
+          </span>
         </div>
       </div>
 
