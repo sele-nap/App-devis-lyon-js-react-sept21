@@ -77,7 +77,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
               <tr className="bg-gray-100">
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Numéro Client
+                    Numéro Devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -180,10 +180,10 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                   createDate,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
-                    <td className="text-sm p-3"> {customer.id}</td>
+                    <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname}
+                      {customer.lastname} {customer.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(deadLine).format(`DD/MM/YYYY`)}

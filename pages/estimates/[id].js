@@ -40,6 +40,27 @@ const options = {
 export default function Estimate(req) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
 
+  const deleteEstimate = async (id) => {
+    Swal.fire({
+      title: "Etes vous sûr de vouloir supprimer votre devis?",
+      text: "Cette action est irréversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui, supprimé",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`/api/estimate/${id}`);
+        setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+        setTimeout(() => {
+          router.push("/estimates"), 2000;
+        });
+      }
+    });
+  };
+
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
@@ -150,7 +171,7 @@ export default function Estimate(req) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
-    dataFiles.append("adminComment", adminComment.valueOf());
+    dataFiles.append("adminComment", adminComment?.valueOf());
 
     try {
       if (isUpdate) {
@@ -234,9 +255,11 @@ export default function Estimate(req) {
               </div>
               <h2 className="text-center text-2xl  uppercase m-4">
                 Devis
-                {{ status } === "TO_DO"
-                  ? " EN COURS DE REDACTION - "
-                  : " BROUILLON  - "}
+                {status !== "VALIDATED"
+                  ? " EN COURS - "
+                  : false
+                  ? " VALIDÉ - "
+                  : " VALIDÉ - "}
                 n° {id}
               </h2>
               <div className="flex  justify-around">
@@ -340,49 +363,53 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                <div className=" w-full mb-10 p-8">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Proposition de l{`'`}administrateur
-                  </h2>
-                  {currentUserIsAdmin ? (
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                      type="text"
-                      value={adminComment}
-                      onChange={(e) => setAdminComment(e.target.value)}
-                    />
-                  ) : (
-                    <div
-                      className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                    >
-                      {adminComment}
-                    </div>
-                  )}
+                {adminComment != null || currentUserIsAdmin ? (
+                  <div className=" w-full mb-10 p-8">
+                    <h2 className="text-center text-xl uppercase mb-4">
+                      Proposition de l{`'`}administrateur
+                    </h2>
+                    {currentUserIsAdmin ? (
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                        type="text"
+                        value={adminComment}
+                        onChange={(e) => setAdminComment(e.target.value)}
+                      />
+                    ) : (
+                      <div
+                        className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                      >
+                        {adminComment}
+                      </div>
+                    )}
 
-                  <div>
-                    {attachedFiles
-                      .filter((attachedFile) => {
-                        return attachedFile.creator === "admin";
-                      })
-                      .map((a) => {
-                        return (
-                          <div key={a.id} className="m-5 text-center ">
-                            <Link href={"/" + a.url}>
-                              <a>{a.name}</a>
-                            </Link>
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={() => deleteAttachedFiles(a.id)}
-                            />
-                          </div>
-                        );
-                      })}
+                    <div>
+                      {attachedFiles
+                        .filter((attachedFile) => {
+                          return attachedFile.creator === "admin";
+                        })
+                        .map((a) => {
+                          return (
+                            <div key={a.id} className="m-5 text-center ">
+                              <Link href={"/" + a.url}>
+                                <a>{a.name}</a>
+                              </Link>
+                              <DeleteForeverIcon
+                                className="ml-3"
+                                onClick={() => deleteAttachedFiles(a.id)}
+                              />
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  "Une réponse de notre part vous sera apportée dans les meilleurs délais."
+                )}
 
                 <div className="m-20 align-sub">
                   {attachedFilesUpload.map((data, index, url) => {

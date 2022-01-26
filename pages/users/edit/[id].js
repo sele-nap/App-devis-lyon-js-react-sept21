@@ -190,6 +190,7 @@ export default function UserDetails() {
                       id="siretNumber"
                       name="siretNumber"
                       type="text"
+                      max="14"
                       value={siretNumber}
                       onChange={(e) => setSiretNumber(e.target.value)}
                     />
@@ -258,6 +259,7 @@ export default function UserDetails() {
                     id="zipCode"
                     name="zipCode"
                     type="text"
+                    max="5"
                     value={zipCode}
                     onChange={(e) => setZipCode(e.target.value)}
                   />
@@ -293,6 +295,7 @@ export default function UserDetails() {
               leading-tight focus:outline-none focus:bg-white
               focus:border-gray-500"
                   value={phone}
+                  max="10"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
