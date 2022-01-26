@@ -227,9 +227,11 @@ export default function Estimate(req) {
               </div>
               <h2 className="text-center text-2xl  uppercase m-4">
                 Devis
-                {{ status } === "TO_DO"
-                  ? " EN COURS DE REDACTION - "
-                  : " BROUILLON  - "}
+                {status !== "VALIDATED"
+                  ? " EN COURS - "
+                  : false
+                  ? " VALIDÉ - "
+                  : " VALIDÉ - "}
                 n° {id}
               </h2>
               <div className="flex  justify-around">
