@@ -40,35 +40,27 @@ const options = {
 export default function Estimate(req) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
 
-  //  -------------------------- DELETE THE ESTIMATE --------------------------
-  const deleteEstimate = async (id) => {
-    Swal.fire({
-      title: "Etes vous sûr de vouloir supprimer votre devis?",
-      text: "Cette action est irréversible",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DAB455",
-      cancelButtonColor: "#ECE6E6",
-      confirmButtonText: "Oui, supprimé",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios.delete(`/api/estimate/${id}`);
-        setEstimate((estimate) => estimate.filter((e) => e.id !== id));
-        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
-      }
-    });
-  };
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
-    if (
-      confirm(
-        "Voulez vous recevoir un mail avec un lien de validation, cette étape vaudra signature de votre part "
-      )
-    ) {
-      axios.post(`/api/estimate/${id}`);
-      alert("RDV maintenant dans votre boite mail pour activer ce lien");
-    }
+    Swal.fire({
+      title:
+        "Voulez vous recevoir un mail avec un lien de validation ? Cette étape vaudra signature de votre part. ",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`/api/estimate/${id}`);
+        Swal.fire(
+          "Envoyé",
+          "RDV maintenant dans votre boite mail pour activer ce lien.",
+          "success"
+        );
+      }
+    });
   };
   //  -------------------------- STATE FOR UPDATE --------------------------
   const [status, setStatus] = useState("");
