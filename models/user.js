@@ -47,7 +47,6 @@ const validateUser = (data, forUpdate = false) => {
 
     siretNumber: Joi.string()
       .max(255)
-
       .presence(
         data.organizationType === "INDIVIDUAL" ? "optional" : "required"
       )
@@ -65,6 +64,11 @@ const validateUser = (data, forUpdate = false) => {
     password: Joi.string()
       .min(8)
       .max(100)
+      .presence(forUpdate ? "optional" : "required"),
+    passwordConfirm: Joi.any()
+      .valid(Joi.ref("password"))
+      .required()
+      .options({ messages: { "any.only": "{{#label}} does not match" } })
       .presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
@@ -141,7 +145,7 @@ const userToShow = {
   city: true,
   siretNumber: true,
 };
-const getUsers = async ({ customerId }) => {
+const getUsers = async () => {
   return db.user.findMany({
     // where: { customer: { id: customerId } },
     select: userToShow,
@@ -175,7 +179,6 @@ const getSafeAttributes = (user) => ({
   ...user,
   hashPassword: undefined,
 });
-
 
 module.exports = {
   hashPassword,

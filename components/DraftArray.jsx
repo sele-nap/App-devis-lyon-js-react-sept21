@@ -62,12 +62,14 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
     <section className="">
       {/* ___________ ESTIMATE IN THE PROCESS OF CREATION  ___________ */}
 
-      <div className="flex justify-center items-center mt-10">
-        <div className="border-2 border-third text-black rounded cursor-auto p-1">
-          Liste des devis en cours de création
+      <div className="flex justify-center mt-8">
+        <div className="ml-2 pl-10 pt-3 flex justify-center items-center text shadow w-96 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+          <span className="text-md text-center">
+            {" "}
+            Devis en cours de création
+          </span>
         </div>
       </div>
-
       {!createEstimate && <p>En chargement...</p>}
       {createEstimate?.length === 0 && <p>Pas de devis actuellement</p>}
       {createEstimate && createEstimate.length !== 0 && (
@@ -77,7 +79,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
               <tr className="bg-gray-100">
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Numéro Client
+                    Numéro Devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -146,7 +148,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                {/* <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Validation
                     <path
@@ -156,7 +158,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                       d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                     />
                   </div>
-                </th> */}
+                </th>
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Suppression
@@ -180,10 +182,10 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                   createDate,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
-                    <td className="text-sm p-3"> {customer.id}</td>
+                    <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname}
+                      {customer.lastname} {customer.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(deadLine).format(`DD/MM/YYYY`)}
@@ -202,16 +204,16 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    {/* <td className="">
+                    <td className="">
                       <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                         <ToggleButtonToDo
-                          e={{ id, status }}
+                          e={{ id, statusList }}
                           handleChange={() =>
                             getEstimates(statusList, offset, limit)
                           }
                         />
                       </div>
-                    </td> */}
+                    </td>
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"

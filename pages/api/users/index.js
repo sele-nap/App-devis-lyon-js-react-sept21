@@ -4,18 +4,18 @@ import {
   create,
   getUsers,
   deleteOneUser,
-} from '../../../models/user';
-import base from '../../../middleware/commons';
-import mailer from '../../../mailer';
-import crypto from 'crypto';
-import requireCurrentUser from '../../../middleware/requireCurrentUser';
+} from "../../../models/user";
+import base from "../../../middleware/commons";
+import mailer from "../../../mailer";
+import crypto from "crypto";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
 async function handler(req, res) {
   const validationError = validateUser(req.body);
   if (validationError) return res.status(422).send(validationError);
   if (await emailAlreadyExists(req.body.email))
-    return res.status(409).send('This email already exists');
-  const emailVerificationCode = crypto.randomBytes(50).toString('hex');
+    return res.status(409).send("This email already exists");
+  const emailVerificationCode = crypto.randomBytes(50).toString("hex");
   const { id, email, lastname } = await create({
     ...req.body,
     emailVerificationCode,
@@ -35,9 +35,11 @@ async function handler(req, res) {
 }
 
 const handleGet = async (req, res) => {
-  const customerId =
-    req.currentUser.role === 'admin' ? undefined : req.currentUser.id;
-  res.send(await getUsers({ customerId }));
+  if (req.currentUser.role === "admin") {
+    res.send(await getUsers());
+  } else {
+    res.send([req.currentUser]);
+  }
 };
 
 async function handleDelete({ query: { id } }, res) {

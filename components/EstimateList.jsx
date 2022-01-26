@@ -71,8 +71,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}
 
       <div className="flex justify-center">
-        <div className="mt-10  border-2 border-third text-black rounded cursor-auto p-1 ">
-          Liste des devis validés ou en attente de validation
+        <div className="ml-2 pl-10 pt-3 flex justify-center items-center text shadow w-96 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+          <span className="text-md text-center">
+            {" "}
+            Devis validés ou en attente de validation{" "}
+          </span>
         </div>
       </div>
 
@@ -85,7 +88,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
               <tr className="bg-gray-100">
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Numéro Client
+                    Numéro Devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -154,19 +157,19 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                {currentUserIsAdmin ? (
-                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                    <div className="flex items-center justify-center">
-                      Validation
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                      />
-                    </div>
-                  </th>
-                ) : null}
+                {/* {currentUserIsAdmin ? ( */}
+                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                  <div className="flex items-center justify-center">
+                    Validation
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                    />
+                  </div>
+                </th>
+                {/* ) : null} */}
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
@@ -192,10 +195,10 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   status,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
-                    <td className="text-sm p-3"> {customer.id}</td>
+                    <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname}
+                      {customer.lastname} {customer.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(createDate).format(`DD/MM/YYYY`)}
@@ -214,18 +217,18 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    {currentUserIsAdmin ? (
-                      <td className="">
-                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                          <ToggleButton
-                            e={{ id, status }}
-                            handleChange={() =>
-                              getEstimates(statusList, currentPage, perPage)
-                            }
-                          />
-                        </div>
-                      </td>
-                    ) : null}
+                    {/* {currentUserIsAdmin ? ( */}
+                    <td className="">
+                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                        <ToggleButton
+                          e={{ id, status }}
+                          handleChange={() =>
+                            getEstimates(statusList, currentPage, perPage)
+                          }
+                        />
+                      </div>
+                    </td>
+                    {/* ) : null} */}
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"

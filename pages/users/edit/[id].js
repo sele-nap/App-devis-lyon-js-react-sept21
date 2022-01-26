@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
-import CtaButton from "../../../components/CtaButton";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import AdminLayout from "../../../components/AdminLayout";
 
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
@@ -193,6 +190,7 @@ export default function UserDetails() {
                       id="siretNumber"
                       name="siretNumber"
                       type="text"
+                      max="14"
                       value={siretNumber}
                       onChange={(e) => setSiretNumber(e.target.value)}
                     />
@@ -261,6 +259,7 @@ export default function UserDetails() {
                     id="zipCode"
                     name="zipCode"
                     type="text"
+                    max="5"
                     value={zipCode}
                     onChange={(e) => setZipCode(e.target.value)}
                   />
@@ -296,6 +295,7 @@ export default function UserDetails() {
               leading-tight focus:outline-none focus:bg-white
               focus:border-gray-500"
                   value={phone}
+                  max="10"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>

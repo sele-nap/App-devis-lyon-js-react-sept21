@@ -25,36 +25,32 @@ const Header = () => {
   };
   return (
     <div className="flex flex-row flex-wrap w-full items-center p-2  m-0 justify-around shadow-xs bg-third ">
-      <Link href="/" passHref>
+      <Link href="/">
         <a className="flex justify-center md:justify-end ">
           <Image src={LogoSansBlabla} alt="Logo" width="50px" height="50px" />
         </a>
       </Link>
       <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
+        <IoIosAddCircle size={20} />
         <span className="mx-2"></span>
-        <Link href="/askEstimatePage">
+        <Link href="/askEstimatePage" passHref>
           <button
             className="text-sm md text-lg:lg"
             onClick={handleEstimateClick}
           >
-            <IoIosAddCircle size={20} /> <a>Devis</a>
+            <a>Devis</a>
           </button>
         </Link>
       </div>
 
       <div className=" flex-around hover:w-1/4 group">
-        <a
-          href="#"
-          className="flex items-center justify-center text-center mx-auto px-4 py-2 group-hover:w-1/5 text-black"
-        >
-          <input
-            type="search"
-            name="search"
-            placeholder="Recherche"
-            className="hidden group-hover:inline-block rounded-2xl z-10 ml-3 align-bottom p-1 pl-4 md:w-15"
-          />
-          <VscSearch size={25} className="text-2xl pt-1 group-hover:hidden" />
-        </a>
+        <input
+          type="search"
+          name="search"
+          placeholder="Recherche"
+          className="hidden group-hover:inline-block rounded-2xl z-10 ml-3 align-bottom p-1 pl-4 md:w-15"
+        />
+        <VscSearch size={25} className="text-2xl pt-1 group-hover:hidden" />
       </div>
 
       <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">

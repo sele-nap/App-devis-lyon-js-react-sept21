@@ -13,7 +13,12 @@ import medaillesport from "../public/Img/medaillesport.jpg";
 
 export default function Catalog() {
   return (
-    <Layout title="catalogue">
+    <Layout>
+      <div className="flex justify-center">
+        <h1 className="border-2 border-third text-black rounded cursor-auto p-1  text-2xl mb-4 uppercase text-center">
+          Catalogue
+        </h1>
+      </div>
       <div className="flex flex-wrap items-center justify-center">
         <div className="w-80 flex justify-center items-center">
           <div className="w-full p-4">
@@ -38,9 +43,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    ADD TO CART
-                  </button>
                 </div>
               </div>
             </div>
@@ -67,9 +69,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -96,9 +95,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -125,9 +121,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -154,9 +147,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -184,9 +174,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -214,9 +201,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -243,9 +227,6 @@ export default function Catalog() {
               <div className="prod-info grid gap-10">
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-900">
                   <p className="font-bold text-xl">35€</p>
-                  <button className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
