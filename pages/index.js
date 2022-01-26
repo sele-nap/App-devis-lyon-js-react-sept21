@@ -63,7 +63,7 @@ export default function Home() {
           </Swiper>
 
           <div className="bg-primary flex flex-row-reverse justify-around p-5 ">
-            <p className="w-full text-justify mr-5">
+            <p className="w-full text-justify mx-20">
               Cat ipsum dolor sit amet, refuse to leave cardboard box pretend
               you want to go out but then dont headbutt owners knee. Sit as
               close as possible to warm fire without sitting on cold floor avoid
