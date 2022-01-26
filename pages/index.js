@@ -29,7 +29,7 @@ export default function Home() {
       <Layout>
         <HelloGuy />
         <h1 className="w-full my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
-          Maison de tradition lyonnaise vous souhaite la bienvenue
+          Les super médailles vous souhaite la bienvenue
         </h1>
         <div className="h-90 w-full bg-gray-200">
           <Swiper
