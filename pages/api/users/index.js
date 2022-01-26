@@ -35,12 +35,11 @@ async function handler(req, res) {
 }
 
 const handleGet = async (req, res) => {
-  const customerId =
-    req.currentUser.role === "admin" ? undefined : req.currentUser.id;
-  const contact = await getUsers({
-    customerId,
-  });
-  res.send(contact);
+  if (req.currentUser.role === "admin") {
+    res.send(await getUsers());
+  } else {
+    res.send([req.currentUser]);
+  }
 };
 
 async function handleDelete({ query: { id } }, res) {
