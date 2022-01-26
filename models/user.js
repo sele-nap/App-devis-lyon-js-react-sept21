@@ -47,7 +47,6 @@ const validateUser = (data, forUpdate = false) => {
 
     siretNumber: Joi.string()
       .max(255)
-
       .presence(
         data.organizationType === "INDIVIDUAL" ? "optional" : "required"
       )
@@ -69,7 +68,8 @@ const validateUser = (data, forUpdate = false) => {
     passwordConfirm: Joi.any()
       .valid(Joi.ref("password"))
       .required()
-      .options({ messages: { "any.only": "{{#label}} does not match" } }),
+      .options({ messages: { "any.only": "{{#label}} does not match" } })
+      .presence(forUpdate ? "optional" : "required"),
   }).validate(data, { abortEarly: false }).error;
 };
 
