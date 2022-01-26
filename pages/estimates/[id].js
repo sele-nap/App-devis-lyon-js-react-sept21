@@ -151,7 +151,7 @@ export default function Estimate(req) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
-    dataFiles.append("adminComment", adminComment.valueOf());
+    dataFiles.append("adminComment", adminComment?.valueOf());
 
     try {
       if (isUpdate) {
@@ -345,49 +345,53 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                <div className=" w-full mb-10 p-8">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Proposition de l{`'`}administrateur
-                  </h2>
-                  {currentUserIsAdmin ? (
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                      type="text"
-                      value={adminComment}
-                      onChange={(e) => setAdminComment(e.target.value)}
-                    />
-                  ) : (
-                    <div
-                      className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                    >
-                      {adminComment}
-                    </div>
-                  )}
+                {adminComment != null ? (
+                  <div className=" w-full mb-10 p-8">
+                    <h2 className="text-center text-xl uppercase mb-4">
+                      Proposition de l{`'`}administrateur
+                    </h2>
+                    {currentUserIsAdmin ? (
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                        type="text"
+                        value={adminComment}
+                        onChange={(e) => setAdminComment(e.target.value)}
+                      />
+                    ) : (
+                      <div
+                        className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                      >
+                        {adminComment != null ? adminComment : null}
+                      </div>
+                    )}
 
-                  <div>
-                    {attachedFiles
-                      .filter((attachedFile) => {
-                        return attachedFile.creator === "admin";
-                      })
-                      .map((a) => {
-                        return (
-                          <div key={a.id} className="m-5 text-center ">
-                            <Link href={"/" + a.url}>
-                              <a>{a.name}</a>
-                            </Link>
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={() => deleteAttachedFiles(a.id)}
-                            />
-                          </div>
-                        );
-                      })}
+                    <div>
+                      {attachedFiles
+                        .filter((attachedFile) => {
+                          return attachedFile.creator === "admin";
+                        })
+                        .map((a) => {
+                          return (
+                            <div key={a.id} className="m-5 text-center ">
+                              <Link href={"/" + a.url}>
+                                <a>{a.name}</a>
+                              </Link>
+                              <DeleteForeverIcon
+                                className="ml-3"
+                                onClick={() => deleteAttachedFiles(a.id)}
+                              />
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  "pas encore"
+                )}
 
                 <div className="m-20 align-sub">
                   {attachedFilesUpload.map((data, index, url) => {
