@@ -40,7 +40,6 @@ const options = {
 export default function Estimate(req) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
 
-  //  -------------------------- DELETE THE ESTIMATE --------------------------
   const deleteEstimate = async (id) => {
     Swal.fire({
       title: "Etes vous sûr de vouloir supprimer votre devis?",
@@ -55,20 +54,34 @@ export default function Estimate(req) {
         axios.delete(`/api/estimate/${id}`);
         setEstimate((estimate) => estimate.filter((e) => e.id !== id));
         Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+        setTimeout(() => {
+          router.push("/estimates"), 2000;
+        });
       }
     });
   };
+
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
-    if (
-      confirm(
-        "Voulez vous recevoir un mail avec un lien de validation, cette étape vaudra signature de votre part "
-      )
-    ) {
-      axios.post(`/api/estimate/${id}`);
-      alert("RDV maintenant dans votre boite mail pour activer ce lien");
-    }
+    Swal.fire({
+      title:
+        "Voulez vous recevoir un mail avec un lien de validation ? Cette étape vaudra signature de votre part. ",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`/api/estimate/${id}`);
+        Swal.fire(
+          "Envoyé",
+          "RDV maintenant dans votre boite mail pour activer ce lien.",
+          "success"
+        );
+      }
+    });
   };
   //  -------------------------- STATE FOR UPDATE --------------------------
   const [status, setStatus] = useState("");
@@ -318,15 +331,7 @@ export default function Estimate(req) {
                       {additionalInformation}
                     </div>
                   )}
-                  {/* <input
-                    className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
-                    id="additionalInformation"
-                    name="additionalInformation"
-                    placeholder="Demande apportée"
-                    type="text"
-                    value={additionalInformation}
-                    onChange={(e) => setAdditionalInformation(e.target.value)}
-                  />{" "} */}
+
                   <div>
                     {" "}
                     {attachedFiles
@@ -339,6 +344,10 @@ export default function Estimate(req) {
                             <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
+                            <DeleteForeverIcon
+                              className="ml-3"
+                              onClick={() => deleteAttachedFiles(a.id)}
+                            />
                           </div>
                         );
                       })}
@@ -419,32 +428,34 @@ export default function Estimate(req) {
                   })}
                 </div>
               </div>
-            </div>
-            <div className="flex  justify-center mt-20">
-              <input
-                className="hidden"
-                type="file"
-                multiple={true}
-                id="attachedFiles"
-                accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
-                ref={attachedFilesRef}
-                onChange={handleAttachedFilesSelection}
-              ></input>
-              <button
-                type="submit"
-                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              >
-                <SaveIcon />
-                <span className="mx-2"> Sauvegarde </span>
-              </button>
-              <button
-                className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                onClick={handleAttachedFilesClick}
-                type="submit"
-              >
-                <IoIosAttach size={26} />
-                <span className="mx-2 ">Pièces Jointes </span>
-              </button>
+
+              <div className="flex  justify-center mt-20">
+                <input
+                  className="hidden"
+                  type="file"
+                  multiple={true}
+                  id="attachedFiles"
+                  accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
+                  ref={attachedFilesRef}
+                  onChange={handleAttachedFilesSelection}
+                ></input>
+
+                <button
+                  type="submit"
+                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                >
+                  <SaveIcon />
+                  <span className="mx-2"> Sauvegarde </span>
+                </button>
+                <button
+                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                  onClick={handleAttachedFilesClick}
+                  type="submit"
+                >
+                  <IoIosAttach size={26} />
+                  <span className="mx-2 ">Pièces Jointes </span>
+                </button>
+              </div>
             </div>
           </form>
         </div>

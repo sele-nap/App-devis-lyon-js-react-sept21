@@ -53,7 +53,11 @@ model estimate {
   signature             String?
   validationDate        DateTime?
   deadLine              DateTime?
+<<<<<<< HEAD
   additionalInformation String?        @db.LongText
+=======
+  additionalInformation String         @db.LongText
+>>>>>>> 9120fc6ed71dbfeaff7ec00a5475f8f399bd9ea7
   validationCode        String?        @unique
   createDate            DateTime?
   adminComment          String?        @db.LongText

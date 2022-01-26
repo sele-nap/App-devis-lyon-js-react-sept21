@@ -145,7 +145,7 @@ const userToShow = {
   city: true,
   siretNumber: true,
 };
-const getUsers = async ({ customerId }) => {
+const getUsers = async () => {
   return db.user.findMany({
     // where: { customer: { id: customerId } },
     select: userToShow,
