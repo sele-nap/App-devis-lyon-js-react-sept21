@@ -42,16 +42,17 @@ export default function EstimateManagement() {
         {/* ___________ CREATE AN ESTIMATE  ___________*/}
 
         <div className="flex justify-around items-center my-8">
-          <Link href="/askEstimatepage">
-            <a><button
-              className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
-              type="submit"
-              onClick={handleClick}
-            >
-            
-              <IoIosAddCircle size={20} />
-              <p className="px-2"> CRÉER UN DEVIS</p>
-            </button></a>
+          <Link href="/askEstimatePage">
+            <a>
+              <button
+                className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+                type="submit"
+                // onClick={handleClick}
+              >
+                <IoIosAddCircle size={20} />
+                <p className="px-2"> CRÉER UN DEVIS</p>
+              </button>
+            </a>
           </Link>
         </div>
       </ClientLayout>
