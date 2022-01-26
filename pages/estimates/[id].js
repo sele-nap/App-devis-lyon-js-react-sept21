@@ -51,15 +51,13 @@ export default function Estimate(req) {
       cancelButtonColor: "#ECE6E6",
       confirmButtonText: "Oui, supprimé",
     }).then((result) => {
-    if (result.isConfirmed) {
-      axios.delete(`/api/estimate/${id}`);
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id)
-      );
-      Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
-      
-    }
-  });
-};
+      if (result.isConfirmed) {
+        axios.delete(`/api/estimate/${id}`);
+        setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+      }
+    });
+  };
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
@@ -339,6 +337,10 @@ export default function Estimate(req) {
                             <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
+                            <DeleteForeverIcon
+                              className="ml-3"
+                              onClick={() => deleteAttachedFiles(a.id)}
+                            />
                           </div>
                         );
                       })}
