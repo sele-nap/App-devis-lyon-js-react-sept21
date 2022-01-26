@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import ClientLayout from "../components/ClientLayout";
 import { format } from "date-fns";
 import { useRouter } from "next/dist/client/router";
+import { IoIosAttach } from "react-icons/io";
 
 function Estimate() {
   const router = useRouter();
@@ -177,9 +178,10 @@ function Estimate() {
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className=" m-10 shadow w-64 h-14 bg-yellow-500 hover:bg-third focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className="flex flex-row justify-center m-10 shadow w-64 h-14 bg-secondary hover:bg-third focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Ajouter pièces jointes <br />3 maximums
+                <IoIosAttach size={26} className="ml-4 mt-2" />
               </button>
               <input
                 className="hidden"
@@ -224,13 +226,13 @@ function Estimate() {
                   e.preventDefault();
                   onSubmit("TO_DO");
                 }}
-                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className="shadow w-64 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Soumettre un devis <SendIcon className="ml-5 " />
               </button>
 
               <button
-                className=" pt-3 flex flex-row around shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className=" pt-3 flex flex-row around shadow w-64 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
