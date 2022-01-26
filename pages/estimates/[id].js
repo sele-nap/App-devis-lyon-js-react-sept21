@@ -102,17 +102,24 @@ export default function Estimate(req) {
     }
   };
   const deleteAttachedFiles = async (id) => {
-    if (
-      confirm(
-        "Voulez vous vraiment supprimer cette pièce jointe définitivement ?"
-      )
-    ) {
-      await axios.delete(`/api/attachedFiles/${id}`);
-      alert("Pièce jointe bien supprimé");
-      setAttachedFiles((attachedFiles) =>
-        attachedFiles.filter((e) => e.id !== id)
-      );
-    }
+    Swal.fire({
+      title:
+        "Voulez vous vraiment supprimer cette pièce jointe définitivement ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DAB455",
+      cancelButtonColor: "#ECE6E6",
+      confirmButtonText: "Oui",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`/api/attachedFiles/${id}`);
+
+        setAttachedFiles((attachedFiles) =>
+          attachedFiles.filter((e) => e.id !== id)
+        );
+        Swal.fire("Envoyé", "Pièce jointe supprimée.", "success");
+      }
+    });
   };
 
   // Remove attached files//
@@ -310,7 +317,7 @@ export default function Estimate(req) {
                       {additionalInformation}
                     </div>
                   )}
-                
+
                   <div>
                     {" "}
                     {attachedFiles
