@@ -133,7 +133,7 @@ function Estimate() {
         {" "}
         <ClientLayout>
           <div className=" flex justify-center">
-            <h1 className="bg-third h-10 w-3/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
+            <h1 className="bg-third h-10 w-1/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
               {`Votre demande de devis ${numberEstimate}`}
             </h1>
           </div>
@@ -151,9 +151,6 @@ function Estimate() {
                 name="additionalInformation"
                 type="text"
                 require="require"
-                // {...register("additionalInformation", {
-                //   required: " ❌ Champs obligatoire ",
-                // })}
               />
               {errors.additionalInformation && (
                 <span className="text-xs">
@@ -180,7 +177,7 @@ function Estimate() {
               <button
                 onClick={handleAttachedFilesClick}
                 type="submit"
-                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className=" m-10 shadow w-64 h-14 bg-yellow-500 hover:bg-third focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Ajouter pièces jointes <br />3 maximums
               </button>
@@ -229,11 +226,11 @@ function Estimate() {
                 }}
                 className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
-                Soumettre un devis <SendIcon className="ml-10 " />
+                Soumettre un devis <SendIcon className="ml-5 " />
               </button>
 
               <button
-                className="shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className=" pt-3 flex flex-row around shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
@@ -241,7 +238,7 @@ function Estimate() {
                 }}
               >
                 Enregistrer ma demande <br />
-                <SaveIcon className="ml-10" />
+                <SaveIcon className="ml-3" />
               </button>
             </div>
           </form>
