@@ -45,9 +45,8 @@ export default function EstimateManagement() {
           <Link href="/askEstimatePage">
             <a>
               <button
-                className="flex p-2 pl-2 bg-third hover:bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 rounded-full cursor-pointer"
+                className="flex pt-3 pl-10 flex-row around shadow w-64 h-12 bg-third hover:bg-yellow-600 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded cursor-pointer"
                 type="submit"
-                // onClick={handleClick}
               >
                 <IoIosAddCircle size={20} />
                 <p className="px-2"> CRÉER UN DEVIS</p>
