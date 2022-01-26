@@ -31,13 +31,14 @@ const Header = () => {
         </a>
       </Link>
       <div className="flex flex-row sm:text-xs p-2 px-4 text-xs leading-none  rounded  hover:border-transparent hover:text-slate-800 hover:bg-white">
+        <IoIosAddCircle size={20} />
         <span className="mx-2"></span>
         <Link href="/askEstimatePage" passHref>
           <button
             className="text-sm md text-lg:lg"
             onClick={handleEstimateClick}
           >
-            <IoIosAddCircle size={20} /> <a>Devis</a>
+            <a>Devis</a>
           </button>
         </Link>
       </div>
