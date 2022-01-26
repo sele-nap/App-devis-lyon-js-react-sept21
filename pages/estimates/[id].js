@@ -160,7 +160,9 @@ export default function Estimate(req) {
       } else {
         await axios.post(`/api/estimate/${id}`, dataFiles);
       }
-      router.push("/estimates");
+      setTimeout(() => {
+        router.push("/estimates"), 2000;
+      });
     } catch (err) {
       console.error(err);
     }
