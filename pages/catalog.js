@@ -13,7 +13,12 @@ import medaillesport from "../public/Img/medaillesport.jpg";
 
 export default function Catalog() {
   return (
-    <Layout title="catalogue">
+    <Layout>
+      <div className="flex justify-center">
+        <h1 className="border-2 border-third text-black rounded cursor-auto p-1  text-2xl mb-4 uppercase text-center">
+          Catalogue
+        </h1>
+      </div>
       <div className="flex flex-wrap items-center justify-center">
         <div className="w-80 flex justify-center items-center">
           <div className="w-full p-4">

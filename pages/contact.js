@@ -41,6 +41,11 @@ const Contact = () => {
   }
   return (
     <Layout>
+      <div className="flex justify-center">
+        <h1 className="border-2 border-third text-black rounded cursor-auto p-1  text-2xl mb-4 uppercase text-center">
+          Contact
+        </h1>
+      </div>
       <div className="flex items-center justify-center mt-16">
         <form className="w-1/3" ref={form} onSubmit={sendmail}>
           <div className="mb-10">
@@ -55,7 +60,6 @@ const Contact = () => {
               name="name"
             />
           </div>
-
           <div className="flex flex-wrap -mx-3 mb-10">
             <div className="w-full px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -69,7 +73,6 @@ const Contact = () => {
               />
             </div>
           </div>
-
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
