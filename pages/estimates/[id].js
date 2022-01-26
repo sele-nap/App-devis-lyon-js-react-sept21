@@ -76,7 +76,7 @@ export default function Estimate(req) {
         axios.post(`/api/estimate/${id}`);
         Swal.fire(
           "Envoyé",
-          "Un mail a été envoyé, celui ci fait office de signature et vaut acceptation des conditions de ventes",
+          "Un mail a été envoyé, celui ci fait office de signature et d'acceptation des conditions de ventes",
           "success"
         );
       }
