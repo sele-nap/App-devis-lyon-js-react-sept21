@@ -73,56 +73,46 @@ export default function Home() {
             </p>
           </div>
           <div className="bg-secondary ">
-            <div className="bg-secondary ">
-              <div className=" ">
-                <h2 className="text-center text-xl m-3 pt-3">
-                  Produit du moment
-                </h2>
-                <div className=" h-full p-7 w-full m-100">
-                  <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 gap-6 pb">
-                    <Link href="/catalog">
-                      <a className="flex justify-center md:justify-end ">
-                        <Image
-                          src={ImageDrapeau}
-                          width="200px"
-                          height="200px "
-                          className="box col-start-1"
-                        />
-                      </a>
-                    </Link>
+            <div className="flex justify-center">
+              <h2 className="mt-7 border-2 border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
+                Produit du moment
+              </h2>
+            </div>
+            <div className=" h-full p-7 w-full m-100">
+              <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 gap-6 pb">
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-end ">
+                    <Image
+                      src={ImageDrapeau}
+                      width="200px"
+                      height="200px "
+                      className="box col-start-1"
+                    />
+                  </a>
+                </Link>
 
-                    <Link href="/catalog">
-                      <a className="flex justify-center md:justify-between">
-                        <Image
-                          src={ImageEcharpe}
-                          width="200px"
-                          height="200px"
-                        />
-                      </a>
-                    </Link>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-between">
+                    <Image src={ImageEcharpe} width="200px" height="200px" />
+                  </a>
+                </Link>
 
-                    <Link href="/catalog">
-                      <a className="flex justify-center md:justify-end">
-                        <Image
-                          src={ImageMedaille}
-                          width="200px"
-                          height="200px"
-                          className=""
-                        />
-                      </a>
-                    </Link>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-end">
+                    <Image
+                      src={ImageMedaille}
+                      width="200px"
+                      height="200px"
+                      className=""
+                    />
+                  </a>
+                </Link>
 
-                    <Link href="/catalog">
-                      <a className="flex justify-center md:justify-between">
-                        <Image
-                          src={ImageTrophee}
-                          width="200px"
-                          height="200px"
-                        />
-                      </a>
-                    </Link>
-                  </div>
-                </div>
+                <Link href="/catalog">
+                  <a className="flex justify-center md:justify-between">
+                    <Image src={ImageTrophee} width="200px" height="200px" />
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
