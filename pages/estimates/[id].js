@@ -51,15 +51,13 @@ export default function Estimate(req) {
       cancelButtonColor: "#ECE6E6",
       confirmButtonText: "Oui, supprimé",
     }).then((result) => {
-    if (result.isConfirmed) {
-      axios.delete(`/api/estimate/${id}`);
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id)
-      );
-      Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
-      
-    }
-  });
-};
+      if (result.isConfirmed) {
+        axios.delete(`/api/estimate/${id}`);
+        setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+      }
+    });
+  };
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
@@ -417,34 +415,32 @@ export default function Estimate(req) {
                   })}
                 </div>
               </div>
-
-              <div className="flex  justify-center mt-20">
-                <input
-                  className="hidden"
-                  type="file"
-                  multiple={true}
-                  id="attachedFiles"
-                  accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
-                  ref={attachedFilesRef}
-                  onChange={handleAttachedFilesSelection}
-                ></input>
-
-                <button
-                  type="submit"
-                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                >
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-                <button
-                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                  onClick={handleAttachedFilesClick}
-                  type="submit"
-                >
-                  <IoIosAttach size={26} />
-                  <span className="mx-2 ">Pièces Jointes </span>
-                </button>
-              </div>
+            </div>
+            <div className="flex  justify-center mt-20">
+              <input
+                className="hidden"
+                type="file"
+                multiple={true}
+                id="attachedFiles"
+                accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
+                ref={attachedFilesRef}
+                onChange={handleAttachedFilesSelection}
+              ></input>
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+              <button
+                className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                onClick={handleAttachedFilesClick}
+                type="submit"
+              >
+                <IoIosAttach size={26} />
+                <span className="mx-2 ">Pièces Jointes </span>
+              </button>
             </div>
           </form>
         </div>
