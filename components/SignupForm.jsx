@@ -140,17 +140,17 @@ const SignupForm = () => {
                   },
                 })}
               />
-              <RemoveRedEyeIcon
-                className="w-1/4 cursor-pointer"
-                onClick={togglePasswordVisiblity}
-              />
             </div>
             {errors.password && (
               <span className="text-xs"> {errors.password.message}</span>
             )}
 
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Repeat Mot de passe
+            <RemoveRedEyeIcon
+              className="w-1/4 cursor-pointer"
+              onClick={togglePasswordVisiblity}
+            />
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-6">
+              Confirmation du mot de passe{" "}
               <span className="text-gray-400 text-md">*</span>
             </label>
             <input
@@ -160,7 +160,12 @@ const SignupForm = () => {
               type={passwordShown ? "text" : "password"}
               {...register("passwordConfirm", {
                 required: "❌ Les deux mots de passe ne correspondent pas",
-                validate: (value) => value === watch("password"),
+                validate: (value) =>
+                  value === watch("password") || (
+                    <span className="text-xs">
+                      ❌ Les deux mots de passe ne correspondent pas
+                    </span>
+                  ),
               })}
             />
 

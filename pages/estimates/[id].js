@@ -51,15 +51,13 @@ export default function Estimate(req) {
       cancelButtonColor: "#ECE6E6",
       confirmButtonText: "Oui, supprimé",
     }).then((result) => {
-    if (result.isConfirmed) {
-      axios.delete(`/api/estimate/${id}`);
-      setEstimate((estimate) => estimate.filter((e) => e.id !== id)
-      );
-      Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
-      
-    }
-  });
-};
+      if (result.isConfirmed) {
+        axios.delete(`/api/estimate/${id}`);
+        setEstimate((estimate) => estimate.filter((e) => e.id !== id));
+        Swal.fire("Supprimé", "Votre devis a bien été supprimé", "success");
+      }
+    });
+  };
   const [estimate, setEstimate] = useState([]);
 
   const sendMail = async (id) => {
@@ -153,7 +151,7 @@ export default function Estimate(req) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
-    dataFiles.append("adminComment", adminComment.valueOf());
+    dataFiles.append("adminComment", adminComment?.valueOf());
 
     try {
       if (isUpdate) {
@@ -347,49 +345,53 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                <div className=" w-full mb-10 p-8">
-                  <h2 className="text-center text-xl uppercase mb-4">
-                    Proposition de l{`'`}administrateur
-                  </h2>
-                  {currentUserIsAdmin ? (
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                      type="text"
-                      value={adminComment}
-                      onChange={(e) => setAdminComment(e.target.value)}
-                    />
-                  ) : (
-                    <div
-                      className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="adminComment"
-                      name="adminComment"
-                    >
-                      {adminComment}
-                    </div>
-                  )}
+                {adminComment != null || currentUserIsAdmin ? (
+                  <div className=" w-full mb-10 p-8">
+                    <h2 className="text-center text-xl uppercase mb-4">
+                      Proposition de l{`'`}administrateur
+                    </h2>
+                    {currentUserIsAdmin ? (
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                        type="text"
+                        value={adminComment}
+                        onChange={(e) => setAdminComment(e.target.value)}
+                      />
+                    ) : (
+                      <div
+                        className="appearance-none block w-full  border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="adminComment"
+                        name="adminComment"
+                      >
+                        {adminComment}
+                      </div>
+                    )}
 
-                  <div>
-                    {attachedFiles
-                      .filter((attachedFile) => {
-                        return attachedFile.creator === "admin";
-                      })
-                      .map((a) => {
-                        return (
-                          <div key={a.id} className="m-5 text-center ">
-                            <Link href={"/" + a.url}>
-                              <a>{a.name}</a>
-                            </Link>
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={() => deleteAttachedFiles(a.id)}
-                            />
-                          </div>
-                        );
-                      })}
+                    <div>
+                      {attachedFiles
+                        .filter((attachedFile) => {
+                          return attachedFile.creator === "admin";
+                        })
+                        .map((a) => {
+                          return (
+                            <div key={a.id} className="m-5 text-center ">
+                              <Link href={"/" + a.url}>
+                                <a>{a.name}</a>
+                              </Link>
+                              <DeleteForeverIcon
+                                className="ml-3"
+                                onClick={() => deleteAttachedFiles(a.id)}
+                              />
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  "Une réponse de notre part vous sera apportée dans les meilleurs délais."
+                )}
 
                 <div className="m-20 align-sub">
                   {attachedFilesUpload.map((data, index, url) => {
@@ -417,34 +419,32 @@ export default function Estimate(req) {
                   })}
                 </div>
               </div>
-
-              <div className="flex  justify-center mt-20">
-                <input
-                  className="hidden"
-                  type="file"
-                  multiple={true}
-                  id="attachedFiles"
-                  accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
-                  ref={attachedFilesRef}
-                  onChange={handleAttachedFilesSelection}
-                ></input>
-
-                <button
-                  type="submit"
-                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                >
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-                <button
-                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                  onClick={handleAttachedFilesClick}
-                  type="submit"
-                >
-                  <IoIosAttach size={26} />
-                  <span className="mx-2 ">Pièces Jointes </span>
-                </button>
-              </div>
+            </div>
+            <div className="flex  justify-center mt-20">
+              <input
+                className="hidden"
+                type="file"
+                multiple={true}
+                id="attachedFiles"
+                accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
+                ref={attachedFilesRef}
+                onChange={handleAttachedFilesSelection}
+              ></input>
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+              <button
+                className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                onClick={handleAttachedFilesClick}
+                type="submit"
+              >
+                <IoIosAttach size={26} />
+                <span className="mx-2 ">Pièces Jointes </span>
+              </button>
             </div>
           </form>
         </div>
