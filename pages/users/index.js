@@ -132,7 +132,12 @@ const ListClient = () => {
                       <td className="text-sm p-3"> {firstname}</td>
                       <td className="text-sm p-3"> {lastname}</td>
                       <td className="text-sm p-3"> {organizationName}</td>
-                      <td className="text-sm p-3"> {organizationType}</td>
+                      <td className="text-sm p-3">
+                        {" "}
+                        {organizationType === "BUISNESS"
+                          ? "ENTREPRISE"
+                          : "PARTICULIER"}
+                      </td>
                       <td className="border">
                         <Link href={`users/edit/${id}`} passHref>
                           <button className="cursor-pointer my-2">
