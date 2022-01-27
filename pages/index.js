@@ -72,7 +72,7 @@ export default function Home() {
           <div className="bg-secondary ">
             <div className="flex justify-center">
               <h2 className="mt-7 border-2 border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
-                Produit du moment
+                Produits du moment
               </h2>
             </div>
             <div className=" h-full p-7 w-full m-100">

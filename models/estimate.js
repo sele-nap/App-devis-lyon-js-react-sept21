@@ -106,7 +106,11 @@ const createFiles = async ({ name, estimate, url, creator }) => {
 };
 
 const updateAskEstimate = async (id, data) => {
-  return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
+  return db.estimate.update({
+    where: { id: parseInt(id, 10) },
+    data,
+  
+  });
 };
 
 const validateEstimate = (id, status, validationCode) => {
