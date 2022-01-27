@@ -444,7 +444,8 @@ export default function Estimate(req) {
                   })}
                 </div>
               </div>
-
+            </div>
+            <div className="mt-8 flex justify-center">
               <div className="flex  justify-center mt-20">
                 <input
                   className="hidden"
@@ -455,29 +456,28 @@ export default function Estimate(req) {
                   ref={attachedFilesRef}
                   onChange={handleAttachedFilesSelection}
                 ></input>
-
-                <button
-                  type="submit"
-                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                >
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
-                <button
-                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                  onClick={handleAttachedFilesClick}
-                  type="submit"
-                >
-                  <IoIosAttach size={26} />
-                  <span className="mx-2 ">Pièces Jointes </span>
-                </button>
               </div>
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+              <button
+                className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                onClick={handleAttachedFilesClick}
+                type="submit"
+              >
+                <IoIosAttach size={26} />
+                <span className="mx-2 ">Pièces Jointes </span>
+              </button>
             </div>
           </form>
         </div>
 
-        <div className="flex justify-center mt-5"></div>
-        <div className="mt-10 flex justify-center">
+        <div className="flex justify-center"></div>
+        <div className="mt-4 flex justify-center">
           <Link href="/estimates" passHref>
             <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
               <ArrowBackIcon />

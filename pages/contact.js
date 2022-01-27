@@ -20,7 +20,6 @@ const Contact = () => {
     e.preventDefault();
     Swal.fire({
       text: "Merci pour votre mail",
-      imageAlt: "gif succes",
     });
 
     emailjs
