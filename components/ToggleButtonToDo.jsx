@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 function ToggleButtonToDo({ e, handleChange }) {
-  console.log(e.status);
   return (
     <div>
       <label className="flex items-center justify-center">
@@ -15,6 +13,7 @@ function ToggleButtonToDo({ e, handleChange }) {
             const data = new FormData();
             data.append("status", e.status !== "TO_DO" ? "TO_DO" : "DRAFT");
             axios.patch(`/api/estimate/${e.id}`, data).then(handleChange);
+            router.push("/estimates");
           }}
         />
         <span className="text-gray-700 dark:text-white font-normal"></span>

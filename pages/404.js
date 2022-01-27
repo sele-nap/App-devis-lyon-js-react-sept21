@@ -11,12 +11,12 @@ const Custom404 = () => {
     <div>
       <Layout>
         <h2 className="text-center text-5xl m-24">
-          Oup&#39;s nous sommes face a un problème !{" "}
+          Oup&#39;s nous sommes face à un problème !{" "}
         </h2>
 
         <p className="text-center text-xl mt-24">
           {" "}
-          Peut etre que vous souhaitez vous :{" "}
+          Peut-être que vous souhaitez-vous ?{" "}
         </p>
         <div className="flex justify-around m-24">
           <Link href="/">

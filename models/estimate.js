@@ -119,9 +119,10 @@ const validateEstimate = (id, status, validationCode) => {
 };
 
 const sendMailChangeStatus = (id) => {
+  const date = new Date(Date.now());
   return db.estimate.update({
     where: { id: parseInt(id, 10) },
-    data: { status: "WAITING_FOR_VALIDATION" },
+    data: { status: "WAITING_FOR_VALIDATION", waitingDate: date },
   });
 };
 
@@ -130,7 +131,11 @@ const confirmEstimate = async (validationCode) => {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
       await db.estimate.update({
         where: { validationCode },
-        data: { validationCode: null, status: "VALIDATED" },
+        data: {
+          validationCode: null,
+          status: "VALIDATED",
+          validationDate: new Date(Date.now()),
+        },
       });
       return true;
     }

@@ -20,11 +20,12 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
-
-setInterval(() => {
-  const dateToday = Date.now(dateToday);
-  return db.estimate.findMany({
-    where: { status: { in: "WAITING_FOR_VALIDATION" }, date },
-  });
-  db.estimate.deleteMany;
-}, 60000);
+// setInterval(() => {
+//   const dateToday = new Date(Date.now());
+// const maxWaitingTime = 30;
+//   const dateDelete = dateToday.setDate(dateToday.getDate() -  maxWaitingTime);
+//   console.log(dateDelete);
+//   return db.estimate.findMany({
+//     where: { status: { in: "WAITING_FOR_VALIDATION" }, waitingDate },
+//   });
+// }, 6000);
