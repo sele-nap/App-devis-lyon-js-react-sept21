@@ -73,6 +73,16 @@ export default function Estimate(req) {
       confirmButtonText: "Oui",
     }).then((result) => {
       if (result.isConfirmed) {
+        {
+          const data = new FormData();
+          data.append(
+            "status",
+            status !== "WAITING_FOR_VALIDATION"
+              ? "WAITING_FOR_VALIDATION"
+              : "TO_DO"
+          );
+          axios.patch(`/api/estimate/${id}`, data);
+        }
         axios.post(`/api/estimate/${id}`);
         Swal.fire(
           "Envoyé",
@@ -255,13 +265,17 @@ export default function Estimate(req) {
                   </div>
                 </div>
               </div>
-              <h2 className="text-center text-2xl  uppercase m-4">
-                Devis
-                {status !== "VALIDATED"
-                  ? " EN COURS - "
-                  : false
-                  ? " VALIDÉ - "
-                  : " VALIDÉ - "}
+              <h2 className="text-center text-2xl  m-4">
+                DEVIS
+                {status === "DRAFT"
+                  ? " Brouillon "
+                  : status === "TO_DO"
+                  ? " En cours de rédaction "
+                  : status === "WAITING_FOR_VALIDATION"
+                  ? " En attente de validation "
+                  : status === "VALIDATED"
+                  ? " validé "
+                  : null}
                 n° {id}
               </h2>
               <div className="flex  justify-around">
@@ -369,12 +383,12 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                {adminComment === null || currentUserIsAdmin ? (
+                {adminComment !== null || currentUserIsAdmin ? (
                   <div className=" w-full mb-10 p-8">
                     <h2 className="text-center text-xl uppercase mb-4">
                       Proposition de l{`'`}administrateur
                     </h2>
-                    {currentUserIsAdmin ? (
+                    {currentUserIsAdmin && status !== "VALIDATED" ? (
                       <input
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="adminComment"
@@ -404,7 +418,7 @@ export default function Estimate(req) {
                               <Link href={"/" + a.url}>
                                 <a>{a.name}</a>
                               </Link>
-                              {status !== "VALIDATED" ? (
+                              {status !== "VALIDATED" && currentUserIsAdmin ? (
                                 <DeleteForeverIcon
                                   className="ml-3 "
                                   onClick={() => deleteAttachedFiles(a.id)}
@@ -488,7 +502,7 @@ export default function Estimate(req) {
             </button>
           </Link>
 
-          {adminComment && (
+          {adminComment && currentUserIsAdmin ? (
             <button
               onClick={() => sendMail(id)}
               className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
@@ -497,7 +511,7 @@ export default function Estimate(req) {
                 <CheckCircleOutlineIcon /> Validation du devis
               </span>
             </button>
-          )}
+          ) : null}
           <div className="ml-2  pt-3 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
             <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
               {({ toPdf }) => (

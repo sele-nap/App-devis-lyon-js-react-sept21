@@ -30,7 +30,6 @@ export default function validationCode({ verified }) {
 }
 
 export async function getServerSideProps({ query }) {
-  console.log(query);
   const verified = await confirmEstimate(query?.validationCode);
   const mailBody = `Un devis a été validé`;
   await mailer.sendMail({

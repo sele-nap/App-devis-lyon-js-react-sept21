@@ -105,10 +105,14 @@ const createFiles = async ({ name, estimate, url, creator }) => {
   });
 };
 
+// const updateAskEstimate = async (id, data) => {
+//   return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
+// };
+
 const updateAskEstimate = async (id, data) => {
   return db.estimate.update({
     where: { id: parseInt(id, 10) },
-    data,
+    data: { waitingDate: new Date(Date.now()), ...data },
   });
 };
 
@@ -118,13 +122,13 @@ const validateEstimate = (id, status, validationCode) => {
     .catch(() => false);
 };
 
-const sendMailChangeStatus = (id) => {
-  const date = new Date(Date.now());
-  return db.estimate.update({
-    where: { id: parseInt(id, 10) },
-    data: { status: "WAITING_FOR_VALIDATION", waitingDate: date },
-  });
-};
+// const sendMailChangeStatus = (id) => {
+//   const date = new Date(Date.now());
+//   return db.estimate.update({
+//     where: { id: parseInt(id, 10) },
+//     data: { status: "WAITING_FOR_VALIDATION", waitingDate: date },
+//   });
+// };
 
 const confirmEstimate = async (validationCode) => {
   try {
@@ -150,7 +154,7 @@ module.exports = {
   createAskEstimate,
   updateAskEstimate,
   createFiles,
-  sendMailChangeStatus,
+  // sendMailChangeStatus,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
