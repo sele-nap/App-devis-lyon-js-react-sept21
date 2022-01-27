@@ -150,7 +150,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Validation
+                    Enregistrer le devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
