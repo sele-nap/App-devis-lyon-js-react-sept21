@@ -105,10 +105,14 @@ const createFiles = async ({ name, estimate, url, creator }) => {
   });
 };
 
+// const updateAskEstimate = async (id, data) => {
+//   return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
+// };
+
 const updateAskEstimate = async (id, data) => {
   return db.estimate.update({
     where: { id: parseInt(id, 10) },
-    data,
+    data: { waitingDate: new Date(Date.now()), ...data },
   });
 };
 
@@ -141,7 +145,6 @@ module.exports = {
   createAskEstimate,
   updateAskEstimate,
   createFiles,
-
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,

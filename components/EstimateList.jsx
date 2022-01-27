@@ -251,14 +251,14 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       </td>
                     ) : null}
                     <td className="text-center border my-2">
-                      {status !== "VALIDATED" ? (
-                        <button
-                          className="cursor-pointer"
-                          onClick={() => deleteEstimate(id)}
-                        >
-                          <RiDeleteBin5Fill size={25} />
-                        </button>
-                      ) : null}
+                      {/* {status !== "WAITING_FOR_VALIDATION" ? ( */}
+                      <button
+                        className="cursor-pointer"
+                        onClick={() => deleteEstimate(id)}
+                      >
+                        <RiDeleteBin5Fill size={25} />
+                      </button>
+                      {/* ) : null} */}
                     </td>
                   </tr>
                 )
