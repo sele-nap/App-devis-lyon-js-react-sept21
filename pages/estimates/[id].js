@@ -406,9 +406,7 @@ export default function Estimate(req) {
                                   className="ml-3 "
                                   onClick={() => deleteAttachedFiles(a.id)}
                                 />
-                              ) : (
-                                <span></span>
-                              )}
+                              ) : null}
                             </div>
                           );
                         })}
@@ -464,14 +462,16 @@ export default function Estimate(req) {
                 <SaveIcon />
                 <span className="mx-2"> Sauvegarde </span>
               </button>
-              <button
-                className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                onClick={handleAttachedFilesClick}
-                type="submit"
-              >
-                <IoIosAttach size={26} />
-                <span className="mx-2 ">Pièces Jointes </span>
-              </button>
+              {status !== "VALIDATED" ? (
+                <button
+                  className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                  onClick={handleAttachedFilesClick}
+                  type="submit"
+                >
+                  <IoIosAttach size={26} />
+                  <span className="mx-2 ">Pièces Jointes </span>
+                </button>
+              ) : null}
             </div>
           </form>
         </div>
