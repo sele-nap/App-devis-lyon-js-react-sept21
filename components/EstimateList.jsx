@@ -11,6 +11,8 @@ import moment from "moment";
 import ToggleButton from "./ToggleButton";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropupCircle } from "react-icons/io";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
@@ -21,6 +23,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const [estimatesListLoading, setEstimatesListLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [orderByDesc, setOrderByDesc] = useState(true);
 
   const deleteEstimate = async (id) => {
     Swal.fire({
@@ -52,8 +55,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       .get(
         `/api/estimate?${statusParam}&offset=${
           (currentPage - 1) * perPage
-        }&limit=${perPage}`
+        }&limit=${perPage}&orderBy=${
+          orderByDesc ? "createDateDesc" : "createDateAsc"
+        }`
       )
+
       .then((res) => {
         setEstimatesList(res.data);
         console.log(res.headers["x-total-count"]);
@@ -63,8 +69,8 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       });
   };
   useEffect(() => {
-    getEstimates(statusList, currentPage, perPage);
-  }, [currentPage, perPage, statusList]);
+    getEstimates(statusList, currentPage, perPage, orderByDesc);
+  }, [currentPage, perPage, statusList, orderByDesc]);
 
   return (
     <section>
@@ -109,7 +115,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 mr-5 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Date
                     <path
@@ -118,6 +124,18 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       strokeWidth="2"
                       d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                     />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOrderByDesc(!orderByDesc);
+                      }}
+                    >
+                      {orderByDesc ? (
+                        <IoMdArrowDropupCircle size={25} />
+                      ) : (
+                        <IoMdArrowDropdownCircle size={25} className="" />
+                      )}
+                    </button>
                   </div>
                 </th>
 

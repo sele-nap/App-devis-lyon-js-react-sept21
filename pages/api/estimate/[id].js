@@ -51,7 +51,27 @@ async function sendMail({ query: { id } }, req, res) {
     text: mailBody,
     html: mailBody,
   });
+  const mailBodyForAdmin = `Un devis est en attente de validation chez votre client vous serez notifié par mail quand ce dernier aura été approuvé.`;
+  await mailer.sendMail({
+    from: process.env.MAILER_FROM,
+    to: process.env.MAILER_FROM,
+    subject: `Un devis a été mis en attente de validation`,
+    text: mailBodyForAdmin,
+    html: mailBodyForAdmin,
+  });
 }
+
+// async function mailNewEstimate({ query: { id } }, req, res) {
+//   // const { validationCode, customer } = await getEstimate(id);
+//   const mailBody = ` Vous avez recu une nouvelle demande de devis , rendez-vous sur ${process.env.HOST} pour apporter une réponse`;
+//   await mailer.mailNewEstimate({
+//     from: "wilder.app.devis@gmail.com",
+//     to: "wilder.app.devis@gmail.com",
+//     subject: `Vous avez une nouvelle demande devis`,
+//     text: mailBody,
+//     html: mailBody,
+//   });
+// }
 
 async function handleGet({ query: { id } }, res) {
   const estimate = await getOneEstimateAttachedFiles(id);

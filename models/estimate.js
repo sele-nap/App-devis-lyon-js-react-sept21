@@ -24,16 +24,20 @@ const estimateToShow = {
   adminComment: true,
 };
 
-const getEstimates = async ({ statusList, limit, offset, customerId }) => {
+const getEstimates = async ({
+  statusList,
+  limit,
+  offset,
+  customerId,
+  orderBy,
+}) => {
   return Promise.all([
     db.estimate.findMany({
       where: { status: { in: statusList }, customer: { id: customerId } },
       select: estimateToShow,
       take: parseInt(limit),
       skip: parseInt(offset),
-      orderBy: {
-        createDate: "desc",
-      },
+      orderBy,
     }),
     db.estimate.count({
       where: { status: { in: statusList }, customer: { id: customerId } },
@@ -130,6 +134,7 @@ module.exports = {
   createAskEstimate,
   updateAskEstimate,
   createFiles,
+
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,

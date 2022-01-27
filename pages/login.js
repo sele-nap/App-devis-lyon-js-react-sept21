@@ -2,8 +2,11 @@ import React from "react";
 import { getCsrfToken } from "next-auth/react";
 import Layout from "../components/Layout";
 import CtaButton from "../components/CtaButton";
+import { useRouter } from "next/dist/client/router";
 
 export default function LogIn({ csrfToken }) {
+  const { query } = useRouter();
+
   return (
     <div>
       <Layout>
@@ -57,9 +60,18 @@ export default function LogIn({ csrfToken }) {
                     />
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <CtaButton title="Se connecter" type="submit" />
-                </div>
+                <button
+                  id="credentials-login-btn"
+                  className=" py-2 px-4 hover:bg-yellow-300 bg-yellow-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
+                  type="submit"
+                >
+                  Se connecter
+                </button>
+                {query.error === "CredentialsSignin" && (
+                  <p className="p-2 text-red-600 text-xl font-bold text-center">
+                    {"Les identifiants ne correspondent pas "}
+                  </p>
+                )}
               </form>
             </div>
           </div>

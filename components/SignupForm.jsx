@@ -32,7 +32,6 @@ const SignupForm = () => {
   const isIndividual = organizationType === "INDIVIDUAL";
 
   const onSubmit = (data) => {
-    //   console.log(data);
     axios
       .post("/api/users", data)
       .then((res) => {
