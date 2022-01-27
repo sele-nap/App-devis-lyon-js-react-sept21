@@ -8,7 +8,7 @@ import {
   getEstimates,
   ValidateEstimate,
 } from "../../../models/estimate";
-// import mailer from "../../../mailer";
+import mailer from "../../../mailer";
 import crypto from "crypto";
 
 // import { requireAdmin } from "../../../middleware/requireAdmin";
@@ -44,6 +44,14 @@ async function handlePost(req, res) {
     customer: { connect: { id: req.currentUser.id } },
   });
 
+  const mailBody = `Une nouvelle demande de devis a été enregistré sur votre site. Rendez vous sur : ${process.env.HOST}/estimates pour apporter une réponse`;
+  await mailer.sendMail({
+    from: process.env.MAILER_FROM,
+    to: "wilder.app.devis@gmail.com",
+    subject: `Un nouveau devis est en attente de réponse`,
+    text: mailBody,
+    html: mailBody,
+  });
   if (req.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
       createFiles({
