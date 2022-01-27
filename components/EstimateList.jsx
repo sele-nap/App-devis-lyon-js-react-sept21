@@ -220,9 +220,13 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       {customer?.lastname} {customer?.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
-                      {status != "VALIDATED"
+                      {status === "DRAFT" || "TO_DO"
                         ? moment(createDate).format(`DD/MM/YYYY`)
-                        : moment(validationDate).format(`DD/MM/YYYY`)}
+                        : status === "WAITING_FOR_VALIDATION"
+                        ? moment(waitingDate).format(`DD/MM/YYYY`)
+                        : status === "VALIDATED"
+                        ? moment(validationDate).format(`DD/MM/YYYY`)
+                        : null}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {additionalInformation}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { VALID_LOADERS } from "next/dist/server/image-config";
 import { useState, useEffect } from "react";
+// import mailer from "../mailer";
 
 function ToggleButton({ e, handleChange }) {
   console.log(e.status);
@@ -21,6 +22,7 @@ function ToggleButton({ e, handleChange }) {
                 ? "WAITING_FOR_VALIDATION"
                 : "TO_DO"
             );
+
             axios.patch(`/api/estimate/${e.id}`, data).then(handleChange);
           }}
         />
