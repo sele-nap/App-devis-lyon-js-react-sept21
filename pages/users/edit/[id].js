@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
 
+
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -20,6 +21,7 @@ export default function UserDetails() {
   const [phone, setPhone] = useState("");
 
   const router = useRouter();
+
   const {
     query: { id },
   } = router;
