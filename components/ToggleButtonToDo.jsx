@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 function ToggleButtonToDo({ e, handleChange }) {
-  console.log(e.status);
   return (
     <div>
       <label className="flex items-center justify-center">

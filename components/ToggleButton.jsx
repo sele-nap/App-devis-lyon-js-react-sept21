@@ -12,7 +12,7 @@ function ToggleButton({ e, handleChange }) {
           type="checkbox"
           disabled={e.status === "VALIDATED" ? true : false}
           className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none"
-          defaultChecked={e.status === "VALIDATED"}
+          defaultChecked={e.status === "WAI"}
           onChange={async (event) => {
             const data = new FormData();
             data.append(
