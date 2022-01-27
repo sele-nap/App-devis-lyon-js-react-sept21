@@ -62,12 +62,14 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
     <section className="">
       {/* ___________ ESTIMATE IN THE PROCESS OF CREATION  ___________ */}
 
-      <div className="flex justify-center items-center mt-10">
-        <div className="border-2 border-third text-black rounded cursor-auto p-1">
-          Liste des devis en cours de création
+      <div className="flex justify-center mt-8">
+        <div className="ml-2 pl-10 pt-3 flex justify-center items-center text shadow w-96 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
+          <span className="text-md text-center">
+            {" "}
+            Devis en cours de création
+          </span>
         </div>
       </div>
-
       {!createEstimate && <p>En chargement...</p>}
       {createEstimate?.length === 0 && <p>Pas de devis actuellement</p>}
       {createEstimate && createEstimate.length !== 0 && (
@@ -148,7 +150,7 @@ export default function DraftArray({ statusList, limit = 5, offset = 0 }) {
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Validation
+                    Enregistrer le devis
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
