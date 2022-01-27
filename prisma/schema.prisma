@@ -52,6 +52,7 @@ model estimate {
   status                EstimateStatus @default(TO_DO)
   signature             String?
   validationDate        DateTime?
+  waitingDate           DateTime?
   deadLine              DateTime?
   additionalInformation String         @db.LongText
   validationCode        String?        @unique

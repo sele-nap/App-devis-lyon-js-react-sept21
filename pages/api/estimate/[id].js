@@ -51,6 +51,7 @@ async function sendMail({ query: { id } }, req, res) {
     text: mailBody,
     html: mailBody,
   });
+
   const mailBodyForAdmin = `Un devis est en attente de validation chez votre client vous serez notifié par mail quand ce dernier aura été approuvé.`;
   await mailer.sendMail({
     from: process.env.MAILER_FROM,

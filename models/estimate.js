@@ -109,7 +109,6 @@ const updateAskEstimate = async (id, data) => {
   return db.estimate.update({
     where: { id: parseInt(id, 10) },
     data,
-  
   });
 };
 
@@ -123,7 +122,11 @@ const confirmEstimate = async (validationCode) => {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
       await db.estimate.update({
         where: { validationCode },
-        data: { validationCode: null, status: "VALIDATED" },
+        data: {
+          validationCode: null,
+          status: "VALIDATED",
+          validationDate: new Date(Date.now()),
+        },
       });
       return true;
     }
