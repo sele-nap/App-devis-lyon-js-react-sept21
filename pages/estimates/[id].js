@@ -352,10 +352,14 @@ export default function Estimate(req) {
                             <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={() => deleteAttachedFiles(a.id)}
-                            />
+                            {status !== "VALIDATED" ? (
+                              <DeleteForeverIcon
+                                className="ml-3 "
+                                onClick={() => deleteAttachedFiles(a.id)}
+                              />
+                            ) : (
+                              <span></span>
+                            )}
                           </div>
                         );
                       })}
@@ -397,10 +401,14 @@ export default function Estimate(req) {
                               <Link href={"/" + a.url}>
                                 <a>{a.name}</a>
                               </Link>
-                              <DeleteForeverIcon
-                                className="ml-3"
-                                onClick={() => deleteAttachedFiles(a.id)}
-                              />
+                              {status !== "VALIDATED" ? (
+                                <DeleteForeverIcon
+                                  className="ml-3 "
+                                  onClick={() => deleteAttachedFiles(a.id)}
+                                />
+                              ) : (
+                                <span></span>
+                              )}
                             </div>
                           );
                         })}
