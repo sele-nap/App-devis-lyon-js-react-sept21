@@ -61,6 +61,7 @@ async function seed() {
         userId: 2,
         status: "TO_DO",
         createDate: "2022-03-19T14:21:00+02:00",
+        validationDate: "2022-03-20T14:21:00+02:00",
       },
       {
         deadLine: "2021-05-25T14:21:00+02:00",
@@ -68,6 +69,7 @@ async function seed() {
         userId: 3,
         status: "DRAFT",
         createDate: "2022-02-10T14:21:00+02:00",
+        validationDate: "2022-03-21T14:21:00+02:00",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
@@ -76,6 +78,7 @@ async function seed() {
         userId: 2,
         status: "WAITING_FOR_VALIDATION",
         createDate: "2022-01-31T14:21:00+02:00",
+        validationDate: "2022-03-22T14:21:00+02:00",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
@@ -84,12 +87,14 @@ async function seed() {
         userId: 3,
         status: "TO_DO",
         createDate: "2022-05-22T14:21:00+02:00",
+        validationDate: "2022-03-30T14:21:00+02:00",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
         additionalInformation: "404 ERROR",
         userId: 2,
         createDate: "2022-04-15T14:21:00+02:00",
+        validationDate: "2022-03-31T14:21:00+02:00",
       },
       {
         deadLine: "2021-05-25T14:21:00+02:00",
@@ -98,6 +103,7 @@ async function seed() {
         userId: 2,
         status: "DRAFT",
         createDate: "2022-06-30T14:21:00+02:00",
+        validationDate: "2022-03-25T14:21:00+02:00",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
@@ -106,6 +112,7 @@ async function seed() {
         userId: 2,
         status: "WAITING_FOR_VALIDATION",
         createDate: "2022-02-15T14:21:00+02:00",
+        validationDate: "2022-04-20T14:21:00+02:00",
       },
       {
         deadLine: "2022-03-19T14:21:00+02:00",
@@ -114,6 +121,7 @@ async function seed() {
         userId: 3,
         status: "VALIDATED",
         createDate: "2022-05-25T14:21:00+02:00",
+        validationDate: "2022-05-20T14:21:00+02:00",
       },
     ],
   });
