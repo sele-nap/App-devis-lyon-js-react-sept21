@@ -58,11 +58,3 @@ export default function EstimateManagement() {
     </Layout>
   );
 }
-// export async function getStaticProps() {
-//   const [estimates] = await getEstimates(5, 0);
-//   return {
-//     props: {
-//       estimates,
-//     },
-//   };
-// }

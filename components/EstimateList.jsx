@@ -157,11 +157,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                {/* {currentUserIsAdmin ? ( */}
+                {currentUserIsAdmin ? (
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Validation
-                    <path
+                    Validation par e-mail
+                  <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
@@ -169,7 +169,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     />
                   </div>
                 </th>
-                {/* ) : null} */}
+                 ) : null} 
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
@@ -193,6 +193,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   customer,
                   createDate,
                   status,
+                  validationDate,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
                     <td className="text-sm p-3"> {id}</td>
@@ -217,7 +218,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    {/* {currentUserIsAdmin ? ( */}
+                    {currentUserIsAdmin ? (
                     <td className="">
                       <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
                         <ToggleButton
@@ -228,7 +229,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                         />
                       </div>
                     </td>
-                    {/* ) : null} */}
+                    ) : null}
                     <td className="text-center border my-2">
                       <button
                         className="cursor-pointer"
