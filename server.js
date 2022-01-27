@@ -1,5 +1,6 @@
 const express = require("express");
 const next = require("next");
+const { delBasePath } = require("next/dist/shared/lib/router/router");
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
@@ -19,3 +20,10 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
+// setInterval(() => {
+// const dateToday = Date.now((dateToday)) 
+//   return db.estimate.findMany({
+//   where: { status: { in : "WAITING_FOR_VALIDATION" }},
+// },)
+// db.estimate.deleteMany
+// }, 60000)

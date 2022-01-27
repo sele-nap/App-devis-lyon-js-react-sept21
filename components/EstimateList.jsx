@@ -117,7 +117,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
 
                 <th className="p-2 mr-5 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Date de création devis
+                    Date
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -139,7 +139,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 w-1/3 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Détails Devis
                     <path
@@ -220,7 +220,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       {customer?.lastname} {customer?.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
-                      {moment(createDate).format(`DD/MM/YYYY`)}
+                      {status !== "VALIDATED"
+                        ? moment(createDate).format(`DD/MM/YYYY`)
+                        : false
+                        ? moment(validationDate).format(`DD/MM/YYYY`)
+                        : moment(validationDate).format(`DD/MM/YYYY`)}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {additionalInformation}
