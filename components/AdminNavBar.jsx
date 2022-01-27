@@ -3,8 +3,12 @@ import Link from "next/link";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import { useSession } from "next-auth/react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 const AdminNavBar = () => {
+  const { currentUserIsAdmin } = useContext(CurrentUserContext);
+
   const { data, user, role } = useSession();
   return (
     <div>
@@ -23,16 +27,22 @@ const AdminNavBar = () => {
                       <span className="mx-2"> Mes devis</span>
                     </a>
                   </Link>
-                  <Link href="/users" passHref>
-                    <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-600 focus:outline-none focus:shadow-outline">
-                      <PermContactCalendarIcon />
-                      {data?.user?.role !== "admin" ? (
+                  {currentUserIsAdmin ? (
+                    <Link href="/users" passHref>
+                      <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-600 focus:outline-none focus:shadow-outline">
+                        <PermContactCalendarIcon />
+                        <span className="mx-2">Mes contacts </span>
+                      </a>
+                    </Link>
+                  ) : (
+                    <Link href={`/users/edit/${data?.user.id}`} passHref>
+                      <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-600 focus:outline-none focus:shadow-outline">
+                        <PermContactCalendarIcon />
+
                         <span className="mx-2">Mon Profil </span>
-                      ) : (
-                        <span className="mx-2">Mes contacts</span>
-                      )}
-                    </a>
-                  </Link>
+                      </a>
+                    </Link>
+                  )}
                 </nav>
               </div>
             </div>

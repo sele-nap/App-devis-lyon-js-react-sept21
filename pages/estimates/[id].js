@@ -170,7 +170,10 @@ export default function Estimate(req) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
-    dataFiles.append("adminComment", adminComment?.valueOf());
+
+    if (adminComment?.valueOf()) {
+      dataFiles.append("adminComment", adminComment?.valueOf());
+    }
 
     try {
       if (isUpdate) {
@@ -366,7 +369,7 @@ export default function Estimate(req) {
                   </div>
                 </div>
 
-                {adminComment != null || currentUserIsAdmin ? (
+                {adminComment === null || currentUserIsAdmin ? (
                   <div className=" w-full mb-10 p-8">
                     <h2 className="text-center text-xl uppercase mb-4">
                       Proposition de l{`'`}administrateur
@@ -377,7 +380,7 @@ export default function Estimate(req) {
                         id="adminComment"
                         name="adminComment"
                         type="text"
-                        value={adminComment}
+                        value={adminComment || ""}
                         onChange={(e) => setAdminComment(e.target.value)}
                       />
                     ) : (

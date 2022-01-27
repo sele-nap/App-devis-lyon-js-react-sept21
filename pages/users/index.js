@@ -139,8 +139,14 @@ const ListClient = () => {
                       <td className="text-sm p-3">
                         {" "}
                         {organizationType === "BUISNESS"
-                          ? "ENTREPRISE"
-                          : "PARTICULIER"}
+                          ? "Entreprise"
+                          : organizationType === "INDIVIDUAL"
+                          ? "Particulier"
+                          : organizationType === "NON_PROFIT_ORGANIZATION"
+                          ? "Association"
+                          : organizationType === "TOWN_HALL"
+                          ? "Collectivité"
+                          : null}
                       </td>
                       <td className="border">
                         <Link href={`users/edit/${id}`} passHref>

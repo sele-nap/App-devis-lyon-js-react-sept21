@@ -20,9 +20,10 @@ app.prepare().then(() => {
     console.log(`> Ready on http://localhost:${port}`);
   });
 });
-setInterval(() => {
-return db.estimate.findMany({
-  where: { status: { in: statusList }, customer: { id: customerId } },
-},)
-
-}, 60000)
+// setInterval(() => {
+// const dateToday = Date.now((dateToday)) 
+//   return db.estimate.findMany({
+//   where: { status: { in : "WAITING_FOR_VALIDATION" }},
+// },)
+// db.estimate.deleteMany
+// }, 60000)

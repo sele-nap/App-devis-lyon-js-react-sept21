@@ -24,7 +24,7 @@ async function handlePatch(req, res) {
   console.log(validationErrors);
   if (validationErrors) return res.status(422).send(validationErrors);
   const updated = await updateAskEstimate(id, body);
-  console.log(updated);
+  console.log(body);
 
   if (files && files?.length) {
     const filesSave = files.map((file) =>
@@ -60,18 +60,6 @@ async function sendMail({ query: { id } }, req, res) {
     html: mailBodyForAdmin,
   });
 }
-
-// async function mailNewEstimate({ query: { id } }, req, res) {
-//   // const { validationCode, customer } = await getEstimate(id);
-//   const mailBody = ` Vous avez recu une nouvelle demande de devis , rendez-vous sur ${process.env.HOST} pour apporter une réponse`;
-//   await mailer.mailNewEstimate({
-//     from: "wilder.app.devis@gmail.com",
-//     to: "wilder.app.devis@gmail.com",
-//     subject: `Vous avez une nouvelle demande devis`,
-//     text: mailBody,
-//     html: mailBody,
-//   });
-// }
 
 async function handleGet({ query: { id } }, res) {
   const estimate = await getOneEstimateAttachedFiles(id);

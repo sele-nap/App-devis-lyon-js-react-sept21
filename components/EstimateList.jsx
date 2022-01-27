@@ -217,7 +217,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname} {customer.firstname}
+                      {customer?.lastname} {customer?.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {status !== "VALIDATED"
