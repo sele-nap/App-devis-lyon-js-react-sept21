@@ -176,18 +176,18 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                 </th>
 
                 {currentUserIsAdmin ? (
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                  <div className="flex items-center justify-center">
-                    Validation par e-mail
-                  <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    />
-                  </div>
-                </th>
-                 ) : null} 
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Validation par e-mail
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                ) : null}
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
@@ -217,7 +217,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname} {customer.firstname}
+                      {customer?.lastname} {customer?.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {moment(createDate).format(`DD/MM/YYYY`)}
@@ -237,16 +237,16 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       </Link>
                     </td>
                     {currentUserIsAdmin ? (
-                    <td className="">
-                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        <ToggleButton
-                          e={{ id, status }}
-                          handleChange={() =>
-                            getEstimates(statusList, currentPage, perPage)
-                          }
-                        />
-                      </div>
-                    </td>
+                      <td className="">
+                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                          <ToggleButton
+                            e={{ id, status }}
+                            handleChange={() =>
+                              getEstimates(statusList, currentPage, perPage)
+                            }
+                          />
+                        </div>
+                      </td>
                     ) : null}
                     <td className="text-center border my-2">
                       <button
