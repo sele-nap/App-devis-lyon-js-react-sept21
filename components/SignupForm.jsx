@@ -143,11 +143,15 @@ const SignupForm = () => {
             {errors.password && (
               <span className="text-xs"> {errors.password.message}</span>
             )}
-
-            <RemoveRedEyeIcon
-              className="w-1/4 cursor-pointer"
-              onClick={togglePasswordVisiblity}
-            />
+            <div className="flex items-center">
+              <p className="text-gray-600 text-xs italic">
+                1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères
+              </p>
+              <RemoveRedEyeIcon
+                className="w-1/4 cursor-pointer"
+                onClick={togglePasswordVisiblity}
+              />
+            </div>
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-6">
               Confirmation du mot de passe{" "}
               <span className="text-gray-400 text-md">*</span>
@@ -169,10 +173,6 @@ const SignupForm = () => {
             />
 
             {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
-
-            <p className="text-gray-600 text-xs italic">
-              1 chiffre / 1 caractère spécial / 1 Majuscule / 8 caractères
-            </p>
           </div>
         </div>
 
