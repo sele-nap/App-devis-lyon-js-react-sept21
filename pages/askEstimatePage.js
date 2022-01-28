@@ -69,7 +69,9 @@ function Estimate() {
     const dataFiles = new FormData();
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+      if (attachedFilesRef.current.files[i]) {
+        dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+      }
     }
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);

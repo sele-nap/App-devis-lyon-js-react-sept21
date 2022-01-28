@@ -6,7 +6,6 @@ import {
   getEstimate,
   createFiles,
   getOneEstimateAttachedFiles,
-  // sendMailChangeStatus,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";

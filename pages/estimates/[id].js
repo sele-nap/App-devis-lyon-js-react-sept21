@@ -176,8 +176,11 @@ export default function Estimate(req) {
 
   const saveEstimate = async () => {
     const dataFiles = new FormData();
-    for (let i = 0; i < 3 - attachedFiles.length; i++) {
-      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+
+    for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
+      if (attachedFilesRef.current.files[i]) {
+        dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+      }
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
 
@@ -201,7 +204,7 @@ export default function Estimate(req) {
         await axios.post(`/api/estimate/${id}`, dataFiles);
       }
       setTimeout(() => {
-        router.push("/estimates"), 2000;
+        router.push("/estimates"), 5000;
       });
     } catch (err) {
       console.error(err);
