@@ -26,18 +26,22 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    if (e.target.files[1])
-      setAttachedFiles(URL.createObjectURL(e.target.files[1]));
+    // if (e.target.files[1])
+    //   setAttachedFiles(URL.createObjectURL(e.target.files[1]));
 
     const fileList = Array.from(e.target.files);
 
-    if (fileList.length) {
-      setAttachedFiles(
-        fileList.map((file) => {
-          return file.name;
-        })
-      );
-    }
+    // if (fileList.forlength) {
+    //   setAttachedFiles(
+    //     fileList.map((file) => {
+    //       return file.name;
+    //     })
+    //   );
+    // }
+
+    fileList.forEach((file) =>
+      setAttachedFiles((attachedFiles) => [...attachedFiles, file.name])
+    );
   };
 
   //Soumission devis//
@@ -191,7 +195,7 @@ function Estimate() {
                 accept="image/bmp,image/jpeg,image/jpg,image/png,image/txt,image/doc,image/docx,image/xls,image/xslx,image/odt,image/ods,image/pdf"
                 ref={attachedFilesRef}
                 onChange={handleAttachedFilesSelection}
-              ></input>
+              />
 
               <div className="m-20">
                 {attachedFiles.map((data, index) => {

@@ -24,16 +24,20 @@ const estimateToShow = {
   adminComment: true,
 };
 
-const getEstimates = async ({ statusList, limit, offset, customerId }) => {
+const getEstimates = async ({
+  statusList,
+  limit,
+  offset,
+  customerId,
+  orderBy,
+}) => {
   return Promise.all([
     db.estimate.findMany({
       where: { status: { in: statusList }, customer: { id: customerId } },
       select: estimateToShow,
       take: parseInt(limit),
       skip: parseInt(offset),
-      orderBy: {
-        createDate: "desc",
-      },
+      orderBy,
     }),
     db.estimate.count({
       where: { status: { in: statusList }, customer: { id: customerId } },
@@ -101,8 +105,15 @@ const createFiles = async ({ name, estimate, url, creator }) => {
   });
 };
 
+// const updateAskEstimate = async (id, data) => {
+//   return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
+// };
+
 const updateAskEstimate = async (id, data) => {
-  return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
+  return db.estimate.update({
+    where: { id: parseInt(id, 10) },
+    data: { waitingDate: new Date(Date.now()), ...data },
+  });
 };
 
 const validateEstimate = (id, status, validationCode) => {
@@ -110,12 +121,25 @@ const validateEstimate = (id, status, validationCode) => {
     .update({ where: { id: parseInt(id, 10) }, status, validationCode })
     .catch(() => false);
 };
+
+// const sendMailChangeStatus = (id) => {
+//   const date = new Date(Date.now());
+//   return db.estimate.update({
+//     where: { id: parseInt(id, 10) },
+//     data: { status: "WAITING_FOR_VALIDATION", waitingDate: date },
+//   });
+// };
+
 const confirmEstimate = async (validationCode) => {
   try {
     if (await db.estimate.findUnique({ where: { validationCode } })) {
       await db.estimate.update({
         where: { validationCode },
-        data: { validationCode: null, status: "VALIDATED" },
+        data: {
+          validationCode: null,
+          status: "VALIDATED",
+          validationDate: new Date(Date.now()),
+        },
       });
       return true;
     }
@@ -130,6 +154,7 @@ module.exports = {
   createAskEstimate,
   updateAskEstimate,
   createFiles,
+  // sendMailChangeStatus,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,

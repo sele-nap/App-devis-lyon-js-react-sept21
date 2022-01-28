@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
 
+
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -20,6 +21,7 @@ export default function UserDetails() {
   const [phone, setPhone] = useState("");
 
   const router = useRouter();
+
   const {
     query: { id },
   } = router;
@@ -304,7 +306,7 @@ export default function UserDetails() {
                 type="submit"
                 className="py-2 px-4 hover:bg-green-300 bg-green-400 focus:ring-yellow-600 focus:ring-offset-red-200 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-10"
               >
-                Sauvegardez mon profil
+                Sauvegardez
               </button>
             </div>
           </form>

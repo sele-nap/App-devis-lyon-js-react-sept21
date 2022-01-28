@@ -29,7 +29,7 @@ export default function Home() {
       <Layout>
         <HelloGuy />
         <h1 className="w-full my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
-          Les super médailles vous souhaite la bienvenue
+          Les superbes médailles vous souhaitent la bienvenue
         </h1>
         <div className="h-90 w-full bg-gray-200">
           <Swiper
@@ -72,7 +72,7 @@ export default function Home() {
           <div className="bg-secondary ">
             <div className="flex justify-center">
               <h2 className="mt-7 border-2 border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
-                Produit du moment
+                Produits du moment
               </h2>
             </div>
             <div className=" h-full p-7 w-full m-100">
@@ -84,13 +84,19 @@ export default function Home() {
                       width="200px"
                       height="200px "
                       className="box col-start-1"
+                      alt=""
                     />
                   </a>
                 </Link>
 
                 <Link href="/catalog">
                   <a className="flex justify-center md:justify-between">
-                    <Image src={ImageEcharpe} width="200px" height="200px" />
+                    <Image
+                      src={ImageEcharpe}
+                      width="200px"
+                      height="200px"
+                      alt=""
+                    />
                   </a>
                 </Link>
 
@@ -101,13 +107,19 @@ export default function Home() {
                       width="200px"
                       height="200px"
                       className=""
+                      alt=""
                     />
                   </a>
                 </Link>
 
                 <Link href="/catalog">
                   <a className="flex justify-center md:justify-between">
-                    <Image src={ImageTrophee} width="200px" height="200px" />
+                    <Image
+                      src={ImageTrophee}
+                      width="200px"
+                      height="200px"
+                      alt=""
+                    />
                   </a>
                 </Link>
               </div>

@@ -1,5 +1,3 @@
-import { IoIosAddCircle } from "react-icons/io";
-import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { RiFileEditFill } from "react-icons/ri";
 import next from "next";
@@ -11,6 +9,8 @@ import moment from "moment";
 import ToggleButton from "./ToggleButton";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropupCircle } from "react-icons/io";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
@@ -21,6 +21,7 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const [estimatesListLoading, setEstimatesListLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [orderByDesc, setOrderByDesc] = useState(true);
 
   const deleteEstimate = async (id) => {
     Swal.fire({
@@ -52,8 +53,11 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       .get(
         `/api/estimate?${statusParam}&offset=${
           (currentPage - 1) * perPage
-        }&limit=${perPage}`
+        }&limit=${perPage}&orderBy=${
+          orderByDesc ? "createDateDesc" : "createDateAsc"
+        }`
       )
+
       .then((res) => {
         setEstimatesList(res.data);
         console.log(res.headers["x-total-count"]);
@@ -63,9 +67,8 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       });
   };
   useEffect(() => {
-    getEstimates(statusList, currentPage, perPage);
-  }, [currentPage, perPage, statusList]);
-
+    getEstimates(statusList, currentPage, perPage, orderByDesc);
+  }, [currentPage, perPage, statusList, orderByDesc]);
   return (
     <section>
       {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}
@@ -109,19 +112,31 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 mr-5 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
-                    Date de création devis
+                    Date
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
                       d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                     />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOrderByDesc(!orderByDesc);
+                      }}
+                    >
+                      {orderByDesc ? (
+                        <IoMdArrowDropupCircle size={25} />
+                      ) : (
+                        <IoMdArrowDropdownCircle size={25} className="" />
+                      )}
+                    </button>
                   </div>
                 </th>
 
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                <th className="p-2 w-1/3 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Détails Devis
                     <path
@@ -157,19 +172,19 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
-                {/* {currentUserIsAdmin ? ( */}
-                <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
-                  <div className="flex items-center justify-center">
-                    Validation
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    />
-                  </div>
-                </th>
-                {/* ) : null} */}
+                {currentUserIsAdmin ? (
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Validation par e-mail
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                ) : null}
 
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
@@ -193,15 +208,22 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   customer,
                   createDate,
                   status,
+                  validationDate,
                 }) => (
                   <tr className="w-full text-center border-b my-2" key={id}>
                     <td className="text-sm p-3"> {id}</td>
 
                     <td className="text-center border text-sm p-3 my-2">
-                      {customer.lastname} {customer.firstname}
+                      {customer?.lastname} {customer?.firstname}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
-                      {moment(createDate).format(`DD/MM/YYYY`)}
+                      {status === "DRAFT" || "TO_DO"
+                        ? moment(createDate).format(`DD/MM/YYYY`)
+                        : status === "WAITING_FOR_VALIDATION"
+                        ? moment(waitingDate).format(`DD/MM/YYYY`)
+                        : status === "VALIDATED"
+                        ? moment(validationDate).format(`DD/MM/YYYY`)
+                        : null}
                     </td>
                     <td className="text-center border  text-sm p-3 my-2">
                       {additionalInformation}
@@ -217,25 +239,27 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                         </button>
                       </Link>
                     </td>
-                    {/* {currentUserIsAdmin ? ( */}
-                    <td className="">
-                      <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
-                        <ToggleButton
-                          e={{ id, status }}
-                          handleChange={() =>
-                            getEstimates(statusList, currentPage, perPage)
-                          }
-                        />
-                      </div>
-                    </td>
-                    {/* ) : null} */}
+                    {currentUserIsAdmin ? (
+                      <td className="">
+                        <div className="text-center my-2 relative inline-block w-10 mr-2 align-middle select-none">
+                          <ToggleButton
+                            e={{ id, status }}
+                            handleChange={() =>
+                              getEstimates(statusList, currentPage, perPage)
+                            }
+                          />
+                        </div>
+                      </td>
+                    ) : null}
                     <td className="text-center border my-2">
+                      {/* {status !== "WAITING_FOR_VALIDATION" ? ( */}
                       <button
                         className="cursor-pointer"
                         onClick={() => deleteEstimate(id)}
                       >
                         <RiDeleteBin5Fill size={25} />
                       </button>
+                      {/* ) : null} */}
                     </td>
                   </tr>
                 )

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import { confirmEstimate } from "../models/estimate";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
+import mailer from "../mailer";
 
 export default function validationCode({ verified }) {
   return (
@@ -29,8 +30,15 @@ export default function validationCode({ verified }) {
 }
 
 export async function getServerSideProps({ query }) {
-  console.log(query);
   const verified = await confirmEstimate(query?.validationCode);
+  const mailBody = `Un devis a été validé`;
+  await mailer.sendMail({
+    from: process.env.MAILER_FROM,
+    to: process.env.MAILER_FROM,
+    subject: `Le devis a été validé par votre client`,
+    text: mailBody,
+    html: mailBody,
+  });
   return {
     props: {
       verified,

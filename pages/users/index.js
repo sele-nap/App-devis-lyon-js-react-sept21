@@ -3,12 +3,14 @@ import Layout from "../../components/Layout";
 import axios from "axios";
 import { RiFileEditFill } from "react-icons/ri";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import AdminLayout from "../../components/AdminLayout";
 import ClientLayout from "../../components/ClientLayout";
 
 const ListClient = () => {
+  const { data, user, role } = useSession();
+
   const deleteUser = async (id) => {
     if (
       confirm(
@@ -27,7 +29,9 @@ const ListClient = () => {
   }, []);
   return (
     <div>
-      <Layout title="Mes contacts">
+      <Layout
+        title={data?.user.role === "admin" ? "Mes Contacts" : "Mon Profil"}
+      >
         <ClientLayout>
           <div className="table w-full p-2 mt-8">
             <table className="w-full border">
@@ -135,8 +139,14 @@ const ListClient = () => {
                       <td className="text-sm p-3">
                         {" "}
                         {organizationType === "BUISNESS"
-                          ? "ENTREPRISE"
-                          : "PARTICULIER"}
+                          ? "Entreprise"
+                          : organizationType === "INDIVIDUAL"
+                          ? "Particulier"
+                          : organizationType === "NON_PROFIT_ORGANIZATION"
+                          ? "Association"
+                          : organizationType === "TOWN_HALL"
+                          ? "Collectivité"
+                          : null}
                       </td>
                       <td className="border">
                         <Link href={`users/edit/${id}`} passHref>

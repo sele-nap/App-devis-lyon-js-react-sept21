@@ -6,7 +6,7 @@
     "build": "next build",
     "lint": "next lint",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "start:server": "next start",
+    "start:server": "node server.js",
     "generate-db-client": "npx prisma generate",
     "migrate:dev": "npx prisma migrate dev",
     "migrate:deploy": "npx prisma migrate deploy",

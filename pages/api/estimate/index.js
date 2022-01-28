@@ -6,9 +6,10 @@ import {
   deleteOneEstimate,
   createAskEstimate,
   getEstimates,
+  getEstimatesDesc,
   ValidateEstimate,
 } from "../../../models/estimate";
-// import mailer from "../../../mailer";
+import mailer from "../../../mailer";
 import crypto from "crypto";
 
 // import { requireAdmin } from "../../../middleware/requireAdmin";
@@ -16,23 +17,20 @@ import crypto from "crypto";
 const handleGet = async (req, res) => {
   const customerId =
     req.currentUser.role === "admin" ? undefined : req.currentUser.id;
-  const { statusList, limit, offset } = req.query;
+  const { statusList, limit, offset, orderBy } = req.query;
   const [items, totalCount] = await getEstimates({
     statusList,
     limit,
     offset,
     customerId,
+    orderBy: {
+      createDate: orderBy === "createDateAsc" ? "asc" : "desc",
+    },
   });
   res.setHeader("x-total-count", totalCount);
   res.send(items);
 };
 
-// const handleGet = async (req, res) => {
-//   const { statusList } = req.query;
-//   const customerId =
-//     req.currentUser.role === "admin" ? undefined : req.currentUser.id;
-//   res.send(await getEstimates({ statusList, customerId }));
-// };
 async function handlePost(req, res) {
   const validationError = ValidateEstimate(req.body);
   console.log(validationError);
@@ -44,6 +42,14 @@ async function handlePost(req, res) {
     customer: { connect: { id: req.currentUser.id } },
   });
 
+  const mailBody = `Une nouvelle demande de devis a été enregistré sur votre site. Rendez vous sur : ${process.env.HOST}/estimates pour apporter une réponse`;
+  await mailer.sendMail({
+    from: process.env.MAILER_FROM,
+    to: "wilder.app.devis@gmail.com",
+    subject: `Un nouveau devis est en attente de réponse`,
+    text: mailBody,
+    html: mailBody,
+  });
   if (req.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
       createFiles({

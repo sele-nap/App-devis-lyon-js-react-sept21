@@ -32,7 +32,6 @@ const SignupForm = () => {
   const isIndividual = organizationType === "INDIVIDUAL";
 
   const onSubmit = (data) => {
-    //   console.log(data);
     axios
       .post("/api/users", data)
       .then((res) => {
@@ -212,8 +211,8 @@ const SignupForm = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="siretNumber"
                   name="siretNumber"
-                  type="text"
-                  defaultValue=""
+                  type="number"
+                  size="14"
                   {...register("siretNumber", {
                     required: "❌ Champs obligatoire",
                     pattern: {
@@ -306,7 +305,8 @@ const SignupForm = () => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="zipCode"
               name="zipCode"
-              type="text"
+              type="number"
+              size="5"
               {...register("zipCode", {
                 required: "❌ Champs obligatoire",
                 pattern: {

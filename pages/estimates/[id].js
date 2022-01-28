@@ -73,6 +73,16 @@ export default function Estimate(req) {
       confirmButtonText: "Oui",
     }).then((result) => {
       if (result.isConfirmed) {
+        {
+          const data = new FormData();
+          data.append(
+            "status",
+            status !== "WAITING_FOR_VALIDATION"
+              ? "WAITING_FOR_VALIDATION"
+              : "TO_DO"
+          );
+          axios.patch(`/api/estimate/${id}`, data);
+        }
         axios.post(`/api/estimate/${id}`);
         Swal.fire(
           "Envoyé",
@@ -166,11 +176,14 @@ export default function Estimate(req) {
 
   const saveEstimate = async () => {
     const dataFiles = new FormData();
-    for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
+    for (let i = 0; i < 3 - attachedFiles.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());
-    dataFiles.append("adminComment", adminComment?.valueOf());
+
+    if (adminComment?.valueOf()) {
+      dataFiles.append("adminComment", adminComment?.valueOf());
+    }
 
     try {
       if (isUpdate) {
@@ -252,13 +265,17 @@ export default function Estimate(req) {
                   </div>
                 </div>
               </div>
-              <h2 className="text-center text-2xl  uppercase m-4">
-                Devis
-                {status !== "VALIDATED"
-                  ? " EN COURS - "
-                  : false
-                  ? " VALIDÉ - "
-                  : " VALIDÉ - "}
+              <h2 className="text-center text-2xl  m-4">
+                DEVIS
+                {status === "DRAFT"
+                  ? " Brouillon "
+                  : status === "TO_DO"
+                  ? " En cours de rédaction "
+                  : status === "WAITING_FOR_VALIDATION"
+                  ? " En attente de validation "
+                  : status === "VALIDATED"
+                  ? " validé "
+                  : null}
                 n° {id}
               </h2>
               <div className="flex  justify-around">
@@ -352,28 +369,32 @@ export default function Estimate(req) {
                             <Link href={"/" + a.url}>
                               <a>{a.name}</a>
                             </Link>
-                            <DeleteForeverIcon
-                              className="ml-3"
-                              onClick={() => deleteAttachedFiles(a.id)}
-                            />
+                            {status !== "VALIDATED" ? (
+                              <DeleteForeverIcon
+                                className="ml-3 "
+                                onClick={() => deleteAttachedFiles(a.id)}
+                              />
+                            ) : (
+                              <span></span>
+                            )}
                           </div>
                         );
                       })}
                   </div>
                 </div>
 
-                {adminComment != null || currentUserIsAdmin ? (
+                {adminComment !== null || currentUserIsAdmin ? (
                   <div className=" w-full mb-10 p-8">
                     <h2 className="text-center text-xl uppercase mb-4">
                       Proposition de l{`'`}administrateur
                     </h2>
-                    {currentUserIsAdmin ? (
+                    {currentUserIsAdmin && status !== "VALIDATED" ? (
                       <input
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="adminComment"
                         name="adminComment"
                         type="text"
-                        value={adminComment}
+                        value={adminComment || ""}
                         onChange={(e) => setAdminComment(e.target.value)}
                       />
                     ) : (
@@ -397,10 +418,12 @@ export default function Estimate(req) {
                               <Link href={"/" + a.url}>
                                 <a>{a.name}</a>
                               </Link>
-                              <DeleteForeverIcon
-                                className="ml-3"
-                                onClick={() => deleteAttachedFiles(a.id)}
-                              />
+                              {status !== "VALIDATED" && currentUserIsAdmin ? (
+                                <DeleteForeverIcon
+                                  className="ml-3 "
+                                  onClick={() => deleteAttachedFiles(a.id)}
+                                />
+                              ) : null}
                             </div>
                           );
                         })}
@@ -436,7 +459,8 @@ export default function Estimate(req) {
                   })}
                 </div>
               </div>
-
+            </div>
+            <div className="mt-8 flex justify-center">
               <div className="flex  justify-center mt-20">
                 <input
                   className="hidden"
@@ -447,14 +471,15 @@ export default function Estimate(req) {
                   ref={attachedFilesRef}
                   onChange={handleAttachedFilesSelection}
                 ></input>
-
-                <button
-                  type="submit"
-                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-                >
-                  <SaveIcon />
-                  <span className="mx-2"> Sauvegarde </span>
-                </button>
+              </div>
+              <button
+                type="submit"
+                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              >
+                <SaveIcon />
+                <span className="mx-2"> Sauvegarde </span>
+              </button>
+              {status !== "VALIDATED" ? (
                 <button
                   className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}
@@ -463,13 +488,13 @@ export default function Estimate(req) {
                   <IoIosAttach size={26} />
                   <span className="mx-2 ">Pièces Jointes </span>
                 </button>
-              </div>
+              ) : null}
             </div>
           </form>
         </div>
 
-        <div className="flex justify-center mt-5"></div>
-        <div className="mt-10 flex justify-center">
+        <div className="flex justify-center"></div>
+        <div className="mt-4 flex justify-center">
           <Link href="/estimates" passHref>
             <button className="ml-2 shadow w-64 h-12 bg-gray-400 hover:bg-gray-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
               <ArrowBackIcon />
@@ -477,7 +502,7 @@ export default function Estimate(req) {
             </button>
           </Link>
 
-          {adminComment && (
+          {adminComment && currentUserIsAdmin ? (
             <button
               onClick={() => sendMail(id)}
               className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
@@ -486,7 +511,7 @@ export default function Estimate(req) {
                 <CheckCircleOutlineIcon /> Validation du devis
               </span>
             </button>
-          )}
+          ) : null}
           <div className="ml-2  pt-3 shadow w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
             <Pdf targetRef={ref} filename="Devis.pdf" options={options}>
               {({ toPdf }) => (
