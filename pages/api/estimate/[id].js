@@ -6,7 +6,7 @@ import {
   getEstimate,
   createFiles,
   getOneEstimateAttachedFiles,
-  sendMailChangeStatus,
+  // sendMailChangeStatus,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
@@ -64,7 +64,7 @@ async function sendMail({ query: { id } }, req, res) {
     text: mailBodyForAdmin,
     html: mailBodyForAdmin,
   });
-  await sendMailChangeStatus(id);
+  // await sendMailChangeStatus(id);
 }
 
 async function handleGet({ query: { id } }, res) {

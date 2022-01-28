@@ -1,5 +1,3 @@
-import { IoIosAddCircle } from "react-icons/io";
-import { FaCloudDownloadAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { RiFileEditFill } from "react-icons/ri";
 import next from "next";
@@ -71,7 +69,6 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   useEffect(() => {
     getEstimates(statusList, currentPage, perPage, orderByDesc);
   }, [currentPage, perPage, statusList, orderByDesc]);
-
   return (
     <section>
       {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}

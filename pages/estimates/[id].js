@@ -176,7 +176,7 @@ export default function Estimate(req) {
 
   const saveEstimate = async () => {
     const dataFiles = new FormData();
-    for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
+    for (let i = 0; i < 3 - attachedFiles.length; i++) {
       dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
     }
     dataFiles.append("additionalInformation", additionalInformation.valueOf());

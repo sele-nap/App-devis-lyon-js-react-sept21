@@ -18,9 +18,7 @@ function ToggleButton({ e, handleChange }) {
             const data = new FormData();
             data.append(
               "status",
-              e.status !== "WAITING_FOR_VALIDATION"
-                ? "WAITING_FOR_VALIDATION"
-                : "TO_DO"
+              e.status !== "VALIDATED" ? "WAITING_FOR_VALIDATION" : "TO_DO"
             );
 
             axios.patch(`/api/estimate/${e.id}`, data).then(handleChange);
