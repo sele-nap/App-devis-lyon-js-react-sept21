@@ -239,13 +239,13 @@ function Estimate() {
                   e.preventDefault();
                   onSubmit("TO_DO");
                 }}
-                className="shadow w-68 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className="shadow w-68 h-12 bg-yellow-400 hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
                 Soumettre ma demande <SendIcon className="ml-5 " />
               </button>
 
               <button
-                className=" pt-3 flex flex-row around shadow w-68 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className=" pt-3 flex flex-row around shadow w-68 h-12 bg-yellow-400 hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();
