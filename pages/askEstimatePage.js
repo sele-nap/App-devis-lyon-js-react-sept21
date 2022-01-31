@@ -78,6 +78,7 @@ function Estimate() {
     dataFiles.append("additionalInformation", additionalInformation.value);
 
     axios
+
       .post("/api/estimate", dataFiles)
       .then((res) => {
         console.log(res);
@@ -222,6 +223,17 @@ function Estimate() {
                       timer: 2500,
                     });
                   }
+                  return (
+                    <ul key={index}>
+                      <li>
+                        {data}
+                        <DeleteForeverIcon
+                          className="ml-3"
+                          onClick={handleClickDelete}
+                        />
+                      </li>
+                    </ul>
+                  );
                 })}
               </div>
             </div>
