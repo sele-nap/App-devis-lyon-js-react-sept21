@@ -433,8 +433,10 @@ export default function Estimate(req) {
                         })}
                     </div>
                   </div>
+                ) : status === "DRAFT" ? (
+                  "Lyon Décoration prendre connaissance de votre devis quand vous l'aurez enregistré"
                 ) : (
-                  "Une réponse de notre part vous sera apportée dans les meilleurs délais."
+                  "Une réponse de notre part vous sera apportée dans les meilleurs  délais."
                 )}
 
                 <div className="m-20 align-sub">

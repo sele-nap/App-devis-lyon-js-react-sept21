@@ -137,14 +137,9 @@ function Estimate() {
 
   return (
     <div>
-      <Layout>
-        {" "}
+      <Layout title="votre demande de devis">
         <ClientLayout>
-          <div className=" flex justify-center">
-            <h1 className="bg-third h-10 w-1/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
-              {`Votre demande de devis ${numberEstimate}`}
-            </h1>
-          </div>
+          <div className=" flex justify-center"></div>
 
           <h2 className="text-center mb-10">
             Cette demande ne vaut pas pour devis
