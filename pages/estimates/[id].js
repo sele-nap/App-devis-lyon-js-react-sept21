@@ -340,7 +340,7 @@ export default function Estimate(req) {
                   <h2 className="text-center text-xl uppercase mb-4">
                     Rappel de la demande
                   </h2>
-                  {status != "VALIDATED" ? (
+                  {status === "TO_DO" || status === "DRAFT" ? (
                     <input
                       className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
                       id="additionalInformation"
