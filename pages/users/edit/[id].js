@@ -4,7 +4,6 @@ import { useRouter } from "next/dist/client/router";
 import Layout from "../../../components/Layout";
 import Swal from "sweetalert2";
 
-
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -103,10 +102,9 @@ export default function UserDetails() {
   }, [isUpdate, id]);
 
   return (
-    <Layout>
+    <Layout title="Profil">
       <div>
         <div className="flex flex-col mb-10">
-          <h1 className="text-center text-2xl mb-2"> Editer mon profil</h1>
           <span className="text-gray-400 text-md text-center">
             Les champs avec * ne sont pas modifiables
           </span>

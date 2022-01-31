@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import AdminNavBar from "./AdminNavBar";
 
 export default function ClientLayout({ children, pageTitle }) {
   const { data, status } = useSession();
@@ -19,7 +18,6 @@ export default function ClientLayout({ children, pageTitle }) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <AdminNavBar />
 
       <main>{children}</main>
     </>

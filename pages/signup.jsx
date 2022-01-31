@@ -4,9 +4,8 @@ import SignupForm from "../components/SignupForm";
 
 const signup = () => {
   return (
-    <Layout>
+    <Layout title="inscription">
       <div>
-        <h1 className="text-2xl uppercase text-center m-10"> Inscription</h1>
         <SignupForm />
       </div>
     </Layout>

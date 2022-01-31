@@ -32,7 +32,7 @@ export default function EstimateManagement() {
   };
 
   return (
-    <Layout>
+    <Layout title="mes devis">
       <ClientLayout>
         <EstimateList
           statusList={["TO_DO", "WAITING_FOR_VALIDATION", "VALIDATED"]}
