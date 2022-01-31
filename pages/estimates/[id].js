@@ -508,7 +508,7 @@ export default function Estimate(req) {
             </button>
           </Link>
 
-          {adminComment && currentUserIsAdmin ? (
+          {adminComment && currentUserIsAdmin && status === "TO_DO" ? (
             <button
               onClick={() => sendMail(id)}
               className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
