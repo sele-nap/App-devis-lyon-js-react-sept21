@@ -14,6 +14,7 @@ import { IoMdArrowDropupCircle } from "react-icons/io";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   const { currentUserIsAdmin } = useContext(CurrentUserContext);
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const perPage = 5;
   const [estimatesList, setEstimatesList] = useState([]);
@@ -160,6 +161,20 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                   </div>
                 </th>
 
+                {currentUserProfile.role != "admin" ? (
+                  <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
+                    <div className="flex items-center justify-center">
+                      Status
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                      />
+                    </div>
+                  </th>
+                ) : null}
+
                 <th className="p-2 border-r cursor-auto text-md font-bold text-gray-500">
                   <div className="flex items-center justify-center">
                     Editer
@@ -232,6 +247,20 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                     <td className="text-center border text-sm p-3 my-2">
                       {moment(deadLine).format(`DD/MM/YYYY`)}
                     </td>
+
+                    {currentUserProfile.role != "admin" ? (
+                      <td className="text-center border text-sm p-3 my-2">
+                        {status === "DRAFT"
+                          ? " Brouillon "
+                          : status === "TO_DO"
+                          ? " En cours "
+                          : status === "WAITING_FOR_VALIDATION"
+                          ? " En attente de validation "
+                          : status === "VALIDATED"
+                          ? " validé "
+                          : null}
+                      </td>
+                    ) : null}
                     <td className="border">
                       <Link href={`estimates/${id}`} passHref>
                         <button className="cursor-pointer my-2">
