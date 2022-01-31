@@ -118,19 +118,21 @@ export default function Estimate(req) {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    if (e.target.files[1])
-      setAttachedFilesUpload(URL.createObjectURL(e.target.files[1]));
+    // if (e.target.files[1])
+    //   setAttachedFilesUpload(URL.createObjectURL(e.target.files[1]));
 
     const fileList = Array.from(e.target.files);
-    console.log(fileList);
-    if (fileList.length) {
-      setAttachedFilesUpload(
-        fileList.map((file) => {
-          return file.name;
-        })
-      );
-    }
+
+    // if (fileList.length) {
+    //   setAttachedFilesUpload(
+    //     fileList.map((file) => {
+    //       return file.name;
+    //     })
+    fileList.forEach((file) =>
+      setAttachedFilesUpload((attachedFiles) => [...attachedFiles, file.name])
+    );
   };
+
   const deleteAttachedFiles = async (id) => {
     Swal.fire({
       title:
@@ -340,7 +342,7 @@ export default function Estimate(req) {
                   <h2 className="text-center text-xl uppercase mb-4">
                     Rappel de la demande
                   </h2>
-                  {status != "VALIDATED" ? (
+                  {status === "TO_DO" || status === "DRAFT" ? (
                     <input
                       className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
                       id="additionalInformation"
@@ -366,6 +368,7 @@ export default function Estimate(req) {
                       .filter(
                         (attachedFile) => attachedFile.creator === "client"
                       )
+
                       .map((a) => {
                         return (
                           <div key={a.id} className="m-5 text-center ">
@@ -377,9 +380,7 @@ export default function Estimate(req) {
                                 className="ml-3 "
                                 onClick={() => deleteAttachedFiles(a.id)}
                               />
-                            ) : (
-                              <span></span>
-                            )}
+                            ) : null}
                           </div>
                         );
                       })}
@@ -432,8 +433,10 @@ export default function Estimate(req) {
                         })}
                     </div>
                   </div>
+                ) : status === "DRAFT" ? (
+                  "Lyon Décoration prendre connaissance de votre devis quand vous l'aurez enregistré"
                 ) : (
-                  "Une réponse de notre part vous sera apportée dans les meilleurs délais."
+                  "Une réponse de notre part vous sera apportée dans les meilleurs  délais."
                 )}
 
                 <div className="m-20 align-sub">
@@ -505,7 +508,7 @@ export default function Estimate(req) {
             </button>
           </Link>
 
-          {adminComment && currentUserIsAdmin ? (
+          {adminComment && currentUserIsAdmin && status === "TO_DO" ? (
             <button
               onClick={() => sendMail(id)}
               className="ml-2  shadow w-64 h-12 bg-blue-400 hover:bg-blue-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
