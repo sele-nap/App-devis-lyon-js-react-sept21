@@ -118,19 +118,21 @@ export default function Estimate(req) {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    if (e.target.files[1])
-      setAttachedFilesUpload(URL.createObjectURL(e.target.files[1]));
+    // if (e.target.files[1])
+    //   setAttachedFilesUpload(URL.createObjectURL(e.target.files[1]));
 
     const fileList = Array.from(e.target.files);
-    console.log(fileList);
-    if (fileList.length) {
-      setAttachedFilesUpload(
-        fileList.map((file) => {
-          return file.name;
-        })
-      );
-    }
+
+    // if (fileList.length) {
+    //   setAttachedFilesUpload(
+    //     fileList.map((file) => {
+    //       return file.name;
+    //     })
+    fileList.forEach((file) =>
+      setAttachedFilesUpload((attachedFiles) => [...attachedFiles, file.name])
+    );
   };
+
   const deleteAttachedFiles = async (id) => {
     Swal.fire({
       title:
@@ -366,6 +368,7 @@ export default function Estimate(req) {
                       .filter(
                         (attachedFile) => attachedFile.creator === "client"
                       )
+
                       .map((a) => {
                         return (
                           <div key={a.id} className="m-5 text-center ">
@@ -377,9 +380,7 @@ export default function Estimate(req) {
                                 className="ml-3 "
                                 onClick={() => deleteAttachedFiles(a.id)}
                               />
-                            ) : (
-                              <span></span>
-                            )}
+                            ) : null}
                           </div>
                         );
                       })}
