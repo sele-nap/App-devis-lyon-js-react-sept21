@@ -50,7 +50,7 @@ async function handlePost(req, res) {
     text: mailBody,
     html: mailBody,
   });
-  if (req.files && req.files?.length) {
+  if (req?.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
       createFiles({
         name: file.filename,

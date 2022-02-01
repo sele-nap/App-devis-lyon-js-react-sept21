@@ -6,7 +6,6 @@ import ImageMedaille from "../public/Img/medaille.jpg";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
 import Medal from "../public/Img/Medal.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
@@ -19,7 +18,6 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
-import HelloGuy from "../components/HelloGuy";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 export default function Home() {
@@ -27,11 +25,10 @@ export default function Home() {
   return (
     <div>
       <Layout>
-        <HelloGuy />
-        <h1 className="w-full my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
+        <h1 className="w-full font-main my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
           Les superbes médailles vous souhaitent la bienvenue
         </h1>
-        <div className="h-90 w-full bg-gray-200">
+        <div className="h-90 w-full">
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -59,7 +56,7 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
 
-          <div className="bg-primary flex flex-row-reverse justify-around p-5 ">
+          <div className=" flex flex-row justify-around p-5 ">
             <p className="w-full text-justify mx-20">
               Cat ipsum dolor sit amet, refuse to leave cardboard box pretend
               you want to go out but then dont headbutt owners knee. Sit as
@@ -69,60 +66,58 @@ export default function Home() {
               chomp.
             </p>
           </div>
-          <div className="bg-secondary ">
-            <div className="flex justify-center">
-              <h2 className="mt-7 border-2 border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
+          <div>
+            <div className="flex justify-center mt-12">
+              <h2 className="mt-7 border-2 bg-yellow-400 p-4 hover:bg-yellow-600 font-bold border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
                 Produits du moment
               </h2>
             </div>
-            <div className=" h-full p-7 w-full m-100">
-              <div className=" border-solid border-2 border-black rounded-xl p-5 md:border-none grid overflow-hidden grid-cols-2 grid-rows-2 gap-6 pb">
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-end ">
-                    <Image
-                      src={ImageDrapeau}
-                      width="200px"
-                      height="200px "
-                      className="box col-start-1"
-                      alt=""
-                    />
-                  </a>
-                </Link>
+            <div className=" mt-8 h-full p-7 w-full m-100 flex justify-around">
+              <Link href="/catalog">
+                <a>
+                  <Image
+                    src={ImageDrapeau}
+                    width="200px"
+                    height="200px "
+                    className="box col-start-1"
+                    alt=""
+                  />
+                </a>
+              </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-between">
-                    <Image
-                      src={ImageEcharpe}
-                      width="200px"
-                      height="200px"
-                      alt=""
-                    />
-                  </a>
-                </Link>
+              <Link href="/catalog">
+                <a>
+                  <Image
+                    src={ImageEcharpe}
+                    width="200px"
+                    height="200px"
+                    alt=""
+                  />
+                </a>
+              </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-end">
-                    <Image
-                      src={ImageMedaille}
-                      width="200px"
-                      height="200px"
-                      className=""
-                      alt=""
-                    />
-                  </a>
-                </Link>
+              <Link href="/catalog">
+                <a>
+                  <Image
+                    src={ImageMedaille}
+                    width="200px"
+                    height="200px"
+                    className=""
+                    alt=""
+                  />
+                </a>
+              </Link>
 
-                <Link href="/catalog">
-                  <a className="flex justify-center md:justify-between">
-                    <Image
-                      src={ImageTrophee}
-                      width="200px"
-                      height="200px"
-                      alt=""
-                    />
-                  </a>
-                </Link>
-              </div>
+              <Link href="/catalog">
+                <a>
+                  <Image
+                    src={ImageTrophee}
+                    width="200px"
+                    height="200px"
+                    alt=""
+                  />
+                </a>
+              </Link>
             </div>
           </div>
         </div>

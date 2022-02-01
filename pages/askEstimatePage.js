@@ -69,13 +69,16 @@ function Estimate() {
     const dataFiles = new FormData();
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+      if (attachedFilesRef.current.files[i]) {
+        dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
+      }
     }
     dataFiles.append("status", status);
     dataFiles.append("deadLine", deadLine.value);
     dataFiles.append("additionalInformation", additionalInformation.value);
 
     axios
+
       .post("/api/estimate", dataFiles)
       .then((res) => {
         console.log(res);
@@ -134,14 +137,9 @@ function Estimate() {
 
   return (
     <div>
-      <Layout>
-        {" "}
+      <Layout title="votre demande de devis">
         <ClientLayout>
-          <div className=" flex justify-center">
-            <h1 className="bg-third h-10 w-1/4 items-center md: h-25 text-center flex justify-center rounded-3xl mt-20 mb-10 p-3 lg: w-50">
-              {`Votre demande de devis ${numberEstimate}`}
-            </h1>
-          </div>
+          <div className=" flex justify-center"></div>
 
           <h2 className="text-center mb-10">
             Cette demande ne vaut pas pour devis
@@ -220,6 +218,17 @@ function Estimate() {
                       timer: 2500,
                     });
                   }
+                  return (
+                    <ul key={index}>
+                      <li>
+                        {data}
+                        <DeleteForeverIcon
+                          className="ml-3"
+                          onClick={handleClickDelete}
+                        />
+                      </li>
+                    </ul>
+                  );
                 })}
               </div>
             </div>
@@ -230,13 +239,13 @@ function Estimate() {
                   e.preventDefault();
                   onSubmit("TO_DO");
                 }}
-                className="shadow w-64 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className="shadow w-68 h-12 bg-yellow-400 hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
               >
-                Soumettre un devis <SendIcon className="ml-5 " />
+                Soumettre ma demande <SendIcon className="ml-5 " />
               </button>
 
               <button
-                className=" pt-3 flex flex-row around shadow w-64 h-12 bg-third hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                className=" pt-3 flex flex-row around shadow w-68 h-12 bg-yellow-400 hover:bg-yellow-700 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                 name="Save"
                 onClick={(e) => {
                   e.preventDefault();

@@ -4,11 +4,16 @@ import next from "next";
 
 export default function Legal() {
   return (
-    <Layout>
+    <Layout title="Mentions légales">
       <div className="flex justify-center">
-        <h1 className="border-2 border-third text-black rounded cursor-auto p-1  text-2xl mb-4 uppercase text-center">
-          Mentions légales
-        </h1>
+        <p className="text-justify mx-20">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae
+          molestie eros. Donec sed aliquet dolor. Ut vel dignissim dolor. Nunc
+          mollis purus eget nunc congue, non scelerisque urna lacinia. Nunc nunc
+          sem, ullamcorper sed turpis sit amet, semper gravida diam. Cras
+          vehicula, tellus at volutpat luctus, est lectus placerat leo, et
+          suscipit enim libero sit amet massa. Quisque nec nisi augue.
+        </p>
       </div>
     </Layout>
   );

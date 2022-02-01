@@ -7,6 +7,7 @@ import {
 import base from "../../../middleware/commons";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
+
 async function handlePatch({ query: { id }, body }, res) {
   const validationErrors = validateUser(body, true);
   if (validationErrors) return res.status(422).send(validationErrors);

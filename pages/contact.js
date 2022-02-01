@@ -39,12 +39,7 @@ const Contact = () => {
       );
   }
   return (
-    <Layout>
-      <div className="flex justify-center">
-        <h1 className="border-2 border-third text-black rounded cursor-auto p-1  text-2xl mb-4 uppercase text-center">
-          Contact
-        </h1>
-      </div>
+    <Layout title="contact">
       <div className="flex items-center justify-center mt-16">
         <form className="w-1/3" ref={form} onSubmit={sendmail}>
           <div className="mb-10">
