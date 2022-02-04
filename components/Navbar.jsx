@@ -39,7 +39,7 @@ const Navbar = () => {
   };
   return (
     <div className="bg-third">
-      <div classNameName="w-full text-gray-700 bg-third ">
+      <div className="w-full text-gray-700 bg-third ">
         <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
           <div className=" flex justify-around items-center">
             <div className="p-4 mx-12 flex flex-row items-center justify-between">
@@ -55,15 +55,17 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="rounded-2xl flex-row bg-white border-white border-2 w-36">
-              <ManageSearchIcon />
+            {/* <div className="rounded-2xl flex-row bg-white border-white border-2 w-48">
+              <div className="p-24">
+                <ManageSearchIcon />
+              </div>
               <input
                 type="search"
                 name="search"
                 className="w-24"
                 placeholder="Recherche"
               />
-            </div>
+            </div> */}
           </div>
           <nav className="flex-wrap pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
             <div className="flex flex-row w-24">

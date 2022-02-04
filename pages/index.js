@@ -6,7 +6,6 @@ import ImageMedaille from "../public/Img/medaille.jpg";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import coupe from "../public/Img/coupe.jpg";
 import coupe1 from "../public/Img/coupe1.jpg";
 import Medal from "../public/Img/Medal.jpg";
 import oscar1 from "../public/Img/oscar1.jpg";
@@ -26,7 +25,7 @@ export default function Home() {
   return (
     <div>
       <Layout>
-        <h1 className="w-full my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
+        <h1 className="w-full font-main my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
           Les superbes médailles vous souhaitent la bienvenue
         </h1>
         <div className="h-90 w-full">
