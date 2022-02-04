@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import CurrentUserContext from "../../../contexts/CurrentUserContext";
 import { useContext } from "react";
 import { useSession } from "next-auth/react";
-import CurrentUserLayout from "../../../components/currentUserLayout";
+import CurrentUserLayout from "../../../components/CurrentUserLayout";
 
 export default function UserDetails() {
   const [firstname, setFirstName] = useState("");
@@ -32,8 +32,6 @@ export default function UserDetails() {
     query: { id },
   } = router;
   const isUpdate = id !== "new";
-  // console.log(typeof currentUserProfile.id);
-  // console.log(typeof parseInt(data?.user?.id));
 
   const saveUser = async () => {
     const formValues = {
@@ -113,7 +111,6 @@ export default function UserDetails() {
   return (
     <Layout title="Profil">
       <CurrentUserLayout>
-        {/* {currentUserProfile.id === parseInt(data?.user?.id) ? ( */}
         <div>
           <div className="flex flex-col mb-10">
             <span className="text-gray-400 text-md text-center">
@@ -321,7 +318,6 @@ export default function UserDetails() {
             </form>
           </div>
         </div>
-        {/* ) : null} */}
       </CurrentUserLayout>
     </Layout>
   );

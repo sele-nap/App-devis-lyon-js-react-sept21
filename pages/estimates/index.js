@@ -8,25 +8,6 @@ import Link from "next/link";
 import ClientLayout from "../../components/ClientLayout";
 
 export default function EstimateManagement() {
-  const handleClick = (e) => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Votre devis a bien été créée !",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
-  const Download = (e) => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Votre devis a bien été téléchargé !",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
-
   return (
     <Layout title="mes devis">
       <ClientLayout>
@@ -34,9 +15,6 @@ export default function EstimateManagement() {
           statusList={["TO_DO", "WAITING_FOR_VALIDATION", "VALIDATED"]}
         />
         <DraftArray statusList={["DRAFT"]} />
-
-        {/* ___________ CREATE AN ESTIMATE  ___________*/}
-
         <div className="flex justify-around items-center my-8">
           <Link href="/askEstimatePage">
             <a>

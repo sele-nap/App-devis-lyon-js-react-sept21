@@ -18,7 +18,6 @@ import axios from "axios";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Swal from "sweetalert2";
-// import EditEstimateArray from "../../components/editEstimateArray";
 import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ClientLayout from "../../components/ClientLayout";
@@ -26,7 +25,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 // import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 import { IoIosAttach } from "react-icons/io";
-import CurrentUserLayout from "../../components/currentUserLayout";
+import CurrentUserLayout from "../../components/CurrentUserLayout";
 
 const router = useRouter;
 //  -------------------------- FORMAT PDF --------------------------
@@ -65,7 +64,7 @@ export default function Estimate(req) {
 
   const sendMail = async (id) => {
     Swal.fire({
-      title: "Voulez vous envoyer un mail avec un lien de validation ?  ",
+      title: "Voulez-vous envoyer un mail avec un lien de validation ?  ",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#DAB455",
@@ -86,7 +85,7 @@ export default function Estimate(req) {
         axios.post(`/api/estimate/${id}`);
         Swal.fire(
           "Envoyé",
-          "Un mail a été envoyé, celui ci fait office de signature et d'acceptation des conditions de ventes",
+          "Un mail a été envoyé, celui-ci fait office de signature et d'acceptation des conditions de ventes",
           "success"
         );
       }
@@ -118,16 +117,7 @@ export default function Estimate(req) {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    // if (e.target.files[1])
-    //   setAttachedFilesUpload(URL.createObjectURL(e.target.files[1]));
-
     const fileList = Array.from(e.target.files);
-
-    // if (fileList.length) {
-    //   setAttachedFilesUpload(
-    //     fileList.map((file) => {
-    //       return file.name;
-    //     })
     fileList.forEach((file) =>
       setAttachedFilesUpload((attachedFiles) => [...attachedFiles, file.name])
     );
@@ -136,7 +126,7 @@ export default function Estimate(req) {
   const deleteAttachedFiles = async (id) => {
     Swal.fire({
       title:
-        "Voulez vous vraiment supprimer cette pièce jointe définitivement ?",
+        "Voulez-vous vraiment supprimer cette pièce jointe définitivement ?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DAB455",
@@ -192,7 +182,6 @@ export default function Estimate(req) {
 
     try {
       if (isUpdate) {
-        console.log(dataFiles);
         await axios.patch(`/api/estimate/${id}`, dataFiles).then((res) => {
           Swal.fire({
             position: "center",
@@ -443,7 +432,7 @@ export default function Estimate(req) {
                       </div>
                     </div>
                   ) : status === "DRAFT" ? (
-                    "Lyon Décoration prendre connaissance de votre devis quand vous l'aurez enregistré"
+                    "Lyon Décoration va prendre connaissance de votre devis quand vous l'aurez enregistré"
                   ) : (
                     "Une réponse de notre part vous sera apportée dans les meilleurs  délais."
                   )}
