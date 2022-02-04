@@ -41,6 +41,17 @@ function Estimate() {
     setAttachedFiles([]);
   };
 
+  const customErrors = () => {
+    const globalError = "votre demande de devis n'a pas été envoyée";
+    if (additionalInformation.value === "") {
+      return "Le champ message n'a pas été rempli, " + globalError;
+    }
+    if (deadLine.value === "") {
+      return "Le champ date n'a pas été rempli, " + globalError;
+    }
+    return globalError;
+  };
+
   const onSubmit = async (status) => {
     const dataFiles = new FormData();
 
@@ -78,7 +89,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: "votre demande de devis n'a pas été envoyée",
+          title: globalError(),
           showConfirmButton: false,
           timer: 2500,
         });
