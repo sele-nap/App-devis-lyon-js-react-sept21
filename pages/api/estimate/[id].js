@@ -9,7 +9,6 @@ import {
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
-import requireCurrentUser from "../../../middleware/requireCurrentUser";
 import handleImageUpload from "../../../middleware/handleImageUpload";
 
 async function handlePatch(req, res) {
@@ -89,8 +88,11 @@ export const config = {
 };
 
 export default base()
-  .use(requireCurrentUser)
-  .post(sendMail)
-  .get(handleGet)
-  .patch(handleImageUpload.array("attachedFiles", 3), handlePatch)
-  .delete(handleDelete);
+  .post(requireCurrentUser, sendMail)
+  .get(requireCurrentUser, handleGet)
+  .patch(
+    requireCurrentUser,
+    handleImageUpload.array("attachedFiles", 3),
+    handlePatch
+  )
+  .delete(requireCurrentUser, handleDelete);
