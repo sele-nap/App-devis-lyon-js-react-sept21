@@ -26,36 +26,12 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    // if (e.target.files[1])
-    //   setAttachedFiles(URL.createObjectURL(e.target.files[1]));
-
     const fileList = Array.from(e.target.files);
-
-    // if (fileList.forlength) {
-    //   setAttachedFiles(
-    //     fileList.map((file) => {
-    //       return file.name;
-    //     })
-    //   );
-    // }
 
     fileList.forEach((file) =>
       setAttachedFiles((attachedFiles) => [...attachedFiles, file.name])
     );
   };
-
-  //Soumission devis//
-
-  // const customErrors = () => {
-  //   const globalError = "votre demande de devis n'a pas été envoyée";
-  //   if (additionalInformation.value === "") {
-  //     return "Le champ message n'a pas été rempli, " + globalError;
-  //   }
-  //   if (deadLine.value === "") {
-  //     return "Le champ date n'a pas été rempli, " + globalError;
-  //   }
-  //   return globalError;
-  // };
 
   const [numberEstimate, setNumberEstimate] = useState("");
 
@@ -81,15 +57,14 @@ function Estimate() {
 
       .post("/api/estimate", dataFiles)
       .then((res) => {
-        console.log(res);
         setNumberEstimate("n°" + res.data?.id);
         Swal.fire({
           position: "center",
           icon: "success",
           title:
             res.data.status === "TO_DO"
-              ? `Votre demande de devis ${res.data?.id} a été envoyé `
-              : "Votre demande de devis a été enregistré, vous pourrez le modifier ultérieurement",
+              ? `Votre demande de devis ${res.data?.id} a été envoyée `
+              : "Votre demande de devis a été enregistrée, vous pourrez la modifier ultérieurement",
           showConfirmButton: false,
           timer: 2500,
         });
@@ -119,13 +94,13 @@ function Estimate() {
       showCancelButton: true,
       confirmButtonColor: "#DAB455",
       cancelButtonColor: "#ECE6E6",
-      confirmButtonText: "Oui, supprimé",
+      confirmButtonText: "Oui",
     }).then((result) => {
       if (result.isConfirmed) {
         setAttachedFiles(attachedFiles.splice(1, 3));
         Swal.fire(
           "Supprimé",
-          "Votre pièce jointe à bien été supprimé",
+          "Votre pièce jointe à bien été supprimée",
           "success"
         );
       }

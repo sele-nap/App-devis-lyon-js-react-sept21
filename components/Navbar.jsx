@@ -54,18 +54,6 @@ const Navbar = () => {
                 </a>
               </Link>
             </div>
-
-            {/* <div className="rounded-2xl flex-row bg-white border-white border-2 w-48">
-              <div className="p-24">
-                <ManageSearchIcon />
-              </div>
-              <input
-                type="search"
-                name="search"
-                className="w-24"
-                placeholder="Recherche"
-              />
-            </div> */}
           </div>
           <nav className="flex-wrap pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
             <div className="flex flex-row w-24">
@@ -114,7 +102,6 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={handleToggle}
-                // className="text-sm font-semibold text-gray-900  rounded-lg  hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline"
                 className="flex px-4 py-2 mt-2 text-sm font-semibold text-gray-900  rounded-lg  md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline"
               >
                 {status === "authenticated" && (
