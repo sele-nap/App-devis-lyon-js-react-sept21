@@ -18,7 +18,9 @@ export default function AdminLayout({ children, pageTitle }) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <main>{children}</main>
+      <main>
+        {status === "loading" ? <p>chargement de la session...</p> : children}
+      </main>
     </>
   );
 }
