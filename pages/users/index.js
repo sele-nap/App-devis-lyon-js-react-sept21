@@ -5,7 +5,6 @@ import { RiFileEditFill } from "react-icons/ri";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import AdminLayout from "../../components/AdminLayout";
 import ClientLayout from "../../components/ClientLayout";
 
 const ListClient = () => {

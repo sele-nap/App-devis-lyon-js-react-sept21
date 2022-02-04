@@ -18,14 +18,11 @@ import axios from "axios";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import Swal from "sweetalert2";
-import AdminLayout from "../../components/AdminLayout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ClientLayout from "../../components/ClientLayout";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
-// import ToggleButtonToDo from "../../components/ToggleButtonToDo";
 import { IoIosAttach } from "react-icons/io";
-import CurrentUserLayout from "../../components/currentUserLayout";
 
 const router = useRouter;
 //  -------------------------- FORMAT PDF --------------------------
@@ -243,7 +240,6 @@ export default function Estimate(req) {
   return (
     <Layout>
       <ClientLayout>
-        {/* <CurrentUserLayout> */}
         <div className="flex flex-col">
           <form
             onSubmit={async (e) => {
@@ -537,7 +533,6 @@ export default function Estimate(req) {
         </div>
 
         <div className="flex flex-row justify-around mt-20"></div>
-        {/* </CurrentUserLayout> */}
       </ClientLayout>
     </Layout>
   );
