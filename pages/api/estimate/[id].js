@@ -12,8 +12,6 @@ import mailer from "../../../mailer";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
 import handleImageUpload from "../../../middleware/handleImageUpload";
 
-import { getSession } from "next-auth/react";
-
 async function handlePatch(req, res) {
   const {
     query: { id },
@@ -65,11 +63,9 @@ async function sendMail({ query: { id } }, req, res) {
     text: mailBodyForAdmin,
     html: mailBodyForAdmin,
   });
-  // await sendMailChangeStatus(id);
 }
 
 async function handleGet({ query: { id }, currentUser }, res) {
-  // const { data } = useSession();
   const { customer } = await getEstimate(id);
 
   const estimate = await getOneEstimateAttachedFiles(id);
