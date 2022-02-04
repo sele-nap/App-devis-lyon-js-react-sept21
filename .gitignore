@@ -37,3 +37,4 @@ yarn-error.log*
 
 public/uploads/*
 !public/uploads/.gitkeep
+.vscode
