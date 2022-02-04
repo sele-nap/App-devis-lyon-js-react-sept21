@@ -25,8 +25,8 @@ export default function UserDetails() {
 
   const router = useRouter();
 
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
   const { data, status } = useSession();
   const {
     query: { id },

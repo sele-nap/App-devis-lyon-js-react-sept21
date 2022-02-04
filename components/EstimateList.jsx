@@ -13,8 +13,8 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
 
   const perPage = 5;
   const [estimatesList, setEstimatesList] = useState([]);
@@ -35,9 +35,6 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       confirmButtonText: "Oui, supprimé",
     }).then((result) => {
       if (result.isConfirmed) {
-        // if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
-
-        //   alert("Projet bien supprimé");
         axios.delete(`/api/estimate/${id}`);
         setEstimatesList((estimatesList) =>
           estimatesList.filter((e) => e.id !== id)

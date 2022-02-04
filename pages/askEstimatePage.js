@@ -26,9 +26,6 @@ function Estimate() {
     e.preventDefault();
   };
   const handleAttachedFilesSelection = (e) => {
-    // if (e.target.files[1])
-    //   setAttachedFiles(URL.createObjectURL(e.target.files[1]));
-
     const fileList = Array.from(e.target.files);
 
     // if (fileList.forlength) {

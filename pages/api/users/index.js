@@ -10,7 +10,7 @@ import mailer from "../../../mailer";
 import crypto from "crypto";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
-async function handler(req, res) {
+async function handlePost(req, res) {
   const validationError = validateUser(req.body);
   if (validationError) return res.status(422).send(validationError);
   if (await emailAlreadyExists(req.body.email))
@@ -29,7 +29,7 @@ async function handler(req, res) {
     html: mailBody,
   });
 
-  const newUser = create(req.body);
+  const newUser = await create(req.body);
   delete newUser.hashedPassword;
   res.status(201).send(newUser);
 }
@@ -48,6 +48,6 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .post(handler)
+  .post(handlePost)
   .get(requireCurrentUser, handleGet)
   .delete(requireCurrentUser, handleDelete);

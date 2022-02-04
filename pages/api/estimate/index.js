@@ -1,7 +1,7 @@
 import base from "../../../middleware/commons";
 import handleImageUpload from "../../../middleware/handleImageUpload";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
-import { createFiles, deleteFiles } from "../../../models/attachedFiles";
+import { createFile, deleteFile } from "../../../models/attachedFiles";
 import {
   deleteOneEstimate,
   createAskEstimate,
@@ -11,8 +11,6 @@ import {
 } from "../../../models/estimate";
 import mailer from "../../../mailer";
 import crypto from "crypto";
-
-// import { requireAdmin } from "../../../middleware/requireAdmin";
 
 const handleGet = async (req, res) => {
   const customerId =
@@ -52,7 +50,7 @@ async function handlePost(req, res) {
   });
   if (req?.files && req.files?.length) {
     const filesSave = req.files.map((file) =>
-      createFiles({
+      createFile({
         name: file.filename,
         estimate: { connect: { id: newEstimate.id } },
         url: file.path.replace("public/", ""),
@@ -75,7 +73,10 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .use(requireCurrentUser)
-  .post(handleImageUpload.array("attachedFiles", 3), handlePost)
-  .get(handleGet)
-  .delete(handleDelete);
+  .post(
+    requireCurrentUser,
+    handleImageUpload.array("attachedFiles", 3),
+    handlePost
+  )
+  .get(requireCurrentUser, handleGet)
+  .delete(requireCurrentUser, handleDelete);

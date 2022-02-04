@@ -18,10 +18,9 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 const Navbar = () => {
   const { data, user, role, status } = useSession();
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
-
-  const [isActiveBtn, setActiveBtn] = useState("true");
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
+  const [isActiveBtn, setActiveBtn] = useState(true);
   const handleToggle = () => {
     setActiveBtn(!isActiveBtn);
   };
@@ -114,7 +113,6 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={handleToggle}
-                // className="text-sm font-semibold text-gray-900  rounded-lg  hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline"
                 className="flex px-4 py-2 mt-2 text-sm font-semibold text-gray-900  rounded-lg  md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline"
               >
                 {status === "authenticated" && (

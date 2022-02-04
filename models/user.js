@@ -130,7 +130,11 @@ const findByEmail = async (email = "") => {
   return await db.user.findUnique({ where: { email } });
 };
 
-const userToShow = {
+const findById = async (id = "") => {
+  return await db.user.findUnique({ where: { id } });
+};
+
+const userPropsToShow = {
   id: true,
   email: true,
   address1: true,
@@ -147,15 +151,14 @@ const userToShow = {
 };
 const getUsers = async () => {
   return db.user.findMany({
-    // where: { customer: { id: customerId } },
-    select: userToShow,
+    select: userPropsToShow,
   });
 };
 
 const getOneUser = (id) => {
   return db.user.findUnique({
     where: { id: parseInt(id, 10) },
-    select: userToShow,
+    select: userPropsToShow,
   });
 };
 
@@ -164,10 +167,6 @@ const deleteOneUser = (id) => {
     .delete({ where: { id: parseInt(id, 10) } })
     .catch((_) => false);
 };
-
-// const createProject = ({ title, description, mainPictureUrl }) => {
-//   return db.project.create({ data: { title, description, mainPictureUrl } });
-// };
 
 const updateOneUser = (id, data) => {
   return db.user
@@ -193,4 +192,5 @@ module.exports = {
   deleteOneUser,
   updateOneUser,
   getSafeAttributes,
+  findById,
 };

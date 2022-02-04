@@ -2,8 +2,6 @@ import multer from "multer";
 import path from "path";
 import uniqid from "uniqid";
 
-// export default multer({ dest: "../public/uploads/" });
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./public/uploads/");

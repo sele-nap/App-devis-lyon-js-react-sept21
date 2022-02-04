@@ -8,14 +8,17 @@ import { useContext } from "react";
 export default function CurrentUserLayout({ children, pageTitle }) {
   const { data, status } = useSession();
   const router = useRouter();
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
+  console.log(currentUserProfile);
 
   useEffect(() => {
     if (
-      (status !== "loading" &&
-        currentUserProfile.id !== parseInt(data?.user?.id)) ||
-      currentUserProfile !== "client"
+      status !== "loading" &&
+      currentUserProfile.id !== parseInt(data?.user?.id)
+
+      // ||
+      // currentUserProfile.role != "client"
     ) {
       router.push("/estimates");
     }

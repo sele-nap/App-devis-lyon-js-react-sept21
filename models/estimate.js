@@ -13,7 +13,7 @@ const ValidateEstimate = (data, forUpdate = false) => {
   }).validate(data, { abortEarly: false }).error;
 };
 
-const estimateToShow = {
+const estimatePropsToShow = {
   id: true,
   deadLine: true,
   additionalInformation: true,
@@ -34,7 +34,7 @@ const getEstimates = async ({
   return Promise.all([
     db.estimate.findMany({
       where: { status: { in: statusList }, customer: { id: customerId } },
-      select: estimateToShow,
+      select: estimatePropsToShow,
       take: parseInt(limit),
       skip: parseInt(offset),
       orderBy,
@@ -48,7 +48,7 @@ const getEstimates = async ({
 const getOneEstimate = (id) => {
   return db.estimate.findUnique({
     where: { id: parseInt(id, 10) },
-    select: estimateToShow,
+    select: estimatePropsToShow,
   });
 };
 
@@ -94,7 +94,7 @@ const createAskEstimate = async ({
   });
 };
 
-const createFiles = async ({ name, estimate, url, creator }) => {
+const createFile = async ({ name, estimate, url, creator }) => {
   return await db.attachedFile.create({
     data: {
       name,
@@ -104,10 +104,6 @@ const createFiles = async ({ name, estimate, url, creator }) => {
     },
   });
 };
-
-// const updateAskEstimate = async (id, data) => {
-//   return db.estimate.update({ where: { id: parseInt(id, 10) }, data });
-// };
 
 const updateAskEstimate = async (id, data) => {
   return db.estimate.update({
@@ -121,14 +117,6 @@ const validateEstimate = (id, status, validationCode) => {
     .update({ where: { id: parseInt(id, 10) }, status, validationCode })
     .catch(() => false);
 };
-
-// const sendMailChangeStatus = (id) => {
-//   const date = new Date(Date.now());
-//   return db.estimate.update({
-//     where: { id: parseInt(id, 10) },
-//     data: { status: "WAITING_FOR_VALIDATION", waitingDate: date },
-//   });
-// };
 
 const confirmEstimate = async (validationCode) => {
   try {
@@ -153,8 +141,7 @@ module.exports = {
   ValidateEstimate,
   createAskEstimate,
   updateAskEstimate,
-  createFiles,
-  // sendMailChangeStatus,
+  createFile,
   getEstimates,
   getOneEstimate,
   deleteOneEstimate,
