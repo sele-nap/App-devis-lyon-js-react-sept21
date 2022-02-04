@@ -152,7 +152,7 @@ function Estimate() {
               <input
                 type="date"
                 placeholder="date"
-                min={date}
+                min={(date, date2)}
                 id="deadLine"
                 className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
                  "
