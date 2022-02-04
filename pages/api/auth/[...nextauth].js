@@ -4,12 +4,6 @@ import { getSession } from "next-auth/react";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const getSessionID = async (req, res) => {
-  const session = await getSession({ req });
-
-  res.end();
-};
-
 export default NextAuth({
   secret: process.env.SECRET,
   pages: {

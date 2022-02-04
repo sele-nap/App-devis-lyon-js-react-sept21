@@ -18,10 +18,9 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 
 const Navbar = () => {
   const { data, user, role, status } = useSession();
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
-
-  const [isActiveBtn, setActiveBtn] = useState("true");
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
+  const [isActiveBtn, setActiveBtn] = useState(true);
   const handleToggle = () => {
     setActiveBtn(!isActiveBtn);
   };

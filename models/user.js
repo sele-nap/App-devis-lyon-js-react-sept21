@@ -147,7 +147,6 @@ const userPropsToShow = {
 };
 const getUsers = async () => {
   return db.user.findMany({
-    // where: { customer: { id: customerId } },
     select: userPropsToShow,
   });
 };

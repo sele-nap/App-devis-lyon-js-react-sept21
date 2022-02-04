@@ -19,7 +19,9 @@ export default function ClientLayout({ children, pageTitle }) {
         <title>{pageTitle}</title>
       </Head>
 
-      <main>{children}</main>
+      <main>
+        {status === "loading" ? <p>chargement de la session...</p> : children}
+      </main>
     </>
   );
 }
