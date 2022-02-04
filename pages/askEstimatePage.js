@@ -89,7 +89,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: globalError(),
+          title: customErrors(),
           showConfirmButton: false,
           timer: 2500,
         });
