@@ -56,7 +56,7 @@ function Estimate() {
     const dataFiles = new FormData();
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      if (attachedFilesRef.current.files[i]) {
+      if (attachedFilesRef.current.files[i] && i <= 2) {
         dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
       }
     }
@@ -89,7 +89,7 @@ function Estimate() {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: globalError(),
+          title: customErrors(),
           showConfirmButton: false,
           timer: 2500,
         });

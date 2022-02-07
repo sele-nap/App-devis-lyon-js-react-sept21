@@ -166,7 +166,7 @@ export default function Estimate(req) {
     const dataFiles = new FormData();
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      if (attachedFilesRef.current.files[i]) {
+      if (attachedFilesRef.current.files[i] && i <= 2) {
         dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
       }
     }
