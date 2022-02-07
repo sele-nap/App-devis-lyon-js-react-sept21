@@ -134,7 +134,7 @@ const SignupForm = () => {
                   required: " ❌ Mot de passe requis ",
                   pattern: {
                     value:
-                      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
+                      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$-+%^&*]).{8,}$/,
                     message: "❌ Le mot de passe n'est pas au bon format",
                   },
                 })}
