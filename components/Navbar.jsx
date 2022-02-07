@@ -67,7 +67,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <span className="mx-2"></span>
+            <span className=""></span>
             {status === "unauthenticated" && (
               <button
                 className="px-4 py-2 mt-2 text-sm font-semibold text-gray-900  rounded-lg  md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline"
