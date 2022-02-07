@@ -10,6 +10,7 @@ import {
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
 import handleImageUpload from "../../../middleware/handleImageUpload";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
 async function handlePatch(req, res) {
   const {
