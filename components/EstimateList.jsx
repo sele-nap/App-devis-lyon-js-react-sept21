@@ -13,8 +13,8 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 
 export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
-  const { currentUserIsAdmin } = useContext(CurrentUserContext);
-  const { currentUserProfile } = useContext(CurrentUserContext);
+  const { currentUserIsAdmin, currentUserProfile } =
+    useContext(CurrentUserContext);
 
   const perPage = 5;
   const [estimatesList, setEstimatesList] = useState([]);
@@ -35,9 +35,6 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
       confirmButtonText: "Oui, supprimé",
     }).then((result) => {
       if (result.isConfirmed) {
-        // if (confirm("Voulez vous vraiment supprimer ce devis définitivement ?")) {
-
-        //   alert("Projet bien supprimé");
         axios.delete(`/api/estimate/${id}`);
         setEstimatesList((estimatesList) =>
           estimatesList.filter((e) => e.id !== id)
@@ -72,8 +69,6 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
   }, [currentPage, perPage, statusList, orderByDesc]);
   return (
     <section>
-      {/* ___________ VALIDED ESTIMATE / WAITING FOR VALIDATION  ___________*/}
-
       <div className="flex justify-center">
         <div className="ml-2 pl-10 pt-3 flex justify-center items-center text shadow w-96 h-12 bg-yellow-400 hover:bg-yellow-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded">
           <span className="text-md text-center">
@@ -281,14 +276,12 @@ export default function EstimateList({ statusList, limit = 5, offset = 0 }) {
                       </td>
                     ) : null}
                     <td className="text-center border my-2">
-                      {/* {status !== "WAITING_FOR_VALIDATION" ? ( */}
                       <button
                         className="cursor-pointer"
                         onClick={() => deleteEstimate(id)}
                       >
                         <RiDeleteBin5Fill size={25} />
                       </button>
-                      {/* ) : null} */}
                     </td>
                   </tr>
                 )

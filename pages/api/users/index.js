@@ -10,16 +10,18 @@ import mailer from "../../../mailer";
 import crypto from "crypto";
 import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
-async function handler(req, res) {
+async function handlePost(req, res) {
   const validationError = validateUser(req.body);
   if (validationError) return res.status(422).send(validationError);
   if (await emailAlreadyExists(req.body.email))
     return res.status(409).send("This email already exists");
   const emailVerificationCode = crypto.randomBytes(50).toString("hex");
-  const { id, email, lastname } = await create({
-    ...req.body,
+  const newUser = await create(req.body);
+
+  const { email } = {
+    ...newUser,
     emailVerificationCode,
-  });
+  };
   const mailBody = `Rendez-vous sur ce lien pour vérifier votre email : ${process.env.HOST}/validationemail?emailVerificationCode=${emailVerificationCode}`;
   await mailer.sendMail({
     from: process.env.MAILER_FROM,
@@ -29,7 +31,6 @@ async function handler(req, res) {
     html: mailBody,
   });
 
-  const newUser = create(req.body);
   delete newUser.hashedPassword;
   res.status(201).send(newUser);
 }
@@ -48,6 +49,6 @@ async function handleDelete({ query: { id } }, res) {
 }
 
 export default base()
-  .post(handler)
+  .post(handlePost)
   .get(requireCurrentUser, handleGet)
   .delete(requireCurrentUser, handleDelete);

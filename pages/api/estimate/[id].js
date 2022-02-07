@@ -4,13 +4,13 @@ import {
   getOneEstimate,
   deleteOneEstimate,
   getEstimate,
-  createFiles,
+  createFile,
   getOneEstimateAttachedFiles,
 } from "../../../models/estimate";
 import base from "../../../middleware/commons";
 import mailer from "../../../mailer";
-import requireCurrentUser from "../../../middleware/requireCurrentUser";
 import handleImageUpload from "../../../middleware/handleImageUpload";
+import requireCurrentUser from "../../../middleware/requireCurrentUser";
 
 async function handlePatch(req, res) {
   const {
@@ -28,7 +28,7 @@ async function handlePatch(req, res) {
 
   if (files && files?.length) {
     const filesSave = files.map((file) =>
-      createFiles({
+      createFile({
         name: file.filename,
         estimate: { connect: { id: parseInt(id) } },
         url: file.path.replace("public/", ""),
@@ -63,13 +63,18 @@ async function sendMail({ query: { id } }, req, res) {
     text: mailBodyForAdmin,
     html: mailBodyForAdmin,
   });
-  // await sendMailChangeStatus(id);
 }
 
-async function handleGet({ query: { id } }, res) {
+async function handleGet({ query: { id }, currentUser }, res) {
+  const { customer } = await getEstimate(id);
+
   const estimate = await getOneEstimateAttachedFiles(id);
-  if (estimate) res.send(estimate);
-  else res.status(404).send();
+  if (customer.email === currentUser.email || currentUser.role === "admin") {
+    if (estimate) res.send(estimate);
+    else res.status(404).send();
+  } else {
+    res.status(403).send();
+  }
 }
 
 async function handleDelete({ query: { id } }, res) {
@@ -84,8 +89,11 @@ export const config = {
 };
 
 export default base()
-  .use(requireCurrentUser)
-  .post(sendMail)
-  .get(handleGet)
-  .patch(handleImageUpload.array("attachedFiles", 3), handlePatch)
-  .delete(handleDelete);
+  .post(requireCurrentUser, sendMail)
+  .get(requireCurrentUser, handleGet)
+  .patch(
+    requireCurrentUser,
+    handleImageUpload.array("attachedFiles", 3),
+    handlePatch
+  )
+  .delete(requireCurrentUser, handleDelete);
