@@ -143,7 +143,6 @@ function Estimate() {
               />
               {errors.additionalInformation && (
                 <span className="text-xs">
-                  {" "}
                   {errors.additionalInformation.message}
                 </span>
               )}
