@@ -44,10 +44,10 @@ function Estimate() {
   const customErrors = () => {
     const globalError = "votre demande de devis n'a pas été envoyée";
     if (additionalInformation.value === "") {
-      return "Le champ message n'a pas été rempli, " + globalError;
+      return "Le message n'a pas été rempli, " + globalError;
     }
-    if (deadLine.value === "") {
-      return "Le champ date n'a pas été rempli, " + globalError;
+    if (deadLine.value) {
+      return "La date n'est pas valide " + globalError;
     }
     return globalError;
   };
@@ -143,7 +143,6 @@ function Estimate() {
               />
               {errors.additionalInformation && (
                 <span className="text-xs">
-                  {" "}
                   {errors.additionalInformation.message}
                 </span>
               )}
@@ -152,7 +151,7 @@ function Estimate() {
               <input
                 type="date"
                 placeholder="date"
-                min={(date, date2)}
+                min={date2}
                 id="deadLine"
                 className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
                  "

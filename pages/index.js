@@ -68,7 +68,7 @@ export default function Home() {
           </div>
           <div>
             <div className="flex justify-center mt-12">
-              <h2 className="mt-7 border-2 bg-yellow-400 p-4 hover:bg-yellow-600 font-bold border-third text-black rounded cursor-auto  text-xl mb-4 uppercase text-center">
+              <h2 className="mt-7 border-2 bg-yellow-400 p-4 font-bold border-third text-black rounded cursor-auto  text-xl mb-4 uppercase text-center">
                 Produits du moment
               </h2>
             </div>
