@@ -44,10 +44,10 @@ function Estimate() {
   const customErrors = () => {
     const globalError = "votre demande de devis n'a pas été envoyée";
     if (additionalInformation.value === "") {
-      return "Le champ message n'a pas été rempli, " + globalError;
+      return "Le message n'a pas été rempli, " + globalError;
     }
-    if (deadLine.value === "") {
-      return "Le champ date n'a pas été rempli, " + globalError;
+    if (deadLine.value) {
+      return "La date n'est pas valide " + globalError;
     }
     return globalError;
   };
@@ -143,7 +143,6 @@ function Estimate() {
               />
               {errors.additionalInformation && (
                 <span className="text-xs">
-                  {" "}
                   {errors.additionalInformation.message}
                 </span>
               )}

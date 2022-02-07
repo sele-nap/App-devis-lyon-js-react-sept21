@@ -23,7 +23,7 @@ export default function Footer() {
           <li className="ml-4 cursor-pointer">
             <Link href="./about">
               <a className="flex px-4 py-2 mt-2 text-sm font-semibold text-gray-900  rounded-lg  md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-yellow-400 focus:bg-yellow-400 focus:outline-none focus:shadow-outline">
-                Qui sommes nous
+                Qui sommes-nous
               </a>
             </Link>
           </li>
