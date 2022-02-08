@@ -67,16 +67,10 @@ export const config = {
   },
 };
 
-async function handleDelete({ query: { id } }, res) {
-  if (await deleteOneEstimate(id)) res.status(204).send("ok");
-  else res.status(404).send("non supprimé");
-}
-
 export default base()
   .post(
     requireCurrentUser,
     handleImageUpload.array("attachedFiles", 3),
     handlePost
   )
-  .get(requireCurrentUser, handleGet)
-  .delete(requireCurrentUser, handleDelete);
+  .get(requireCurrentUser, handleGet);

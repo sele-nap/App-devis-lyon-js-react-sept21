@@ -166,7 +166,7 @@ export default function Estimate(req) {
     const dataFiles = new FormData();
 
     for (let i = 0; i < attachedFilesRef.current.files.length; i++) {
-      if (attachedFilesRef.current.files[i]) {
+      if (attachedFilesRef.current.files[i] && i <= 2) {
         dataFiles.append("attachedFiles", attachedFilesRef.current.files[i]);
       }
     }
@@ -463,14 +463,16 @@ export default function Estimate(req) {
                   onChange={handleAttachedFilesSelection}
                 ></input>
               </div>
-              <button
-                type="submit"
-                className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-              >
-                <SaveIcon />
-                <span className="mx-2"> Sauvegarde </span>
-              </button>
-              {status !== "VALIDATED" && attachedFiles >= 3 ? (
+              {status != "VALIDATED" && attachedFiles > 3 ? (
+                <button
+                  type="submit"
+                  className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+                >
+                  <SaveIcon />
+                  <span className="mx-2"> Sauvegarde </span>
+                </button>
+              ) : null}
+              {status !== "VALIDATED" ? (
                 <button
                   className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}
@@ -514,13 +516,15 @@ export default function Estimate(req) {
             </Pdf>
           </div>
 
-          <button
-            className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
-            onClick={() => deleteEstimate(id)}
-          >
-            <DeleteForeverIcon />
-            <span className="mx-2"> Suppression </span>
-          </button>
+          {currentUserIsAdmin || status != "VALIDATED" ? (
+            <button
+              className="ml-2 shadow w-64 h-12 bg-red-400 hover:bg-red-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
+              onClick={() => deleteEstimate(id)}
+            >
+              <DeleteForeverIcon />
+              <span className="mx-2"> Suppression </span>
+            </button>
+          ) : null}
         </div>
 
         <div className="flex flex-row justify-around mt-20"></div>

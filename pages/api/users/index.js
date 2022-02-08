@@ -16,10 +16,12 @@ async function handlePost(req, res) {
   if (await emailAlreadyExists(req.body.email))
     return res.status(409).send("This email already exists");
   const emailVerificationCode = crypto.randomBytes(50).toString("hex");
-  const { id, email, lastname } = await create({
-    ...req.body,
+  const newUser = await create(req.body);
+
+  const { email } = {
+    ...newUser,
     emailVerificationCode,
-  });
+  };
   const mailBody = `Rendez-vous sur ce lien pour vérifier votre email : ${process.env.HOST}/validationemail?emailVerificationCode=${emailVerificationCode}`;
   await mailer.sendMail({
     from: process.env.MAILER_FROM,
@@ -29,7 +31,6 @@ async function handlePost(req, res) {
     html: mailBody,
   });
 
-  const newUser = await create(req.body);
   delete newUser.hashedPassword;
   res.status(201).send(newUser);
 }

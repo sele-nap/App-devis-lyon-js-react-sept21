@@ -6,7 +6,9 @@ const ValidateEstimate = (data, forUpdate = false) => {
     additionalInformation: Joi.string().presence(
       forUpdate ? "optional" : "required"
     ),
-    deadLine: Joi.date().presence(forUpdate ? "optional" : "required"),
+    deadLine: Joi.date()
+      .min(Date.now())
+      .presence(forUpdate ? "optional" : "required"),
     status: Joi.string().presence("optional"),
     attachedFiles: Joi.string().presence("optional"),
     adminComment: Joi.string().presence("optional"),

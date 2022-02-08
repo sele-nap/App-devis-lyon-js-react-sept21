@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div>
       <Layout>
-        <h1 className="w-full font-main my-2 mb-8 text-5xl font-bold leading-tight text-center text-gray-800 underline underline-offset-8">
+        <h1 className="w-full font-main my-2 mb-8 p-2 text-5xl font-bold leading-tight text-center text-gray-800">
           Les superbes médailles vous souhaitent la bienvenue
         </h1>
         <div className="h-90 w-full">
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
           <div>
             <div className="flex justify-center mt-12">
-              <h2 className="mt-7 border-2 bg-yellow-400 p-4 hover:bg-yellow-600 font-bold border-third text-black rounded cursor-auto p-1 text-xl mb-4 uppercase text-center">
+              <h2 className="mt-7 border-2 bg-yellow-400 p-4 font-bold border-third text-black rounded cursor-auto  text-xl mb-4 uppercase text-center">
                 Produits du moment
               </h2>
             </div>

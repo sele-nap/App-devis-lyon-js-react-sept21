@@ -59,7 +59,7 @@ model estimate {
   createDate            DateTime?
   adminComment          String?        @db.LongText
   userId                Int?
-  customer              user?          @relation(fields: [userId], references: [id])
+  customer              user?          @relation(fields: [userId], references: [id], onDelete: Cascade)
   products              estimateLine[]
   attachedFiles         attachedFile[]
 }
