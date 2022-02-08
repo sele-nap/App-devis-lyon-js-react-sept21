@@ -155,7 +155,7 @@ export default function Estimate(req) {
         setAttachedFilesUpload(attachedFilesUpload.splice(1, 3));
         Swal.fire(
           "Supprimé",
-          "Votre pièce jointe à bien été supprimé",
+          "Votre pièce jointe à bien été supprimée",
           "success"
         );
       }
@@ -472,7 +472,7 @@ export default function Estimate(req) {
                   <span className="mx-2"> Sauvegarde </span>
                 </button>
               ) : null}
-              {status !== "VALIDATED" ? (
+              {status !== "VALIDATED" && attachedFiles <= 2 ? (
                 <button
                   className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}

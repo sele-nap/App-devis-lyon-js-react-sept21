@@ -30,7 +30,7 @@ const Navbar = () => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "Vous devez ếtre identifié pour pouvoir demander un devis",
+        title: "Vous devez être identifié pour pouvoir demander un devis",
         showConfirmButton: false,
         timer: 2500,
       });

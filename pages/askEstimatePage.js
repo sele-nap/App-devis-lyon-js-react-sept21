@@ -111,7 +111,7 @@ function Estimate() {
         setAttachedFiles(attachedFiles.splice(1, 3));
         Swal.fire(
           "Supprimé",
-          "Votre pièce jointe à bien été supprimée",
+          "Votre pièce jointe a bien été supprimée",
           "success"
         );
       }
@@ -151,7 +151,7 @@ function Estimate() {
               <input
                 type="date"
                 placeholder="date"
-                min={date2}
+                min={date}
                 id="deadLine"
                 className="mt-5 appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 
                  "
