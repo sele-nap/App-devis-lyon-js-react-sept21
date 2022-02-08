@@ -100,7 +100,7 @@ function Estimate() {
         setAttachedFiles(attachedFiles.splice(1, 3));
         Swal.fire(
           "Supprimé",
-          "Votre pièce jointe à bien été supprimée",
+          "Votre pièce jointe a bien été supprimée",
           "success"
         );
       }
