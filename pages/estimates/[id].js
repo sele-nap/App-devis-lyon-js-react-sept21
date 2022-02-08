@@ -463,7 +463,7 @@ export default function Estimate(req) {
                   onChange={handleAttachedFilesSelection}
                 ></input>
               </div>
-              {status != "VALIDATED" && attachedFiles > 3 ? (
+              {status != "VALIDATED" ? (
                 <button
                   type="submit"
                   className="ml-2 shadow w-64 h-12 bg-green-400 hover:bg-green-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
@@ -472,7 +472,7 @@ export default function Estimate(req) {
                   <span className="mx-2"> Sauvegarde </span>
                 </button>
               ) : null}
-              {status !== "VALIDATED" ? (
+              {status !== "VALIDATED" && attachedFiles <= 2 ? (
                 <button
                   className="ml-2 pl-10 pt-3 flex flex-row shadow w-64 h-12 bg-orange-400 hover:bg-orange-500 focus:shadow-outline focus:outline-none  font-bold py-2 px-4 rounded"
                   onClick={handleAttachedFilesClick}
